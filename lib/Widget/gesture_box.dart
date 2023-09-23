@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Story extends StatelessWidget {
-  const Story({
+class GestureBox extends StatelessWidget {
+  const GestureBox({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 100,
-      height: 100,
+      width: 140,
+      height: 150,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(90), color: Colors.grey),
+          borderRadius: BorderRadius.circular(30), color: Colors.grey),
     );
   }
 }

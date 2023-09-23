@@ -1,6 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dating/Widget/gesture_box.dart';
+import 'package:dating/Widget/profile_photo.dart';
 import 'package:flutter/material.dart';
-
-import 'Widget/story.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -16,102 +17,99 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Recent Stories',
-          style: TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-        ),
         backgroundColor: Colors.white,
         elevation: 0,
+        leading: const Text(
+          '캠밋',
+          style: TextStyle(
+              color: Colors.pink, fontSize: 25, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.right,
+        ),
         actions: const [
-          Icon(
-            Icons.settings,
-            color: Colors.black,
-            size: 25,
-          )
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.alarm,
+              color: Colors.black,
+            ),
+          ),
         ],
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // SingleChildScrollView(
+          //   scrollDirection: Axis.horizontal,
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: List.generate(
+          //       50,
+          //       (index) => const ProfilePhoto(),
+          //     ),
+          //   ),
+          // ),
+          CarouselSlider.builder(
+              itemCount: 50,
+              itemBuilder: (context, index, realIndex) => const ProfilePhoto(),
+              options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  aspectRatio: 1.3,
+                  autoPlay: true,
+                  viewportFraction: 0.8)),
+          const SizedBox(
+            height: 40,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '오늘의 과팅🔥',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '정보 수정',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(
             height: 20,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-            child: Text(
-              '나와 잘 맞는 MBTI',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Story(),
-              Story(),
-              Story(),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                '홍박사',
-                style: TextStyle(fontWeight: FontWeight.bold),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(
+                50,
+                (index) => const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: GestureBox(),
+                ),
               ),
-              Text(
-                '홍박사',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '홍박사',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Text(
-              '오늘의 소개',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Center(
-            child: Container(
-              width: 350,
-              height: 450,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15), color: Colors.grey),
             ),
           ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.meeting_room), label: 'home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.heart_broken), label: 'home'),
-          BottomNavigationBarItem(icon: Icon(Icons.message), label: 'home'),
-          BottomNavigationBarItem(icon: Icon(Icons.circle), label: 'home'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: '과팅'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_off), label: '피드'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat_outlined), label: '채팅'),
+          BottomNavigationBarItem(icon: Icon(Icons.circle), label: '프로필'),
         ],
-        backgroundColor: Colors.red,
-        unselectedItemColor: Colors.blue,
-        selectedItemColor: Colors.black,
         onTap: (idx) {
           setState(() {
             pageIdx = idx;
           });
         },
+        selectedItemColor: Colors.pink,
+        unselectedItemColor: Colors.grey,
         currentIndex: pageIdx,
-        showSelectedLabels: false,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
