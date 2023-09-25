@@ -42,11 +42,10 @@ class MainScreen extends StatelessWidget {
               itemCount: 50,
               itemBuilder: (context, index, realIndex) => const ProfilePhoto(),
               options: CarouselOptions(
-                enlargeCenterPage: true,
-                aspectRatio: 1.3,
-                autoPlay: true,
-                viewportFraction: 0.8,
-              ),
+                  enlargeCenterPage: true,
+                  aspectRatio: 1,
+                  autoPlay: true,
+                  viewportFraction: 0.8),
             ),
             const SizedBox(height: 40),
             // Title and Info

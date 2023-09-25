@@ -1,3 +1,4 @@
+import 'package:dating/Widget/meeting_container.dart';
 import 'package:dating/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +27,43 @@ class MeetingScreen extends StatelessWidget {
               Icons.tune,
               color: Colors.black,
             ),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  '대학생',
+                  style: TextStyle(fontSize: 17, color: font2Color),
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  '일반',
+                  style: TextStyle(fontSize: 17, color: font2Color),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  MeetingContainer(),
+                  MeetingContainer(),
+                ],
+              ),
+            ],
           ),
         ],
       ),
