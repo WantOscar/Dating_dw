@@ -69,13 +69,16 @@ class MainScreen extends StatelessWidget {
             // Gesture Box List
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(
-                  50,
-                  (index) => const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: GestureBox(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    50,
+                    (index) => const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: GestureBox(),
+                    ),
                   ),
                 ),
               ),
@@ -100,13 +103,17 @@ class MainScreen extends StatelessWidget {
             // Interested Friends List
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(
-                  50,
-                  (index) => const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Avatar(),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    50,
+                    (index) => const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Avatar(),
+                    ),
                   ),
                 ),
               ),

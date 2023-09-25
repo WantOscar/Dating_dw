@@ -8,7 +8,7 @@ class GestureBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.3,
+      width: MediaQuery.of(context).size.width * 0.32,
       height: MediaQuery.of(context).size.width * 0.32,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30), color: Colors.grey),
