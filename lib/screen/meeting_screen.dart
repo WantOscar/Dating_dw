@@ -56,22 +56,26 @@ class MeetingScreen extends StatelessWidget {
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
-                    children: List.generate(
-                        50,
-                        (index) => const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10),
-                              child: MeetingContainer(),
-                            ))),
+                  children: List.generate(
+                    50,
+                    (index) => const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      child: MeetingContainer(),
+                    ),
+                  ),
+                ),
                 Column(
-                    children: List.generate(
-                        50,
-                        (index) => const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 10),
-                              child: MeetingContainer(),
-                            )))
+                  children: List.generate(
+                    50,
+                    (index) => const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      child: MeetingContainer(),
+                    ),
+                  ),
+                ),
               ],
             ),
           ],

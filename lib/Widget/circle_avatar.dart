@@ -8,8 +8,8 @@ class Avatar extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 100,
-          height: 100,
+          width: MediaQuery.of(context).size.width * 0.22,
+          height: MediaQuery.of(context).size.width * 0.22,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(60), color: Colors.grey),
         ),
