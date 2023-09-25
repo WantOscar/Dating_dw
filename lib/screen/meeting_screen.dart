@@ -30,42 +30,52 @@ class MeetingScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  '대학생',
-                  style: TextStyle(fontSize: 17, color: font2Color),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    '대학생',
+                    style: TextStyle(fontSize: 17, color: font2Color),
+                  ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text(
-                  '일반',
-                  style: TextStyle(fontSize: 17, color: font2Color),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    '일반',
+                    style: TextStyle(fontSize: 17, color: font2Color),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  MeetingContainer(),
-                  MeetingContainer(),
-                ],
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                    children: List.generate(
+                        50,
+                        (index) => const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: MeetingContainer(),
+                            ))),
+                Column(
+                    children: List.generate(
+                        50,
+                        (index) => const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: MeetingContainer(),
+                            )))
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
