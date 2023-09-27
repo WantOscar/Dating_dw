@@ -1,3 +1,4 @@
+import 'package:dating/screen/feed_screen.dart';
 import 'package:dating/screen/main_screen.dart';
 import 'package:dating/constant.dart';
 import 'package:dating/screen/meeting_screen.dart';
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     const MainScreen(),
     const MeetingScreen(),
-    const Text('data2'),
+    const FeedScreen(),
     const Text('data3'),
     const Text('data4'),
   ];
