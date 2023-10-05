@@ -28,7 +28,8 @@ class MainScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Icon(
-              Icons.alarm,
+              Icons.notifications_outlined,
+              size: 30,
               color: Colors.black,
             ),
           ),

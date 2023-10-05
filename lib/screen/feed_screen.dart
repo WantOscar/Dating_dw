@@ -1,5 +1,4 @@
 import 'package:dating/Widget/feed.dart';
-import 'package:dating/Widget/feed_icon.dart';
 import 'package:dating/Widget/story_circle.dart';
 import 'package:dating/constant.dart';
 import 'package:flutter/material.dart';
@@ -29,21 +28,25 @@ class FeedScreen extends StatelessWidget {
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   children: List.generate(
                     50,
                     (index) => const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 6, horizontal: 13),
-                        child: StoryCircle()),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 6, horizontal: 13),
+                      child: StoryCircle(),
+                    ),
                   ),
                 ),
               ),
             ),
-            const Feed(),
-            const Feed(),
-            const Feed()
+            Column(
+              children: List.generate(
+                50,
+                (index) => const Feed(),
+              ),
+            ),
           ],
         ),
       ),

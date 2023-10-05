@@ -25,7 +25,7 @@ class ProfilePhoto extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: Image.network(
-          'https://i.namu.wiki/i/oZ0HT6_yrgDr01429BJBl5S_G2alYkqs-Rp1jbYE_tDxlY2n-Mp9YOqrcvVFJwXtv-YTcGZVeYknmxLUK3iSKv5e8a4eMX5mhwhMCJnxMAyMmUhb66y43_FnenjavSc2SNSXG5acMZ8EavJ19bbWAQ.webp',
+          'https://i.namu.wiki/i/uwCjHuS8HlDWf46qN9D-_flVyOu0AMB6IFni65P854bjTMQ2NcJ2D0LPZ253QAGsFbj0QYg9-CB_CYAURSaWnZ1rgU1ucqfNND5dakURS4nY--kOwHnr7U67tb3UgcIK7gfQQ4Isoxs5T-0kYe_HVQ.webp',
           fit: BoxFit.cover,
         ),
       ),

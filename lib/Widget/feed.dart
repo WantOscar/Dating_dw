@@ -10,7 +10,7 @@ class Feed extends StatelessWidget {
     return Column(
       children: [
         const Padding(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [FeedIcon(), Icon(Icons.more_horiz)],
@@ -40,44 +40,43 @@ class Feed extends StatelessWidget {
                 height: 5,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    Icons.chat_bubble_outline,
-                    color: Colors.blue,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.chat_bubble_outline,
+                        color: Colors.blue,
+                      ),
+                      Text('12'),
+                    ],
                   ),
-                  Text('12'),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 80),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.favorite_outline,
-                          color: Colors.pink,
-                        ),
-                        Text('62'),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.favorite_border_outlined,
+                        color: Colors.pink,
+                      ),
+                      Text('62'),
+                    ],
                   ),
-                  Icon(
-                    Icons.bookmark_outline,
-                    color: Colors.green,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.bookmark_outline,
+                        color: Colors.green,
+                      ),
+                      Text('7')
+                    ],
                   ),
-                  Text('7'),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 34),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          '7시간 전',
-                          style: TextStyle(fontSize: 13, color: font2Color),
-                        ),
-                        Icon(
-                          Icons.share,
-                          color: font2Color,
-                        )
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      Text('7시간 전'),
+                      Icon(
+                        Icons.share,
+                        color: Colors.grey,
+                      )
+                    ],
                   )
                 ],
               )
