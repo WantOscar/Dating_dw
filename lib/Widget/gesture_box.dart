@@ -25,7 +25,7 @@ class GestureBox extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(30),
         child: Image.network(
-          'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/19/SpoHankook/20230119052512141eivc.jpg',
+          'https://i.pinimg.com/564x/2b/0f/16/2b0f16a08f85c9989fb3043cfb51ba49.jpg',
           fit: BoxFit.cover,
         ),
       ),

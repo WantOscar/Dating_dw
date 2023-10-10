@@ -3,6 +3,7 @@ import 'package:dating/screen/feed_screen.dart';
 import 'package:dating/screen/main_screen.dart';
 import 'package:dating/constant.dart';
 import 'package:dating/screen/meeting_screen.dart';
+import 'package:dating/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const MeetingScreen(),
     const FeedScreen(),
     const ChattingScreen(),
-    const Text('data4'),
+    const ProfileScreen(),
   ];
 
   @override

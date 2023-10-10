@@ -1,5 +1,4 @@
 import 'package:dating/Widget/feed_icon.dart';
-import 'package:dating/constant.dart';
 import 'package:flutter/material.dart';
 
 class Feed extends StatelessWidget {
@@ -13,7 +12,10 @@ class Feed extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [FeedIcon(), Icon(Icons.more_horiz)],
+            children: [
+              FeedIcon(),
+              Icon(Icons.more_horiz),
+            ],
           ),
         ),
         Container(
