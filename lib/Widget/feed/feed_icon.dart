@@ -1,4 +1,4 @@
-import 'package:dating/constant.dart';
+import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class FeedIcon extends StatelessWidget {

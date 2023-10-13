@@ -1,6 +1,5 @@
-import 'package:dating/Widget/feed.dart';
-import 'package:dating/Widget/story_circle.dart';
-import 'package:dating/constant.dart';
+import 'package:dating/Widget/feed/feed.dart';
+import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class FeedScreen extends StatelessWidget {

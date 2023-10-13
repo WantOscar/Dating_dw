@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dating/Widget/circle_avatar.dart';
-import 'package:dating/Widget/gesture_box.dart';
-import 'package:dating/Widget/profile_photo.dart';
-import 'package:dating/constant.dart';
+import 'package:dating/Widget/main/circle_avatar.dart';
+import 'package:dating/Widget/main/gesture_box.dart';
+import 'package:dating/Widget/main/profile_main.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/screen/alert_screen.dart';
 import 'package:dating/screen/information_modify_screen.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class MainScreen extends StatelessWidget {
             // Profile Photo Carousel
             CarouselSlider.builder(
               itemCount: 50,
-              itemBuilder: (context, index, realIndex) => const ProfilePhoto(),
+              itemBuilder: (context, index, realIndex) => const ProfileMain(),
               options: CarouselOptions(
                   enlargeCenterPage: true,
                   aspectRatio: 1,

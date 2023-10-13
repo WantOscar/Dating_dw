@@ -1,5 +1,5 @@
-import 'package:dating/Widget/meeting_container.dart';
-import 'package:dating/constant.dart';
+import 'package:dating/Widget/meet/meeting_container.dart';
+import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class MeetingScreen extends StatelessWidget {

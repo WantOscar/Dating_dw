@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constant.dart';
+import '../../style/constant.dart';
 
 class ChattingBox extends StatelessWidget {
   const ChattingBox({

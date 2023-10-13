@@ -1,7 +1,7 @@
 import 'package:dating/screen/chatting_screen.dart';
 import 'package:dating/screen/feed_screen.dart';
 import 'package:dating/screen/main_screen.dart';
-import 'package:dating/constant.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/screen/meeting_screen.dart';
 import 'package:dating/screen/profile_screen.dart';
 import 'package:flutter/material.dart';
