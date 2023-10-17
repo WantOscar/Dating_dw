@@ -19,9 +19,9 @@ class ProfilePositionedEdit extends StatelessWidget {
         ),
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const ProfileEditScreen()));
+            context,
+            MaterialPageRoute(builder: (context) => const ProfileEditScreen()),
+          );
         },
         child: TextStyling.profileEdit,
       ),

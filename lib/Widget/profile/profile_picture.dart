@@ -11,6 +11,7 @@ class ProfilePicture extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.width * 1.1,
           decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(10),
             color: Colors.red,
             boxShadow: [
               BoxShadow(
@@ -22,7 +23,7 @@ class ProfilePicture extends StatelessWidget {
             ],
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            // borderRadius: BorderRadius.circular(10),
             child: Image.network(
               'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/19/SpoHankook/20230119052512141eivc.jpg',
               fit: BoxFit.cover,
