@@ -7,6 +7,7 @@ import 'package:dating/style/constant.dart';
 import 'package:dating/screen/alert_screen.dart';
 import 'package:dating/screen/information_modify_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -32,10 +33,7 @@ class MainScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AlertScreen()));
+                Get.to(const AlertScreen());
               },
               icon: const Icon(
                 Icons.notifications_outlined,
