@@ -8,7 +8,6 @@ import 'package:dating/Widget/profile/profile_positioned_edit.dart';
 import 'package:dating/Widget/profile/profile_positioned_location.dart';
 import 'package:dating/Widget/profile/profile_positioned_name.dart';
 import 'package:dating/Widget/profile/profile_picture.dart';
-import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +44,7 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 Stack(
                   children: [
+                    // 프로필
                     ProfilePicture(),
                     ProfilePositionedName(),
                     ProfilePositionedAge(),
@@ -54,25 +54,24 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
+            // 인적사항
             Hobby1(),
+            // 성격
             Hobby2(),
+            // 관심사
             Hobby3(),
+            // 이상형
             Hobby4(),
             SizedBox(height: 50),
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text(
-                '스토리',
-                style: TextStyle(
-                    color: fontColor,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
-              ),
+              child: TextStyling.story,
             ),
             Padding(
               padding: EdgeInsets.all(2.0),
               child: Row(
                 children: [
+                  // 스토리
                   ContainerBasic(),
                   ContainerBasic(),
                   ContainerBasic(),

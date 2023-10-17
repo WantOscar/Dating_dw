@@ -11,7 +11,7 @@ class MBTICard extends StatelessWidget {
       children: [
         Container(
           width: MediaQuery.of(context).size.width * 0.9,
-          height: MediaQuery.of(context).size.width * 0.25,
+          height: MediaQuery.of(context).size.width * 0.26,
           decoration: BoxDecoration(
             color: const Color(0xFFEDEDED),
             borderRadius: BorderRadius.circular(60),
@@ -64,7 +64,7 @@ class MBTICard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.008,
+                          height: MediaQuery.of(context).size.height * 0.001,
                         ),
                         const Text(
                           '성격이 잘 맞을 것 같아요!',

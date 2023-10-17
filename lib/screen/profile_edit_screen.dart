@@ -26,34 +26,31 @@ class ProfileEditScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: Wrap(
-              direction: Axis.horizontal,
-              alignment: WrapAlignment.start,
-              spacing: 1,
-              runSpacing: 1,
-              children: [
-                const ContainerBasic(),
-                const ContainerBasic(),
-                const ContainerBasic(),
-                const ContainerBasic(),
-                const ContainerBasic(),
-                Stack(
-                  children: [
-                    const ContainerBasic(),
-                    Positioned(
-                      top: 90,
-                      right: 1,
-                      child: IconButton(
-                        icon: IconShape.iconPhotoCamera,
-                        onPressed: () {},
-                      ),
+          Wrap(
+            direction: Axis.horizontal,
+            alignment: WrapAlignment.start,
+            spacing: 1,
+            runSpacing: 1,
+            children: [
+              const ContainerBasic(),
+              const ContainerBasic(),
+              const ContainerBasic(),
+              const ContainerBasic(),
+              const ContainerBasic(),
+              Stack(
+                children: [
+                  const ContainerBasic(),
+                  Positioned(
+                    top: 90,
+                    right: 1,
+                    child: IconButton(
+                      icon: IconShape.iconPhotoCamera,
+                      onPressed: () {},
                     ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),

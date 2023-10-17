@@ -64,6 +64,15 @@ class TextStyling {
       fontWeight: FontWeight.bold,
     ),
   );
+
+  static const story = Text(
+    '스토리',
+    style: TextStyle(
+      color: fontColor,
+      fontSize: 30,
+      fontWeight: FontWeight.bold,
+    ),
+  );
 }
 
 class Human {
