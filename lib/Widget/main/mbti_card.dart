@@ -40,12 +40,12 @@ class MBTICard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 30),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        const Row(
                           children: [
                             Text(
                               '홍길동',
@@ -64,9 +64,9 @@ class MBTICard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 7,
+                          height: MediaQuery.of(context).size.height * 0.008,
                         ),
-                        Text(
+                        const Text(
                           '성격이 잘 맞을 것 같아요!',
                           style: TextStyle(color: Colors.grey),
                         ),
