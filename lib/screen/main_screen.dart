@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/main/circle_avatar.dart';
 import 'package:dating/Widget/main/gesture_box.dart';
+import 'package:dating/Widget/main/mbti_card.dart';
 import 'package:dating/Widget/main/profile_main.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/screen/alert_screen.dart';
@@ -47,6 +48,7 @@ class MainScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Profile Photo Carousel
             CarouselSlider.builder(
@@ -137,6 +139,44 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'MBTI 별 추전조합',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text(
+                    'ISFP와 좋은 궁합을 가진 친구들이에요!',
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFbebebe),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Column(
+                    children: List.generate(
+                      5,
+                      (index) => const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        child: MBTICard(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
