@@ -1,3 +1,4 @@
+import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile/profile_positioned_age.dart';
 import 'package:dating/Widget/profile/profile_positioned_edit.dart';
 import 'package:dating/Widget/profile/profile_positioned_location.dart';
@@ -33,6 +34,8 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: const SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -48,6 +51,80 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
+              child: Text('인적사항'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Wrap(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.start,
+                spacing: 5,
+                runSpacing: 5,
+                children: [
+                  HobbyContainer(
+                    text: '일반대',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: '학생',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: 'ESTP',
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
+              child: Text('성격'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Wrap(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.start,
+                spacing: 5,
+                runSpacing: 5,
+                children: [
+                  HobbyContainer(
+                    text: '털털한',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: '기모띠',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: '자유로운',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: '유쾌한',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: '대담한',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: '보수적인',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: '재밌는',
+                    color: Colors.grey,
+                  ),
+                  HobbyContainer(
+                    text: '호전적인',
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

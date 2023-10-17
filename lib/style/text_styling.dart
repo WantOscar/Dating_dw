@@ -2,36 +2,36 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class TextStyling {
-  static const profileName = Text(
-    '카리나',
-    style: TextStyle(
+  static Text profileName = Text(
+    Human.name,
+    style: const TextStyle(
       fontSize: 40,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
   );
 
-  static const profileAge = Text(
-    '22세',
-    style: TextStyle(
+  static Text profileAge = Text(
+    Human.age,
+    style: const TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
   );
 
-  static const profileHeight = Text(
-    '168cm',
-    style: TextStyle(
+  static Text profileHeight = Text(
+    Human.height,
+    style: const TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
   );
 
-  static const profileLocation = Text(
-    '서울 강북구',
-    style: TextStyle(
+  static Text profileLocation = Text(
+    Human.location,
+    style: const TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.bold,
       color: Colors.white,
@@ -52,4 +52,11 @@ class TextStyling {
     style:
         TextStyle(fontSize: 25, color: fontColor, fontWeight: FontWeight.bold),
   );
+}
+
+class Human {
+  static String get name => '카리나';
+  static String get age => '22세';
+  static String get height => '168cm';
+  static String get location => '서울 강북구';
 }
