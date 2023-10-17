@@ -8,10 +8,9 @@ class ProfilePicture extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.width * 1.1,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
             color: Colors.red,
             boxShadow: [
               BoxShadow(
