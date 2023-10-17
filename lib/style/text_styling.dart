@@ -6,8 +6,8 @@ class TextStyling {
     Human.name,
     style: const TextStyle(
       fontSize: 40,
-      fontWeight: FontWeight.bold,
       color: Colors.white,
+      fontWeight: FontWeight.bold,
     ),
   );
 
@@ -15,8 +15,8 @@ class TextStyling {
     Human.age,
     style: const TextStyle(
       fontSize: 13,
-      fontWeight: FontWeight.bold,
       color: Colors.white,
+      fontWeight: FontWeight.bold,
     ),
   );
 
@@ -24,8 +24,8 @@ class TextStyling {
     Human.height,
     style: const TextStyle(
       fontSize: 13,
-      fontWeight: FontWeight.bold,
       color: Colors.white,
+      fontWeight: FontWeight.bold,
     ),
   );
 
@@ -33,8 +33,8 @@ class TextStyling {
     Human.location,
     style: const TextStyle(
       fontSize: 13,
-      fontWeight: FontWeight.bold,
       color: Colors.white,
+      fontWeight: FontWeight.bold,
     ),
   );
 
@@ -42,15 +42,27 @@ class TextStyling {
     '프로필 편집',
     style: TextStyle(
       fontSize: 17,
-      fontWeight: FontWeight.bold,
       color: Colors.white,
+      fontWeight: FontWeight.bold,
     ),
   );
 
   static const profile = Text(
     '프로필',
-    style:
-        TextStyle(fontSize: 25, color: fontColor, fontWeight: FontWeight.bold),
+    style: TextStyle(
+      fontSize: 25,
+      color: fontColor,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+
+  static const profileEdit2 = Text(
+    '프로필 수정',
+    style: TextStyle(
+      fontSize: 25,
+      color: fontColor,
+      fontWeight: FontWeight.bold,
+    ),
   );
 }
 
