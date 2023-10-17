@@ -1,6 +1,6 @@
-// class User {
-//   final String username;
-//   final String password;
+class User {
+  late final String username;
+  late final String password;
 
-//   User({required this.username, required this.password})
-// }
+  User({required this.username, required this.password});
+}
