@@ -1,4 +1,5 @@
 import 'package:dating/Widget/profile/container_basic.dart';
+import 'package:dating/Widget/profile/input_field.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
@@ -61,19 +62,14 @@ class ProfileEditScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 30),
-            const Text('이름'),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.5,
-              height: MediaQuery.of(context).size.height * 0.03,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.grey,
-              ),
-              child: const TextField(
-                decoration: InputDecoration(hintText: '이름 입력'),
-              ),
-            )
+            const SizedBox(height: 10),
+            const InputField(text1: '이름', text2: '이름 입력'),
+            const SizedBox(height: 10),
+            const InputField(text1: '한줄 소개', text2: '소개 입력'),
+            const SizedBox(height: 10),
+            const InputField(text1: '성별', text2: '성별 입력'),
+            const SizedBox(height: 10),
+            const InputField(text1: '주소', text2: '주소 입력'),
           ],
         ),
       ),
