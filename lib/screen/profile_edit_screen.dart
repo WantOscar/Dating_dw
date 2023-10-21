@@ -1,5 +1,11 @@
+import 'package:dating/Widget/profile/ideal_type.dart';
+import 'package:dating/Widget/profile/interest.dart';
+import 'package:dating/Widget/profile/personal_information.dart';
+import 'package:dating/Widget/profile/personality.dart';
 import 'package:dating/Widget/profile_edit/container_basic.dart';
 import 'package:dating/Widget/profile_edit/input_field.dart';
+import 'package:dating/screen/profile_screen.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
@@ -90,11 +96,11 @@ class ProfileEditScreen extends StatelessWidget {
               widthPoint: 0.7,
               heightPoint: 0.05,
             ),
+            const SizedBox(height: 7),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: 7),
                 Expanded(
                   child: InputField(
                     text1: '나이',
@@ -103,7 +109,6 @@ class ProfileEditScreen extends StatelessWidget {
                     heightPoint: 0.05,
                   ),
                 ),
-                SizedBox(height: 7),
                 Expanded(
                   child: InputField(
                     text1: '키',
@@ -120,6 +125,37 @@ class ProfileEditScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.003,
               decoration: const BoxDecoration(color: Colors.grey),
             ),
+            const SizedBox(height: 20),
+            const PersonalInformation(),
+            const SizedBox(height: 7),
+            const Personality(),
+            const SizedBox(height: 7),
+            const IdealType(),
+            const SizedBox(height: 7),
+            const Interest(),
+            const SizedBox(height: 40),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: fontColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ProfileScreen(),
+                    ),
+                  );
+                },
+                child: const Center(
+                  child: TextStyling.modification,
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
           ],
         ),
       ),

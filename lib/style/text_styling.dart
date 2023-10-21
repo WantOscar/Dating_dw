@@ -73,6 +73,15 @@ class TextStyling {
       fontWeight: FontWeight.bold,
     ),
   );
+
+  static const modification = Text(
+    '수정 완료',
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+    ),
+  );
 }
 
 class Human {

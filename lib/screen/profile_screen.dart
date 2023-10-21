@@ -4,7 +4,7 @@ import 'package:dating/Widget/profile/personality.dart';
 import 'package:dating/Widget/profile/interest.dart';
 import 'package:dating/Widget/profile/ideal_type.dart';
 import 'package:dating/Widget/profile/profile_positioned_age.dart';
-import 'package:dating/Widget/profile/profile_positioned_edit.dart';
+import 'package:dating/Widget/profile/profile_edit_button.dart';
 import 'package:dating/Widget/profile/profile_positioned_location.dart';
 import 'package:dating/Widget/profile/profile_positioned_name.dart';
 import 'package:dating/Widget/profile/profile_picture.dart';
@@ -49,7 +49,11 @@ class ProfileScreen extends StatelessWidget {
                     ProfilePositionedName(),
                     ProfilePositionedAge(),
                     ProfilePositionedLocation(),
-                    ProfilePositionedEdit(),
+                    Positioned(
+                      top: 360,
+                      right: 20,
+                      child: ProfileEditButton(),
+                    ),
                   ],
                 ),
               ],
