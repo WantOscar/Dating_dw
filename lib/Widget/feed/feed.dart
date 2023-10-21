@@ -18,10 +18,17 @@ class Feed extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.width,
-          color: Colors.grey,
+          child: ClipRRect(
+            child: Image.network(
+              'https://i.namu.wiki/i/kaz6S7cPB4_I17_j-3wqJiwE89xPTzrC8QPSZpon-r6yknLvtmO6WF0j0thUrddEEEakudNFvpXm-aVrFvSE-xh0jmuh61xeLO7J_2sTSpqGWvSNNyJRR0dA28cN_Kdz536msgVDrzpwfLZiqA-PqA.webp',
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.width,
+            ),
+          ),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),

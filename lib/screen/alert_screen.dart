@@ -1,5 +1,6 @@
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AlertScreen extends StatelessWidget {
   const AlertScreen({super.key});
@@ -9,12 +10,30 @@ class AlertScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Text(
-            '알림',
-            style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.pink,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  '알림',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: fontColor),
+                ),
+              ),
+            ],
           ),
         ),
         leadingWidth: 200,

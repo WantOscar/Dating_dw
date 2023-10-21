@@ -38,6 +38,13 @@ class MBTICard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(45),
                         color: Colors.grey,
                       ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(60),
+                        child: Image.network(
+                          'https://i.pinimg.com/474x/88/0d/b9/880db9d816b47504adc3be91439cd77e.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                   Padding(

@@ -1,4 +1,4 @@
-import 'package:dating/screen/chatting_screen.dart';
+import 'package:dating/screen/chatting_list_screen.dart';
 import 'package:dating/screen/feed_screen.dart';
 import 'package:dating/screen/main_screen.dart';
 import 'package:dating/style/constant.dart';
@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const MainScreen(),
     const MeetingScreen(),
     const FeedScreen(),
-    const ChattingScreen(),
+    const ChattingListScreen(),
     const ProfileScreen(),
   ];
 
