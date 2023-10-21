@@ -1,8 +1,8 @@
 import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:flutter/material.dart';
 
-class Hobby3 extends StatelessWidget {
-  const Hobby3({super.key});
+class Personality extends StatelessWidget {
+  const Personality({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class Hobby3 extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-          child: Text('관심사'),
+          child: Text('성격'),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -23,15 +23,35 @@ class Hobby3 extends StatelessWidget {
             runSpacing: 5,
             children: [
               HobbyContainer(
-                text: '게임',
+                text: '털털한',
                 color: Colors.grey,
               ),
               HobbyContainer(
-                text: 'IT',
+                text: '기모띠',
                 color: Colors.grey,
               ),
               HobbyContainer(
-                text: '운동',
+                text: '자유로운',
+                color: Colors.grey,
+              ),
+              HobbyContainer(
+                text: '유쾌한',
+                color: Colors.grey,
+              ),
+              HobbyContainer(
+                text: '대담한',
+                color: Colors.grey,
+              ),
+              HobbyContainer(
+                text: '보수적인',
+                color: Colors.grey,
+              ),
+              HobbyContainer(
+                text: '재밌는',
+                color: Colors.grey,
+              ),
+              HobbyContainer(
+                text: '호전적인',
                 color: Colors.grey,
               ),
             ],

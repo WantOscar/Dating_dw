@@ -1,8 +1,8 @@
-import 'package:dating/Widget/profile/container_basic.dart';
-import 'package:dating/Widget/profile/hobby1.dart';
-import 'package:dating/Widget/profile/hobby2.dart';
-import 'package:dating/Widget/profile/hobby3.dart';
-import 'package:dating/Widget/profile/hobby4.dart';
+import 'package:dating/Widget/profile_edit/container_basic.dart';
+import 'package:dating/Widget/profile/personal_information.dart';
+import 'package:dating/Widget/profile/personality.dart';
+import 'package:dating/Widget/profile/interest.dart';
+import 'package:dating/Widget/profile/ideal_type.dart';
 import 'package:dating/Widget/profile/profile_positioned_age.dart';
 import 'package:dating/Widget/profile/profile_positioned_edit.dart';
 import 'package:dating/Widget/profile/profile_positioned_location.dart';
@@ -55,13 +55,13 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             // 인적사항
-            Hobby1(),
+            PersonalInformation(),
             // 성격
-            Hobby2(),
+            Personality(),
             // 관심사
-            Hobby3(),
+            Interest(),
             // 이상형
-            Hobby4(),
+            IdealType(),
             SizedBox(height: 50),
             Padding(
               padding: EdgeInsets.all(8.0),

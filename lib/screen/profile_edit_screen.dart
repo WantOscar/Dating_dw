@@ -1,5 +1,5 @@
-import 'package:dating/Widget/profile/container_basic.dart';
-import 'package:dating/Widget/profile/input_field.dart';
+import 'package:dating/Widget/profile_edit/container_basic.dart';
+import 'package:dating/Widget/profile_edit/input_field.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
@@ -62,14 +62,64 @@ class ProfileEditScreen extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            const InputField(text1: '이름', text2: '이름 입력'),
-            const SizedBox(height: 10),
-            const InputField(text1: '한줄 소개', text2: '소개 입력'),
-            const SizedBox(height: 10),
-            const InputField(text1: '성별', text2: '성별 입력'),
-            const SizedBox(height: 10),
-            const InputField(text1: '주소', text2: '주소 입력'),
+            const SizedBox(height: 20),
+            const InputField(
+              text1: '닉네임',
+              text2: '압둘라 3세',
+              widthPoint: 0.7,
+              heightPoint: 0.05,
+            ),
+            const SizedBox(height: 7),
+            const InputField(
+              text1: '한줄 소개',
+              text2: '소개 입력',
+              widthPoint: 0.7,
+              heightPoint: 0.05,
+            ),
+            const SizedBox(height: 7),
+            const InputField(
+              text1: '성별',
+              text2: '여자',
+              widthPoint: 0.7,
+              heightPoint: 0.05,
+            ),
+            const SizedBox(height: 7),
+            const InputField(
+              text1: '주소',
+              text2: '주소 입력',
+              widthPoint: 0.7,
+              heightPoint: 0.05,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 7),
+                Expanded(
+                  child: InputField(
+                    text1: '나이',
+                    text2: '25세',
+                    widthPoint: 0.2,
+                    heightPoint: 0.05,
+                  ),
+                ),
+                SizedBox(height: 7),
+                Expanded(
+                  child: InputField(
+                    text1: '키',
+                    text2: '키 입력',
+                    widthPoint: 0.2,
+                    heightPoint: 0.05,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.003,
+              decoration: const BoxDecoration(color: Colors.grey),
+            ),
           ],
         ),
       ),
