@@ -9,6 +9,7 @@ import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileEditScreen extends StatelessWidget {
   const ProfileEditScreen({super.key});
@@ -143,12 +144,7 @@ class ProfileEditScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfileScreen(),
-                    ),
-                  );
+                  Get.back();
                 },
                 child: const Center(
                   child: TextStyling.modification,

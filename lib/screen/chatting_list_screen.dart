@@ -48,7 +48,7 @@ class ChattingListScreen extends StatelessWidget {
                     child: const ChattingBox(),
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ChattingScreen()));
+                          builder: (context) => ChattingScreen()));
                     },
                   ),
                 ),
