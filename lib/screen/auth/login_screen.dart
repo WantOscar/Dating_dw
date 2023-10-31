@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextFormField(
-              decoration: const InputDecoration(labelText: '사용자 이름'),
+              decoration: const InputDecoration(labelText: '이메일'),
               onChanged: (value) {
                 email = value;
               },

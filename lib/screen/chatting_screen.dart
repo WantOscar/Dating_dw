@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChattingScreen extends StatelessWidget {
-  final ChatController chatController = Get.find();
-  ChattingScreen({super.key});
+  const ChattingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
