@@ -4,7 +4,6 @@ import 'package:dating/Widget/profile/personal_information.dart';
 import 'package:dating/Widget/profile/personality.dart';
 import 'package:dating/Widget/profile_edit/container_basic.dart';
 import 'package:dating/Widget/profile_edit/input_field.dart';
-import 'package:dating/screen/profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
