@@ -6,7 +6,7 @@ import 'dart:convert';
 import '../model/user.dart';
 
 class AuthController extends GetxController {
-  final user = User(username: '', password: '').obs;
+  final user = User(email: '', password: '').obs;
   final isLoading = false.obs;
 
   Future<void> login() async {
