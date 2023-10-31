@@ -4,11 +4,11 @@ import 'package:dating/Widget/profile/personal_information.dart';
 import 'package:dating/Widget/profile/personality.dart';
 import 'package:dating/Widget/profile_edit/container_basic.dart';
 import 'package:dating/Widget/profile_edit/input_field.dart';
-import 'package:dating/screen/profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileEditScreen extends StatelessWidget {
   const ProfileEditScreen({super.key});
@@ -143,12 +143,13 @@ class ProfileEditScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfileScreen(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const ProfileScreen(),
+                  //   ),
+                  // );
+                  Get.back();
                 },
                 child: const Center(
                   child: TextStyling.modification,
