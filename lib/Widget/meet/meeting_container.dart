@@ -23,7 +23,7 @@ class MeetingContainer extends StatelessWidget {
         child: Stack(
           children: [
             Image.network(
-              'https://www.fnnews.com/resource/media/image/2023/08/04/202308040936406369_l.jpg',
+              'https://images.chosun.com/resizer/AgSU7uA4D8GbK_TyRBjRYKz_wDo=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/UIJUKKZHBBHRZE5AIA2SUXWPUE.gif',
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width * 0.43,
               height: MediaQuery.of(context).size.height * 0.3,

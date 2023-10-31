@@ -23,7 +23,7 @@ class Feed extends StatelessWidget {
           height: MediaQuery.of(context).size.width,
           child: ClipRRect(
             child: Image.network(
-              'https://i.namu.wiki/i/kaz6S7cPB4_I17_j-3wqJiwE89xPTzrC8QPSZpon-r6yknLvtmO6WF0j0thUrddEEEakudNFvpXm-aVrFvSE-xh0jmuh61xeLO7J_2sTSpqGWvSNNyJRR0dA28cN_Kdz536msgVDrzpwfLZiqA-PqA.webp',
+              'https://i.pinimg.com/564x/3e/b9/33/3eb9336930e18b7ad1586e297355ba50.jpg',
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width,
