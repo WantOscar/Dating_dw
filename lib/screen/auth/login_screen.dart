@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
+  late String email;
+  late String password;
 
   LoginPage({super.key});
 
@@ -21,17 +23,13 @@ class LoginPage extends StatelessWidget {
             TextFormField(
               decoration: const InputDecoration(labelText: '사용자 이름'),
               onChanged: (value) {
-                authController.user.update((user) {
-                  user!.username = value;
-                });
+                email = value;
               },
             ),
             TextFormField(
               decoration: const InputDecoration(labelText: '비밀번호'),
               onChanged: (value) {
-                authController.user.update((user) {
-                  user!.password = value;
-                });
+                password = value;
               },
               obscureText: true,
             ),
@@ -40,6 +38,8 @@ class LoginPage extends StatelessWidget {
                 onPressed: authController.isLoading.value
                     ? null
                     : () async {
+                        authController.user.value.email = email;
+                        authController.user.value.password = password;
                         await authController.login();
                       },
                 child: authController.isLoading.value

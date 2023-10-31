@@ -21,7 +21,7 @@ class SignUpPage extends StatelessWidget {
               decoration: const InputDecoration(labelText: '사용자 이름'),
               onChanged: (value) {
                 authController.user.update((user) {
-                  user!.username = value;
+                  user!.email = value;
                 });
               },
             ),
