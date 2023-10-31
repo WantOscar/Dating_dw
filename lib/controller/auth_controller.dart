@@ -1,3 +1,4 @@
+import 'package:dating/screen/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -12,7 +13,8 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
       final response = await http.post(
-        Uri.parse('http://your-spring-service-url/api/users/login'),
+        Uri.parse(
+            'http://ec2-43-202-97-23.ap-northeast-2.compute.amazonaws.com:8080/member/login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -20,7 +22,7 @@ class AuthController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        // 로그인 성공
+        Get.to(const HomeScreen());
       } else {
         // 로그인 실패
         // 에러 메시지 처리
@@ -34,7 +36,8 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
       final response = await http.post(
-        Uri.parse('http://your-spring-service-url/api/users/signup'),
+        Uri.parse(
+            'http://ec2-43-202-97-23.ap-northeast-2.compute.amazonaws.com:8080/member/join'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -42,13 +45,12 @@ class AuthController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        // 회원가입 성공
+        print("Did it");
       } else {
-        // 회원가입 실패
-        // 에러 메시지 처리
+        throw Exception("failed");
       }
-    } finally {
-      isLoading(false);
+    } catch (e) {
+      print("Failed to send post a data : $e");
     }
   }
 }

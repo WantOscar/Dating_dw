@@ -1,5 +1,4 @@
 import 'package:dating/screen/auth/login_screen.dart';
-import 'package:dating/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,8 +12,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      home: HomeScreen(),
+    return GetMaterialApp(
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }

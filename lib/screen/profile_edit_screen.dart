@@ -143,12 +143,6 @@ class ProfileEditScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const ProfileScreen(),
-                  //   ),
-                  // );
                   Get.back();
                 },
                 child: const Center(
