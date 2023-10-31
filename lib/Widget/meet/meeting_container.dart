@@ -8,9 +8,9 @@ class MeetingContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Get.to(MeetingDetail());
-      // },
+      onTap: () {
+        Get.to(const MeetingDetail());
+      },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.43,
         height: MediaQuery.of(context).size.height * 0.3,
