@@ -48,9 +48,7 @@ class ChattingListScreen extends StatelessWidget {
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => ChattingScreen()));
-                      Get.to(ChattingScreen());
+                      Get.to(const ChattingScreen());
                     },
                   ),
                 ),

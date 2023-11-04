@@ -122,7 +122,7 @@ class ProfileEditScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.003,
+              height: MediaQuery.of(context).size.height * 0.002,
               decoration: const BoxDecoration(color: Colors.grey),
             ),
             const SizedBox(height: 20),

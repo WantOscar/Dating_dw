@@ -14,4 +14,8 @@ class IconShape {
 
   static const iconArrowBack =
       Icon(Icons.arrow_back, color: Colors.black, size: 30);
+
+  static const iconMale = Icon(Icons.people, size: 20, color: Colors.blue);
+
+  static const iconFemale = Icon(Icons.people, size: 20, color: Colors.red);
 }

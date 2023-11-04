@@ -82,6 +82,36 @@ class TextStyling {
       fontWeight: FontWeight.bold,
     ),
   );
+
+  static const meetLocation = Text(
+    '홍대',
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 12,
+      fontWeight: FontWeight.bold,
+    ),
+    textAlign: TextAlign.center,
+  );
+
+  static const meetJob = Text(
+    '일반',
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 12,
+      fontWeight: FontWeight.bold,
+    ),
+    textAlign: TextAlign.center,
+  );
+
+  static const MaleNumber = Text('0/2',
+      style: TextStyle(
+          fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
+      overflow: TextOverflow.ellipsis);
+
+  static const FemaleNumber = Text('2/2',
+      style: TextStyle(
+          fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
+      overflow: TextOverflow.ellipsis);
 }
 
 class Human {

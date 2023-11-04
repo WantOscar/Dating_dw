@@ -1,4 +1,5 @@
 import 'package:dating/screen/meeting_detail_screen.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -104,11 +105,7 @@ class MeetingContainer extends StatelessWidget {
                 child: Container(
                   child: const Row(
                     children: [
-                      Icon(
-                        Icons.people,
-                        size: 20,
-                        color: Colors.blue,
-                      ),
+                      IconShape.iconMale,
                       Text('3/3',
                           style: TextStyle(
                               fontSize: 12,
@@ -118,11 +115,7 @@ class MeetingContainer extends StatelessWidget {
                       SizedBox(width: 5),
                       Padding(
                         padding: EdgeInsets.all(1.0),
-                        child: Icon(
-                          Icons.people,
-                          size: 20,
-                          color: Colors.pink,
-                        ),
+                        child: IconShape.iconFemale,
                       ),
                       Text('2/3',
                           style: TextStyle(
