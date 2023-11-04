@@ -81,6 +81,13 @@ class MeetingScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: fontColor,
+        child: const Icon(
+          Icons.add,
+        ),
+      ),
     );
   }
 }

@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const MeetingScreen(),
     const FeedScreen(),
     const ChattingListScreen(),
-    const ProfileScreen(),
+    ProfileScreen(),
   ];
 
   @override
