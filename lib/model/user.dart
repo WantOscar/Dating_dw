@@ -1,12 +1,18 @@
 class User {
-  late String email;
-  late String password;
+  final String? name;
+  final String? comment;
+  final String? gender;
+  final String? residence;
+  final int? age;
+  final int? height;
+  final String? image;
+  final String? personalInfo;
+  final String? mbti;
+  final String? personality;
+  final String? interest;
+  final String? likePersonality;
 
-  User({required this.email, required this.password});
+  User({required this.name, required this.comment, required this.gender, required this.residence, required this.age, required this.height, required this.image, required this.personalInfo, required this.mbti, required this.personality, required this.interest, required this.likePersonality});
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(email: json['email'], password: json['password']);
-  }
-
-  Map<String, dynamic> toJson() => {'email': email, 'password': password};
+  factory
 }
