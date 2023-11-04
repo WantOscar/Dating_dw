@@ -11,4 +11,7 @@ class IconShape {
 
   static const iconPhotoCamera =
       Icon(Icons.photo_camera, color: Colors.black, size: 30);
+
+  static const iconArrowBack =
+      Icon(Icons.arrow_back, color: Colors.black, size: 30);
 }

@@ -1,4 +1,4 @@
-import 'package:dating/Widget/meet/meeting_detail.dart';
+import 'package:dating/screen/meeting_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

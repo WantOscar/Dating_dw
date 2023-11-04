@@ -1,3 +1,5 @@
+import 'package:dating/Widget/container_standard.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,21 +32,36 @@ class MeetingDetail extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  left: 20,
+                  left: 10,
                   top: 40,
                   child: IconButton(
                     onPressed: () {
                       Get.back();
                     },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
-                      size: 30,
-                    ),
+                    icon: IconShape.iconArrowBack,
                   ),
                 )
               ],
             ),
+          ),
+          const SizedBox(height: 10),
+          const Row(
+            children: [
+              SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: ContainerStandard(
+                    w: 0.08,
+                    h: 0.05,
+                    child: Text(
+                      '홍대',
+                      style: TextStyle(color: Colors.white),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
