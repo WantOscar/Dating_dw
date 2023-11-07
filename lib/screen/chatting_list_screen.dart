@@ -3,6 +3,7 @@ import 'package:dating/Widget/chat/chatting_container.dart';
 import 'package:dating/screen/chatting_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChattingListScreen extends StatelessWidget {
   const ChattingListScreen({super.key});
@@ -47,8 +48,7 @@ class ChattingListScreen extends StatelessWidget {
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChattingScreen()));
+                      Get.to(const ChattingScreen());
                     },
                   ),
                 ),

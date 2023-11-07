@@ -8,12 +8,14 @@ import 'package:dating/Widget/profile/profile_edit_button.dart';
 import 'package:dating/Widget/profile/profile_positioned_location.dart';
 import 'package:dating/Widget/profile/profile_positioned_name.dart';
 import 'package:dating/Widget/profile/profile_picture.dart';
-import 'package:dating/style/icon_shape.dart';
+import 'package:dating/controller/auth_controller.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final AuthController authController = Get.put(AuthController());
+  ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +28,18 @@ class ProfileScreen extends StatelessWidget {
           padding: EdgeInsets.all(8.0),
           child: TextStyling.profile,
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: IconShape.iconSettings,
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                authController.logOut();
+              },
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.black,
+              ),
+            ),
           ),
         ],
       ),

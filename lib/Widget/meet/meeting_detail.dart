@@ -1,3 +1,4 @@
+import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,8 +38,8 @@ class MeetingDetail extends StatelessWidget {
                       Get.back();
                     },
                     icon: const Icon(
-                      Icons.arrow_back_ios,
-                      color: Colors.black,
+                      Icons.arrow_back,
+                      color: fontColor,
                       size: 30,
                     ),
                   ),
