@@ -25,4 +25,35 @@ class User {
       required this.personality,
       required this.interest,
       required this.likePersonality});
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      name: json['name'],
+      comment: json['comment'],
+      gender: json['gender'],
+      residence: json['residence'],
+      age: json['age'],
+      height: json['height'],
+      image: json['image'],
+      personalInfo: json['personalInfo'],
+      mbti: json['mbti'],
+      personality: json['personality'],
+      interest: json['interest'],
+      likePersonality: json['likePersonality'],
+    );
+  }
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'comment': comment,
+        'gender': gender,
+        'residence': residence,
+        'age': age,
+        'height': height,
+        'image': image,
+        'personalInfo': personalInfo,
+        'mbti': mbti,
+        'personlity': personality,
+        'interest': interest,
+        'likePersonality': likePersonality,
+      };
 }
