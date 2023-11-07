@@ -24,8 +24,7 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         Get.to(const HomeScreen());
       } else {
-        // 로그인 실패
-        // 에러 메시지 처리
+        Get.snackbar('계정을 로그인 하는데 실패했습니다!', '다시 한번 입력하세요!');
       }
     } finally {
       isLoading(false);
@@ -50,7 +49,7 @@ class AuthController extends GetxController {
         throw Exception("failed");
       }
     } catch (e) {
-      print("Failed to send post a data : $e");
+      Get.snackbar('회원가입에 실패했습니다', '제대로 입력해주세요!');
     }
   }
 }
