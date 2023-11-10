@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _pageIdx = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    const MainScreen(),
+    MainScreen(),
     const MeetingScreen(),
     const FeedScreen(),
     const ChattingListScreen(),

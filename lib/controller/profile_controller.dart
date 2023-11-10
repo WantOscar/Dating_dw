@@ -1,42 +1,77 @@
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+
+class Profile {
+  final String name;
+  final String comment;
+  final String gender;
+  final String residence;
+  final int age;
+  final int height;
+  final String image;
+  final String personalInfo;
+  final String mbti;
+  final String personality;
+  final String interest;
+  final String likePersonality;
+
+  Profile({
+    required this.name,
+    required this.comment,
+    required this.gender,
+    required this.residence,
+    required this.age,
+    required this.height,
+    required this.image,
+    required this.personalInfo,
+    required this.mbti,
+    required this.personality,
+    required this.interest,
+    required this.likePersonality,
+  });
+}
+
 class ProfileController extends GetxController {
-  final Rx<Map<String, dynamic>> _user = Rx<Map<String, dynamic>>({});
-  Map<String, dynamic> get user => _user.value;
+  final Rx<Profile> profile = Profile(
+    name: "",
+    comment: "",
+    gender: "",
+    residence: "",
+    age: 0,
+    height: 0,
+    image: "",
+    personalInfo: "",
+    mbti: "",
+    personality: "",
+    interest: "",
+    likePersonality: "",
+  ).obs;
 
-  final Rx<String> _uid = "".obs;
-
-  updateUserId(String uid) {
-    _uid.value = uid;
-    getUserData();
-  }
-
-  getUserData() async {
-    final response = await http.get(
-      Uri.parse(
-          'http://ec2-43-202-97-23.ap-northeast-2.compute.amazonaws.com:8080/member/profile/'),
-    );
+  Future<void> fetchProfile() async {
+    final response = await http.get(Uri.parse(
+        "http://ec2-43-202-97-23.ap-northeast-2.compute.amazonaws.com:8080/member/profile"));
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> userData = json.decode(response.body);
-      _user.value = userData;
+      final Map<String, dynamic> jsonData = json.decode(response.body);
+      final profileData = Profile(
+        name: jsonData['name'],
+        comment: jsonData['comment'],
+        gender: jsonData['gender'],
+        residence: jsonData['residence'],
+        age: jsonData['age'],
+        height: jsonData['height'],
+        image: jsonData['image'],
+        personalInfo: jsonData['personalInfo'],
+        mbti: jsonData['mbti'],
+        personality: jsonData['personality'],
+        interest: jsonData['interest'],
+        likePersonality: jsonData['likePersonality'],
+      );
+      profile.value = profileData;
     } else {
-      print('데이터 가져오기 실패 ${response.statusCode}');
+      throw Exception("Failed to fetch profile");
     }
-    final userData = getUserData().data('users') as dynamic;
-    String name = userData['name'];
-    String comment = userData['comment'];
-    String gender = userData['gender'];
-    String residence = userData['residence'];
-    int age = userData['age'];
-    int height = userData['height'];
-    String image = userData['image'];
-    String personalInfo = userData['personalInfo'];
-    String mbti = userData['mbti'];
-    String personality = userData['personality'];
-    String interest = userData['interest'];
-    String likePersonality = userData['likePersonality'];
   }
 }
