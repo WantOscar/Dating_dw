@@ -1,13 +1,11 @@
 import 'package:dating/controller/auth_controller.dart';
-import 'package:dating/screen/auth/password_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpPage extends StatelessWidget {
+class PasswordScreen extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
-
-  SignUpPage({super.key});
+  PasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,7 @@ class SignUpPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              '이메일을 입력해주세요',
+              '비밀번호를 입력해주세요',
               style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
             ),
@@ -39,7 +37,7 @@ class SignUpPage extends StatelessWidget {
               height: 10,
             ),
             const Text(
-              '이메일 작성 후 인증번호가 전송됩니다',
+              '이제 마지막 단계에요 :)',
               style: TextStyle(
                   fontSize: 13, color: font2Color, fontWeight: FontWeight.w300),
             ),
@@ -55,18 +53,19 @@ class SignUpPage extends StatelessWidget {
               ),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    hintText: 'hello@comment.com',
+                    hintText: '비밀번호를 입력해주세요!',
                     border: InputBorder.none,
-                    hintStyle: TextStyle(color: font2Color),
+                    hintStyle: TextStyle(color: Colors.grey),
                   ),
                   onChanged: (value) {
                     authController.user.update((user) {
-                      user!.email = value;
+                      user!.password = value;
                     });
                   },
+                  obscureText: true,
                 ),
               ),
             ),
@@ -79,23 +78,27 @@ class SignUpPage extends StatelessWidget {
           shadowColor: Colors.white,
           elevation: 0,
           child: GestureDetector(
-            onTap: () {
-              Get.to(PasswordScreen());
-            },
+            onTap: authController.isLoading.value
+                ? null
+                : () async {
+                    await authController.signUp();
+                  },
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.07,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30), color: fontColor),
-              child: const Center(
-                child: Text(
-                  '확인',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: Colors.white),
-                ),
-              ),
+              child: authController.isLoading.value
+                  ? const CircularProgressIndicator()
+                  : const Center(
+                      child: Text(
+                        '회원가입',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 15),
+                      ),
+                    ),
             ),
           ),
         ),
