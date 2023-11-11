@@ -5,7 +5,7 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetView<AuthController> {
   final AuthController authController = Get.put(AuthController());
   late String email;
   late String password;

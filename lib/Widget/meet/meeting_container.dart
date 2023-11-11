@@ -1,5 +1,7 @@
+import 'package:dating/Widget/meet/meeting_detail.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MeetingContainer extends StatelessWidget {
   const MeetingContainer({Key? key}) : super(key: key);
@@ -7,9 +9,9 @@ class MeetingContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Get.to(MeetingDetail());
-      // },
+      onTap: () {
+        Get.to(const MeetingDetail());
+      },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.43,
         height: MediaQuery.of(context).size.height * 0.3,

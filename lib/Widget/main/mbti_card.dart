@@ -10,7 +10,7 @@ class MBTICard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: MediaQuery.of(context).size.width * 0.89,
           height: MediaQuery.of(context).size.width * 0.26,
           decoration: BoxDecoration(
             color: const Color(0xFFEDEDED),

@@ -77,6 +77,93 @@ class AuthForgotScreen extends StatelessWidget {
         child: BottomAppBar(
           shadowColor: Colors.white,
           elevation: 0,
+          child: GestureDetector(
+            onTap: () {
+              Get.to(VerifyScreen());
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.07,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30), color: fontColor),
+              child: const Center(
+                child: Text(
+                  '확인',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class VerifyScreen extends StatelessWidget {
+  VerifyScreen({super.key});
+
+  final controller = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: fontColor,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              '인증번호 6자를 입력해 주세요',
+              style: TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              '작성하신 이메일로 인증번호가 전송됐을 거에요',
+              style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w300),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Row(
+              children: List.generate(
+                6,
+                (index) => const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  child: VerifyBox(),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: BottomAppBar(
+          shadowColor: Colors.white,
+          elevation: 0,
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.07,
@@ -94,6 +181,22 @@ class AuthForgotScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class VerifyBox extends StatelessWidget {
+  const VerifyBox({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.13,
+      height: MediaQuery.of(context).size.width * 0.18,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30), color: Colors.grey),
     );
   }
 }
