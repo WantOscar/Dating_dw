@@ -4,7 +4,7 @@ import 'package:dating/Widget/main/gesture_box.dart';
 import 'package:dating/Widget/main/mbti_card.dart';
 import 'package:dating/Widget/main/profile_main.dart';
 import 'package:dating/style/constant.dart';
-import 'package:dating/screen/alert_screen.dart';
+import 'package:dating/screen/main/alert_screen.dart';
 import 'package:dating/screen/information_modify_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -112,6 +112,41 @@ class MainScreen extends StatelessWidget {
                 children: [
                   Text(
                     '내가 관심 있는 친구',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                ],
+              ),
+            ),
+            // Interested Friends List
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(
+                    50,
+                    (index) => const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Avatar(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
+            // Interested Friends
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  Text(
+                    '나한테 관심 있는 친구',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

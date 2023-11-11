@@ -11,6 +11,9 @@ class MeetingDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -18,23 +21,27 @@ class MeetingDetail extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.width * 0.8,
-              decoration: BoxDecoration(boxShadow: [
-                BoxShadow(
+              width: width,
+              height: width * 0.8,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     spreadRadius: 1,
                     blurRadius: 5,
-                    offset: const Offset(0, 8)),
-              ], color: Colors.white),
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+                color: Colors.white,
+              ),
               child: Stack(
                 children: [
                   ClipRRect(
                     child: Image.network(
                       'https://i.pinimg.com/474x/a6/24/5b/a6245bee6c4461558e293551fa463265.jpg',
                       fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.width,
+                      width: width,
+                      height: width,
                     ),
                   ),
                   Positioned(
@@ -102,8 +109,8 @@ class MeetingDetail extends StatelessWidget {
             ),
             const SizedBox(height: 50),
             Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.002,
+              width: width,
+              height: height * 0.002,
               decoration: const BoxDecoration(color: Colors.grey),
             ),
             const SizedBox(height: 20),

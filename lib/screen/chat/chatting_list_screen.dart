@@ -1,6 +1,6 @@
 import 'package:dating/Widget/chat/chatting_box.dart';
 import 'package:dating/Widget/chat/chatting_container.dart';
-import 'package:dating/screen/chatting_screen.dart';
+import 'package:dating/screen/chat/chatting_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

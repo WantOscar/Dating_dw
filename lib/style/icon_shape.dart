@@ -1,3 +1,4 @@
+import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class IconShape {
@@ -13,9 +14,13 @@ class IconShape {
       Icon(Icons.photo_camera, color: Colors.black, size: 30);
 
   static const iconArrowBack =
-      Icon(Icons.arrow_back, color: Colors.black, size: 30);
+      Icon(Icons.arrow_back, color: fontColor, size: 30);
 
   static const iconMale = Icon(Icons.people, size: 20, color: Colors.blue);
 
   static const iconFemale = Icon(Icons.people, size: 20, color: Colors.red);
+
+  static const iconSchool = Icon(Icons.school, size: 50);
+
+  static const iconEmojiPeople = Icon(Icons.emoji_people, size: 50);
 }
