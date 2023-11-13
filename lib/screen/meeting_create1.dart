@@ -54,7 +54,12 @@ class MeetingCreate1 extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.school, size: 50),
+                          Text(
+                            '🏫',
+                            style: TextStyle(
+                              fontSize: 50,
+                            ),
+                          ),
                           Text(
                             '대학교',
                             style: TextStyle(fontSize: 15, color: Colors.grey),
@@ -79,7 +84,10 @@ class MeetingCreate1 extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.emoji_people, size: 50),
+                          Text(
+                            '🙌',
+                            style: TextStyle(fontSize: 50),
+                          ),
                           Text(
                             '일반',
                             style: TextStyle(fontSize: 15, color: Colors.grey),
@@ -94,15 +102,28 @@ class MeetingCreate1 extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(16),
-        color: Colors.white,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: fontColor),
-          onPressed: () {},
-          child: const Padding(
-            padding: EdgeInsets.all(12.0),
-            child: Text('다음', style: TextStyle(fontSize: 18)),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: BottomAppBar(
+          shadowColor: Colors.white,
+          elevation: 0,
+          child: GestureDetector(
+            onTap: () {},
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.07,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30), color: fontColor),
+              child: const Center(
+                child: Text(
+                  '확인',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
           ),
         ),
       ),
