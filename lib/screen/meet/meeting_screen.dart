@@ -1,6 +1,8 @@
-import 'package:dating/Widget/meet/meeting_container.dart';
-import 'package:dating/screen/meet/meeting_create1.dart';
+import 'package:dating/Widget/meet/meeting_room.dart';
+import 'package:dating/Widget/meet/select_room.dart';
+import 'package:dating/screen/meet/meeting_create1_screen.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,65 +34,23 @@ class MeetingScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    '대학생',
-                    style: TextStyle(fontSize: 17, color: font2Color),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    '일반',
-                    style: TextStyle(fontSize: 17, color: font2Color),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: List.generate(
-                    50,
-                    (index) => const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 12),
-                      child: MeetingContainer(),
-                    ),
-                  ),
-                ),
-                Column(
-                  children: List.generate(
-                    50,
-                    (index) => const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 12),
-                      child: MeetingContainer(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // select college student or general
+            SelectRoom(),
+            SizedBox(height: 20),
+            // meeting room
+            MeetingRoom(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(const MeetingCreate1());
+          Get.to(const MeetingCreate1Screen());
         },
         backgroundColor: fontColor,
-        child: const Icon(
-          Icons.add,
-        ),
+        child: IconShape.iconAdd,
       ),
     );
   }

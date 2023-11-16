@@ -23,4 +23,12 @@ class IconShape {
   static const iconSchool = Icon(Icons.school, size: 50);
 
   static const iconEmojiPeople = Icon(Icons.emoji_people, size: 50);
+
+  static const iconArrowBackIos =
+      Icon(Icons.arrow_back_ios, color: Colors.pink);
+
+  static const iconNotificationOutline =
+      Icon(Icons.notifications_outlined, size: 30, color: Colors.black);
+
+  static const iconAdd = Icon(Icons.add, size: 30, color: Colors.white);
 }

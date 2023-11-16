@@ -23,30 +23,10 @@ class FeedScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 10),
-            //     child: Row(
-            //       children: List.generate(
-            //         50,
-            //         (index) => const Padding(
-            //           padding:
-            //               EdgeInsets.symmetric(vertical: 6, horizontal: 13),
-            //           child: StoryCircle(),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            Column(
-              children: List.generate(
-                50,
-                (index) => const Feed(),
-              ),
-            ),
-          ],
+          children: List.generate(
+            50,
+            (index) => const Feed(),
+          ),
         ),
       ),
     );

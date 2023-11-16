@@ -1,11 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dating/Widget/main/circle_avatar.dart';
-import 'package:dating/Widget/main/gesture_box.dart';
-import 'package:dating/Widget/main/mbti_card.dart';
+import 'package:dating/Widget/main/interested_friends.dart';
+import 'package:dating/Widget/main/interested_friends_box.dart';
+import 'package:dating/Widget/main/interested_me.dart';
+import 'package:dating/Widget/main/interested_me_box.dart';
+import 'package:dating/Widget/main/mbti_recommend.dart';
 import 'package:dating/Widget/main/profile_main.dart';
+import 'package:dating/Widget/main/today_meet.dart';
+import 'package:dating/Widget/main/today_meet_box.dart';
 import 'package:dating/style/constant.dart';
-import 'package:dating/screen/main/alert_screen.dart';
-import 'package:dating/screen/information_modify_screen.dart';
+import 'package:dating/screen/main/alarm_screen.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,13 +37,9 @@ class MainScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                Get.to(const AlertScreen());
+                Get.to(const AlarmScreen());
               },
-              icon: const Icon(
-                Icons.notifications_outlined,
-                size: 30,
-                color: Colors.black,
-              ),
+              icon: IconShape.iconNotificationOutline,
             ),
           ),
         ],
@@ -59,159 +59,40 @@ class MainScreen extends StatelessWidget {
                   viewportFraction: 0.8),
             ),
             const SizedBox(height: 40),
+
             // Title and Info
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    '오늘의 과팅🔥',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => const InformationScreen()),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      '정보 수정',
-                      style: TextStyle(color: font2Color),
-                    ),
-                  ),
-                ],
-              ),
+            const TodayMeet(),
+            const SizedBox(height: 20),
+
+            // Gesture Box List
+            const SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: TodayMeetBox(),
+            ),
+            const SizedBox(height: 30),
+
+            // Interested Friends
+            const InterestedFriends(),
+
+            // Interested Friends List
+            const SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: InterestedFriendsBox(),
+            ),
+            const SizedBox(height: 30),
+
+            // Interested me
+            const InterestedMe(),
+
+            // Interested me List
+            const SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: InterestedMeBox(),
             ),
             const SizedBox(height: 20),
-            // Gesture Box List
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                    50,
-                    (index) => const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: GestureBox(),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            // Interested Friends
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Text(
-                    '내가 관심 있는 친구',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                ],
-              ),
-            ),
-            // Interested Friends List
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                    50,
-                    (index) => const Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      child: Avatar(),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 30),
-            // Interested Friends
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                children: [
-                  Text(
-                    '나한테 관심 있는 친구',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 30),
-                ],
-              ),
-            ),
-            // Interested Friends List
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(
-                    50,
-                    (index) => const Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      child: Avatar(),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'MBTI 별 추전조합',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    'ISFP와 좋은 궁합을 가진 친구들이에요!',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFbebebe),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    children: List.generate(
-                      5,
-                      (index) => const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        child: MBTICard(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
+            // Recommendations by mbti
+            const MbtiRecommend(),
           ],
         ),
       ),

@@ -3,8 +3,8 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MeetingCreate2 extends StatelessWidget {
-  const MeetingCreate2({super.key});
+class MeetingCreate2Screen extends StatelessWidget {
+  const MeetingCreate2Screen({super.key});
 
   @override
   Widget build(BuildContext context) {

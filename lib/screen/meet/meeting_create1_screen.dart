@@ -1,12 +1,12 @@
 import 'package:dating/Widget/meet/meet_create1/select_meet_method.dart';
-import 'package:dating/screen/meet/meeting_create2.dart';
+import 'package:dating/screen/meet/meeting_create2_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MeetingCreate1 extends StatelessWidget {
-  const MeetingCreate1({super.key});
+class MeetingCreate1Screen extends StatelessWidget {
+  const MeetingCreate1Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class MeetingCreate1 extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(backgroundColor: fontColor),
           onPressed: () {
-            Get.to(const MeetingCreate2());
+            Get.to(const MeetingCreate2Screen());
           },
           child: const Padding(
             padding: EdgeInsets.all(12.0),

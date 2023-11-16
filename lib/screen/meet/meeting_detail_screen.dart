@@ -6,8 +6,8 @@ import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MeetingDetail extends StatelessWidget {
-  const MeetingDetail({super.key});
+class MeetingDetailScreen extends StatelessWidget {
+  const MeetingDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,19 @@ class MeetingDetail extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      appBar: AppBar(
+        leading: const Padding(
+          padding: EdgeInsets.all(12.0),
+          child: Text(
+            '오늘의 과팅❤️‍🔥',
+            style: TextStyle(
+                fontSize: 20, color: fontColor, fontWeight: FontWeight.bold),
+          ),
+        ),
+        leadingWidth: 200,
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +59,7 @@ class MeetingDetail extends StatelessWidget {
                   ),
                   Positioned(
                     left: 10,
-                    top: 40,
+                    top: 10,
                     child: IconButton(
                       onPressed: () {
                         Get.back();
