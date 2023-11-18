@@ -1,4 +1,4 @@
-import 'package:dating/model/album.dart';
+import 'package:dating/data/model/album.dart';
 import 'package:get/get.dart';
 import 'package:photo_manager/photo_manager.dart';
 
