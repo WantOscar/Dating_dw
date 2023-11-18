@@ -54,11 +54,19 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    // 프로필
+                    // my representative profile photo
                     ProfilePicture(),
+
+                    // my name
                     ProfilePositionedName(),
+
+                    // my age
                     ProfilePositionedAge(),
+
+                    // my residence
                     ProfilePositionedLocation(),
+
+                    // profile edit button
                     Positioned(
                       top: 360,
                       right: 20,
@@ -68,24 +76,30 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            // 인적사항
+            // personal information
             PersonalInformation(),
-            // 성격
+
+            // my personality
             Personality(),
-            // 관심사
+
+            // my interest
             Interest(),
-            // 이상형
+
+            // my ideal type
             IdealType(),
             SizedBox(height: 50),
+
+            // my story text
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextStyling.story,
             ),
+
+            // my story collection
             Padding(
               padding: EdgeInsets.all(2.0),
               child: Row(
                 children: [
-                  // 스토리
                   ContainerBasic(),
                   ContainerBasic(),
                   ContainerBasic(),

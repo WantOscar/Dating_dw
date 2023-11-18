@@ -1,10 +1,12 @@
-import 'package:dating/Widget/meet/container_standard.dart';
+import 'package:dating/Widget/meet/meet_detail/explain_room.dart';
+import 'package:dating/Widget/meet/meet_detail/room_manager_profile.dart';
+import 'package:dating/Widget/meet/meet_detail/room_title.dart';
+import 'package:dating/Widget/meet/meet_detail/room_type.dart';
 import 'package:dating/Widget/meet/mini_profile.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class MeetingDetailScreen extends StatelessWidget {
   const MeetingDetailScreen({super.key});
@@ -33,100 +35,31 @@ class MeetingDetailScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: width,
-              height: width * 0.8,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: const Offset(0, 8),
-                  ),
-                ],
-                color: Colors.white,
-              ),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    child: Image.network(
-                      'https://i.pinimg.com/474x/a6/24/5b/a6245bee6c4461558e293551fa463265.jpg',
-                      fit: BoxFit.cover,
-                      width: width,
-                      height: width,
-                    ),
-                  ),
-                  Positioned(
-                    left: 10,
-                    top: 10,
-                    child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: IconShape.iconArrowBack,
-                    ),
-                  )
-                ],
-              ),
-            ),
+            // room manager profile
+            const RoomManagerProfile(),
             const SizedBox(height: 30),
-            const Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 30.0, right: 10),
-                  child: ContainerStandard(
-                    w: 0.13,
-                    h: 0.05,
-                    color: fontColor,
-                    c: 20,
-                    child: TextStyling.meetJob,
-                  ),
-                ),
-                ContainerStandard(
-                  w: 0.13,
-                  h: 0.05,
-                  color: fontColor,
-                  c: 20,
-                  child: TextStyling.meetLocation,
-                ),
-              ],
-            ),
+
+            // show room type
+            const RoomType(),
             const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.only(left: 30.0, right: 10),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '홍대에서 술 마실 사람 급구!(제목)',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
+
+            // room title
+            const Roomtitle(),
             const SizedBox(height: 15),
-            const Center(
-              child: ContainerStandard(
-                w: 0.85,
-                h: 0.2,
-                color: Color.fromARGB(255, 214, 211, 211),
-                c: 10,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-                  child: Center(
-                    child: Text(
-                      '22살, 23살 여자 두 명이에요! 잘생긴 남자 두 분 구해요 ㅎㅎ(2줄까지)',
-                    ),
-                  ),
-                ),
-              ),
-            ),
+
+            // explanation of the room
+            const ExplainRoom(),
             const SizedBox(height: 50),
+
+            // deviding line
             Container(
               width: width,
               height: height * 0.002,
               decoration: const BoxDecoration(color: Colors.grey),
             ),
             const SizedBox(height: 20),
+
+            // Number of people participating
             const Padding(
               padding: EdgeInsets.only(left: 30.0, right: 10),
               child: Row(
@@ -143,6 +76,9 @@ class MeetingDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            // status of people participating
+            // miniprofile이 남자는 왼쪽에 여자는 오른쪽에 오게 하는 방법을 몰라서 해결해 주실 수 있는 분~
             const MiniProfile(),
             const MiniProfile(),
             const MiniProfile(),

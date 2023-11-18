@@ -40,6 +40,7 @@ class MeetingScreen extends StatelessWidget {
             // select college student or general
             SelectRoom(),
             SizedBox(height: 20),
+
             // meeting room
             MeetingRoom(),
           ],

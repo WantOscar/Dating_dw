@@ -33,16 +33,20 @@ class MeetingCreate1Screen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // select you want room text
             Text(
               '원하시는 방을 선택해 주세요',
               style: TextStyle(
                   fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
             ),
             SizedBox(height: 30),
+
+            // select college students or general button
             SelectMeetMethod(),
           ],
         ),
       ),
+      // select the room you want, and go to the next screen
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16),
         color: Colors.white,
