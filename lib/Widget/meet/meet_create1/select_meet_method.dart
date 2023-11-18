@@ -1,4 +1,3 @@
-import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 
 class SelectMeetMethod extends StatelessWidget {
@@ -25,7 +24,10 @@ class SelectMeetMethod extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconShape.iconSchool,
+                  Text(
+                    '🏫',
+                    style: TextStyle(fontSize: 50),
+                  ),
                   Text(
                     '대학교',
                     style: TextStyle(fontSize: 15, color: Colors.grey),
@@ -50,7 +52,10 @@ class SelectMeetMethod extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconShape.iconEmojiPeople,
+                  Text(
+                    '🙌',
+                    style: TextStyle(fontSize: 50),
+                  ),
                   Text(
                     '일반',
                     style: TextStyle(fontSize: 15, color: Colors.grey),
