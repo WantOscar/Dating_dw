@@ -1,3 +1,4 @@
+import 'package:dating/Widget/bottom_apply_bar.dart';
 import 'package:dating/Widget/meet/meet_create1/select_meet_method.dart';
 import 'package:dating/screen/meet/meeting_create2_screen.dart';
 import 'package:dating/style/constant.dart';
@@ -10,9 +11,6 @@ class MeetingCreate1Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -50,32 +48,12 @@ class MeetingCreate1Screen extends StatelessWidget {
         ),
       ),
       // select the room you want, and go to the next screen
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-        child: BottomAppBar(
-          shadowColor: Colors.white,
-          elevation: 0,
-          child: GestureDetector(
-            onTap: () {
-              Get.to(const MeetingCreate2Screen());
-            },
-            child: Container(
-              width: width,
-              height: height * 0.07,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15), color: fontColor),
-              child: const Center(
-                child: Text(
-                  '확인',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-        ),
+      bottomNavigationBar: BottomApplyBar(
+        heightPoint: 0.06,
+        text: '확인',
+        onTap: () {
+          Get.to(const MeetingCreate2Screen());
+        },
       ),
     );
   }

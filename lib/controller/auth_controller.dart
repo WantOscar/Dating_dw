@@ -1,7 +1,8 @@
 import 'package:dating/data/model/auth.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/screen/home_screen.dart';
-import 'package:dating/utils/api_urls.dart';
+import 'package:dating/util/api_urls.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

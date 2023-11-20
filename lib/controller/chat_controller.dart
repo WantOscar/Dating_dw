@@ -1,5 +1,5 @@
 import 'package:dating/data/model/chat.dart';
-import 'package:dating/utils/api_urls.dart';
+import 'package:dating/util/api_urls.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
