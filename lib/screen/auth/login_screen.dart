@@ -1,4 +1,5 @@
 import 'package:dating/controller/auth_controller.dart';
+import 'package:dating/screen/auth/auth_forgot_screen.dart';
 import 'package:dating/screen/auth/signup_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
@@ -142,8 +143,12 @@ class LoginScreen extends StatelessWidget {
               }),
               TextButton(
                 onPressed: () {
+<<<<<<< HEAD
                   // 회원가입 페이지로 이동 -> 계정 찾기 페이지 하나 더 만들기
                   Get.to(SignUpPage());
+=======
+                  Get.to(const AuthForgotScreen());
+>>>>>>> develop
                 },
                 child: const Text(
                   '계정을 잃어버리셨나요?',

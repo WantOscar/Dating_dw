@@ -7,8 +7,8 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController extends GetxController {
-  final user = Auth(email: '', password: '').obs;
-  final isLoading = false.obs;
+  final Rx<Auth> user = Auth(email: '', password: '').obs;
+  final RxBool isLoading = false.obs;
 
   Future<void> login() async {
     try {
