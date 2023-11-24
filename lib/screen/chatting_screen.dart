@@ -5,8 +5,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-class ChattingScreen extends StatelessWidget {
+class ChattingScreen extends StatefulWidget {
   const ChattingScreen({super.key});
+
+  @override
+  _ChattingScreenState createState() => _ChattingScreenState();
+}
+
+class _ChattingScreenState extends State<ChattingScreen> {
+  final textController = TextEditingController();
+  List<Chat> chats = [];
+  void sendMessage() {
+    setState(() {
+      if (textController.text.isNotEmpty) {
+        chats.add(Chat(text: Text(textController.text)));
+        textController.clear();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,47 +58,21 @@ class ChattingScreen extends StatelessWidget {
         elevation: 0,
       ),
       body: ListView.builder(
-        itemCount: 1,
+        itemCount: chats.length,
         itemBuilder: (context, index) {
-          return const SingleChildScrollView(
+          return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
                     child: Row(
                       children: [
-                        ChattingProfile(),
-                        Chat(
-                          text: Text('안녕하세요 !'),
-                        ),
+                        const ChattingProfile(),
+                        chats[index],
                       ],
                     )),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 70),
-                  child: Chat(text: Text('홍대신가요 ?')),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Chat(text: Text('안녕하세요')),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      child: Chat(text: Text('지금 홍대')),
-                    )
-                  ],
-                ),
               ],
             ),
           );
@@ -100,13 +90,16 @@ class ChattingScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(20)),
-                child: const TextField(
-                  decoration: InputDecoration(
-                      hintText: ' 입력 ..', border: InputBorder.none),
-                ),
+                child: TextField(
+                    controller: textController,
+                    decoration: const InputDecoration(
+                        hintText: ' 입력 ..', border: InputBorder.none),
+                    onSubmitted: (Value) {
+                      sendMessage();
+                    }),
               ),
             ),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.send))
+            IconButton(onPressed: sendMessage, icon: const Icon(Icons.send))
           ],
         ),
       ),
