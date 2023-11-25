@@ -7,13 +7,16 @@ import 'package:dating/Widget/main/mbti_recommend.dart';
 import 'package:dating/Widget/main/profile_main.dart';
 import 'package:dating/Widget/main/today_meet.dart';
 import 'package:dating/Widget/main/today_meet_box.dart';
+import 'package:dating/controller/user_controller.dart';
+import 'package:dating/data/model/user.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/screen/main/alarm_screen.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends GetView<UserController> {
   const MainScreen({super.key});
 
   @override
@@ -44,57 +47,82 @@ class MainScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Profile Photo Carousel
-            CarouselSlider.builder(
-              itemCount: 50,
-              itemBuilder: (context, index, realIndex) => const ProfileMain(),
-              options: CarouselOptions(
-                  enlargeCenterPage: true,
-                  aspectRatio: 1,
-                  autoPlay: true,
-                  viewportFraction: 0.8),
-            ),
-            const SizedBox(height: 40),
+      body: FutureBuilder<List<User>>(
+        future: UserRepository().getUserData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // 디스플레이가 로딩중일 때 나오는 화면
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            // 만약 에러가 발생할 경우 에러메세지 발생
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            // 디스플레이에 표시
+            List<User> users = snapshot.data ?? [];
+            return ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                User user = users[index];
+                return SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Profile Photo Carousel
+                      CarouselSlider.builder(
+                        itemCount: users.length,
+                        itemBuilder: (context, index, realIndex) => ProfileMain(
+                          user: users[index],
+                        ),
+                        options: CarouselOptions(
+                            enlargeCenterPage: true,
+                            aspectRatio: 1,
+                            autoPlay: true,
+                            viewportFraction: 0.8),
+                      ),
+                      const SizedBox(height: 40),
 
-            // Title and Info
-            const TodayMeet(),
-            const SizedBox(height: 20),
+                      // Title and Info
+                      const TodayMeet(),
+                      const SizedBox(height: 20),
 
-            // Gesture Box List
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: TodayMeetBox(),
-            ),
-            const SizedBox(height: 30),
+                      // Gesture Box List
+                      const SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: TodayMeetBox(),
+                      ),
+                      const SizedBox(height: 30),
 
-            // Interested Friends
-            const InterestedFriends(),
+                      // Interested Friends
+                      const InterestedFriends(),
 
-            // Interested Friends List
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: InterestedFriendsBox(),
-            ),
-            const SizedBox(height: 30),
+                      // Interested Friends List
+                      const SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: InterestedFriendsBox(),
+                      ),
+                      const SizedBox(height: 30),
 
-            // Interested me
-            const InterestedMe(),
+                      // Interested me
+                      const InterestedMe(),
 
-            // Interested me List
-            const SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: InterestedMeBox(),
-            ),
-            const SizedBox(height: 20),
+                      // Interested me List
+                      const SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: InterestedMeBox(),
+                      ),
+                      const SizedBox(height: 20),
 
-            // Recommendations by mbti
-            const MbtiRecommend(),
-          ],
-        ),
+                      // Recommendations by mbti
+                      const MbtiRecommend(),
+                    ],
+                  ),
+                );
+              },
+            );
+          }
+        },
       ),
     );
   }

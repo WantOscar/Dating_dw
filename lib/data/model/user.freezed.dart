@@ -20,18 +20,18 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get name => throw _privateConstructorUsedError;
-  String get comment => throw _privateConstructorUsedError;
-  String get gender => throw _privateConstructorUsedError;
-  String get residence => throw _privateConstructorUsedError;
-  int get age => throw _privateConstructorUsedError;
-  int get height => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
-  String get personalInfo => throw _privateConstructorUsedError;
-  String get mbti => throw _privateConstructorUsedError;
-  String get personality => throw _privateConstructorUsedError;
-  String get interest => throw _privateConstructorUsedError;
-  String get likePersonality => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get comment => throw _privateConstructorUsedError;
+  String? get gender => throw _privateConstructorUsedError;
+  String? get residence => throw _privateConstructorUsedError;
+  int? get age => throw _privateConstructorUsedError;
+  int? get height => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
+  String? get personalInfo => throw _privateConstructorUsedError;
+  String? get mbti => throw _privateConstructorUsedError;
+  String? get personality => throw _privateConstructorUsedError;
+  String? get interest => throw _privateConstructorUsedError;
+  String? get likePersonality => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,18 +44,18 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String name,
-      String comment,
-      String gender,
-      String residence,
-      int age,
-      int height,
-      String image,
-      String personalInfo,
-      String mbti,
-      String personality,
-      String interest,
-      String likePersonality});
+      {String? name,
+      String? comment,
+      String? gender,
+      String? residence,
+      int? age,
+      int? height,
+      String? image,
+      String? personalInfo,
+      String? mbti,
+      String? personality,
+      String? interest,
+      String? likePersonality});
 }
 
 /// @nodoc
@@ -71,68 +71,68 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? comment = null,
-    Object? gender = null,
-    Object? residence = null,
-    Object? age = null,
-    Object? height = null,
-    Object? image = null,
-    Object? personalInfo = null,
-    Object? mbti = null,
-    Object? personality = null,
-    Object? interest = null,
-    Object? likePersonality = null,
+    Object? name = freezed,
+    Object? comment = freezed,
+    Object? gender = freezed,
+    Object? residence = freezed,
+    Object? age = freezed,
+    Object? height = freezed,
+    Object? image = freezed,
+    Object? personalInfo = freezed,
+    Object? mbti = freezed,
+    Object? personality = freezed,
+    Object? interest = freezed,
+    Object? likePersonality = freezed,
   }) {
     return _then(_value.copyWith(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: null == comment
+              as String?,
+      comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: null == gender
+              as String?,
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      residence: null == residence
+              as String?,
+      residence: freezed == residence
           ? _value.residence
           : residence // ignore: cast_nullable_to_non_nullable
-              as String,
-      age: null == age
+              as String?,
+      age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int,
-      height: null == height
+              as int?,
+      height: freezed == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
-              as int,
-      image: null == image
+              as int?,
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      personalInfo: null == personalInfo
+              as String?,
+      personalInfo: freezed == personalInfo
           ? _value.personalInfo
           : personalInfo // ignore: cast_nullable_to_non_nullable
-              as String,
-      mbti: null == mbti
+              as String?,
+      mbti: freezed == mbti
           ? _value.mbti
           : mbti // ignore: cast_nullable_to_non_nullable
-              as String,
-      personality: null == personality
+              as String?,
+      personality: freezed == personality
           ? _value.personality
           : personality // ignore: cast_nullable_to_non_nullable
-              as String,
-      interest: null == interest
+              as String?,
+      interest: freezed == interest
           ? _value.interest
           : interest // ignore: cast_nullable_to_non_nullable
-              as String,
-      likePersonality: null == likePersonality
+              as String?,
+      likePersonality: freezed == likePersonality
           ? _value.likePersonality
           : likePersonality // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -145,18 +145,18 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name,
-      String comment,
-      String gender,
-      String residence,
-      int age,
-      int height,
-      String image,
-      String personalInfo,
-      String mbti,
-      String personality,
-      String interest,
-      String likePersonality});
+      {String? name,
+      String? comment,
+      String? gender,
+      String? residence,
+      int? age,
+      int? height,
+      String? image,
+      String? personalInfo,
+      String? mbti,
+      String? personality,
+      String? interest,
+      String? likePersonality});
 }
 
 /// @nodoc
@@ -169,68 +169,68 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
-    Object? comment = null,
-    Object? gender = null,
-    Object? residence = null,
-    Object? age = null,
-    Object? height = null,
-    Object? image = null,
-    Object? personalInfo = null,
-    Object? mbti = null,
-    Object? personality = null,
-    Object? interest = null,
-    Object? likePersonality = null,
+    Object? name = freezed,
+    Object? comment = freezed,
+    Object? gender = freezed,
+    Object? residence = freezed,
+    Object? age = freezed,
+    Object? height = freezed,
+    Object? image = freezed,
+    Object? personalInfo = freezed,
+    Object? mbti = freezed,
+    Object? personality = freezed,
+    Object? interest = freezed,
+    Object? likePersonality = freezed,
   }) {
     return _then(_$UserImpl(
-      name: null == name
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: null == comment
+              as String?,
+      comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      gender: null == gender
+              as String?,
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      residence: null == residence
+              as String?,
+      residence: freezed == residence
           ? _value.residence
           : residence // ignore: cast_nullable_to_non_nullable
-              as String,
-      age: null == age
+              as String?,
+      age: freezed == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int,
-      height: null == height
+              as int?,
+      height: freezed == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
-              as int,
-      image: null == image
+              as int?,
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
-      personalInfo: null == personalInfo
+              as String?,
+      personalInfo: freezed == personalInfo
           ? _value.personalInfo
           : personalInfo // ignore: cast_nullable_to_non_nullable
-              as String,
-      mbti: null == mbti
+              as String?,
+      mbti: freezed == mbti
           ? _value.mbti
           : mbti // ignore: cast_nullable_to_non_nullable
-              as String,
-      personality: null == personality
+              as String?,
+      personality: freezed == personality
           ? _value.personality
           : personality // ignore: cast_nullable_to_non_nullable
-              as String,
-      interest: null == interest
+              as String?,
+      interest: freezed == interest
           ? _value.interest
           : interest // ignore: cast_nullable_to_non_nullable
-              as String,
-      likePersonality: null == likePersonality
+              as String?,
+      likePersonality: freezed == likePersonality
           ? _value.likePersonality
           : likePersonality // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -239,46 +239,46 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   _$UserImpl(
-      {required this.name,
-      required this.comment,
-      required this.gender,
-      required this.residence,
-      required this.age,
-      required this.height,
-      required this.image,
-      required this.personalInfo,
-      required this.mbti,
-      required this.personality,
-      required this.interest,
-      required this.likePersonality});
+      {this.name,
+      this.comment,
+      this.gender,
+      this.residence,
+      this.age,
+      this.height,
+      this.image,
+      this.personalInfo,
+      this.mbti,
+      this.personality,
+      this.interest,
+      this.likePersonality});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  final String name;
+  final String? name;
   @override
-  final String comment;
+  final String? comment;
   @override
-  final String gender;
+  final String? gender;
   @override
-  final String residence;
+  final String? residence;
   @override
-  final int age;
+  final int? age;
   @override
-  final int height;
+  final int? height;
   @override
-  final String image;
+  final String? image;
   @override
-  final String personalInfo;
+  final String? personalInfo;
   @override
-  final String mbti;
+  final String? mbti;
   @override
-  final String personality;
+  final String? personality;
   @override
-  final String interest;
+  final String? interest;
   @override
-  final String likePersonality;
+  final String? likePersonality;
 
   @override
   String toString() {
@@ -342,45 +342,45 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   factory _User(
-      {required final String name,
-      required final String comment,
-      required final String gender,
-      required final String residence,
-      required final int age,
-      required final int height,
-      required final String image,
-      required final String personalInfo,
-      required final String mbti,
-      required final String personality,
-      required final String interest,
-      required final String likePersonality}) = _$UserImpl;
+      {final String? name,
+      final String? comment,
+      final String? gender,
+      final String? residence,
+      final int? age,
+      final int? height,
+      final String? image,
+      final String? personalInfo,
+      final String? mbti,
+      final String? personality,
+      final String? interest,
+      final String? likePersonality}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get name;
+  String? get name;
   @override
-  String get comment;
+  String? get comment;
   @override
-  String get gender;
+  String? get gender;
   @override
-  String get residence;
+  String? get residence;
   @override
-  int get age;
+  int? get age;
   @override
-  int get height;
+  int? get height;
   @override
-  String get image;
+  String? get image;
   @override
-  String get personalInfo;
+  String? get personalInfo;
   @override
-  String get mbti;
+  String? get mbti;
   @override
-  String get personality;
+  String? get personality;
   @override
-  String get interest;
+  String? get interest;
   @override
-  String get likePersonality;
+  String? get likePersonality;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>
