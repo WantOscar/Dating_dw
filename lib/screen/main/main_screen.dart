@@ -61,65 +61,62 @@ class MainScreen extends GetView<UserController> {
           } else {
             // 디스플레이에 표시
             List<User> users = snapshot.data ?? [];
-            return ListView.builder(
-              itemCount: users.length,
-              itemBuilder: (context, index) {
-                User user = users[index];
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Profile Photo Carousel
-                      CarouselSlider.builder(
-                        itemCount: users.length,
-                        itemBuilder: (context, index, realIndex) => ProfileMain(
-                          user: users[index],
-                        ),
-                        options: CarouselOptions(
-                            enlargeCenterPage: true,
-                            aspectRatio: 1,
-                            autoPlay: true,
-                            viewportFraction: 0.8),
-                      ),
-                      const SizedBox(height: 40),
-
-                      // Title and Info
-                      const TodayMeet(),
-                      const SizedBox(height: 20),
-
-                      // Gesture Box List
-                      const SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: TodayMeetBox(),
-                      ),
-                      const SizedBox(height: 30),
-
-                      // Interested Friends
-                      const InterestedFriends(),
-
-                      // Interested Friends List
-                      const SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: InterestedFriendsBox(),
-                      ),
-                      const SizedBox(height: 30),
-
-                      // Interested me
-                      const InterestedMe(),
-
-                      // Interested me List
-                      const SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: InterestedMeBox(),
-                      ),
-                      const SizedBox(height: 20),
-
-                      // Recommendations by mbti
-                      const MbtiRecommend(),
-                    ],
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Profile Photo Carousel
+                  CarouselSlider.builder(
+                    itemCount: users.length,
+                    itemBuilder: (context, index, realIndex) {
+                      final user = users[index];
+                      return ProfileMain(
+                        user: user,
+                      );
+                    },
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        aspectRatio: 1,
+                        autoPlay: true,
+                        viewportFraction: 0.8),
                   ),
-                );
-              },
+                  const SizedBox(height: 40),
+
+                  // Title and Info
+                  const TodayMeet(),
+                  const SizedBox(height: 20),
+
+                  // Gesture Box List
+                  const SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: TodayMeetBox(),
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Interested Friends
+                  const InterestedFriends(),
+
+                  // Interested Friends List
+                  const SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: InterestedFriendsBox(),
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Interested me
+                  const InterestedMe(),
+
+                  // Interested me List
+                  const SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: InterestedMeBox(),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Recommendations by mbti
+                  const MbtiRecommend(),
+                ],
+              ),
             );
           }
         },
