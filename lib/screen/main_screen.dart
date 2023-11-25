@@ -3,6 +3,7 @@ import 'package:dating/Widget/main/circle_avatar.dart';
 import 'package:dating/Widget/main/gesture_box.dart';
 import 'package:dating/Widget/main/mbti_card.dart';
 import 'package:dating/Widget/main/profile_main.dart';
+import 'package:dating/screen/main_favorite.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/screen/alert_screen.dart';
 import 'package:dating/screen/information_modify_screen.dart';
@@ -106,18 +107,28 @@ class MainScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             // Interested Friends
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     '내가 관심 있는 친구',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
+                  IconButton(
+                    icon: const Icon(Icons.add),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainFavorite()),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
