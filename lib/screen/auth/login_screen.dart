@@ -5,7 +5,7 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetView<AuthController> {
   final AuthController authController = Get.put(AuthController());
   late String email;
   late String password;
@@ -143,8 +143,6 @@ class LoginScreen extends StatelessWidget {
               }),
               TextButton(
                 onPressed: () {
-                  // 회원가입 페이지로 이동 -> 계정 찾기 페이지 하나 더 만들기
-                  Get.to(SignUpPage());
                   Get.to(const AuthForgotScreen());
                 },
                 child: const Text(

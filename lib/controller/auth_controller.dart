@@ -1,6 +1,8 @@
-import 'package:dating/model/auth.dart';
+import 'package:dating/data/model/auth.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/screen/home_screen.dart';
+import 'package:dating/util/api_urls.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -14,8 +16,7 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
       final response = await http.post(
-        Uri.parse(
-            'http://ec2-43-202-97-23.ap-northeast-2.compute.amazonaws.com:8080/member/login'),
+        Uri.parse(ApiUrl.login),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -36,8 +37,7 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
       final response = await http.post(
-        Uri.parse(
-            'http://ec2-43-202-97-23.ap-northeast-2.compute.amazonaws.com:8080/member/join'),
+        Uri.parse(ApiUrl.memberJoin),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
