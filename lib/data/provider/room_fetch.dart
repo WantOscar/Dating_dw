@@ -1,5 +1,5 @@
 import 'package:dating/data/model/meeting_room.dart';
-import 'package:dating/util/api_urls.dart';
+import 'package:dating/utils/api_urls.dart';
 
 import 'package:dio/dio.dart';
 
