@@ -60,7 +60,7 @@ class MainScreen extends GetView<UserController> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             // 디스플레이에 표시
-            List<User> users = snapshot.data ?? [];
+            List<User> users = snapshot.data!;
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

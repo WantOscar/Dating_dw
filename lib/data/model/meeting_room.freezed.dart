@@ -20,11 +20,11 @@ MeetingRoom _$MeetingRoomFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MeetingRoom {
-  String get roomName => throw _privateConstructorUsedError;
-  int get allCount => throw _privateConstructorUsedError;
-  String get roomCategory => throw _privateConstructorUsedError;
-  String get ageCategory => throw _privateConstructorUsedError;
-  String get location => throw _privateConstructorUsedError;
+  String? get roomName => throw _privateConstructorUsedError;
+  int? get allCount => throw _privateConstructorUsedError;
+  String? get roomCategory => throw _privateConstructorUsedError;
+  String? get ageCategory => throw _privateConstructorUsedError;
+  String? get location => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,11 +39,11 @@ abstract class $MeetingRoomCopyWith<$Res> {
       _$MeetingRoomCopyWithImpl<$Res, MeetingRoom>;
   @useResult
   $Res call(
-      {String roomName,
-      int allCount,
-      String roomCategory,
-      String ageCategory,
-      String location});
+      {String? roomName,
+      int? allCount,
+      String? roomCategory,
+      String? ageCategory,
+      String? location});
 }
 
 /// @nodoc
@@ -59,33 +59,33 @@ class _$MeetingRoomCopyWithImpl<$Res, $Val extends MeetingRoom>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? roomName = null,
-    Object? allCount = null,
-    Object? roomCategory = null,
-    Object? ageCategory = null,
-    Object? location = null,
+    Object? roomName = freezed,
+    Object? allCount = freezed,
+    Object? roomCategory = freezed,
+    Object? ageCategory = freezed,
+    Object? location = freezed,
   }) {
     return _then(_value.copyWith(
-      roomName: null == roomName
+      roomName: freezed == roomName
           ? _value.roomName
           : roomName // ignore: cast_nullable_to_non_nullable
-              as String,
-      allCount: null == allCount
+              as String?,
+      allCount: freezed == allCount
           ? _value.allCount
           : allCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      roomCategory: null == roomCategory
+              as int?,
+      roomCategory: freezed == roomCategory
           ? _value.roomCategory
           : roomCategory // ignore: cast_nullable_to_non_nullable
-              as String,
-      ageCategory: null == ageCategory
+              as String?,
+      ageCategory: freezed == ageCategory
           ? _value.ageCategory
           : ageCategory // ignore: cast_nullable_to_non_nullable
-              as String,
-      location: null == location
+              as String?,
+      location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -99,11 +99,11 @@ abstract class _$$MeetingRoomImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String roomName,
-      int allCount,
-      String roomCategory,
-      String ageCategory,
-      String location});
+      {String? roomName,
+      int? allCount,
+      String? roomCategory,
+      String? ageCategory,
+      String? location});
 }
 
 /// @nodoc
@@ -117,33 +117,33 @@ class __$$MeetingRoomImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? roomName = null,
-    Object? allCount = null,
-    Object? roomCategory = null,
-    Object? ageCategory = null,
-    Object? location = null,
+    Object? roomName = freezed,
+    Object? allCount = freezed,
+    Object? roomCategory = freezed,
+    Object? ageCategory = freezed,
+    Object? location = freezed,
   }) {
     return _then(_$MeetingRoomImpl(
-      roomName: null == roomName
+      roomName: freezed == roomName
           ? _value.roomName
           : roomName // ignore: cast_nullable_to_non_nullable
-              as String,
-      allCount: null == allCount
+              as String?,
+      allCount: freezed == allCount
           ? _value.allCount
           : allCount // ignore: cast_nullable_to_non_nullable
-              as int,
-      roomCategory: null == roomCategory
+              as int?,
+      roomCategory: freezed == roomCategory
           ? _value.roomCategory
           : roomCategory // ignore: cast_nullable_to_non_nullable
-              as String,
-      ageCategory: null == ageCategory
+              as String?,
+      ageCategory: freezed == ageCategory
           ? _value.ageCategory
           : ageCategory // ignore: cast_nullable_to_non_nullable
-              as String,
-      location: null == location
+              as String?,
+      location: freezed == location
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -152,25 +152,25 @@ class __$$MeetingRoomImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MeetingRoomImpl implements _MeetingRoom {
   _$MeetingRoomImpl(
-      {required this.roomName,
-      required this.allCount,
-      required this.roomCategory,
-      required this.ageCategory,
-      required this.location});
+      {this.roomName,
+      this.allCount,
+      this.roomCategory,
+      this.ageCategory,
+      this.location});
 
   factory _$MeetingRoomImpl.fromJson(Map<String, dynamic> json) =>
       _$$MeetingRoomImplFromJson(json);
 
   @override
-  final String roomName;
+  final String? roomName;
   @override
-  final int allCount;
+  final int? allCount;
   @override
-  final String roomCategory;
+  final String? roomCategory;
   @override
-  final String ageCategory;
+  final String? ageCategory;
   @override
-  final String location;
+  final String? location;
 
   @override
   String toString() {
@@ -215,25 +215,25 @@ class _$MeetingRoomImpl implements _MeetingRoom {
 
 abstract class _MeetingRoom implements MeetingRoom {
   factory _MeetingRoom(
-      {required final String roomName,
-      required final int allCount,
-      required final String roomCategory,
-      required final String ageCategory,
-      required final String location}) = _$MeetingRoomImpl;
+      {final String? roomName,
+      final int? allCount,
+      final String? roomCategory,
+      final String? ageCategory,
+      final String? location}) = _$MeetingRoomImpl;
 
   factory _MeetingRoom.fromJson(Map<String, dynamic> json) =
       _$MeetingRoomImpl.fromJson;
 
   @override
-  String get roomName;
+  String? get roomName;
   @override
-  int get allCount;
+  int? get allCount;
   @override
-  String get roomCategory;
+  String? get roomCategory;
   @override
-  String get ageCategory;
+  String? get ageCategory;
   @override
-  String get location;
+  String? get location;
   @override
   @JsonKey(ignore: true)
   _$$MeetingRoomImplCopyWith<_$MeetingRoomImpl> get copyWith =>

@@ -9,6 +9,7 @@ class InterestedFriends extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
             '내가 관심 있는 친구',

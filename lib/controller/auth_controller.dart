@@ -12,7 +12,13 @@ class AuthController extends GetxController {
   final Rx<Auth> user = Auth(email: '', password: '').obs;
   final RxBool isLoading = false.obs;
 
+  late String email;
+  late String password;
+
   Future<void> login() async {
+    user.value.email = email;
+    user.value.password = password;
+
     try {
       isLoading(true);
       final response = await http.post(
@@ -63,5 +69,13 @@ class AuthController extends GetxController {
     } catch (e) {
       Get.snackbar('로그아웃에 실패하였습니다!', '잠시후 다시 시도해주세요');
     }
+  }
+
+  void changeEmail(String value) {
+    email = value;
+  }
+
+  void changePassword(String value) {
+    password = value;
   }
 }

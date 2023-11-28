@@ -9,6 +9,8 @@ import 'package:dating/Widget/profile/profile_positioned_location.dart';
 import 'package:dating/Widget/profile/profile_positioned_name.dart';
 import 'package:dating/Widget/profile/profile_picture.dart';
 import 'package:dating/controller/auth_controller.dart';
+import 'package:dating/data/model/user.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,71 +45,95 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Stack(
-                  children: [
-                    // my representative profile photo
-                    ProfilePicture(),
-
-                    // my name
-                    ProfilePositionedName(),
-
-                    // my age
-                    ProfilePositionedAge(),
-
-                    // my residence
-                    ProfilePositionedLocation(),
-
-                    // profile edit button
-                    Positioned(
-                      top: 360,
-                      right: 20,
-                      child: ProfileEditButton(),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            // personal information
-            PersonalInformation(),
-
-            // my personality
-            Personality(),
-
-            // my interest
-            Interest(),
-
-            // my ideal type
-            IdealType(),
-            SizedBox(height: 50),
-
-            // my story text
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextStyling.story,
-            ),
-
-            // my story collection
-            Padding(
-              padding: EdgeInsets.all(2.0),
-              child: Row(
+      body: FutureBuilder<List<User>>(
+        future: UserRepository().getUserData(),
+        builder: (context, snapshot) {
+          final users = snapshot.data!;
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('${snapshot.error}'),
+            );
+          } else {
+            const int index = 0;
+            final user = users[index];
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MyPhotos(),
-                  MyPhotos(),
-                  MyPhotos(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          // my representative profile photo
+                          const ProfilePicture(),
+
+                          // my name
+                          ProfilePositionedName(
+                            user: user,
+                          ),
+
+                          // my age
+                          ProfilePositionedAge(
+                            user: user,
+                          ),
+
+                          // my residence
+                          ProfilePositionedLocation(
+                            user: user,
+                          ),
+
+                          // profile edit button
+                          const Positioned(
+                            top: 360,
+                            right: 20,
+                            child: ProfileEditButton(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  // personal information
+                  const PersonalInformation(),
+
+                  // my personality
+                  const Personality(),
+
+                  // my interest
+                  const Interest(),
+
+                  // my ideal type
+                  const IdealType(),
+                  const SizedBox(height: 50),
+
+                  // my story text
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TextStyling.story,
+                  ),
+
+                  // my story collection
+                  const Padding(
+                    padding: EdgeInsets.all(2.0),
+                    child: Row(
+                      children: [
+                        MyPhotos(),
+                        MyPhotos(),
+                        MyPhotos(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
-          ],
-        ),
+            );
+          }
+        },
       ),
     );
   }

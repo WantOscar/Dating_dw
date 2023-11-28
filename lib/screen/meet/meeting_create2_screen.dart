@@ -6,7 +6,7 @@ import 'package:dating/Widget/meet/meet_create2/room_photo_upload.dart';
 import 'package:dating/Widget/meet/meet_create2/room_title.dart';
 import 'package:dating/Widget/meet/meet_create2/set_num_female.dart';
 import 'package:dating/Widget/meet/meet_create2/set_num_male.dart';
-import 'package:dating/screen/meet/meeting_screen.dart';
+import 'package:dating/screen/home_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +115,7 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
         heightPoint: 0.06,
         text: '확인',
         onTap: () {
-          Get.to(const MeetingScreen());
+          Get.to(const HomeScreen());
         },
       ),
     );
