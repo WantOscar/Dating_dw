@@ -1,7 +1,7 @@
-import 'package:dating/Widget/meet/meet_detail/explain_room.dart';
-import 'package:dating/Widget/meet/meet_detail/room_manager_profile.dart';
-import 'package:dating/Widget/meet/meet_detail/room_title.dart';
-import 'package:dating/Widget/meet/meet_detail/room_type.dart';
+import 'package:dating/Widget/meet_detail/explain_room.dart';
+import 'package:dating/Widget/meet_detail/room_manager_profile.dart';
+import 'package:dating/Widget/meet_detail/room_title.dart';
+import 'package:dating/Widget/meet_detail/room_type.dart';
 import 'package:dating/Widget/meet/mini_profile.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';

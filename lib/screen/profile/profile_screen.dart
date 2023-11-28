@@ -1,4 +1,4 @@
-import 'package:dating/Widget/profile/profile_edit/my_photos.dart';
+import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/Widget/profile/personal_information.dart';
 import 'package:dating/Widget/profile/personality.dart';
 import 'package:dating/Widget/profile/interest.dart';

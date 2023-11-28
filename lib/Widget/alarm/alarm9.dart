@@ -1,8 +1,8 @@
-import 'package:dating/Widget/main/alarm/alarm_widget.dart';
+import 'package:dating/Widget/alarm/alarm_widget.dart';
 import 'package:flutter/material.dart';
 
-class Alarm5 extends StatelessWidget {
-  const Alarm5({super.key});
+class Alarm9 extends StatelessWidget {
+  const Alarm9({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class Alarm5 extends StatelessWidget {
         style: TextStyle(fontSize: 12, color: Colors.grey),
       ),
       text3: Text(
-        '10월 13일',
+        '10월 17일',
         style: TextStyle(color: Colors.grey, fontSize: 13),
       ),
     );
