@@ -8,11 +8,11 @@ part of 'meeting_room.dart';
 
 _$MeetingRoomImpl _$$MeetingRoomImplFromJson(Map<String, dynamic> json) =>
     _$MeetingRoomImpl(
-      roomName: json['roomName'] as String,
-      allCount: json['allCount'] as int,
-      roomCategory: json['roomCategory'] as String,
-      ageCategory: json['ageCategory'] as String,
-      location: json['location'] as String,
+      roomName: json['roomName'] as String?,
+      allCount: json['allCount'] as int?,
+      roomCategory: json['roomCategory'] as String?,
+      ageCategory: json['ageCategory'] as String?,
+      location: json['location'] as String?,
     );
 
 Map<String, dynamic> _$$MeetingRoomImplToJson(_$MeetingRoomImpl instance) =>

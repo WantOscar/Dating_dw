@@ -1,10 +1,13 @@
+import 'package:dating/data/model/meeting_room.dart';
 import 'package:dating/screen/meet/meeting_detail_screen.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MeetingContainer extends StatelessWidget {
-  const MeetingContainer({Key? key}) : super(key: key);
+  final MeetingRoom meetingRoom;
+  const MeetingContainer({Key? key, required this.meetingRoom})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +51,9 @@ class MeetingContainer extends StatelessWidget {
                     color: const Color(0xFFFF006B),
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  child: const Text(
-                    "이태원",
-                    style: TextStyle(
+                  child: Text(
+                    "${meetingRoom.location}",
+                    style: const TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
@@ -63,8 +66,8 @@ class MeetingContainer extends StatelessWidget {
                 child: SizedBox(
                   width: width * 0.4,
                   height: height * 0.04,
-                  child: const Text('이태원에서 같이 술 마셔요',
-                      style: TextStyle(
+                  child: Text('${meetingRoom.roomName}',
+                      style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
@@ -74,16 +77,16 @@ class MeetingContainer extends StatelessWidget {
               Positioned(
                 bottom: width * 0.08,
                 left: height * 0.02,
-                child: const Row(
+                child: Row(
                   children: [
                     Text(
-                      '성별 무관',
-                      style: TextStyle(
+                      '${meetingRoom.roomCategory}',
+                      style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
-                    Text(
+                    const Text(
                       ' • ',
                       style: TextStyle(
                           fontSize: 20,
@@ -91,8 +94,8 @@ class MeetingContainer extends StatelessWidget {
                           color: Colors.white),
                     ), // Add some spacing between the texts.
                     Text(
-                      '20대',
-                      style: TextStyle(
+                      '${meetingRoom.ageCategory}',
+                      style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
