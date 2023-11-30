@@ -1,3 +1,4 @@
+import 'package:dating/Widget/common_header.dart';
 import 'package:dating/Widget/meet/meeting_room.dart';
 import 'package:dating/Widget/meet/select_room.dart';
 import 'package:dating/screen/meet/meeting_create1_screen.dart';
@@ -7,33 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MeetingScreen extends StatelessWidget {
-  const MeetingScreen({super.key});
+  const MeetingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Text(
-            '오늘의 과팅❤️‍🔥',
-            style: TextStyle(
-                fontSize: 20, color: fontColor, fontWeight: FontWeight.bold),
-          ),
-        ),
-        leadingWidth: 200,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Icon(
-              Icons.tune,
-              color: Colors.black,
-            ),
-          ),
-        ],
-      ),
+      appBar: const CommonHeader(),
       body: const SingleChildScrollView(
         child: Column(
           children: [
@@ -56,7 +36,3 @@ class MeetingScreen extends StatelessWidget {
     );
   }
 }
-
-//sdl;kfjsdl;kjfl;ksdjlf;jsd;kfj;lsdjf;lsdjl
-//dlkfjs;ldjf;lsdjf;ljsd;lkf
-//sdfkjsd;lfjsd;fj;lds
