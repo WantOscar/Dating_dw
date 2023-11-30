@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dating/Widget/common_header.dart';
 import 'package:dating/Widget/main/interested_friends.dart';
 import 'package:dating/Widget/main/interested_friends_box.dart';
 import 'package:dating/Widget/main/interested_me.dart';
@@ -10,7 +11,6 @@ import 'package:dating/Widget/main/today_meet_box.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
-import 'package:dating/style/constant.dart';
 import 'package:dating/screen/main/alarm_screen.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
@@ -22,19 +22,8 @@ class MainScreen extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.all(12.0),
-          child: Text(
-            '캠밋',
-            style: TextStyle(
-                color: fontColor, fontSize: 25, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.right,
-          ),
-        ),
-        leadingWidth: 70,
+      appBar: CommonHeader(
+        text: '캠밋',
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),

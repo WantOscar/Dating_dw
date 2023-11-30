@@ -22,9 +22,6 @@ class MeetingCreate2Screen extends StatefulWidget {
 class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
   @override
   Widget build(BuildContext context) {
-    // final width = MediaQuery.of(context).size.width;
-    // final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
