@@ -13,7 +13,7 @@ class MeetingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonHeader(),
+      appBar: const CommonHeader(text: '오늘의 과팅❤️‍🔥'),
       body: const SingleChildScrollView(
         child: Column(
           children: [

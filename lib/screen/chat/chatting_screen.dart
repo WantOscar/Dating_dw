@@ -1,7 +1,8 @@
 import 'package:dating/Widget/chat/chatting_box.dart';
 import 'package:dating/Widget/chat/chatting_container.dart';
+import 'package:dating/Widget/common_header.dart';
 import 'package:dating/screen/chat/chatting_in_screen.dart';
-import 'package:dating/style/constant.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,25 +12,12 @@ class ChattingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 200,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Text(
-            '채팅',
-            style: TextStyle(
-                fontSize: 25, color: fontColor, fontWeight: FontWeight.bold),
-          ),
-        ),
-        actions: const [
+      appBar: const CommonHeader(
+        text: '채팅',
+        actions: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Icon(
-              Icons.more_horiz,
-              color: Colors.black,
-            ),
+            child: IconShape.iconMore,
           ),
         ],
       ),

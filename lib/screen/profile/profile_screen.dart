@@ -1,3 +1,4 @@
+import 'package:dating/Widget/common_header.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/Widget/profile/personal_information.dart';
 import 'package:dating/Widget/profile/personality.dart';
@@ -9,6 +10,7 @@ import 'package:dating/Widget/profile/profile_positioned_location.dart';
 import 'package:dating/Widget/profile/profile_positioned_name.dart';
 import 'package:dating/Widget/profile/profile_picture.dart';
 import 'package:dating/controller/auth_controller.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,14 +22,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 200,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: TextStyling.profile,
-        ),
+      appBar: CommonHeader(
+        text: '프로필',
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -35,10 +31,7 @@ class ProfileScreen extends StatelessWidget {
               onPressed: () {
                 authController.logOut();
               },
-              icon: const Icon(
-                Icons.settings,
-                color: Colors.black,
-              ),
+              icon: IconShape.iconSettings,
             ),
           ),
         ],
