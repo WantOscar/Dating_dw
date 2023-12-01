@@ -7,9 +7,12 @@ class ProfileMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Container(
-      width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * 0.8,
+      width: width * 0.8,
+      height: height * 0.8,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Colors.grey,
@@ -30,12 +33,12 @@ class ProfileMain extends StatelessWidget {
               user.image ??
                   'https://image.news1.kr/system/photos/2022/12/16/5742694/article.jpg/dims/quality/80/optimize',
               fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.8,
+              width: width * 0.8,
+              height: height * 0.8,
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.width * 0.45,
-              left: MediaQuery.of(context).size.height * 0.04,
+              bottom: width * 0.45,
+              left: height * 0.04,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 2.5),
@@ -53,8 +56,8 @@ class ProfileMain extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.width * 0.3,
-              left: MediaQuery.of(context).size.height * 0.04,
+              bottom: width * 0.3,
+              left: height * 0.04,
               child: Text(
                 '${user.name}',
                 style: const TextStyle(
@@ -64,8 +67,8 @@ class ProfileMain extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.width * 0.22,
-              left: MediaQuery.of(context).size.height * 0.04,
+              bottom: width * 0.22,
+              left: height * 0.04,
               child: Row(
                 children: [
                   const Icon(
@@ -84,8 +87,8 @@ class ProfileMain extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.width * 0.17,
-              left: MediaQuery.of(context).size.height * 0.04,
+              bottom: width * 0.17,
+              left: height * 0.04,
               child: const Row(
                 children: [
                   Icon(Icons.location_on, color: Colors.white, size: 20),
@@ -100,8 +103,8 @@ class ProfileMain extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.width * 0.035,
-              left: MediaQuery.of(context).size.height * 0.04,
+              bottom: width * 0.035,
+              left: height * 0.03,
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 90, vertical: 11.5),
@@ -119,8 +122,8 @@ class ProfileMain extends StatelessWidget {
               ),
             ),
             Positioned(
-              bottom: MediaQuery.of(context).size.width * 0.024,
-              left: MediaQuery.of(context).size.height * 0.372,
+              bottom: width * 0.024,
+              left: height * 0.38,
               child: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
