@@ -1,4 +1,4 @@
-import 'package:dating/screen/main_favorite.dart';
+import 'package:dating/Widget/main/main_favorite.dart';
 import 'package:flutter/material.dart';
 
 class InterestedFriends extends StatelessWidget {
