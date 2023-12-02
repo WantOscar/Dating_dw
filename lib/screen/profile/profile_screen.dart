@@ -10,6 +10,7 @@ import 'package:dating/Widget/profile/profile_positioned_location.dart';
 import 'package:dating/Widget/profile/profile_positioned_name.dart';
 import 'package:dating/Widget/profile/profile_picture.dart';
 import 'package:dating/controller/auth_controller.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -17,7 +18,7 @@ import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends GetView<UserController> {
   final AuthController authController = Get.put(AuthController());
   ProfileScreen({super.key});
 
