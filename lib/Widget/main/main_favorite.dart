@@ -1,6 +1,5 @@
-import 'package:dating/style/constant.dart';
+import 'package:dating/Widget/icon_header.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class MainFavorite extends StatelessWidget {
   const MainFavorite({super.key});
@@ -8,37 +7,7 @@ class MainFavorite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.pink,
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text(
-                  '내가 관심있는 친구',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: fontColor),
-                ),
-              ),
-            ],
-          ),
-        ),
-        leadingWidth: 300,
-        elevation: 0,
-      ),
+      appBar: const IconHeader(text: '내가 관심 있는 친구'),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -435,12 +404,11 @@ class AlertWidget extends StatelessWidget {
   final Text text;
   final Widget text2;
   final Widget text3;
-  const AlertWidget({
-    super.key,
-    required this.text,
-    required this.text2,
-    required this.text3,
-  });
+  const AlertWidget(
+      {super.key,
+      required this.text,
+      required this.text2,
+      required this.text3});
 
   @override
   Widget build(BuildContext context) {

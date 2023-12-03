@@ -15,7 +15,6 @@ class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
       leading: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Text(
-          // '오늘의 과팅❤️‍🔥',
           text,
           style: const TextStyle(
               fontSize: 25, color: fontColor, fontWeight: FontWeight.bold),
@@ -25,15 +24,6 @@ class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       actions: actions,
-      // const [
-      //   Padding(
-      //     padding: EdgeInsets.symmetric(horizontal: 10),
-      //     child: Icon(
-      //       Icons.tune,
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      // ],
       toolbarHeight: _headerHeight,
     );
   }
