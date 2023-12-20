@@ -1,5 +1,6 @@
 import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/Widget/setting_profile/alarm_setting.dart';
+import 'package:dating/screen/profile/account_information.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +26,11 @@ class SettingProfile extends StatelessWidget {
                   '계정 확인 및 비밀번호 변경',
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
-                IconButton(onPressed: () {}, icon: IconShape.iconArrowForward),
+                IconButton(
+                    onPressed: () {
+                      Get.to(const AccountInformation());
+                    },
+                    icon: IconShape.iconArrowForward),
               ],
             ),
           ),
