@@ -1,6 +1,8 @@
 import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/Widget/setting_profile/alarm_setting.dart';
 import 'package:dating/Widget/setting_profile/human_account_switch_btn.dart';
+import 'package:dating/Widget/setting_profile/logout_btn.dart';
+import 'package:dating/Widget/setting_profile/withdrawal_btn.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -78,35 +80,33 @@ class SettingProfile extends StatelessWidget {
           ),
 
           // 로그아웃
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   '로그아웃',
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
-                IconButton(onPressed: () {}, icon: IconShape.iconArrowForward),
+                LogoutBtn(),
               ],
             ),
           ),
 
-          // 회원 탈퇴
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          // 회원탈퇴
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  '회원 탈퇴',
+                Text(
+                  '회원탈퇴',
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
-                IconButton(onPressed: () {}, icon: IconShape.iconArrowForward),
+                WithdrawalBtn(),
               ],
             ),
           ),

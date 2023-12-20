@@ -69,6 +69,25 @@ class _HumanAccountSwitchBtnState extends State<HumanAccountSwitchBtn> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 5),
+                        GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            height: MediaQuery.of(context).size.width * 0.1,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: inputColor),
+                            child: const Center(
+                              child: Text(
+                                '취소',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ],
