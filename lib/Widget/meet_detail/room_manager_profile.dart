@@ -1,6 +1,4 @@
-import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class RoomManagerProfile extends StatelessWidget {
   const RoomManagerProfile({super.key});
@@ -33,16 +31,6 @@ class RoomManagerProfile extends StatelessWidget {
               height: width,
             ),
           ),
-          Positioned(
-            left: 10,
-            top: 10,
-            child: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: IconShape.iconArrowBack,
-            ),
-          )
         ],
       ),
     );

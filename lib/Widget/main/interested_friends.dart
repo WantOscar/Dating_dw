@@ -1,4 +1,4 @@
-import 'package:dating/Widget/main/main_favorite.dart';
+import 'package:dating/screen/main/main_favorite_screen.dart';
 import 'package:flutter/material.dart';
 
 class InterestedFriends extends StatelessWidget {
@@ -24,7 +24,8 @@ class InterestedFriends extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const MainFavorite()),
+                MaterialPageRoute(
+                    builder: (context) => const MainFavoriteScreen()),
               );
             },
           ),

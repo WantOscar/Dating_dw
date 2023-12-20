@@ -13,6 +13,7 @@ import 'package:dating/controller/auth_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
+import 'package:dating/screen/profile/setting_profile.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class ProfileScreen extends GetView<UserController> {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                authController.logOut();
+                Get.to(const SettingProfile());
               },
               icon: IconShape.iconSettings,
             ),

@@ -1,4 +1,5 @@
 import 'package:dating/Widget/bottom_apply_bar.dart';
+import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/Widget/meet_create2/Room_explain.dart';
 import 'package:dating/Widget/meet_create2/invite_friends.dart';
 import 'package:dating/Widget/meet_create2/location_select.dart';
@@ -7,8 +8,6 @@ import 'package:dating/Widget/meet_create2/room_title.dart';
 import 'package:dating/Widget/meet_create2/set_num_female.dart';
 import 'package:dating/Widget/meet_create2/set_num_male.dart';
 import 'package:dating/screen/home_screen.dart';
-import 'package:dating/style/constant.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,24 +22,7 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: IconButton(
-            icon: IconShape.iconArrowBack,
-            onPressed: () {
-              Get.back();
-            },
-          ),
-        ),
-        title: const Text(
-          '방 설정',
-          style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
-        ),
-      ),
+      appBar: const IconHeader(text: '방 설정'),
       body: const SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -109,7 +91,6 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
 
       // settings complete button
       bottomNavigationBar: BottomApplyBar(
-        heightPoint: 0.06,
         text: '확인',
         onTap: () {
           Get.to(const HomeScreen());

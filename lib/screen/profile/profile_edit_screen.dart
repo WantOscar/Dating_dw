@@ -1,4 +1,5 @@
 import 'package:dating/Widget/bottom_apply_bar.dart';
+import 'package:dating/Widget/common_header.dart';
 import 'package:dating/Widget/profile/ideal_type.dart';
 import 'package:dating/Widget/profile/interest.dart';
 import 'package:dating/Widget/profile/personal_information.dart';
@@ -6,7 +7,6 @@ import 'package:dating/Widget/profile/personality.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/Widget/profile_edit/input_field.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,20 +18,9 @@ class ProfileEditScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 200,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: TextStyling.profileEdit2,
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: IconShape.iconSettings,
-          ),
-        ],
+      appBar: const CommonHeader(
+        text: '프로필 수정',
+        actions: [IconShape.iconSettings],
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -69,7 +58,7 @@ class ProfileEditScreen extends StatelessWidget {
                 const InputField(
                   text1: '닉네임',
                   text2: '압둘라 3세',
-                  widthPoint: 0.7,
+                  widthPoint: 0.68,
                   heightPoint: 0.05,
                 ),
                 const SizedBox(height: 7),
@@ -78,7 +67,7 @@ class ProfileEditScreen extends StatelessWidget {
                 const InputField(
                   text1: '한줄 소개',
                   text2: '소개 입력',
-                  widthPoint: 0.7,
+                  widthPoint: 0.68,
                   heightPoint: 0.05,
                 ),
                 const SizedBox(height: 7),
@@ -87,7 +76,7 @@ class ProfileEditScreen extends StatelessWidget {
                 const InputField(
                   text1: '성별',
                   text2: '여자',
-                  widthPoint: 0.7,
+                  widthPoint: 0.68,
                   heightPoint: 0.05,
                 ),
                 const SizedBox(height: 7),
@@ -96,7 +85,7 @@ class ProfileEditScreen extends StatelessWidget {
                 const InputField(
                   text1: '주소',
                   text2: '주소 입력',
-                  widthPoint: 0.7,
+                  widthPoint: 0.68,
                   heightPoint: 0.05,
                 ),
                 const SizedBox(height: 7),
@@ -109,7 +98,7 @@ class ProfileEditScreen extends StatelessWidget {
                       child: InputField(
                         text1: '나이',
                         text2: '25세',
-                        widthPoint: 0.2,
+                        widthPoint: 0.18,
                         heightPoint: 0.05,
                       ),
                     ),
@@ -119,7 +108,7 @@ class ProfileEditScreen extends StatelessWidget {
                       child: InputField(
                         text1: '키',
                         text2: '키 입력',
-                        widthPoint: 0.2,
+                        widthPoint: 0.18,
                         heightPoint: 0.05,
                       ),
                     ),
@@ -168,7 +157,6 @@ class ProfileEditScreen extends StatelessWidget {
 
       // modification complete
       bottomNavigationBar: BottomApplyBar(
-        heightPoint: 0.06,
         text: '수정완료',
         onTap: () {
           Get.back();
