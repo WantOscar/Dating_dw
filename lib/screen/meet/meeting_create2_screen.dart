@@ -91,7 +91,6 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
 
       // settings complete button
       bottomNavigationBar: BottomApplyBar(
-        heightPoint: 0.06,
         text: '확인',
         onTap: () {
           Get.to(const HomeScreen());

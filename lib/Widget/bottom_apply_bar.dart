@@ -2,12 +2,12 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class BottomApplyBar extends StatelessWidget {
-  final double heightPoint;
+  // final double heightPoint;
   final String text;
   final Function onTap;
   const BottomApplyBar(
       {super.key,
-      required this.heightPoint,
+      // required this.heightPoint,
       required this.text,
       required this.onTap});
 
@@ -27,7 +27,8 @@ class BottomApplyBar extends StatelessWidget {
           },
           child: Container(
             width: width,
-            height: height * heightPoint,
+            // height: height * heightPoint,
+            height: height * 0.06,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15), color: fontColor),
             child: Center(

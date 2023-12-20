@@ -32,7 +32,6 @@ class MeetingCreate1Screen extends StatelessWidget {
       ),
       // select the room you want, and go to the next screen
       bottomNavigationBar: BottomApplyBar(
-        heightPoint: 0.06,
         text: '확인',
         onTap: () {
           Get.to(const MeetingCreate2Screen());
