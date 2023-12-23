@@ -43,7 +43,6 @@ class ProfileScreen extends GetView<UserController> {
       body: FutureBuilder<List<User>>(
         future: UserRepository().getUserData(),
         builder: (context, snapshot) {
-          final users = snapshot.data!;
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -53,6 +52,7 @@ class ProfileScreen extends GetView<UserController> {
               child: Text('${snapshot.error}'),
             );
           } else {
+            final users = snapshot.data!;
             const int index = 0;
             final user = users[index];
             return SingleChildScrollView(

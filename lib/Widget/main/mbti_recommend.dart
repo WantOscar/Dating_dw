@@ -1,8 +1,10 @@
 import 'package:dating/Widget/main/mbti_card.dart';
+import 'package:dating/data/model/mbti.dart';
 import 'package:flutter/material.dart';
 
 class MbtiRecommend extends StatelessWidget {
-  const MbtiRecommend({super.key});
+  final Mbti mbti;
+  const MbtiRecommend({super.key, required this.mbti});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,9 @@ class MbtiRecommend extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const Text(
-            'ISFP와 좋은 궁합을 가진 친구들이에요!',
-            style: TextStyle(
+          Text(
+            '${mbti.mbti}와 좋은 궁합을 가진 친구들이에요!',
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
               color: Color(0xFFbebebe),
@@ -31,10 +33,12 @@ class MbtiRecommend extends StatelessWidget {
           ),
           Column(
             children: List.generate(
-              5,
-              (index) => const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: MBTICard(),
+              3,
+              (index) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: MBTICard(
+                  mbti: mbti,
+                ),
               ),
             ),
           ),

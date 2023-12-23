@@ -1,8 +1,10 @@
+import 'package:dating/data/model/mbti.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class MBTICard extends StatelessWidget {
-  const MBTICard({super.key});
+  final Mbti mbti;
+  const MBTICard({super.key, required this.mbti});
 
   @override
   Widget build(BuildContext context) {
@@ -52,21 +54,21 @@ class MBTICard extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
+                        Row(
                           children: [
                             Text(
-                              '홍길동',
-                              style: TextStyle(
+                              mbti.name,
+                              style: const TextStyle(
                                   fontSize: 18,
                                   color: font2Color,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
-                              'ENTP',
-                              style: TextStyle(color: Colors.grey),
+                              mbti.mbti,
+                              style: const TextStyle(color: Colors.grey),
                             )
                           ],
                         ),

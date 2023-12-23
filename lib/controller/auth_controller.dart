@@ -30,7 +30,7 @@ class AuthController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        Get.to(const HomeScreen());
+        Get.to(() => const HomeScreen());
       } else {
         Get.snackbar('계정을 로그인 하는데 실패했습니다!', '다시 한번 입력하세요!');
       }
@@ -43,7 +43,7 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
       final response = await http.post(
-        Uri.parse(ApiUrl.memberJoin),
+        Uri.parse(ApiUrl.login),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -65,7 +65,7 @@ class AuthController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('userToken');
       user.value = Auth(email: '', password: '');
-      Get.offAll(LoginScreen());
+      Get.offAll(const LoginScreen());
     } catch (e) {
       Get.snackbar('로그아웃에 실패하였습니다!', '잠시후 다시 시도해주세요');
     }
