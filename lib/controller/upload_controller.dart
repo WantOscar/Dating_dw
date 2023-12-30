@@ -1,3 +1,4 @@
+import 'package:dating/Widget/meet_create2/albums.dart';
 import 'package:dating/data/model/album.dart';
 import 'package:get/get.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -41,9 +42,9 @@ class UploadController extends GetxController {
     });
   }
 
-  // void changeAlbum() {
-  //   Get.to(() => const Albums(), transition: Transition.downToUp);
-  // }
+  void changeAlbum() {
+    Get.to(() => const Albums(), transition: Transition.downToUp);
+  }
 
   void changeIndex(int value) {
     _index(value);

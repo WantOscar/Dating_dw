@@ -1,6 +1,8 @@
+import 'package:dating/screen/meet/meeting_photo_upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RoomPhotoUpload extends StatelessWidget {
   const RoomPhotoUpload({super.key});
@@ -27,7 +29,9 @@ class RoomPhotoUpload extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const MeetingScreenUploadScreen());
+              },
               icon: IconShape.iconPhotoCamera,
             ),
           ),
