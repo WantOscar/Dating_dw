@@ -12,7 +12,7 @@ class InviteFriends extends StatelessWidget {
     return Center(
       child: Container(
         width: width * 0.9,
-        height: height * 0.08,
+        height: height * 0.1,
         decoration: BoxDecoration(
           color: inputColor,
           borderRadius: BorderRadius.circular(10),
@@ -23,8 +23,8 @@ class InviteFriends extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                width: width * 0.05,
-                height: width * 0.05,
+                width: width * 0.1,
+                height: width * 0.1,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(100),
