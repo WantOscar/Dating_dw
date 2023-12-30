@@ -1,6 +1,8 @@
 import 'package:dating/Widget/icon_header.dart';
+import 'package:dating/screen/profile/change_password.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AccountInformationScreen extends StatelessWidget {
   const AccountInformationScreen({super.key});
@@ -32,7 +34,11 @@ class AccountInformationScreen extends StatelessWidget {
                   '비밀번호 변경',
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
-                IconButton(onPressed: () {}, icon: IconShape.iconArrowForward),
+                IconButton(
+                    onPressed: () {
+                      Get.to(const ChangePassword());
+                    },
+                    icon: IconShape.iconArrowForward),
               ],
             ),
           ),
