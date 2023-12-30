@@ -1,6 +1,7 @@
 import 'package:dating/Widget/bottom_apply_bar.dart';
 import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/Widget/meet_create1/select_meet_method.dart';
+import 'package:dating/binding/upload_binding.dart';
 import 'package:dating/screen/meet/meeting_create2_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
