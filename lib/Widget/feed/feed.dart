@@ -1,8 +1,8 @@
 import 'package:dating/Widget/feed/feed_icon.dart';
 import 'package:flutter/material.dart';
 
-class Feed extends StatelessWidget {
-  const Feed({super.key});
+class FeedIcon2 extends StatelessWidget {
+  const FeedIcon2({super.key});
 
   @override
   Widget build(BuildContext context) {
