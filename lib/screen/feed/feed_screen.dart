@@ -3,6 +3,8 @@ import 'package:dating/Widget/feed/feed_icon2.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/data/repository/feed_repository.dart';
+import 'package:dating/data/model/feed.dart';
+import 'package:dating/data/repository/feed_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
