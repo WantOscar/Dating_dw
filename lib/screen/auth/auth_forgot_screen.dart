@@ -80,7 +80,7 @@ class AuthForgotScreen extends StatelessWidget {
           elevation: 0,
           child: GestureDetector(
             onTap: () {
-              Get.to(VerifyScreen());
+              Get.to(() => VerifyScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -184,7 +184,7 @@ class VerifyScreen extends StatelessWidget {
           elevation: 0,
           child: GestureDetector(
             onTap: () {
-              Get.to(const PasswordChangeScreen());
+              Get.to(() => const PasswordChangeScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,
@@ -301,7 +301,7 @@ class PasswordChangeScreen extends StatelessWidget {
           elevation: 0,
           child: GestureDetector(
             onTap: () {
-              Get.to(LoginScreen());
+              Get.to(() => const LoginScreen());
             },
             child: Container(
               width: MediaQuery.of(context).size.width,

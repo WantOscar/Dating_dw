@@ -36,7 +36,7 @@ class ChattingScreen extends StatelessWidget {
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      Get.to(const ChattingInScreen());
+                      Get.to(() => const ChattingInScreen());
                     },
                   ),
                 ),

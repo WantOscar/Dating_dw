@@ -25,7 +25,34 @@ class RoomPhotoUpload extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: (image != null)
-              ? Image.file(File(image.path))
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Stack(
+                    children: [
+                      Image.file(
+                        File(image.path),
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        right: 5,
+                        top: 5,
+                        child: GestureDetector(
+                          onTap: controller.removeImage,
+                          child: Container(
+                            width: 25,
+                            height: 25,
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(100)),
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ))
               : Center(
                   child: Container(
                     width: width * 0.15,

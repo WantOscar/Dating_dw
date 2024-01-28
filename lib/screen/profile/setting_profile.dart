@@ -32,7 +32,7 @@ class SettingProfile extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () {
-                      Get.to(const AccountInformationScreen());
+                      Get.to(() => const AccountInformationScreen());
                     },
                     icon: IconShape.iconArrowForward),
               ],

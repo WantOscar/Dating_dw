@@ -130,7 +130,7 @@ class LoginScreen extends GetView<AuthController> {
               }),
               TextButton(
                 onPressed: () {
-                  Get.to(const AuthForgotScreen());
+                  Get.to(() => const AuthForgotScreen());
                 },
                 child: const Text(
                   '계정을 잃어버리셨나요?',
@@ -159,7 +159,7 @@ class LoginScreen extends GetView<AuthController> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: TextButton(
                 onPressed: () {
-                  Get.to(SignUpPage());
+                  Get.to(() => const SignUpPage());
                 },
                 child: const Text(
                   '회원가입',

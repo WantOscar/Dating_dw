@@ -51,7 +51,7 @@ class MeetingScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         onPressed: () {
-          Get.to(const MeetingCreate1Screen());
+          Get.to(() => const MeetingCreate1Screen());
         },
         backgroundColor: fontColor,
         child: IconShape.iconAdd,

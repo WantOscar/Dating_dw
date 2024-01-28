@@ -93,7 +93,7 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
       bottomNavigationBar: BottomApplyBar(
         text: '확인',
         onTap: () {
-          Get.to(const HomeScreen());
+          Get.to(() => const HomeScreen());
         },
       ),
     );

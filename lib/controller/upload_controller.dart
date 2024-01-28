@@ -24,4 +24,8 @@ class UploadController extends GetxController {
       print("$error, $stackTrace");
     });
   }
+
+  void removeImage() {
+    _selectImage.value = null;
+  }
 }
