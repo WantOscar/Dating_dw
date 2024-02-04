@@ -1,6 +1,5 @@
 import 'package:dating/Widget/bottom_apply_bar.dart';
 import 'package:dating/Widget/icon_header.dart';
-import 'package:dating/Widget/meet_create2/location_select.dart';
 import 'package:dating/Widget/meet_create2/room_photo_upload.dart';
 import 'package:dating/Widget/meet_create2/set_num_female.dart';
 import 'package:dating/Widget/meet_create2/set_num_male.dart';
@@ -105,8 +104,43 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
             ),
             const SizedBox(height: 20),
 
-            // 지역 선택
-            const LocationSelect(),
+            // 지역 입력
+            const Row(
+              children: [
+                Text(
+                  '지역 입력',
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: TextField(
+                    maxLength: 3,
+                    decoration: InputDecoration(
+                      counterText: '',
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  '시',
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(width: 20),
+                Expanded(
+                  child: TextField(
+                    maxLength: 3,
+                    decoration: InputDecoration(
+                      counterText: '',
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  '구',
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
             const SizedBox(height: 20),
 
             // 남/여 인원 설정
