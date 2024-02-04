@@ -36,4 +36,9 @@ class IconShape {
 
   static const iconArrowForward =
       Icon(Icons.arrow_forward_ios, size: 15, color: iconColor);
+
+  static const iconClose = Icon(Icons.close, color: Colors.black);
+
+  static const iconAddBoxOutlined =
+      Icon(Icons.add_box_outlined, color: Colors.black, size: 35);
 }

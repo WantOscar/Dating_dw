@@ -36,7 +36,7 @@ class AccountInformationScreen extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () {
-                      Get.to(const ChangePassword());
+                      Get.to(() => const ChangePassword());
                     },
                     icon: IconShape.iconArrowForward),
               ],

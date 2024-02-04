@@ -1,6 +1,5 @@
 import 'package:dating/Widget/common_header.dart';
 import 'package:dating/Widget/meet/meeting_room.dart';
-import 'package:dating/Widget/meet/select_room.dart';
 import 'package:dating/data/model/meeting_room.dart';
 import 'package:dating/data/repository/room_repository.dart';
 import 'package:dating/screen/meet/meeting_create1_screen.dart';
@@ -34,11 +33,29 @@ class MeetingScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  // select college student or general
-                  const SelectRoom(),
+                  // 대학생/일반 방 선택.
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          '대학생',
+                          style: TextStyle(fontSize: 17, color: font2Color),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          '일반',
+                          style: TextStyle(fontSize: 17, color: font2Color),
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 20),
 
-                  // meeting room
+                  // 미팅방
                   Meeting(
                     meetingRoom: meetingRoom,
                   ),
@@ -51,7 +68,7 @@ class MeetingScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         onPressed: () {
-          Get.to(const MeetingCreate1Screen());
+          Get.to(() => const MeetingCreate1Screen());
         },
         backgroundColor: fontColor,
         child: IconShape.iconAdd,
