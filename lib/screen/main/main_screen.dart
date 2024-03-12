@@ -95,27 +95,27 @@ class MainScreen extends GetView<UserController> {
           // ),
           // const SizedBox(height: 30),
 
-          // Interested Friends
+          // 내가 관심있는 친구
           const InterestedFriends(),
 
-          // Interested Friends List
+          // 내가 관심있는 친구 목록
           const SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: InterestedFriendsBox(),
           ),
           const SizedBox(height: 30),
 
-          // Interested me
+          // 나한테 관심있는 친구
           const InterestedMe(),
 
-          // Interested me List
+          // 나한테 관심있는 친구 목록
           const SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: InterestedMeBox(),
           ),
           const SizedBox(height: 20),
 
-          // Recommendations by mbti
+          // mbti별 추천 조합
           // FutureBuilder<List<Mbti>>(
           //   future: MbtiRepository().getListMbtiData(),
           //   builder: (context, snapshot) {
