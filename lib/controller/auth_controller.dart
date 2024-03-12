@@ -16,6 +16,7 @@ class AuthController extends GetxController {
   final storage = const FlutterSecureStorage();
   late String email;
   late String password;
+  static AuthController get to => Get.find();
 
   AuthController({required this.service});
 
