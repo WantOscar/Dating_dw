@@ -13,10 +13,7 @@ class InterestedFriends extends StatelessWidget {
         children: [
           const Text(
             '내가 관심 있는 친구',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 30),
           IconButton(
@@ -25,7 +22,8 @@ class InterestedFriends extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const MainFavoriteScreen()),
+                  builder: (context) => const MainFavoriteScreen(),
+                ),
               );
             },
           ),

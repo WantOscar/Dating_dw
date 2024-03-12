@@ -14,7 +14,7 @@ class ChatController extends GetxController {
 
 Future<List<ChatMessage>> fetchChatMessages() async {
   final response =
-      await http.get(Uri.parse(ApiUrl.messages)); // 석환이형 백엔드 url -> 메시지 패치
+      await http.get(Uri.parse(ApiUrl.sendMessages)); // 석환이형 백엔드 url -> 메시지 패치
 
   if (response.statusCode == 200) {
     Iterable data = json.decode(response.body);
