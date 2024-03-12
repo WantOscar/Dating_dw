@@ -8,6 +8,7 @@ class UserController extends GetxController {
   final Rx<Status> _status = Rx<Status>(Status.LOADING);
   final UserRepository userRepository;
   final Rxn<User> _myInfo = Rxn<User>();
+  static UserController get to => Get.find();
 
   UserController({required this.userRepository});
 

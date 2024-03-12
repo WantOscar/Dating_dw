@@ -65,15 +65,6 @@ class TextStyling {
     ),
   );
 
-  static const story = Text(
-    '스토리',
-    style: TextStyle(
-      color: fontColor,
-      fontSize: 30,
-      fontWeight: FontWeight.bold,
-    ),
-  );
-
   static const modification = Text(
     '수정 완료',
     style: TextStyle(

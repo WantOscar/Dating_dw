@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/common_header.dart';
-import 'package:dating/Widget/main/interested_friends.dart';
 import 'package:dating/Widget/main/interested_friends_box.dart';
-import 'package:dating/Widget/main/interested_me.dart';
 import 'package:dating/Widget/main/interested_me_box.dart';
 // import 'package:dating/Widget/main/mbti_recommend.dart';
 import 'package:dating/Widget/main/profile_main.dart';
@@ -12,6 +10,8 @@ import 'package:dating/controller/user_controller.dart';
 // import 'package:dating/data/model/mbti.dart';
 // import 'package:dating/data/repository/mbti_repository.dart';
 import 'package:dating/screen/main/alarm_screen.dart';
+import 'package:dating/screen/main/main_favorite_me_screen.dart';
+import 'package:dating/screen/main/main_favorite_screen.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/utils/status_enum.dart';
 import 'package:flutter/material.dart';
@@ -95,8 +95,26 @@ class MainScreen extends GetView<UserController> {
           // ),
           // const SizedBox(height: 30),
 
-          // 내가 관심있는 친구
-          const InterestedFriends(),
+          // 내가 관심있는 친구, 세부 페이지
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  '내가 관심 있는 친구',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 30),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    Get.to(() => const MainFavoriteScreen());
+                  },
+                ),
+              ],
+            ),
+          ),
 
           // 내가 관심있는 친구 목록
           const SingleChildScrollView(
@@ -105,8 +123,26 @@ class MainScreen extends GetView<UserController> {
           ),
           const SizedBox(height: 30),
 
-          // 나한테 관심있는 친구
-          const InterestedMe(),
+          // 나한테 관심있는 친구, 세부 페이지
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  '나한테 관심 있는 친구',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 30),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    Get.to(() => const MainFavoriteMeScreen());
+                  },
+                ),
+              ],
+            ),
+          ),
 
           // 나한테 관심있는 친구 목록
           const SingleChildScrollView(

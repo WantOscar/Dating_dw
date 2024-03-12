@@ -12,11 +12,9 @@ class Root extends StatelessWidget {
         future: const FlutterSecureStorage().read(key: "token"),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
-            // return const LoginScreen();
-            return const HomeScreen();
-          } else {
-            // return const HomeScreen();
             return const LoginScreen();
+          } else {
+            return const HomeScreen();
           }
         });
   }
