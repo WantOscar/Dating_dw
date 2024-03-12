@@ -8,12 +8,15 @@ class MBTICard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.89,
-          height: MediaQuery.of(context).size.width * 0.26,
+          width: width * 0.89,
+          height: width * 0.3,
           decoration: BoxDecoration(
             color: const Color(0xFFEDEDED),
             borderRadius: BorderRadius.circular(60),
@@ -34,8 +37,8 @@ class MBTICard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.width * 0.2,
+                      width: width * 0.2,
+                      height: width * 0.2,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(45),
                         color: Colors.grey,
@@ -73,7 +76,7 @@ class MBTICard extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.001,
+                          height: height * 0.02,
                         ),
                         const Text(
                           '성격이 잘 맞을 것 같아요!',

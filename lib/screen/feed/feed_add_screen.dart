@@ -1,4 +1,5 @@
 import 'package:dating/screen/feed/feed_add_second_screen.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,10 +14,7 @@ class FeedAddScreen extends StatelessWidget {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
-            Icons.close,
-            color: Colors.black,
-          ),
+          icon: IconShape.iconClose,
         ),
         backgroundColor: Colors.white,
         elevation: 0,

@@ -17,14 +17,14 @@ import 'package:dating/utils/status_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends GetView<UserController> {
-  const ProfileScreen({super.key});
+class SomeOneProfile extends GetView<UserController> {
+  const SomeOneProfile({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonHeader(
-        text: '프로필',
+        text: '누군가의 프로필',
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -57,18 +57,18 @@ class ProfileScreen extends GetView<UserController> {
             children: [
               Stack(
                 children: [
-                  // 내 프로필 사진
+                  // 누군가의 프로필 사진
                   const ProfilePicture(),
 
-                  // 내 이름
+                  // 누군가의 이름
                   ProfilePositionedName(user: controller.myInfo!),
 
-                  // 내 나이
+                  // 누군가의 나이
                   ProfilePositionedAge(
                     user: controller.myInfo!,
                   ),
 
-                  // 내 위치
+                  // 누군가의 위치
                   ProfilePositionedLocation(
                     user: controller.myInfo!,
                   ),
@@ -83,26 +83,26 @@ class ProfileScreen extends GetView<UserController> {
               ),
             ],
           ),
-          // 내 정보
+          // 누군가의 정보
           const PersonalInformation(),
 
-          // 나의 성격
+          // 누군가의 성격
           const Personality(),
 
-          // 나의 관심사
+          // 누군가의 관심사
           const Interest(),
 
-          // 나의 이상형
+          // 누군가의 이상형
           const IdealType(),
           const SizedBox(height: 50),
 
-          // 내 스토리
+          // 누군가의 스토리
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: TextStyling.story,
           ),
 
-          // 내 스토리 사진
+          // 누군가의 스토리 사진
           const Padding(
             padding: EdgeInsets.all(2.0),
             child: Row(
