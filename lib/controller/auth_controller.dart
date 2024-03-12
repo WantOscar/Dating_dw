@@ -2,6 +2,7 @@ import 'package:dating/data/model/auth.dart';
 import 'package:dating/data/provider/auth_service.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/utils/api_urls.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
@@ -46,9 +47,10 @@ class AuthController extends GetxController {
 
   Future<void> logOut() async {
     try {
+      debugPrint("토큰 삭제");
       await storage.delete(key: "token");
       user.value = Auth(email: '', password: '');
-      Get.offAll(const LoginScreen());
+      Get.offAll(() => const LoginScreen());
     } catch (e) {
       Get.snackbar('로그아웃에 실패하였습니다!', '잠시후 다시 시도해주세요');
     }
