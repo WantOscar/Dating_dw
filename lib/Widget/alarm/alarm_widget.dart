@@ -15,36 +15,36 @@ class AlarmWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: width * 0.13,
-                height: width * 0.13,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(45),
-                    color: Colors.grey),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  text,
-                  const SizedBox(height: 4),
-                  text2,
-                ],
-              ),
-            ],
-          ),
-          text3,
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Container(
+              width: width * 0.13,
+              height: width * 0.13,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(45), color: Colors.grey),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                text,
+                const SizedBox(height: 4),
+                SizedBox(
+                    width: 200,
+                    child: Flexible(
+                      child: text2,
+                    )),
+              ],
+            ),
+          ],
+        ),
+        text3,
+      ],
     );
   }
 }

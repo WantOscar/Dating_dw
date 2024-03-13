@@ -56,6 +56,7 @@ class _ChattingScreenState extends State<ChattingScreen>
                     TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
                 indicatorColor: ThemeColor.fontColor,
                 indicatorSize: TabBarIndicatorSize.tab,
+                indicatorWeight: 1.0,
                 controller: _tab,
                 tabs: [
                   Tab(
