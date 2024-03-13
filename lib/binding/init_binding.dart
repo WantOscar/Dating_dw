@@ -11,8 +11,8 @@ import 'package:image_picker/image_picker.dart';
 class InitBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(UserController(
-        userRepository: UserRepository(service: UserFetch(dio: Dio()))));
+    // Get.put(UserController(
+    //     userRepository: UserRepository(service: UserFetch(dio: Dio()))));
     Get.put(AuthController(service: AuthService(dio: Dio())));
     Get.put(UploadController(picker: ImagePicker()));
   }
