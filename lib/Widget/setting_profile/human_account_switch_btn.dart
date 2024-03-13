@@ -60,7 +60,7 @@ class _HumanAccountSwitchBtnState extends State<HumanAccountSwitchBtn> {
                             height: width * 0.1,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: fontColor),
+                                color: ThemeColor.fontColor),
                             child: const Center(
                               child: Text(
                                 '전환하기',
@@ -79,7 +79,7 @@ class _HumanAccountSwitchBtnState extends State<HumanAccountSwitchBtn> {
                             height: MediaQuery.of(context).size.width * 0.1,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: inputColor),
+                                color: ThemeColor.inputColor),
                             child: const Center(
                               child: Text(
                                 '취소',

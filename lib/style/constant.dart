@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 // Colors
-const fontColor = Color(0xFFFF006B);
-const font2Color = Color(0xFF464646);
-const containerColor = Color(0xFFD9D9D9);
-const inputColor = Color.fromARGB(255, 212, 211, 211);
-const iconColor = Color.fromARGB(255, 179, 177, 177);
+class ThemeColor {
+  static Color get fontColor => Color(0xFFFF006B);
+  static Color get font2Color => Color(0xFF464646);
+  static Color get containerColor => Color(0xFFD9D9D9);
+  static Color get inputColor => Color.fromARGB(255, 212, 211, 211);
+  static Color get iconColor => Color.fromARGB(255, 179, 177, 177);
+}

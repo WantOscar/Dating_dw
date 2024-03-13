@@ -30,7 +30,8 @@ class BottomApplyBar extends StatelessWidget {
             // height: height * heightPoint,
             height: height * 0.05,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: fontColor),
+                borderRadius: BorderRadius.circular(15),
+                color: ThemeColor.fontColor),
             child: Center(
               child: Text(
                 text,

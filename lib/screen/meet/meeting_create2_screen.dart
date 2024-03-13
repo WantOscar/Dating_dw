@@ -68,7 +68,7 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: inputColor),
+                  borderSide: BorderSide(color: ThemeColor.inputColor),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 labelText: '제목은 최대 15자로 제한',
@@ -96,7 +96,7 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: inputColor),
+                  borderSide: BorderSide(color: ThemeColor.inputColor),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 labelText: '방 설명은 최대 50자로 제한',

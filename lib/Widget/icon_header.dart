@@ -25,8 +25,10 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         text,
-        style: const TextStyle(
-            fontSize: 25, fontWeight: FontWeight.bold, color: fontColor),
+        style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ThemeColor.fontColor),
       ),
       toolbarHeight: _headerHeight,
     );

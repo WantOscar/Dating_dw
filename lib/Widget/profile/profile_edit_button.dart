@@ -10,7 +10,7 @@ class ProfileEditButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: fontColor,
+        backgroundColor: ThemeColor.fontColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),

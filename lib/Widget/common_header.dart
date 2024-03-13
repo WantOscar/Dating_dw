@@ -16,8 +16,10 @@ class CommonHeader extends StatelessWidget implements PreferredSizeWidget {
         padding: const EdgeInsets.all(14.0),
         child: Text(
           text,
-          style: const TextStyle(
-              fontSize: 25, color: fontColor, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 25,
+              color: ThemeColor.fontColor,
+              fontWeight: FontWeight.bold),
         ),
       ),
       leadingWidth: 200,
