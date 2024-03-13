@@ -11,14 +11,14 @@ import 'package:dating/Widget/profile/profile_positioned_name.dart';
 import 'package:dating/Widget/profile/profile_picture.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/profile/setting_profile.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/style/text_styling.dart';
 import 'package:dating/utils/status_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SomeOneProfile extends GetView<UserController> {
-  const SomeOneProfile({super.key});
+class SomeOneProfileScreen extends GetView<UserController> {
+  const SomeOneProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,11 @@ class SomeOneProfile extends GetView<UserController> {
           // 누군가의 스토리
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: TextStyling.story,
+            child: Text(
+              '스토리',
+              style: TextStyle(
+                  color: fontColor, fontSize: 30, fontWeight: FontWeight.bold),
+            ),
           ),
 
           // 누군가의 스토리 사진

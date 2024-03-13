@@ -1,6 +1,7 @@
 import 'package:dating/binding/init_binding.dart';
 import 'package:dating/root.dart';
 import 'package:dating/screen/auth/login_screen.dart';
+import 'package:dating/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-      home: const Root(),
+      // home: const Root(),
+      home: const HomeScreen(),
       debugShowCheckedModeBanner: false,
       initialBinding: InitBinding(),
     );
