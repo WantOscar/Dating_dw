@@ -1,4 +1,5 @@
 import 'package:dating/Widget/common_header.dart';
+import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/Widget/profile/personal_information.dart';
 import 'package:dating/Widget/profile/personality.dart';
@@ -25,18 +26,15 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CommonHeader(
+        appBar: IconHeader(
           text: '프로필',
           actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                onPressed: () {
-                  Get.to(() => const SettingProfile());
-                },
-                icon: IconShape.iconSettings,
-              ),
-            ),
+            IconButton(
+              onPressed: () {
+                Get.to(() => const SettingProfile());
+              },
+              icon: IconShape.iconSettings,
+            )
           ],
         ),
         body: Obx(() {

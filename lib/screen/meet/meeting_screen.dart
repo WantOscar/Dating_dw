@@ -51,17 +51,17 @@ class _MeetingScreenState extends State<MeetingScreen>
         elevation: 0,
         toolbarHeight: 65,
         bottom: PreferredSize(
-            preferredSize: Size.fromHeight(65),
-            child: Container(
+            preferredSize: const Size.fromHeight(65),
+            child: SizedBox(
               height: AppBar().preferredSize.height,
               width: double.infinity,
               child: TabBar(
                 indicatorColor: ThemeColor.fontColor,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorWeight: 1.0,
-                labelStyle:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
-                tabs: [
+                labelStyle: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w600),
+                tabs: const [
                   Tab(
                     text: "대학생",
                   ),
