@@ -1,4 +1,5 @@
 import 'package:dating/Widget/common_header.dart';
+import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/Widget/profile/personal_information.dart';
 import 'package:dating/Widget/profile/personality.dart';
@@ -12,6 +13,7 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:dating/utils/status_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class SomeoneProfileScreen extends StatefulWidget {
@@ -25,19 +27,8 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonHeader(
-        text: '프로필',
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              onPressed: () {
-                Get.to(() => const SettingProfile());
-              },
-              icon: IconShape.iconSettings,
-            ),
-          ),
-        ],
+      appBar: const IconHeader(
+        text: '상대 프로필',
       ),
       body:
           // Obx(
@@ -171,27 +162,27 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                     ),
                   ),
 
-                  // 프로필 편집 버튼
+                  // 채팅하기 버튼
                   Positioned(
                     top: 360,
                     right: 20,
-                    // child: ProfileEditButton(),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: fontColor,
+                        backgroundColor: ThemeColor.fontColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ProfileEditScreen(),
-                          ),
-                        );
+                        showToast();
                       },
-                      child: TextStyling.profileEdit,
+                      child: const Text(
+                        '채팅하기',
+                        style: TextStyle(
+                            fontSize: 17,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ],
@@ -213,12 +204,14 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
           const SizedBox(height: 50),
 
           // 상대 스토리
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               '스토리',
               style: TextStyle(
-                  color: fontColor, fontSize: 30, fontWeight: FontWeight.bold),
+                  color: ThemeColor.fontColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
             ),
           ),
 
@@ -237,4 +230,16 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
       ),
     );
   }
+}
+
+void showToast() {
+  Fluttertoast.showToast(
+    msg: '채팅을 신청하였습니다',
+    gravity: ToastGravity.TOP,
+    backgroundColor: Colors.transparent,
+    fontSize: 17,
+    textColor: Colors.black,
+    toastLength: Toast.LENGTH_SHORT, // 토스트 뜨는 시간(android)
+    timeInSecForIosWeb: 1, // 토스트 뜨는 시간(IOS & Web)
+  );
 }

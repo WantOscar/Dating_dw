@@ -29,6 +29,7 @@ class ProfileMain extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         child: Stack(
           children: [
+            // 오늘의 추천인 사진
             Image.network(
               user.image ??
                   'https://image.news1.kr/system/photos/2022/12/16/5742694/article.jpg/dims/quality/80/optimize',
@@ -36,6 +37,8 @@ class ProfileMain extends StatelessWidget {
               width: width * 0.8,
               height: height * 0.8,
             ),
+
+            // 오늘의 추천인 현재 활동 여부
             Positioned(
               bottom: width * 0.45,
               left: height * 0.04,
@@ -55,6 +58,8 @@ class ProfileMain extends StatelessWidget {
                 ),
               ),
             ),
+
+            // 오늘의 추천인 이름
             Positioned(
               bottom: width * 0.3,
               left: height * 0.04,
@@ -66,6 +71,8 @@ class ProfileMain extends StatelessWidget {
                     color: Colors.white),
               ),
             ),
+
+            // 오늘의 추천인 나이, 신장
             Positioned(
               bottom: width * 0.22,
               left: height * 0.04,
@@ -86,6 +93,7 @@ class ProfileMain extends StatelessWidget {
                 ],
               ),
             ),
+            // 나와 추천인의 현재 거리
             Positioned(
               bottom: width * 0.17,
               left: height * 0.04,
@@ -102,6 +110,8 @@ class ProfileMain extends StatelessWidget {
                 ],
               ),
             ),
+
+            // 추천인과 채팅하기
             Positioned(
               bottom: width * 0.035,
               left: height * 0.03,
@@ -115,12 +125,15 @@ class ProfileMain extends StatelessWidget {
                 child: const Text(
                   "채팅하기",
                   style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFFFF006B)),
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFFF006B),
+                  ),
                 ),
               ),
             ),
+
+            // 추천인에게 좋아요 누르기 버튼
             Positioned(
               bottom: width * 0.024,
               left: height * 0.38,

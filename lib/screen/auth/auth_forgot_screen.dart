@@ -14,9 +14,9 @@ class AuthForgotScreen extends StatelessWidget {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: fontColor,
+            color: ThemeColor.fontColor,
           ),
         ),
         backgroundColor: Colors.white,
@@ -27,10 +27,12 @@ class AuthForgotScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '이메일을 입력해주세요',
               style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColor.fontColor),
             ),
             const SizedBox(
               height: 10,
@@ -56,10 +58,10 @@ class AuthForgotScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'hello@comment.com',
                     border: InputBorder.none,
-                    hintStyle: TextStyle(color: font2Color),
+                    hintStyle: TextStyle(color: ThemeColor.font2Color),
                     // ),
                     // onChanged: (value) {
                     //   authController.user.update((user) {
@@ -86,7 +88,8 @@ class AuthForgotScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.07,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: fontColor),
+                  borderRadius: BorderRadius.circular(30),
+                  color: ThemeColor.fontColor),
               child: const Center(
                 child: Text(
                   '확인',
@@ -117,15 +120,15 @@ class VerifyScreen extends StatelessWidget {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: fontColor,
+            color: ThemeColor.fontColor,
           ),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: const Padding(
+      body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +136,9 @@ class VerifyScreen extends StatelessWidget {
             Text(
               '인증번호 6자를 입력해 주세요',
               style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColor.fontColor),
             ),
             SizedBox(
               height: 10,
@@ -190,7 +195,8 @@ class VerifyScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.07,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: fontColor),
+                  borderRadius: BorderRadius.circular(30),
+                  color: ThemeColor.fontColor),
               child: const Center(
                 child: Text(
                   '확인',
@@ -235,9 +241,9 @@ class PasswordChangeScreen extends StatelessWidget {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: fontColor,
+            color: ThemeColor.fontColor,
           ),
         ),
         backgroundColor: Colors.white,
@@ -248,10 +254,12 @@ class PasswordChangeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '변경하실 비밀번호를 입력해주세요',
               style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColor.fontColor),
             ),
             const SizedBox(
               height: 10,
@@ -277,10 +285,10 @@ class PasswordChangeScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: TextFormField(
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: '비밀번호를 입력해주세요',
                     border: InputBorder.none,
-                    hintStyle: TextStyle(color: font2Color),
+                    hintStyle: TextStyle(color: ThemeColor.font2Color),
                     // ),
                     // onChanged: (value) {
                     //   authController.user.update((user) {
@@ -307,7 +315,8 @@ class PasswordChangeScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.07,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: fontColor),
+                  borderRadius: BorderRadius.circular(30),
+                  color: ThemeColor.fontColor),
               child: const Center(
                 child: Text(
                   '확인',

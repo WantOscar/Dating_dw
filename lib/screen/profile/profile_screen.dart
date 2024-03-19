@@ -173,7 +173,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                     // child: ProfileEditButton(),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: fontColor,
+                        backgroundColor: ThemeColor.fontColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -186,7 +186,14 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                           ),
                         );
                       },
-                      child: TextStyling.profileEdit,
+                      child: const Text(
+                        '프로필 편집',
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -208,12 +215,14 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
           const SizedBox(height: 50),
 
           // 내 스토리
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               '스토리',
               style: TextStyle(
-                  color: fontColor, fontSize: 30, fontWeight: FontWeight.bold),
+                  color: ThemeColor.fontColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
             ),
           ),
 

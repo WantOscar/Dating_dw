@@ -25,9 +25,9 @@ class TodayMeet extends StatelessWidget {
                 ),
               );
             },
-            child: const Text(
+            child: Text(
               '정보 수정',
-              style: TextStyle(color: font2Color),
+              style: TextStyle(color: ThemeColor.font2Color),
             ),
           ),
         ],

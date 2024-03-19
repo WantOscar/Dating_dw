@@ -21,10 +21,12 @@ class ChatInAppBar extends StatelessWidget {
                 icon: IconShape.iconArrowBackIos,
               ),
             ),
-            const Text(
+            Text(
               '홍길동',
               style: TextStyle(
-                  color: fontColor, fontSize: 20, fontWeight: FontWeight.bold),
+                  color: ThemeColor.fontColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ),

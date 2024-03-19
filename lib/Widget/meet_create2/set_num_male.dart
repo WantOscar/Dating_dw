@@ -42,7 +42,7 @@ class _SetNumMaleState extends State<SetNumMale> {
           width: width * 0.3,
           height: 40,
           decoration: BoxDecoration(
-            color: inputColor,
+            color: ThemeColor.inputColor,
             borderRadius: BorderRadius.circular(100),
           ),
           child: Row(

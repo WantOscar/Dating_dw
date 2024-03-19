@@ -31,7 +31,7 @@ class AlarmScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 17),
               ),
               text2: Text(
-                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세 \n요?"',
+                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세요?"',
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
               text3: Text(
@@ -59,7 +59,7 @@ class AlarmScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 17),
               ),
               text2: Text(
-                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세 \n요?"',
+                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세요?"',
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
               text3: Text(
@@ -87,8 +87,11 @@ class AlarmScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 17),
               ),
               text2: Text(
-                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세 \n요?"',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
+                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세요?"',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
               ),
               text3: Text(
                 '10월 14일',

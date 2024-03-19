@@ -1,5 +1,7 @@
 import 'package:dating/Widget/main/circle_avatar.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class InterestedMeBox extends StatelessWidget {
   const InterestedMeBox({super.key});
@@ -12,9 +14,13 @@ class InterestedMeBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(
           50,
-          (index) => const Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: Avatar(),
+          (index) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Avatar(
+              onTap: () {
+                Get.to(() => const SomeoneProfileScreen());
+              },
+            ),
           ),
         ),
       ),

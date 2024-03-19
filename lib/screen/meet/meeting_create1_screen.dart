@@ -25,10 +25,12 @@ class _MeetingCreate1ScreenState extends State<MeetingCreate1Screen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // select you want room text
-            const Text(
+            Text(
               '원하시는 방을 선택해 주세요',
               style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColor.fontColor),
             ),
             const SizedBox(height: 30),
 

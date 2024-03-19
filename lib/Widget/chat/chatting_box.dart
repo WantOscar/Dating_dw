@@ -35,7 +35,7 @@ class ChattingBox extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +43,8 @@ class ChattingBox extends StatelessWidget {
                       Text(
                         '홍길동',
                         style: TextStyle(
-                            color: font2Color, fontWeight: FontWeight.bold),
+                            color: ThemeColor.font2Color,
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         height: 5,
@@ -60,9 +61,9 @@ class ChattingBox extends StatelessWidget {
                 ),
               ],
             ),
-            const Text(
+            Text(
               '9월 25일',
-              style: TextStyle(fontSize: 12, color: font2Color),
+              style: TextStyle(fontSize: 12, color: ThemeColor.font2Color),
             )
           ],
         ),

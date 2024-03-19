@@ -4,16 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class IconHeader extends StatelessWidget implements PreferredSizeWidget {
-  const IconHeader({super.key, required this.text});
+  const IconHeader({super.key, required this.text, this.actions});
 
   final double _headerHeight = 65;
   final String text;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
-      elevation: 0,
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: IconButton(
@@ -25,9 +24,14 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         text,
-        style: const TextStyle(
-            fontSize: 25, fontWeight: FontWeight.bold, color: fontColor),
+        style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: ThemeColor.fontColor),
       ),
+      backgroundColor: Colors.white,
+      elevation: 0,
+      actions: actions,
       toolbarHeight: _headerHeight,
     );
   }

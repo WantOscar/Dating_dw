@@ -10,7 +10,7 @@ class ProfileEditButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: fontColor,
+        backgroundColor: ThemeColor.fontColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
@@ -23,7 +23,14 @@ class ProfileEditButton extends StatelessWidget {
           ),
         );
       },
-      child: TextStyling.profileEdit,
+      child: const Text(
+        '프로필 편집',
+        style: TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
