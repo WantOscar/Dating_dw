@@ -1,4 +1,4 @@
-import 'package:dating/Widget/meet/container_standard.dart';
+import 'package:dating/widget/meet/container_standard.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';

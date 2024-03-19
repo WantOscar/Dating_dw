@@ -1,4 +1,4 @@
-import 'package:dating/Widget/main/mbti_card.dart';
+import 'package:dating/widget/main/mbti_card.dart';
 import 'package:dating/data/model/mbti.dart';
 import 'package:flutter/material.dart';
 

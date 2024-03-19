@@ -1,4 +1,3 @@
-import 'package:dating/controller/auth_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ class LogoutBtn extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Get.find<AuthController>().logOut();
+                          // Get.find<AuthController>().logOut();
                         },
                         child: Container(
                           width: width * 0.8,

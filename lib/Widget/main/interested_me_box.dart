@@ -1,4 +1,4 @@
-import 'package:dating/Widget/main/circle_avatar.dart';
+import 'package:dating/widget/main/circle_avatar.dart';
 import 'package:flutter/material.dart';
 
 class InterestedMeBox extends StatelessWidget {

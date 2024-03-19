@@ -1,10 +1,10 @@
-import 'package:dating/controller/auth_controller.dart';
+import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/screen/auth/password_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpPage extends GetView<AuthController> {
+class SignUpPage extends GetView<ResisterController> {
   const SignUpPage({super.key});
 
   @override
@@ -55,16 +55,12 @@ class SignUpPage extends GetView<AuthController> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: TextFormField(
+                  controller: ResisterController.to.email,
                   decoration: const InputDecoration(
                     hintText: 'hello@comment.com',
                     border: InputBorder.none,
                     hintStyle: TextStyle(color: font2Color),
                   ),
-                  onChanged: (value) {
-                    controller.user.update((user) {
-                      user!.email = value;
-                    });
-                  },
                 ),
               ),
             ),
@@ -77,9 +73,7 @@ class SignUpPage extends GetView<AuthController> {
           shadowColor: Colors.white,
           elevation: 0,
           child: GestureDetector(
-            onTap: () {
-              Get.to(() => const PasswordScreen());
-            },
+            onTap: ResisterController.to.emailVerify,
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.07,

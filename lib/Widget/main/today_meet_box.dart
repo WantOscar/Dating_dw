@@ -1,4 +1,4 @@
-import 'package:dating/Widget/main/gesture_box.dart';
+import 'package:dating/widget/main/gesture_box.dart';
 import 'package:flutter/material.dart';
 
 class TodayMeetBox extends StatelessWidget {

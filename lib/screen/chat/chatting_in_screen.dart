@@ -1,5 +1,5 @@
-import 'package:dating/Widget/chat/chat.dart';
-import 'package:dating/Widget/chat/chatting_profile.dart';
+import 'package:dating/widget/chat/chat.dart';
+import 'package:dating/widget/chat/chatting_profile.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';

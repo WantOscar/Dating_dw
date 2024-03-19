@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dating/Widget/common_header.dart';
-import 'package:dating/Widget/main/interested_friends_box.dart';
-import 'package:dating/Widget/main/interested_me_box.dart';
+import 'package:dating/widget/common_header.dart';
+import 'package:dating/widget/main/interested_friends_box.dart';
+import 'package:dating/widget/main/interested_me_box.dart';
 // import 'package:dating/Widget/main/mbti_recommend.dart';
-import 'package:dating/Widget/main/profile_main.dart';
+import 'package:dating/widget/main/profile_main.dart';
 // import 'package:dating/Widget/main/today_meet.dart';
 // import 'package:dating/Widget/main/today_meet_box.dart';
 import 'package:dating/controller/user_controller.dart';

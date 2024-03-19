@@ -1,8 +1,8 @@
-import 'package:dating/Widget/icon_header.dart';
-import 'package:dating/Widget/setting_profile/alarm_setting.dart';
-import 'package:dating/Widget/setting_profile/human_account_switch_btn.dart';
-import 'package:dating/Widget/setting_profile/logout_btn.dart';
-import 'package:dating/Widget/setting_profile/withdrawal_btn.dart';
+import 'package:dating/widget/icon_header.dart';
+import 'package:dating/widget/setting_profile/alarm_setting.dart';
+import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
+import 'package:dating/widget/setting_profile/logout_btn.dart';
+import 'package:dating/widget/setting_profile/withdrawal_btn.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';

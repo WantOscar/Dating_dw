@@ -1,5 +1,5 @@
-import 'package:dating/Widget/alarm/alarm_widget.dart';
-import 'package:dating/Widget/icon_header.dart';
+import 'package:dating/widget/alarm/alarm_widget.dart';
+import 'package:dating/widget/icon_header.dart';
 import 'package:flutter/material.dart';
 
 class AlarmScreen extends StatelessWidget {
