@@ -32,7 +32,7 @@ class InputField extends StatelessWidget {
             width: width * widthPoint,
             height: height * heightPoint,
             decoration: BoxDecoration(
-              color: inputColor,
+              color: ThemeColor.inputColor,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Center(

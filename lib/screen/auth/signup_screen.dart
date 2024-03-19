@@ -15,9 +15,9 @@ class SignUpPage extends GetView<ResisterController> {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: fontColor,
+            color: ThemeColor.fontColor,
           ),
         ),
         backgroundColor: Colors.white,
@@ -28,18 +28,22 @@ class SignUpPage extends GetView<ResisterController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               '이메일을 입력해주세요',
               style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.bold, color: fontColor),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: ThemeColor.fontColor),
             ),
             const SizedBox(
               height: 10,
             ),
-            const Text(
+            Text(
               '이메일 작성 후 인증번호가 전송됩니다',
               style: TextStyle(
-                  fontSize: 13, color: font2Color, fontWeight: FontWeight.w300),
+                  fontSize: 13,
+                  color: ThemeColor.font2Color,
+                  fontWeight: FontWeight.w300),
             ),
             const SizedBox(
               height: 30,
@@ -56,10 +60,10 @@ class SignUpPage extends GetView<ResisterController> {
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: TextFormField(
                   controller: ResisterController.to.email,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'hello@comment.com',
                     border: InputBorder.none,
-                    hintStyle: TextStyle(color: font2Color),
+                    hintStyle: TextStyle(color: ThemeColor.font2Color),
                   ),
                 ),
               ),
@@ -78,7 +82,8 @@ class SignUpPage extends GetView<ResisterController> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 0.07,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: fontColor),
+                  borderRadius: BorderRadius.circular(30),
+                  color: ThemeColor.fontColor),
               child: const Center(
                 child: Text(
                   '확인',

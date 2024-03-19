@@ -36,7 +36,7 @@ class LogoutBtn extends StatelessWidget {
                           height: width * 0.1,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: fontColor),
+                              color: ThemeColor.fontColor),
                           child: const Center(
                             child: Text(
                               '로그아웃',
@@ -55,7 +55,7 @@ class LogoutBtn extends StatelessWidget {
                           height: width * 0.1,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
-                              color: inputColor),
+                              color: ThemeColor.inputColor),
                           child: const Center(
                             child: Text(
                               '취소',

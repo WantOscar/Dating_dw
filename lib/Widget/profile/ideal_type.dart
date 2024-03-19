@@ -7,7 +7,7 @@ class IdealType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,15 +25,15 @@ class IdealType extends StatelessWidget {
             children: [
               HobbyContainer(
                 text: '예쁜',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '귀여운',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '섹시한',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
             ],
           ),

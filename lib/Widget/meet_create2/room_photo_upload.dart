@@ -21,7 +21,7 @@ class RoomPhotoUpload extends StatelessWidget {
           width: width * 0.9,
           height: height * 0.3,
           decoration: BoxDecoration(
-            color: inputColor,
+            color: ThemeColor.inputColor,
             borderRadius: BorderRadius.circular(10),
           ),
           child: (image != null)

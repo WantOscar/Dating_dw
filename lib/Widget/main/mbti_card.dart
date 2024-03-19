@@ -61,9 +61,9 @@ class MBTICard extends StatelessWidget {
                           children: [
                             Text(
                               mbti.name,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 18,
-                                  color: font2Color,
+                                  color: ThemeColor.font2Color,
                                   fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(

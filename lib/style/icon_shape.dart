@@ -13,8 +13,8 @@ class IconShape {
   static const iconPhotoCamera =
       Icon(Icons.photo_camera, color: Colors.black, size: 30);
 
-  static const iconArrowBack =
-      Icon(Icons.arrow_back, color: fontColor, size: 30);
+  static Icon get iconArrowBack =>
+      Icon(Icons.arrow_back, color: ThemeColor.fontColor, size: 30);
 
   static const iconMale = Icon(Icons.people, size: 20, color: Colors.blue);
 
@@ -34,8 +34,8 @@ class IconShape {
 
   static const iconMore = Icon(Icons.more_horiz, color: Colors.black);
 
-  static const iconArrowForward =
-      Icon(Icons.arrow_forward_ios, size: 15, color: iconColor);
+  static Icon get iconArrowForward =>
+      Icon(Icons.arrow_forward_ios, size: 15, color: ThemeColor.iconColor);
 
   static const iconClose = Icon(Icons.close, color: Colors.black);
 

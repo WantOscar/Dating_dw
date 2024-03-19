@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _pageIdx = idx;
             });
           },
-          selectedItemColor: fontColor,
+          selectedItemColor: ThemeColor.fontColor,
           unselectedItemColor: Colors.grey,
           currentIndex: _pageIdx,
           showUnselectedLabels: true,

@@ -40,10 +40,10 @@ class _ChattingInScreenState extends State<ChattingInScreen> {
                   icon: IconShape.iconArrowBackIos,
                 ),
               ),
-              const Text(
+              Text(
                 '홍길동',
                 style: TextStyle(
-                    color: fontColor,
+                    color: ThemeColor.fontColor,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),

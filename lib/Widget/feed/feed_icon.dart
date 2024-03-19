@@ -21,7 +21,7 @@ class FeedIcon extends StatelessWidget {
             ),
           ),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +35,7 @@ class FeedIcon extends StatelessWidget {
               ),
               Text(
                 '강남구 24세 185cm',
-                style: TextStyle(fontSize: 10, color: font2Color),
+                style: TextStyle(fontSize: 10, color: ThemeColor.font2Color),
               )
             ],
           ),

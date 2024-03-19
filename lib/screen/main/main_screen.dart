@@ -54,7 +54,7 @@ class MainScreen extends GetView<UserController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Profile Photo Carousel
+          // 오늘의 추천(상대방 무작위 하루 10명 제한 줄 것.)
           (controller.users.isNotEmpty)
               ? CarouselSlider.builder(
                   itemCount: controller.users.length,

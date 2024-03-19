@@ -7,7 +7,7 @@ class Personality extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,35 +25,35 @@ class Personality extends StatelessWidget {
             children: [
               HobbyContainer(
                 text: '털털한',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '기모띠',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '자유로운',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '유쾌한',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '대담한',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '보수적인',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '재밌는',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '호전적인',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
             ],
           ),

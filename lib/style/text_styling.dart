@@ -38,32 +38,23 @@ class TextStyling {
     ),
   );
 
-  static const profileEdit = Text(
-    '프로필 편집',
-    style: TextStyle(
-      fontSize: 17,
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-    ),
-  );
+  static Text get profile => Text(
+        '프로필',
+        style: TextStyle(
+          fontSize: 25,
+          color: ThemeColor.fontColor,
+          fontWeight: FontWeight.bold,
+        ),
+      );
 
-  static const profile = Text(
-    '프로필',
-    style: TextStyle(
-      fontSize: 25,
-      color: fontColor,
-      fontWeight: FontWeight.bold,
-    ),
-  );
-
-  static const profileEdit2 = Text(
-    '프로필 수정',
-    style: TextStyle(
-      fontSize: 25,
-      color: fontColor,
-      fontWeight: FontWeight.bold,
-    ),
-  );
+  static Text get profileEdit2 => Text(
+        '프로필 수정',
+        style: TextStyle(
+          fontSize: 25,
+          color: ThemeColor.fontColor,
+          fontWeight: FontWeight.bold,
+        ),
+      );
 
   static const modification = Text(
     '수정 완료',

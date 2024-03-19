@@ -8,14 +8,14 @@ class RoomType extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
         Padding(
           padding: EdgeInsets.only(left: 30.0, right: 10),
           child: ContainerStandard(
             w: 0.13,
             h: 0.05,
-            color: fontColor,
+            color: ThemeColor.fontColor,
             c: 20,
             child: TextStyling.meetJob,
           ),
@@ -23,7 +23,7 @@ class RoomType extends StatelessWidget {
         ContainerStandard(
           w: 0.13,
           h: 0.05,
-          color: fontColor,
+          color: ThemeColor.fontColor,
           c: 20,
           child: TextStyling.meetLocation,
         ),

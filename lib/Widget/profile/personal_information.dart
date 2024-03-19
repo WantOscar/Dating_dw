@@ -7,7 +7,7 @@ class PersonalInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,15 +25,15 @@ class PersonalInformation extends StatelessWidget {
             children: [
               HobbyContainer(
                 text: '일반대',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '학생',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: 'ESTP',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
             ],
           ),

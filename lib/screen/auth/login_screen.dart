@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _title() {
-    return const Column(
+    return Column(
       children: [
         Text(
           '캠퍼스와 만남,',
@@ -51,7 +51,9 @@ class _LoginScreenState extends State<LoginScreen> {
         Text(
           '캠밋',
           style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 50, color: fontColor),
+              fontWeight: FontWeight.bold,
+              fontSize: 50,
+              color: ThemeColor.fontColor),
         ),
       ],
     );
@@ -162,9 +164,10 @@ class _LoginScreenState extends State<LoginScreen> {
             onTap: () {
               Get.to(() => const AuthForgotScreen());
             },
-            child: const Text(
+            child: Text(
               '계정을 잃어버리셨나요?',
-              style: TextStyle(fontWeight: FontWeight.bold, color: fontColor),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: ThemeColor.fontColor),
             ),
           ),
         ),
@@ -192,9 +195,10 @@ class _LoginScreenState extends State<LoginScreen> {
               onTap: () {
                 Get.to(() => const SignUpPage(), binding: ResisterBinding());
               },
-              child: const Text(
+              child: Text(
                 '회원가입',
-                style: TextStyle(fontWeight: FontWeight.bold, color: fontColor),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: ThemeColor.fontColor),
               ),
             ),
           ),

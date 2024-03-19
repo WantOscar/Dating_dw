@@ -7,7 +7,7 @@ class Interest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,15 +25,15 @@ class Interest extends StatelessWidget {
             children: [
               HobbyContainer(
                 text: '게임',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: 'IT',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '운동',
-                color: inputColor,
+                color: ThemeColor.inputColor,
               ),
             ],
           ),

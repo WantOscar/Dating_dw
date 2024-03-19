@@ -1,3 +1,4 @@
+import 'package:dating/Widget/meet/meeting_container.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/meet/meeting_room.dart';
 import 'package:dating/data/model/meeting_room.dart';
@@ -8,24 +9,109 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MeetingScreen extends StatelessWidget {
+class MeetingScreen extends StatefulWidget {
   const MeetingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MeetingScreen> createState() => _MeetingScreenState();
+}
+
+class _MeetingScreenState extends State<MeetingScreen>
+    with SingleTickerProviderStateMixin {
+  late RoomRepository repository;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    repository = RoomRepository();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonHeader(text: '오늘의 과팅❤️‍🔥'),
-      body: FutureBuilder(
-        future: RoomRepository().getMeetingRoomData(),
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Text(
+            '오늘의 과팅❤️‍🔥',
+            style: TextStyle(
+                fontSize: 25,
+                color: ThemeColor.fontColor,
+                fontWeight: FontWeight.bold),
+          ),
+        ),
+        leadingWidth: 200,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        toolbarHeight: 65,
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(65),
+            child: SizedBox(
+              height: AppBar().preferredSize.height,
+              width: double.infinity,
+              child: TabBar(
+                indicatorColor: ThemeColor.fontColor,
+                indicatorSize: TabBarIndicatorSize.tab,
+                indicatorWeight: 1.0,
+                labelStyle: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w600),
+                tabs: const [
+                  Tab(
+                    text: "대학생",
+                  ),
+                  Tab(
+                    text: "일반인",
+                  ),
+                ],
+                controller: _tabController,
+              ),
+            )),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          _junior(),
+          _senior(),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        onPressed: () {
+          Get.to(() => const MeetingCreate1Screen());
+        },
+        backgroundColor: ThemeColor.fontColor,
+        child: IconShape.iconAdd,
+      ),
+    );
+  }
+
+  Widget _loading() {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget _error(String error) {
+    return Center(
+      child: Text(error),
+    );
+  }
+
+  Widget _junior() => FutureBuilder(
+        future: repository.getMeetingRoomData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return _loading();
           } else if (snapshot.hasError) {
-            return Center(
-              child: Text('${snapshot.error}'),
-            );
+            return _error(snapshot.error.toString());
           } else {
             List<MeetingRoom> meetingRooms = snapshot.data!;
             const int index = 0;
@@ -33,46 +119,85 @@ class MeetingScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  // 대학생/일반 방 선택.
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          '대학생',
-                          style: TextStyle(fontSize: 17, color: font2Color),
+                      Column(
+                        children: List.generate(
+                          50,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: MeetingContainer(
+                              meetingRoom: meetingRoom,
+                            ),
+                          ),
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          '일반',
-                          style: TextStyle(fontSize: 17, color: font2Color),
+                      Column(
+                        children: List.generate(
+                          50,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: MeetingContainer(
+                              meetingRoom: meetingRoom,
+                            ),
+                          ),
                         ),
                       ),
                     ],
-                  ),
-                  const SizedBox(height: 20),
-
-                  // 미팅방
-                  Meeting(
-                    meetingRoom: meetingRoom,
                   ),
                 ],
               ),
             );
           }
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-        onPressed: () {
-          Get.to(() => const MeetingCreate1Screen());
+      );
+
+  Widget _senior() => FutureBuilder(
+        future: repository.getMeetingRoomData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return _loading();
+          } else if (snapshot.hasError) {
+            return _error(snapshot.error.toString());
+          } else {
+            List<MeetingRoom> meetingRooms = snapshot.data!;
+            const int index = 0;
+            final meetingRoom = meetingRooms[index];
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: List.generate(
+                          50,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: MeetingContainer(
+                              meetingRoom: meetingRoom,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: List.generate(
+                          50,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: MeetingContainer(
+                              meetingRoom: meetingRoom,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          }
         },
-        backgroundColor: fontColor,
-        child: IconShape.iconAdd,
-      ),
-    );
-  }
+      );
 }
