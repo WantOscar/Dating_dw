@@ -1,5 +1,5 @@
-import 'package:dating/Widget/icon_header.dart';
-import 'package:dating/Widget/main/alart_widget.dart';
+import 'package:dating/widget/icon_header.dart';
+import 'package:dating/widget/main/alart_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainFavoriteMeScreen extends StatelessWidget {

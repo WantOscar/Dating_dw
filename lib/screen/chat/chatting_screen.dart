@@ -1,4 +1,5 @@
-import 'package:dating/Widget/chat/chatting_box.dart';
+import 'package:dating/widget/chat/chatting_box.dart';
+import 'package:dating/widget/common_header.dart';
 import 'package:dating/screen/chat/chatting_in_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';

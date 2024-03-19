@@ -1,4 +1,4 @@
-import 'package:dating/Widget/meet/container_standard.dart';
+import 'package:dating/widget/meet/container_standard.dart';
 import 'package:flutter/material.dart';
 
 class ExplainRoom extends StatelessWidget {

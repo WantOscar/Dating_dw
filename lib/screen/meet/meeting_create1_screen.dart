@@ -1,5 +1,5 @@
-import 'package:dating/Widget/bottom_apply_bar.dart';
-import 'package:dating/Widget/icon_header.dart';
+import 'package:dating/widget/bottom_apply_bar.dart';
+import 'package:dating/widget/icon_header.dart';
 import 'package:dating/screen/meet/meeting_create2_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';

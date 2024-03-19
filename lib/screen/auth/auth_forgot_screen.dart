@@ -38,7 +38,7 @@ class AuthForgotScreen extends StatelessWidget {
               height: 10,
             ),
             const Text(
-              '아이디로 사용 중인 이메일을 입력해주세요',
+              '최초가입 이메일을 입력해주세요',
               style: TextStyle(
                   fontSize: 13,
                   color: Colors.grey,

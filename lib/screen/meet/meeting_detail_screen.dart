@@ -1,9 +1,9 @@
-import 'package:dating/Widget/icon_header.dart';
-import 'package:dating/Widget/meet_detail/explain_room.dart';
-import 'package:dating/Widget/meet_detail/room_manager_profile.dart';
-import 'package:dating/Widget/meet_detail/room_title.dart';
-import 'package:dating/Widget/meet_detail/room_type.dart';
-import 'package:dating/Widget/meet/mini_profile.dart';
+import 'package:dating/widget/icon_header.dart';
+import 'package:dating/widget/meet_detail/explain_room.dart';
+import 'package:dating/widget/meet_detail/room_manager_profile.dart';
+import 'package:dating/widget/meet_detail/room_title.dart';
+import 'package:dating/widget/meet_detail/room_type.dart';
+import 'package:dating/widget/meet/mini_profile.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/style/text_styling.dart';
 import 'package:flutter/material.dart';

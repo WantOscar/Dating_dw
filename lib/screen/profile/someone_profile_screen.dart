@@ -1,10 +1,10 @@
-import 'package:dating/Widget/common_header.dart';
 import 'package:dating/Widget/icon_header.dart';
-import 'package:dating/Widget/profile_edit/my_photos.dart';
-import 'package:dating/Widget/profile/personal_information.dart';
-import 'package:dating/Widget/profile/personality.dart';
-import 'package:dating/Widget/profile/interest.dart';
-import 'package:dating/Widget/profile/ideal_type.dart';
+import 'package:dating/widget/common_header.dart';
+import 'package:dating/widget/profile_edit/my_photos.dart';
+import 'package:dating/widget/profile/personal_information.dart';
+import 'package:dating/widget/profile/personality.dart';
+import 'package:dating/widget/profile/interest.dart';
+import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.dart';

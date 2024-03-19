@@ -1,4 +1,4 @@
-import 'package:dating/Widget/main/circle_avatar.dart';
+import 'package:dating/widget/main/circle_avatar.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

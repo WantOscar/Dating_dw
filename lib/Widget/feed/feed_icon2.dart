@@ -1,4 +1,4 @@
-import 'package:dating/Widget/feed/feed_icon.dart';
+import 'package:dating/widget/feed/feed_icon.dart';
 import 'package:flutter/material.dart';
 
 class FeedIcon2 extends StatelessWidget {

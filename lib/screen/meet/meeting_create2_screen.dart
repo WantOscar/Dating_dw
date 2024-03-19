@@ -1,8 +1,8 @@
-import 'package:dating/Widget/bottom_apply_bar.dart';
-import 'package:dating/Widget/icon_header.dart';
-import 'package:dating/Widget/meet_create2/room_photo_upload.dart';
-import 'package:dating/Widget/meet_create2/set_num_female.dart';
-import 'package:dating/Widget/meet_create2/set_num_male.dart';
+import 'package:dating/widget/bottom_apply_bar.dart';
+import 'package:dating/widget/icon_header.dart';
+import 'package:dating/widget/meet_create2/room_photo_upload.dart';
+import 'package:dating/widget/meet_create2/set_num_female.dart';
+import 'package:dating/widget/meet_create2/set_num_male.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
