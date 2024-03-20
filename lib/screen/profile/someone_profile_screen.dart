@@ -235,7 +235,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
 void showToast() {
   Fluttertoast.showToast(
     msg: '채팅을 신청하였습니다',
-    backgroundColor: Colors.transparent,
+    backgroundColor: Colors.white,
     gravity: ToastGravity.TOP,
     fontSize: 17,
     textColor: Colors.black,
