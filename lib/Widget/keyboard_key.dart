@@ -16,6 +16,7 @@ class _KeyboardKeyState extends State<KeyboardKey> {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () => widget.onTap(widget.value),
+        borderRadius: BorderRadius.circular(12.0),
         child: AspectRatio(
           aspectRatio: 2,
           child: Container(

@@ -73,39 +73,48 @@ class AuthForgotScreen extends GetView<ResetPasswordController> {
 
   Widget _header() => Column(
         children: [
-          Text(
-            '이메일을 입력해주세요',
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: ThemeColor.fontColor),
+          Row(
+            children: [
+              Text(
+                '이메일을 입력해주세요',
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: ThemeColor.fontColor),
+              ),
+            ],
           ),
           const SizedBox(
             height: 10,
           ),
-          const Text(
-            '최초가입 이메일을 입력해주세요',
-            style: TextStyle(
-                fontSize: 13, color: Colors.grey, fontWeight: FontWeight.w300),
+          const Row(
+            children: [
+              Text(
+                '최초가입 이메일을 입력해주세요',
+                style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w300),
+              ),
+            ],
           ),
         ],
       );
 
-  Widget _email() => Expanded(
-        child: Center(
-          child: TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            controller: controller.email,
-            decoration: InputDecoration(
-              prefixIcon: Icon(
-                Icons.email,
-                color: ThemeColor.fontColor,
-              ),
-              focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: ThemeColor.fontColor)),
-              hintText: 'hello@comment.com',
-              hintStyle: TextStyle(color: ThemeColor.font2Color),
+  Widget _email() => Center(
+        child: TextFormField(
+          cursorColor: ThemeColor.fontColor,
+          keyboardType: TextInputType.emailAddress,
+          controller: controller.email,
+          decoration: InputDecoration(
+            prefixIcon: Icon(
+              Icons.email,
+              color: ThemeColor.fontColor,
             ),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: ThemeColor.fontColor)),
+            hintText: 'hello@comment.com',
+            hintStyle: TextStyle(color: ThemeColor.font2Color),
           ),
         ),
       );
@@ -172,15 +181,17 @@ class VerifyScreen extends GetView<ResetPasswordController> {
         ],
       );
 
-  Widget _body() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(
-              6,
-              (index) => CodeBox(
-                    value: controller.code[index],
-                  )),
+  Widget _body() => Expanded(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(
+                6,
+                (index) => CodeBox(
+                      value: controller.code[index],
+                    )),
+          ),
         ),
       );
 

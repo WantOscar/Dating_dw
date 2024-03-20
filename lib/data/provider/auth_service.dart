@@ -1,6 +1,7 @@
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
@@ -22,16 +23,10 @@ class AuthService extends GetxService {
         st.write(key: "token", value: response.data["accessToken"]);
       }
     } on DioException catch (error) {
-      switch (error.type) {
-        case DioExceptionType.badResponse:
-          Get.snackbar("네트워크 에러", "서버와의 연결이 원할하지 않습니다 !");
-          break;
-        case DioExceptionType.connectionTimeout:
-          Get.snackbar("네트워크 에러", "런타임 아웃 !");
-
-        default:
-          Get.snackbar("에러", "에러가 발생했습니다!");
-      }
+      dioExceptionHander(error);
+      return;
+    } on Exception {
+      Get.snackbar("로그인 실패!", "회원정보를 다시 확인해주세요 !");
     }
   }
 
@@ -52,8 +47,10 @@ class AuthService extends GetxService {
       } else {
         print(response.data["errorMessage"]);
       }
-    } catch (e) {
-      Get.snackbar('회원가입실패', '회원정보를 다시 확인해주세요!');
+    } on DioException catch (error) {
+      dioExceptionHander(error);
+    } on Exception {
+      Get.snackbar("회원가입 실패", "잠시후에 다시 시도해주세요 !");
     }
   }
 
@@ -83,14 +80,25 @@ class AuthService extends GetxService {
         return null;
       }
     } on DioException catch (error) {
-      switch (error.type) {
-        case DioExceptionType.badResponse:
-          Get.snackbar("네트워크 에러", "서버와의 연결이 원할하지 않습니다 !");
-          break;
-        default:
-          Get.snackbar("에러", "에러가 발생했습니다!");
-      }
+      dioExceptionHander(error);
+      return null;
+    } on Exception {
+      Get.snackbar("에러 !", "잠시후에 다시 시도해주세요!");
     }
     return null;
+  }
+
+  void dioExceptionHander(DioException error) {
+    switch (error.type) {
+      case DioExceptionType.badResponse:
+        Get.snackbar("로그인 실패!", "회원정보를 확인해주세요!");
+        break;
+      case DioExceptionType.connectionTimeout:
+        Get.snackbar("네트워크 에러", "런타임 아웃 !");
+        break;
+      default:
+        Get.snackbar("에러", "에러가 발생했습니다!");
+        break;
+    }
   }
 }
