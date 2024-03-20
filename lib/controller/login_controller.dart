@@ -1,4 +1,5 @@
 import 'package:dating/data/provider/auth_service.dart';
+import 'package:dating/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -16,13 +17,18 @@ class LoginController extends GetxController {
   TextEditingController get email => _email;
   TextEditingController get password => _password;
 
-  void login() {
+  void login() async {
+    print("로그인");
     isLoading(true);
     final data = {
       "email": _email.value.text.toString(),
       "password": _password.value.text.toString()
     };
-    service.login(data);
+    print(data);
+    await service.login(data);
     isLoading(false);
+    Get.to(() => const HomeScreen());
   }
+
+  void logout() => service.logOut();
 }
