@@ -1,4 +1,5 @@
 import 'package:dating/Widget/icon_header.dart';
+import 'package:dating/Widget/profile/warning_window.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/profile_edit/my_photos.dart';
 import 'package:dating/widget/profile/personal_information.dart';
@@ -7,10 +8,9 @@ import 'package:dating/widget/profile/interest.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
-import 'package:dating/screen/profile/setting_profile.dart';
+import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/style/text_styling.dart';
 import 'package:dating/utils/status_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -27,8 +27,68 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const IconHeader(
+      appBar: IconHeader(
         text: '상대 프로필',
+        actions: [
+          // IconButton(
+          //   onPressed: () {
+          //     showDialog(
+          //       context: context,
+          //       builder: (context) {
+          //         return WarningWindow(
+          //           onTap: () {},
+          //           titleText: '차단',
+          //           explainText: '상대방을 차단하시겠습니까 ?',
+          //           btnText: '차단',
+          //           context: context,
+          //         );
+          //       },
+          //     );
+          //   },
+          //   icon: const Icon(Icons.more_vert),
+          // ),
+          PopupMenuButton(
+            icon: IconShape.iconMore,
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  child: const Center(
+                    child: Text(
+                      '차단',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                PopupMenuItem(
+                  child: const Center(
+                    child: Text(
+                      '취소',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              ];
+            },
+            onSelected: (value) {
+              switch (value) {
+                case '차단':
+                  print('차단');
+                  break;
+                case '취소':
+                  print('취소');
+                  break;
+              }
+            },
+          ),
+        ],
       ),
       body:
           // Obx(
@@ -62,7 +122,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
             children: [
               Stack(
                 children: [
-                  // 상대 프로필 사진
+                  /// 상대 프로필 사진
                   Column(
                     children: [
                       Container(
@@ -89,7 +149,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                     ],
                   ),
 
-                  // 상대 이름
+                  /// 상대 이름
                   // ProfilePositionedName(user: UserController.to.myInfo!),
                   Positioned(
                     top: 300,
@@ -107,7 +167,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                     ),
                   ),
 
-                  // 상대 나이
+                  /// 상대 나이
                   // ProfilePositionedAge(user: UserController.to.myInfo!),
                   Positioned(
                     top: 360,
@@ -139,7 +199,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                     ),
                   ),
 
-                  // 상대 위치
+                  /// 상대 위치
                   // ProfilePositionedLocation(user: UserController.to.myInfo!),
                   Positioned(
                     top: 385,
@@ -162,26 +222,67 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                     ),
                   ),
 
-                  // 채팅하기 버튼
+                  /// 채팅하기 버튼
+                  Positioned(
+                    top: 360,
+                    right: 80,
+                    child: SizedBox(
+                      height: 50,
+                      child: Card(
+                        elevation: 5.0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            onPressed: () {
+                              chatToast();
+                            },
+                            child: Text(
+                              '채팅하기',
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  color: ThemeColor.fontColor,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  /// 좋아요 누르기 버튼
                   Positioned(
                     top: 360,
                     right: 20,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ThemeColor.fontColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      onPressed: () {
-                        showToast();
+                    child: GestureDetector(
+                      onTap: () {
+                        likeToast();
                       },
-                      child: const Text(
-                        '채팅하기',
-                        style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Card(
+                          elevation: 5.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  color: ThemeColor.fontColor,
+                                  shape: BoxShape.circle),
+                              child: IconShape.iconFavorite,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -190,20 +291,20 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
             ],
           ),
 
-          // 상대 정보
+          /// 상대 인적사항을 알 수 있음(일반대/전문대, 학생/일반, MBTI)
           const PersonalInformation(),
 
-          // 상대 성격
+          /// 상대 성격을 보여줌(성격이 어떠한지)
           const Personality(),
 
-          // 상대 관심사
+          /// 상대 관심사를 보여줌(ex. 게임, 운동, 동물 등등..)
           const Interest(),
 
-          // 상대 이상형
+          /// 상대방의 이상형이 뭔지 보여줌(예쁜, 잘생긴, 도도한 등등..)
           const IdealType(),
           const SizedBox(height: 50),
 
-          // 상대 스토리
+          /// 스토리 텍스트
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -215,7 +316,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
             ),
           ),
 
-          // 상대 스토리 사진
+          /// 상대방이 올린 스토리들을 보여줌
           const Padding(
             padding: EdgeInsets.all(2.0),
             child: Row(
@@ -232,14 +333,28 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   }
 }
 
-void showToast() {
+/// 채팅신청이 되었다는 것을 알려주는 알림 함수
+void chatToast() {
   Fluttertoast.showToast(
     msg: '채팅을 신청하였습니다',
     backgroundColor: Colors.white,
     gravity: ToastGravity.TOP,
     fontSize: 17,
     textColor: Colors.black,
-    toastLength: Toast.LENGTH_SHORT, // 토스트 뜨는 시간(android)
-    timeInSecForIosWeb: 1, // 토스트 뜨는 시간(IOS & Web)
+    toastLength: Toast.LENGTH_SHORT,
+    timeInSecForIosWeb: 1,
+  );
+}
+
+/// 좋아요를 보냈다는 것을 알려주는 알림 함수
+void likeToast() {
+  Fluttertoast.showToast(
+    msg: '좋아요를 보냈습니다.',
+    backgroundColor: Colors.white,
+    gravity: ToastGravity.TOP,
+    fontSize: 17,
+    textColor: Colors.black,
+    toastLength: Toast.LENGTH_SHORT,
+    timeInSecForIosWeb: 1,
   );
 }

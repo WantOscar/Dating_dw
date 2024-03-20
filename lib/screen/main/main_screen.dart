@@ -1,14 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common_header.dart';
-import 'package:dating/widget/main/interested_friends_box.dart';
-import 'package:dating/widget/main/interested_me_box.dart';
-// import 'package:dating/Widget/main/mbti_recommend.dart';
+import 'package:dating/widget/main/circle_avatar.dart';
+import 'package:dating/Widget/main/mbti_recommend.dart';
 import 'package:dating/widget/main/profile_main.dart';
-// import 'package:dating/Widget/main/today_meet.dart';
-// import 'package:dating/Widget/main/today_meet_box.dart';
+import 'package:dating/Widget/main/today_meet.dart';
+import 'package:dating/Widget/main/today_meet_box.dart';
 import 'package:dating/controller/user_controller.dart';
-// import 'package:dating/data/model/mbti.dart';
-// import 'package:dating/data/repository/mbti_repository.dart';
+import 'package:dating/data/model/mbti.dart';
+import 'package:dating/data/repository/mbti_repository.dart';
 import 'package:dating/screen/main/alarm_screen.dart';
 import 'package:dating/screen/main/main_favorite_me_screen.dart';
 import 'package:dating/screen/main/main_favorite_screen.dart';
@@ -54,7 +54,7 @@ class MainScreen extends GetView<UserController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 오늘의 추천(상대방 무작위 하루 10명 제한 줄 것.)
+          /// 오늘의 추천 상대(상대방 무작위 하루 10명 제한 줄 것.)
           (controller.users.isNotEmpty)
               ? CarouselSlider.builder(
                   itemCount: controller.users.length,
@@ -95,7 +95,7 @@ class MainScreen extends GetView<UserController> {
           // ),
           // const SizedBox(height: 30),
 
-          // 내가 관심있는 친구, 세부 페이지
+          /// 내가 관심있는 상대 텍스트, 관심있는 상대방 목록 세부 페이지
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -116,14 +116,31 @@ class MainScreen extends GetView<UserController> {
             ),
           ),
 
-          // 내가 관심있는 친구 목록
-          const SingleChildScrollView(
+          /// 내가 관심있는 상대방 목록
+          SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: InterestedFriendsBox(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(
+                  50,
+                  (index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    child: Avatar(
+                      onTap: () {
+                        Get.to(() => const SomeoneProfileScreen());
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
           const SizedBox(height: 30),
 
-          // 나한테 관심있는 친구, 세부 페이지
+          /// 나한테 관심있는 상대 텍스트, 나한테 관심있는 상대방 목록 세부 페이지
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -144,14 +161,31 @@ class MainScreen extends GetView<UserController> {
             ),
           ),
 
-          // 나한테 관심있는 친구 목록
-          const SingleChildScrollView(
+          /// 나한테 관심있는 상대방 목록
+          SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: InterestedMeBox(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: List.generate(
+                  50,
+                  (index) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
+                    child: Avatar(
+                      onTap: () {
+                        Get.to(() => const SomeoneProfileScreen());
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
           const SizedBox(height: 20),
 
-          // mbti별 추천 조합
+          /// mbti별 추천 조합
           // FutureBuilder<List<Mbti>>(
           //   future: MbtiRepository().getListMbtiData(),
           //   builder: (context, snapshot) {

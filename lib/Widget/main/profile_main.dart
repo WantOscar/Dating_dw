@@ -1,4 +1,7 @@
 import 'package:dating/data/model/user.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
+import 'package:dating/style/constant.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMain extends StatelessWidget {
@@ -29,7 +32,7 @@ class ProfileMain extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         child: Stack(
           children: [
-            // 오늘의 추천인 사진
+            /// 오늘의 추천인 사진
             Image.network(
               user.image ??
                   'https://image.news1.kr/system/photos/2022/12/16/5742694/article.jpg/dims/quality/80/optimize',
@@ -38,7 +41,7 @@ class ProfileMain extends StatelessWidget {
               height: height * 0.8,
             ),
 
-            // 오늘의 추천인 현재 활동 여부
+            /// 오늘의 추천인 현재 활동 여부
             Positioned(
               bottom: width * 0.45,
               left: height * 0.04,
@@ -59,7 +62,7 @@ class ProfileMain extends StatelessWidget {
               ),
             ),
 
-            // 오늘의 추천인 이름
+            /// 오늘의 추천인 이름
             Positioned(
               bottom: width * 0.3,
               left: height * 0.04,
@@ -72,7 +75,7 @@ class ProfileMain extends StatelessWidget {
               ),
             ),
 
-            // 오늘의 추천인 나이, 신장
+            /// 오늘의 추천인 나이, 신장
             Positioned(
               bottom: width * 0.22,
               left: height * 0.04,
@@ -93,7 +96,8 @@ class ProfileMain extends StatelessWidget {
                 ],
               ),
             ),
-            // 나와 추천인의 현재 거리
+
+            /// 나와 추천인의 현재 거리
             Positioned(
               bottom: width * 0.17,
               left: height * 0.04,
@@ -111,39 +115,70 @@ class ProfileMain extends StatelessWidget {
               ),
             ),
 
-            // 추천인과 채팅하기
+            /// 추천인과 채팅하기
             Positioned(
               bottom: width * 0.035,
               left: height * 0.03,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 90, vertical: 11.5),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Text(
-                  "채팅하기",
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFFF006B),
+              child: SizedBox(
+                height: 50,
+                child: Card(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      onPressed: () {
+                        chatToast();
+                      },
+                      child: Text(
+                        '채팅하기',
+                        style: TextStyle(
+                            fontSize: 17,
+                            color: ThemeColor.fontColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
 
-            // 추천인에게 좋아요 누르기 버튼
+            /// 추천인에게 좋아요 누르기 버튼
             Positioned(
               bottom: width * 0.024,
               left: height * 0.38,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFF006B),
-                  borderRadius: BorderRadius.circular(20),
+              child: GestureDetector(
+                onTap: () {
+                  likeToast();
+                },
+                child: SizedBox(
+                  height: 50,
+                  width: 50,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: ThemeColor.fontColor,
+                          shape: BoxShape.circle,
+                        ),
+                        child: IconShape.iconFavorite,
+                      ),
+                    ),
+                  ),
                 ),
-                child: Image.asset('assets/heart.png'),
               ),
             ),
           ],
