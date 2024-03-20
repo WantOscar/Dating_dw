@@ -6,10 +6,9 @@ import 'package:dating/widget/profile/interest.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
-import 'package:dating/screen/profile/setting_profile.dart';
+import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/style/text_styling.dart';
 import 'package:dating/utils/status_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,7 +31,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                 onPressed: () {
-                  Get.to(() => const SettingProfile());
+                  Get.to(() => const SettingProfileScreen());
                 },
                 icon: IconShape.iconSettings,
               ),

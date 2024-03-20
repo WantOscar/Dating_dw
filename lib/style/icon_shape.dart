@@ -41,4 +41,7 @@ class IconShape {
 
   static const iconAddBoxOutlined =
       Icon(Icons.add_box_outlined, color: Colors.black, size: 35);
+
+  static Icon get iconFavorite =>
+      const Icon(Icons.favorite, color: Colors.white, size: 25);
 }
