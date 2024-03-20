@@ -11,7 +11,6 @@ import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/style/text_styling.dart';
 import 'package:dating/utils/status_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -31,22 +30,63 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
       appBar: IconHeader(
         text: '상대 프로필',
         actions: [
-          IconButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return WarningWindow(
-                    onTap: () {},
-                    titleText: '차단',
-                    explainText: '상대방을 차단하시겠습니까 ?',
-                    btnText: '차단',
-                    context: context,
-                  );
-                },
-              );
+          // IconButton(
+          //   onPressed: () {
+          //     showDialog(
+          //       context: context,
+          //       builder: (context) {
+          //         return WarningWindow(
+          //           onTap: () {},
+          //           titleText: '차단',
+          //           explainText: '상대방을 차단하시겠습니까 ?',
+          //           btnText: '차단',
+          //           context: context,
+          //         );
+          //       },
+          //     );
+          //   },
+          //   icon: const Icon(Icons.more_vert),
+          // ),
+          PopupMenuButton(
+            icon: IconShape.iconMore,
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  child: const Center(
+                    child: Text(
+                      '차단',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+                PopupMenuItem(
+                  child: const Center(
+                    child: Text(
+                      '취소',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  onTap: () {},
+                ),
+              ];
             },
-            icon: const Icon(Icons.more_vert),
+            onSelected: (value) {
+              switch (value) {
+                case '차단':
+                  print('차단');
+                  break;
+                case '취소':
+                  print('취소');
+                  break;
+              }
+            },
           ),
         ],
       ),
