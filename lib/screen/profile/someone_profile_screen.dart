@@ -165,23 +165,67 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                   // 채팅하기 버튼
                   Positioned(
                     top: 360,
-                    right: 20,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: ThemeColor.fontColor,
+                    right: 80,
+                    child: SizedBox(
+                      height: 50,
+                      child: Card(
+                        elevation: 5.0,
                         shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        child: ClipRRect(
                           borderRadius: BorderRadius.circular(30),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ThemeColor.fontColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            onPressed: () {
+                              showToast();
+                            },
+                            child: const Text(
+                              '채팅하기',
+                              style: TextStyle(
+                                  fontSize: 17,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ),
                       ),
-                      onPressed: () {
-                        showToast();
+                    ),
+                  ),
+
+                  // 좋아요 누르기 버튼
+                  Positioned(
+                    top: 360,
+                    right: 20,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.back();
                       },
-                      child: const Text(
-                        '채팅하기',
-                        style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Card(
+                          elevation: 5.0,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100)),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white, shape: BoxShape.circle),
+                              child: const Icon(
+                                Icons.favorite,
+                                color: Color(0xffff006b),
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -235,7 +279,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
 void showToast() {
   Fluttertoast.showToast(
     msg: '채팅을 신청하였습니다',
-    backgroundColor: Colors.transparent,
+    backgroundColor: Colors.white,
     gravity: ToastGravity.TOP,
     fontSize: 17,
     textColor: Colors.black,

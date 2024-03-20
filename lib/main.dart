@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       // home: const Root(),
-      home: const Root(),
+      // home: const Root(),
+      home: const HomeScreen(),
+
       debugShowCheckedModeBanner: false,
       initialBinding: InitBinding(),
     );

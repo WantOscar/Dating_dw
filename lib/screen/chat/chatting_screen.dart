@@ -45,16 +45,17 @@ class _ChattingScreenState extends State<ChattingScreen>
         leadingWidth: 200,
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [Icon(Icons.more_vert)],
+        actions: [const Icon(Icons.more_vert)],
         toolbarHeight: 65,
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(65),
-          child: Container(
+          preferredSize: const Size.fromHeight(65),
+          child: SizedBox(
             height: AppBar().preferredSize.height,
             width: double.infinity,
             child: TabBar(
                 labelStyle:
                     TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
+                labelColor: Colors.black,
                 indicatorColor: ThemeColor.fontColor,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorWeight: 1.0,
