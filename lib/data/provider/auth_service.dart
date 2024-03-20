@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
-class AuthService {
+class AuthService extends GetxService {
   final Dio dio;
   final FlutterSecureStorage storage;
 
@@ -26,6 +26,9 @@ class AuthService {
         case DioExceptionType.badResponse:
           Get.snackbar("네트워크 에러", "서버와의 연결이 원할하지 않습니다 !");
           break;
+        case DioExceptionType.connectionTimeout:
+          Get.snackbar("네트워크 에러", "런타임 아웃 !");
+
         default:
           Get.snackbar("에러", "에러가 발생했습니다!");
       }

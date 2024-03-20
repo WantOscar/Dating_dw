@@ -16,13 +16,14 @@ class LoginController extends GetxController {
   TextEditingController get email => _email;
   TextEditingController get password => _password;
 
-  void login() {
+  void login() async {
+    print("로그인");
     isLoading(true);
     final data = {
       "email": _email.value.text.toString(),
       "password": _password.value.text.toString()
     };
-    service.login(data);
+    await service.login(data);
     isLoading(false);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:dating/binding/reset_password_binding.dart';
 import 'package:dating/binding/resister_binding.dart';
 import 'package:dating/controller/login_controller.dart';
 import 'package:dating/screen/auth/auth_forgot_screen.dart';
@@ -6,34 +7,31 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: FocusScope.of(context).unfocus,
-      child: Scaffold(
-        body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                _title(),
-                const SizedBox(
-                  height: 50,
-                ),
-                _body(),
-              ],
+    return Obx(
+      () => GestureDetector(
+        onTap: FocusScope.of(context).unfocus,
+        child: Scaffold(
+          body: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _title(),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  _body(),
+                ],
+              ),
             ),
           ),
+          bottomNavigationBar: _bottom(),
         ),
-        bottomNavigationBar: _bottom(),
       ),
     );
   }
@@ -41,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _title() {
     return Column(
       children: [
-        Text(
+        const Text(
           '캠퍼스와 만남,',
           style: TextStyle(
               fontSize: 12,
@@ -63,8 +61,8 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       children: [
         Container(
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.width * 0.16,
+          width: Get.size.width * 0.8,
+          height: Get.size.width * 0.16,
           decoration: BoxDecoration(
               color: const Color(0xFFEDEDED),
               borderRadius: BorderRadius.circular(45),
@@ -79,7 +77,8 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextFormField(
-                controller: LoginController.to.email,
+                controller: controller.email,
+                cursorColor: ThemeColor.fontColor,
                 decoration: const InputDecoration(
                   hintText: '이메일을 입력해주세요.',
                   border: InputBorder.none,
@@ -96,8 +95,8 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 20,
         ),
         Container(
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.width * 0.16,
+          width: Get.size.width * 0.8,
+          height: Get.size.width * 0.16,
           decoration: BoxDecoration(
               color: const Color(0xFFEDEDED),
               borderRadius: BorderRadius.circular(45),
@@ -112,7 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: TextFormField(
-                controller: LoginController.to.password,
+                cursorColor: ThemeColor.fontColor,
+                controller: controller.password,
                 decoration: const InputDecoration(
                   hintText: '비밀번호를 입력해주세요.',
                   border: InputBorder.none,
@@ -129,40 +129,41 @@ class _LoginScreenState extends State<LoginScreen> {
         const SizedBox(
           height: 20,
         ),
-        Obx(() {
-          return GestureDetector(
-            onTap: LoginController.to.isLoading.value
-                ? null
-                : LoginController.to.login,
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.width * 0.16,
-              decoration: BoxDecoration(
-                  color: const Color(0xFFFF006B),
-                  borderRadius: BorderRadius.circular(45),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: const Offset(0, 8))
-                  ]),
-              child: Center(
-                child: LoginController.to.isLoading.value
-                    ? const CircularProgressIndicator()
-                    : const Text(
-                        '로그인',
-                        style: TextStyle(color: Colors.white),
-                      ),
-              ),
+        InkWell(
+          onTap: controller.isLoading.value ? null : controller.login,
+          highlightColor: Colors.white,
+          borderRadius: BorderRadius.circular(45),
+          child: Container(
+            width: Get.size.width * 0.8,
+            height: Get.size.width * 0.16,
+            decoration: BoxDecoration(
+                color: const Color(0xFFFF006B),
+                borderRadius: BorderRadius.circular(45),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, 8))
+                ]),
+            child: Center(
+              child: controller.isLoading.value
+                  ? const CircularProgressIndicator(
+                      color: Colors.white,
+                    )
+                  : const Text(
+                      '로그인',
+                      style: TextStyle(color: Colors.white),
+                    ),
             ),
-          );
-        }),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () {
-              Get.to(() => const AuthForgotScreen());
+              Get.to(() => const AuthForgotScreen(),
+                  binding: ResetPasswordBinding());
             },
             child: Text(
               '계정을 잃어버리셨나요?',
