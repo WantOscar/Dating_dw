@@ -24,33 +24,38 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CommonHeader(
-          text: '프로필',
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                onPressed: () {
-                  Get.to(() => const SettingProfileScreen());
-                },
-                icon: IconShape.iconSettings,
-              ),
+      appBar: CommonHeader(
+        text: '프로필',
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                Get.to(() => const SettingProfileScreen());
+              },
+              icon: IconShape.iconSettings,
             ),
-          ],
-        ),
-        body: Obx(() {
-          if (UserController.to.status == Status.LOADING) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
-            );
-          } else if (UserController.to.status == Status.ERROR) {
-            return const Center(
-              child: Text("에러가 발생했습니다."),
-            );
-          } else {
-            return _buildBody();
-          }
-        }));
+          ),
+        ],
+      ),
+      body:
+          // Obx(
+          //   () {
+          //     if (UserController.to.status == Status.LOADING) {
+          //       return const Center(
+          //         child: CircularProgressIndicator.adaptive(),
+          //       );
+          //     } else if (UserController.to.status == Status.ERROR) {
+          //       return const Center(
+          //         child: Text("에러가 발생했습니다."),
+          //       );
+          //     } else {
+          //       return _buildBody();
+          //     }
+          //   },
+          // ),
+          _buildBody(),
+    );
   }
 
   Widget _buildBody() {
