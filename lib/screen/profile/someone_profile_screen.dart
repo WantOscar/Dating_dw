@@ -30,63 +30,73 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
       appBar: IconHeader(
         text: '상대 프로필',
         actions: [
-          // IconButton(
-          //   onPressed: () {
-          //     showDialog(
-          //       context: context,
-          //       builder: (context) {
-          //         return WarningWindow(
-          //           onTap: () {},
-          //           titleText: '차단',
-          //           explainText: '상대방을 차단하시겠습니까 ?',
-          //           btnText: '차단',
-          //           context: context,
-          //         );
-          //       },
-          //     );
-          //   },
-          //   icon: const Icon(Icons.more_vert),
-          // ),
-          PopupMenuButton(
-            icon: IconShape.iconMore,
-            itemBuilder: (context) {
-              return [
-                PopupMenuItem(
-                  child: const Center(
-                    child: Text(
-                      '차단',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-                PopupMenuItem(
-                  child: const Center(
-                    child: Text(
-                      '취소',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  onTap: () {},
-                ),
-              ];
+          IconButton(
+            onPressed: () {
+              /// 우측 상단 ... 아이콘 누르면 바텀에서 차단/취소 여부 시트가 나옴
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return Wrap(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(3.0),
+                        margin: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              InkWell(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(10.0),
+                                  width: double.infinity,
+                                  child: Text(
+                                    '차단',
+                                    style: TextStyle(
+                                      color: ThemeColor.fontColor,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                onTap: () {},
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                child: Divider(),
+                              ),
+                              InkWell(
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: const Text(
+                                    '취소',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                onTap: () {
+                                  Get.back();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+                backgroundColor: Colors.transparent,
+              );
             },
-            onSelected: (value) {
-              switch (value) {
-                case '차단':
-                  print('차단');
-                  break;
-                case '취소':
-                  print('취소');
-                  break;
-              }
-            },
+            icon: const Icon(Icons.more_vert),
           ),
         ],
       ),
