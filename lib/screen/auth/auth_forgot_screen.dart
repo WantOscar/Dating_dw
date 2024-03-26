@@ -45,9 +45,7 @@ class AuthForgotScreen extends GetView<ResetPasswordController> {
             shadowColor: Colors.white,
             elevation: 0,
             child: GestureDetector(
-              onTap: () {
-                Get.to(() => const VerifyScreen());
-              },
+              onTap: controller.sendAuthCode,
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.07,

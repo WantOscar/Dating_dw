@@ -1,6 +1,7 @@
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/utils/status_enum.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
@@ -23,6 +24,9 @@ class UserController extends GetxController {
   }
 
   Future<void> fetchData() async {
+    /// 사용자가 로그인하지 않은 경우
+    /// 예외처리
+    if (await const FlutterSecureStorage().read(key: "token") == null) return;
     _status(Status.LOADING);
     userRepository.getUserData().then((data) {
       _users.value = data;
@@ -34,7 +38,9 @@ class UserController extends GetxController {
     });
   }
 
-  void searchMyInfo() {
+  void searchMyInfo() async {
+    /// 사용자가 로그인하지 않은경우 예외처리
+    if (await const FlutterSecureStorage().read(key: "token") == null) return;
     userRepository.searchMyInfo().then((data) {
       _myInfo.value = data;
     });

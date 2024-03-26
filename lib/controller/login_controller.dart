@@ -1,3 +1,4 @@
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/provider/auth_service.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,14 @@ class LoginController extends GetxController {
       "email": _email.value.text.toString(),
       "password": _password.value.text.toString()
     };
-    print(data);
+
     await service.login(data);
     isLoading(false);
     Get.to(() => const HomeScreen());
+
+    /// 로그인 시 데이터 패치
+    UserController.to.fetchData();
+    UserController.to.searchMyInfo();
   }
 
   void logout() => service.logOut();

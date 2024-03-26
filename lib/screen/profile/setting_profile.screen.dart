@@ -1,4 +1,5 @@
 import 'package:dating/Widget/profile/warning_window.dart';
+import 'package:dating/controller/login_controller.dart';
 import 'package:dating/widget/icon_header.dart';
 import 'package:dating/widget/setting_profile/alarm_setting.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
@@ -98,7 +99,7 @@ class SettingProfileScreen extends StatelessWidget {
                       context: context,
                       builder: (context) {
                         return WarningWindow(
-                          onTap: () {},
+                          onTap: LoginController.to.logout,
                           titleText: '로그아웃',
                           explainText: '정말로 로그아웃 하시나요 ?',
                           btnText: '로그아웃',
