@@ -10,7 +10,7 @@ class UserFetch {
   Future<List<User>> fetchUserData() async {
     const st = storage.FlutterSecureStorage();
     final token = await st.read(key: "token");
-    print(token);
+
     return dio
         .get(ApiUrl.main,
             options: Options(headers: {"Authorization": "Bearer $token"}))
@@ -31,7 +31,7 @@ class UserFetch {
   Future<User> searchMyInfo() async {
     const st = storage.FlutterSecureStorage();
     final token = await st.read(key: "token");
-    print(token);
+
     return dio
         .get(ApiUrl.profile,
             options: Options(headers: {"Authorization": "Bearer $token"}))

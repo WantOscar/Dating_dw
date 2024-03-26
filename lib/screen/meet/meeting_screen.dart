@@ -61,6 +61,7 @@ class _MeetingScreenState extends State<MeetingScreen>
                 indicatorColor: ThemeColor.fontColor,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorWeight: 1.0,
+                labelColor: Colors.black,
                 labelStyle: const TextStyle(
                     color: Colors.black, fontWeight: FontWeight.w600),
                 tabs: const [
