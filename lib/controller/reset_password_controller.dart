@@ -1,4 +1,5 @@
 import 'package:dating/data/provider/auth_service.dart';
+import 'package:dating/screen/auth/auth_forgot_screen.dart';
 import 'package:dating/utils/show_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -94,6 +95,7 @@ class ResetPasswordController extends GetxController with UseToast {
     final response = await service.emailVerify(data);
     if (response != null) {
       _authCode = response;
+      Get.to(() => const VerifyScreen());
     }
   }
 
