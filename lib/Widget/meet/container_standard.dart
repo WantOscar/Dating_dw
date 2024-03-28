@@ -1,28 +1,22 @@
+import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class ContainerStandard extends StatelessWidget {
-  final double w;
-  final double h;
-  final double c;
   final dynamic child;
-  final Color? color;
+
   const ContainerStandard({
     super.key,
-    required this.w,
-    required this.h,
     this.child,
-    required this.c,
-    this.color,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * w,
-      height: MediaQuery.of(context).size.width * h,
+      alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(c),
+        color: ThemeColor.fontColor,
+        borderRadius: BorderRadius.circular(100),
       ),
       child: child,
     );

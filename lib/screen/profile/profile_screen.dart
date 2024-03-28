@@ -232,6 +232,9 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
+          const SizedBox(
+            height: 80,
+          )
         ],
       ),
     );

@@ -42,12 +42,18 @@ class FeedScreen extends GetView<FeedController> {
           } else {
             List<Feed> feed = snapshot.data!;
             return SingleChildScrollView(
-              child: Column(
-                children: List.generate(
+              child: Column(children: [
+                Container(),
+                ...List.generate(
                   50,
                   (index) => const FeedIcon2(),
                 ),
-              ),
+                ...[
+                  const SizedBox(
+                    height: 80,
+                  )
+                ],
+              ]),
             );
           }
         },

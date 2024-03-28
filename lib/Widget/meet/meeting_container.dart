@@ -42,11 +42,12 @@ class MeetingContainer extends StatelessWidget {
                 height: height * 0.3,
               ),
               Positioned(
-                bottom: width * 0.45,
-                left: height * 0.02,
+                top: 10,
+                left: 10,
                 child: Container(
+                  alignment: Alignment.center,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                     color: const Color(0xFFFF006B),
                     borderRadius: BorderRadius.circular(20),
@@ -54,7 +55,7 @@ class MeetingContainer extends StatelessWidget {
                   child: Text(
                     "${meetingRoom.location}",
                     style: const TextStyle(
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),

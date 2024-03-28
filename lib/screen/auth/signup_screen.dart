@@ -61,7 +61,8 @@ class SignUpPage extends GetView<ResisterController> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: TextFormField(
-                    controller: ResisterController.to.email,
+                    cursorColor: ThemeColor.fontColor,
+                    controller: controller.email,
                     decoration: InputDecoration(
                       hintText: 'hello@comment.com',
                       border: InputBorder.none,
@@ -79,7 +80,7 @@ class SignUpPage extends GetView<ResisterController> {
             shadowColor: Colors.white,
             elevation: 0,
             child: GestureDetector(
-              onTap: ResisterController.to.emailVerify,
+              onTap: controller.emailVerify,
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.07,

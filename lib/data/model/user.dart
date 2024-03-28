@@ -14,7 +14,7 @@ class User with _$User {
     int? height,
     String? image,
     String? personalInfo,
-    String? mbti,
+    // String? mbti,
     String? personality,
     String? interest,
     String? likePersonality,

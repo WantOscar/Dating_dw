@@ -1,3 +1,4 @@
+import 'package:dating/data/model/main_response.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dio/dio.dart';
@@ -7,24 +8,33 @@ class UserFetch {
   final Dio dio;
   UserFetch({required this.dio});
 
-  Future<List<User>> fetchUserData() async {
+  Future<MainResponse?> fetchUserData() async {
     const st = storage.FlutterSecureStorage();
-    final token = await st.read(key: "token");
+    final access = await st.read(key: "accessToken");
+    final refresh = await st.read(key: "refreshToken");
 
     return dio
         .get(ApiUrl.main,
-            options: Options(headers: {"Authorization": "Bearer $token"}))
+            options: Options(headers: {
+              "Authorization": "Bearer $access",
+              "refreshToken": "Bearer $refresh"
+            }))
         .then((resp) {
-      if (resp.statusCode == 200) {
-        final List<User> users = [];
-        for (var data in resp.data) {
-          final User user = User.fromJson(data);
-          users.add(user);
-        }
-        return users;
-      } else {
-        throw Exception("Failed to send User data..");
-      }
+      // print(resp.data);
+      // return null;
+      final MainResponse response = MainResponse.fromJson(resp.data);
+      return response;
+      // if (resp.statusCode == 200) {
+      //   final List<MainResponse> users = [];
+      //   for (var data in resp.data) {
+      //     print(data);
+      //     // final MainResponse user = MainResponse.fromJson(data);
+      //     // users.add(user);
+      //   }
+      //   return users;
+      // } else {
+      //   throw Exception("Failed to send User data..");
+      // }
     });
   }
 

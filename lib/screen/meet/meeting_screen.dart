@@ -52,6 +52,19 @@ class _MeetingScreenState extends State<MeetingScreen>
         backgroundColor: Colors.white,
         elevation: 0,
         toolbarHeight: 65,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const MeetingCreate1Screen());
+                },
+                child: Icon(
+                  Icons.add,
+                  color: ThemeColor.fontColor,
+                )),
+          )
+        ],
         bottom: PreferredSize(
             preferredSize: const Size.fromHeight(65),
             child: SizedBox(
@@ -82,14 +95,6 @@ class _MeetingScreenState extends State<MeetingScreen>
           _junior(),
           _senior(),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-        onPressed: () {
-          Get.to(() => const MeetingCreate1Screen());
-        },
-        backgroundColor: ThemeColor.fontColor,
-        child: IconShape.iconAdd,
       ),
     );
   }
@@ -147,6 +152,9 @@ class _MeetingScreenState extends State<MeetingScreen>
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 80,
+                  )
                 ],
               ),
             );
@@ -195,6 +203,9 @@ class _MeetingScreenState extends State<MeetingScreen>
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 80,
+                  )
                 ],
               ),
             );

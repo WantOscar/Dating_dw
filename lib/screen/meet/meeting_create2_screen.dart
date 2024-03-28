@@ -1,8 +1,8 @@
+import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
 import 'package:dating/widget/icon_header.dart';
 import 'package:dating/widget/meet_create2/room_photo_upload.dart';
-import 'package:dating/widget/meet_create2/set_num_female.dart';
-import 'package:dating/widget/meet_create2/set_num_male.dart';
+
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +16,18 @@ class MeetingCreate2Screen extends StatefulWidget {
 }
 
 class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
+  int _count = 0;
+
+  void increase() => setState(() {
+        if (_count == 5) return;
+        _count++;
+      });
+
+  void decrease() => setState(() {
+        if (_count == 0) return;
+        _count--;
+      });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,12 +161,82 @@ class _MeetingCreate2ScreenState extends State<MeetingCreate2Screen> {
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SetNumMale(),
-                SizedBox(width: 10),
-                SetNumFemale(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconShape.iconMale,
+                    const SizedBox(width: 10),
+                    Container(
+                      width: Get.size.width * 0.3,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: ThemeColor.inputColor,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: decrease,
+                            icon: const Icon(
+                              Icons.remove,
+                            ),
+                          ),
+                          Text(
+                            '$_count',
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          IconButton(
+                            onPressed: increase,
+                            icon: const Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconShape.iconFemale,
+                    const SizedBox(width: 10),
+                    Container(
+                      width: Get.size.width * 0.3,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: ThemeColor.inputColor,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: decrease,
+                            icon: const Icon(Icons.remove),
+                          ),
+                          Text(
+                            '$_count',
+                            style: const TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
+                          IconButton(
+                            onPressed: increase,
+                            icon: const Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
             const SizedBox(height: 20),
