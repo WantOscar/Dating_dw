@@ -1,3 +1,4 @@
+import 'package:dating/controller/bottom_nav_controller.dart';
 import 'package:dating/controller/login_controller.dart';
 import 'package:dating/controller/upload_controller.dart';
 import 'package:dating/controller/user_controller.dart';
@@ -18,5 +19,6 @@ class InitBinding implements Bindings {
         service:
             AuthService(dio: Dio(), storage: const FlutterSecureStorage())));
     Get.put(UploadController(picker: ImagePicker()));
+    Get.put(BottomNavController());
   }
 }
