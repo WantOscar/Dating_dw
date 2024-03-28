@@ -1,4 +1,7 @@
+import 'package:dating/data/model/error_response.dart';
+import 'package:dating/data/model/login_response.dart';
 import 'package:dating/screen/auth/login_screen.dart';
+import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +22,24 @@ class AuthService extends GetxService {
     try {
       final response = await dio.post(ApiUrl.login, data: data);
       if (response.statusCode == 200) {
+        final loginResponse = LoginResponse.fromJson(response.data);
+
         const st = FlutterSecureStorage();
-        st.write(key: "token", value: response.data["accessToken"]);
+        st.write(
+          key: "accessToken",
+          value: loginResponse.accessToken,
+        );
+        st.write(
+          key: "refreshToken",
+          value: loginResponse.refreshToken,
+        );
+
+        Get.to(() => const HomeScreen());
       }
+      // } else {
+      //   final errorResponse = ErrorResponse.fromJson(response.data);
+      //   print(errorResponse.errorMessage);
+      // }
     } on DioException catch (error) {
       dioExceptionHander(error);
       return;
@@ -49,6 +67,7 @@ class AuthService extends GetxService {
       }
     } on DioException catch (error) {
       dioExceptionHander(error);
+      // final error = ErrorResponse.fromJson(response.data);
     } on Exception {
       Get.snackbar("회원가입 실패", "잠시후에 다시 시도해주세요 !");
     }

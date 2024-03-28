@@ -28,7 +28,6 @@ class LoginController extends GetxController {
 
     await service.login(data);
     isLoading(false);
-    Get.to(() => const HomeScreen());
 
     ///컨트롤러 값 초기화
     _email.clear();
@@ -36,7 +35,7 @@ class LoginController extends GetxController {
 
     /// 로그인 시 데이터 패치
     UserController.to.fetchData();
-    UserController.to.searchMyInfo();
+    // UserController.to.searchMyInfo();
   }
 
   void logout() => service.logOut();

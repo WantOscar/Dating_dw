@@ -55,13 +55,15 @@ class MainScreen extends GetView<UserController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// 오늘의 추천 상대(상대방 무작위 하루 10명 제한 줄 것.)
-          (controller.users.isNotEmpty)
+          (controller.users!.randomMemberList.isNotEmpty)
               ? CarouselSlider.builder(
-                  itemCount: controller.users.length,
+                  itemCount: controller.users!.randomMemberList.length,
                   itemBuilder: (context, index, realIndex) {
-                    final user = controller.users[index];
+                    final user = controller.users!.randomMemberList[index];
+
+                    // final user = controller.users[index];
                     return ProfileMain(
-                      user: user,
+                      randomUser: user,
                     );
                   },
                   options: CarouselOptions(
@@ -82,7 +84,6 @@ class MainScreen extends GetView<UserController> {
                     ),
                   ),
                 ),
-          const SizedBox(height: 40),
 
           // Title and Info
           // const TodayMeet(),
@@ -117,28 +118,54 @@ class MainScreen extends GetView<UserController> {
           ),
 
           /// 내가 관심있는 상대방 목록
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(
-                  50,
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: Avatar(
-                      onTap: () {
-                        Get.to(() => const SomeoneProfileScreen());
-                      },
+          SizedBox(
+            height: 200,
+            child: (controller.users!.sendHeartList.isNotEmpty)
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        children: List.generate(
+                            controller.users!.sendHeartList.length, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Avatar(
+                              onTap: () {
+                                Get.to(() => const SomeoneProfileScreen());
+                              },
+                            ),
+                          );
+                        }),
+                      ),
+                      // child: Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //   children: List.generate(
+                      //     50,
+                      //     (index) => Padding(
+                      //       padding: const EdgeInsets.symmetric(
+                      //           vertical: 10, horizontal: 10),
+                      //       child: Avatar(
+                      //         onTap: () {
+                      //           Get.to(() => const SomeoneProfileScreen());
+                      //         },
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                    ),
+                  )
+                : const Center(
+                    child: Text(
+                      "아직 사용자 없습니다 !",
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
-                ),
-              ),
-            ),
           ),
-          const SizedBox(height: 30),
 
           /// 나한테 관심있는 상대 텍스트, 나한테 관심있는 상대방 목록 세부 페이지
           Padding(
@@ -162,26 +189,39 @@ class MainScreen extends GetView<UserController> {
           ),
 
           /// 나한테 관심있는 상대방 목록
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(
-                  50,
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: Avatar(
-                      onTap: () {
-                        Get.to(() => const SomeoneProfileScreen());
-                      },
+          SizedBox(
+            height: 200,
+            child: (controller.users!.receiverHeartList.isNotEmpty)
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: List.generate(
+                          50,
+                          (index) => Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: Avatar(
+                              onTap: () {
+                                Get.to(() => const SomeoneProfileScreen());
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : const Center(
+                    child: Text(
+                      "아직 사용자 없습니다 !",
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
-                ),
-              ),
-            ),
           ),
           const SizedBox(height: 80),
 

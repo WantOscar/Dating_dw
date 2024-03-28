@@ -9,7 +9,7 @@ class Root extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: const FlutterSecureStorage().read(key: "token"),
+        future: const FlutterSecureStorage().read(key: "accessToken"),
         builder: (context, snapshot) {
           if (snapshot.data != null) {
             // return const LoginScreen();

@@ -27,8 +27,8 @@ mixin _$User {
   int? get age => throw _privateConstructorUsedError;
   int? get height => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  String? get personalInfo => throw _privateConstructorUsedError;
-  String? get mbti => throw _privateConstructorUsedError;
+  String? get personalInfo =>
+      throw _privateConstructorUsedError; // String? mbti,
   String? get personality => throw _privateConstructorUsedError;
   String? get interest => throw _privateConstructorUsedError;
   String? get likePersonality => throw _privateConstructorUsedError;
@@ -52,7 +52,6 @@ abstract class $UserCopyWith<$Res> {
       int? height,
       String? image,
       String? personalInfo,
-      String? mbti,
       String? personality,
       String? interest,
       String? likePersonality});
@@ -79,7 +78,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? height = freezed,
     Object? image = freezed,
     Object? personalInfo = freezed,
-    Object? mbti = freezed,
     Object? personality = freezed,
     Object? interest = freezed,
     Object? likePersonality = freezed,
@@ -117,10 +115,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.personalInfo
           : personalInfo // ignore: cast_nullable_to_non_nullable
               as String?,
-      mbti: freezed == mbti
-          ? _value.mbti
-          : mbti // ignore: cast_nullable_to_non_nullable
-              as String?,
       personality: freezed == personality
           ? _value.personality
           : personality // ignore: cast_nullable_to_non_nullable
@@ -153,7 +147,6 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       int? height,
       String? image,
       String? personalInfo,
-      String? mbti,
       String? personality,
       String? interest,
       String? likePersonality});
@@ -177,7 +170,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? height = freezed,
     Object? image = freezed,
     Object? personalInfo = freezed,
-    Object? mbti = freezed,
     Object? personality = freezed,
     Object? interest = freezed,
     Object? likePersonality = freezed,
@@ -215,10 +207,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.personalInfo
           : personalInfo // ignore: cast_nullable_to_non_nullable
               as String?,
-      mbti: freezed == mbti
-          ? _value.mbti
-          : mbti // ignore: cast_nullable_to_non_nullable
-              as String?,
       personality: freezed == personality
           ? _value.personality
           : personality // ignore: cast_nullable_to_non_nullable
@@ -247,7 +235,6 @@ class _$UserImpl implements _User {
       this.height,
       this.image,
       this.personalInfo,
-      this.mbti,
       this.personality,
       this.interest,
       this.likePersonality});
@@ -271,8 +258,7 @@ class _$UserImpl implements _User {
   final String? image;
   @override
   final String? personalInfo;
-  @override
-  final String? mbti;
+// String? mbti,
   @override
   final String? personality;
   @override
@@ -282,7 +268,7 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(name: $name, comment: $comment, gender: $gender, residence: $residence, age: $age, height: $height, image: $image, personalInfo: $personalInfo, mbti: $mbti, personality: $personality, interest: $interest, likePersonality: $likePersonality)';
+    return 'User(name: $name, comment: $comment, gender: $gender, residence: $residence, age: $age, height: $height, image: $image, personalInfo: $personalInfo, personality: $personality, interest: $interest, likePersonality: $likePersonality)';
   }
 
   @override
@@ -300,7 +286,6 @@ class _$UserImpl implements _User {
             (identical(other.image, image) || other.image == image) &&
             (identical(other.personalInfo, personalInfo) ||
                 other.personalInfo == personalInfo) &&
-            (identical(other.mbti, mbti) || other.mbti == mbti) &&
             (identical(other.personality, personality) ||
                 other.personality == personality) &&
             (identical(other.interest, interest) ||
@@ -311,20 +296,8 @@ class _$UserImpl implements _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      name,
-      comment,
-      gender,
-      residence,
-      age,
-      height,
-      image,
-      personalInfo,
-      mbti,
-      personality,
-      interest,
-      likePersonality);
+  int get hashCode => Object.hash(runtimeType, name, comment, gender, residence,
+      age, height, image, personalInfo, personality, interest, likePersonality);
 
   @JsonKey(ignore: true)
   @override
@@ -350,7 +323,6 @@ abstract class _User implements User {
       final int? height,
       final String? image,
       final String? personalInfo,
-      final String? mbti,
       final String? personality,
       final String? interest,
       final String? likePersonality}) = _$UserImpl;
@@ -373,9 +345,7 @@ abstract class _User implements User {
   String? get image;
   @override
   String? get personalInfo;
-  @override
-  String? get mbti;
-  @override
+  @override // String? mbti,
   String? get personality;
   @override
   String? get interest;
