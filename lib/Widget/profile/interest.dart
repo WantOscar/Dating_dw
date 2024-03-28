@@ -1,4 +1,4 @@
-import 'package:dating/widget/profile/hobby_container.dart';
+import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +7,7 @@ class Interest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,15 +25,12 @@ class Interest extends StatelessWidget {
             children: [
               HobbyContainer(
                 text: '게임',
-                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: 'IT',
-                color: ThemeColor.inputColor,
               ),
               HobbyContainer(
                 text: '운동',
-                color: ThemeColor.inputColor,
               ),
             ],
           ),

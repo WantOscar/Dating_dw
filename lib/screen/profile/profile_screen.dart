@@ -15,9 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key});
-  int _current = 0;
-  final CarouselController _controller = CarouselController();
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _SomeoneProfileScreenState();
