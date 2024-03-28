@@ -183,7 +183,7 @@ class MainScreen extends GetView<UserController> {
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 80),
 
           /// mbti별 추천 조합
           // FutureBuilder<List<Mbti>>(

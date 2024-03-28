@@ -101,6 +101,9 @@ class _ChattingScreenState extends State<ChattingScreen>
                 ),
               ),
             ),
+            const SizedBox(
+              height: 80,
+            )
           ],
         ),
       );
@@ -125,6 +128,9 @@ class _ChattingScreenState extends State<ChattingScreen>
                 ),
               ),
             ),
+            const SizedBox(
+              height: 80,
+            )
           ],
         ),
       );

@@ -147,6 +147,9 @@ class _MeetingScreenState extends State<MeetingScreen>
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 80,
+                  )
                 ],
               ),
             );
@@ -195,6 +198,9 @@ class _MeetingScreenState extends State<MeetingScreen>
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 80,
+                  )
                 ],
               ),
             );
