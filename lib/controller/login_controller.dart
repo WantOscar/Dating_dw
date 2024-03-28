@@ -30,6 +30,10 @@ class LoginController extends GetxController {
     isLoading(false);
     Get.to(() => const HomeScreen());
 
+    ///컨트롤러 값 초기화
+    _email.clear();
+    _password.clear();
+
     /// 로그인 시 데이터 패치
     UserController.to.fetchData();
     UserController.to.searchMyInfo();
