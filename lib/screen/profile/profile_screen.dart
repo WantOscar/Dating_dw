@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/profile_edit/my_photos.dart';
 import 'package:dating/widget/profile/personal_information.dart';
@@ -14,7 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
 
   @override
   State<ProfileScreen> createState() => _SomeoneProfileScreenState();
@@ -70,7 +73,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
             children: [
               Stack(
                 children: [
-                  // 내 프로필 사진
+                  /// 내 프로필 사진
                   Column(
                     children: [
                       Container(
@@ -97,7 +100,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
 
-                  // 내 이름
+                  /// 내 이름
                   // ProfilePositionedName(user: UserController.to.myInfo!),
                   Positioned(
                     top: 300,
@@ -115,7 +118,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
 
-                  // 내 나이
+                  /// 내 나이
                   // ProfilePositionedAge(user: UserController.to.myInfo!),
                   Positioned(
                     top: 360,
@@ -147,7 +150,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
 
-                  // 내 위치
+                  /// 내 위치
                   // ProfilePositionedLocation(user: UserController.to.myInfo!),
                   Positioned(
                     top: 385,
@@ -170,7 +173,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
 
-                  // 프로필 편집 버튼
+                  /// 프로필 편집 버튼
                   Positioned(
                     top: 360,
                     right: 20,
@@ -205,20 +208,20 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
             ],
           ),
 
-          // 내 정보
+          /// 내 정보
           const PersonalInformation(),
 
-          // 나의 성격
+          /// 나의 성격
           const Personality(),
 
-          // 나의 관심사
+          /// 나의 관심사
           const Interest(),
 
-          // 나의 이상형
+          /// 나의 이상형
           const IdealType(),
           const SizedBox(height: 50),
 
-          // 내 스토리
+          /// 내 스토리 텍스트
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -230,7 +233,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
             ),
           ),
 
-          // 내 스토리 사진
+          /// 내 스토리 사진
           const Padding(
             padding: EdgeInsets.all(2.0),
             child: Row(

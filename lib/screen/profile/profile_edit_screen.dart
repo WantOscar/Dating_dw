@@ -1,3 +1,4 @@
+import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
@@ -18,9 +19,8 @@ class ProfileEditScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: const CommonHeader(
+      appBar: const IconHeader(
         text: '프로필 수정',
-        actions: [IconShape.iconSettings],
       ),
       body: SingleChildScrollView(
         child: Stack(
