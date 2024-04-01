@@ -16,7 +16,7 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: IconButton(
-          icon: IconShape.iconArrowBack,
+          icon: IconShape.iconClose,
           onPressed: () {
             Get.back();
           },
@@ -29,6 +29,7 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
             fontWeight: FontWeight.bold,
             color: ThemeColor.fontColor),
       ),
+      centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
       actions: actions,

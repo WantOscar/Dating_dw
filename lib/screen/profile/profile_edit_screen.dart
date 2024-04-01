@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
+import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/widget/profile/interest.dart';
@@ -57,13 +58,15 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       appBar: IconHeader(
         text: '프로필 수정',
         actions: [
+          // IconButton(
+          //   onPressed: _pickImage,
+          //   icon: IconShape.iconPhotoCamera,
+          // ),
           IconButton(
-            onPressed: _pickImage,
+            onPressed: () {
+              Get.to(() => const UploadScreen());
+            },
             icon: IconShape.iconPhotoCamera,
-          ),
-          IconButton(
-            onPressed: _pickImage,
-            icon: const Icon(Icons.image_search),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
