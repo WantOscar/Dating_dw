@@ -18,10 +18,10 @@ class UserController extends GetxController {
   MainResponse? get users => _users.value;
   User? get myInfo => _myInfo.value;
   @override
-  void onReady() {
-    super.onReady();
+  void onInit() {
+    super.onInit();
     fetchData();
-    // searchMyInfo();
+    searchMyInfo();
   }
 
   Future<void> fetchData() async {

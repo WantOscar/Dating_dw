@@ -1,3 +1,4 @@
+import 'package:dating/binding/home_binding.dart';
 import 'package:dating/data/model/error_response.dart';
 import 'package:dating/data/model/login_response.dart';
 import 'package:dating/screen/auth/login_screen.dart';
@@ -34,7 +35,7 @@ class AuthService extends GetxService {
           value: loginResponse.refreshToken,
         );
 
-        Get.to(() => const HomeScreen());
+        Get.to(() => const HomeScreen(), binding: HomeBinding());
       }
       // } else {
       //   final errorResponse = ErrorResponse.fromJson(response.data);
@@ -81,7 +82,8 @@ class AuthService extends GetxService {
   Future<void> logOut() async {
     try {
       print("토큰 삭제");
-      await storage.delete(key: "token");
+      await storage.delete(key: "accessToken");
+      await storage.delete(key: "refreshToken");
       Get.offAll(() => const LoginScreen());
     } catch (e) {
       Get.snackbar('로그아웃에 실패하였습니다!', '잠시후 다시 시도해주세요');
