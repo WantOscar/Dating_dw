@@ -1,8 +1,7 @@
 import 'dart:io';
-
 import 'package:dating/Widget/icon_header.dart';
+import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
-import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/widget/profile/interest.dart';
 import 'package:dating/widget/profile/personal_information.dart';
@@ -21,7 +20,15 @@ class ProfileEditScreen extends StatefulWidget {
 }
 
 class _ProfileEditScreenState extends State<ProfileEditScreen> {
-  XFile? file;
+  List<XFile?> file = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ];
+  var imageLength = 0;
 
   final List<List<int>> _imageIndex = [
     [0, 1, 2],
@@ -33,7 +40,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       (image) {
         if (image != null) {
           setState(() {
-            file = image;
+            file[imageLength] = image;
+            imageLength++;
           });
         }
       },
@@ -42,12 +50,31 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+    // final width = MediaQuery.of(context).size.width;
+    // final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: const IconHeader(
+      appBar: IconHeader(
         text: '프로필 수정',
+        actions: [
+          IconButton(
+            onPressed: _pickImage,
+            icon: IconShape.iconPhotoCamera,
+          ),
+          IconButton(
+            onPressed: _pickImage,
+            icon: const Icon(Icons.image_search),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {
+                Get.to(() => const ProfileThumnailManageScreen());
+              },
+              child: const Icon(Icons.add),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -73,9 +100,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                                 padding: const EdgeInsets.all(1.0),
                                 child: Container(
                                   color: Colors.grey,
-                                  child: (file != null)
+                                  child: (file[_imageIndex[index][jndex]] !=
+                                          null)
                                       ? Image.file(
-                                          File(file!.path),
+                                          File(file[_imageIndex[index][jndex]]!
+                                              .path),
                                           fit: BoxFit.cover,
                                         )
                                       : IconShape.iconNoImage,
@@ -125,6 +154,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   heightPoint: 0.05,
                 ),
                 const SizedBox(height: 7),
+
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,39 +183,30 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 const SizedBox(height: 20),
 
                 /// 나누는 선
-                Container(
-                  width: width,
-                  height: height * 0.002,
-                  decoration: const BoxDecoration(color: Colors.grey),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Divider(
+                    color: Colors.grey,
+                  ),
                 ),
                 const SizedBox(height: 20),
 
-                // my personal information
+                /// 내 인적사항
                 const PersonalInformation(),
                 const SizedBox(height: 7),
 
-                // my personality
+                /// 내 성격
                 const Personality(),
                 const SizedBox(height: 7),
 
-                // my ideal type
+                /// 내 이상형
                 const IdealType(),
                 const SizedBox(height: 7),
 
-                // my interest
+                /// 내 관심사
                 const Interest(),
                 const SizedBox(height: 40),
               ],
-            ),
-
-            // add or modification my 6 photos
-            Positioned(
-              top: 220,
-              right: 1,
-              child: IconButton(
-                icon: IconShape.iconPhotoCamera,
-                onPressed: () {},
-              ),
             ),
           ],
         ),
