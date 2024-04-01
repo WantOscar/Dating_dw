@@ -13,25 +13,30 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => GestureDetector(
-        onTap: FocusScope.of(context).unfocus,
-        child: Scaffold(
-          body: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _title(),
-                  const SizedBox(
-                    height: 50,
+      () => Stack(
+        children: [
+          GestureDetector(
+            onTap: FocusScope.of(context).unfocus,
+            child: Scaffold(
+              body: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      _title(),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      _body(),
+                    ],
                   ),
-                  _body(),
-                ],
+                ),
               ),
+              bottomNavigationBar: _bottom(),
             ),
           ),
-          bottomNavigationBar: _bottom(),
-        ),
+          _loading(),
+        ],
       ),
     );
   }
@@ -130,7 +135,7 @@ class LoginScreen extends GetView<LoginController> {
           height: 20,
         ),
         InkWell(
-          onTap: controller.isLoading.value ? null : controller.login,
+          onTap: controller.login,
           highlightColor: Colors.white,
           borderRadius: BorderRadius.circular(45),
           child: Container(
@@ -146,15 +151,11 @@ class LoginScreen extends GetView<LoginController> {
                       blurRadius: 5,
                       offset: const Offset(0, 8))
                 ]),
-            child: Center(
-              child: controller.isLoading.value
-                  ? const CircularProgressIndicator(
-                      color: Colors.white,
-                    )
-                  : const Text(
-                      '로그인',
-                      style: TextStyle(color: Colors.white),
-                    ),
+            child: const Center(
+              child: Text(
+                '로그인',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ),
@@ -207,4 +208,20 @@ class LoginScreen extends GetView<LoginController> {
       ),
     );
   }
+
+  Widget _loading() => Offstage(
+        offstage: controller.isLoading ? false : true,
+        child: Stack(
+          children: [
+            ModalBarrier(
+              color: Colors.black.withOpacity(0.4),
+            ),
+            Center(
+              child: CircularProgressIndicator(
+                color: ThemeColor.fontColor,
+              ),
+            )
+          ],
+        ),
+      );
 }
