@@ -1,104 +1,69 @@
+import 'package:dating/style/constant.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/alarm/alarm_widget.dart';
 import 'package:dating/widget/icon_header.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AlarmScreen extends StatelessWidget {
   const AlarmScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: IconHeader(text: '알림'),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: Text(
+          "알림",
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: ThemeColor.fontColor),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            AlarmWidget(
-              text: Text(
-                '홍길동',
-                style: TextStyle(fontSize: 17),
-              ),
-              text2: Text(
-                '나에게 하트를 눌렀어요! 마음에 드시나요?',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              text3: Text(
-                '1시간전',
-                style: TextStyle(color: Colors.grey, fontSize: 13),
-              ),
-            ),
-            AlarmWidget(
-              text: Text(
-                '남동길',
-                style: TextStyle(fontSize: 17),
-              ),
-              text2: Text(
-                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세요?"',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              text3: Text(
-                '2시간전',
-                style: TextStyle(color: Colors.grey, fontSize: 13),
-              ),
-            ),
-            AlarmWidget(
-              text: Text(
-                '홍길동',
-                style: TextStyle(fontSize: 17),
-              ),
-              text2: Text(
-                '나에게 하트를 눌렀어요! 마음에 드시나요?',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              text3: Text(
-                '10월 13일',
-                style: TextStyle(color: Colors.grey, fontSize: 13),
-              ),
-            ),
-            AlarmWidget(
-              text: Text(
-                '남동길',
-                style: TextStyle(fontSize: 17),
-              ),
-              text2: Text(
-                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세요?"',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              text3: Text(
-                '10월 13일',
-                style: TextStyle(color: Colors.grey, fontSize: 13),
-              ),
-            ),
-            AlarmWidget(
-              text: Text(
-                '홍길동',
-                style: TextStyle(fontSize: 17),
-              ),
-              text2: Text(
-                '나에게 하트를 눌렀어요! 마음에 드시나요?',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              text3: Text(
-                '10월 13일',
-                style: TextStyle(color: Colors.grey, fontSize: 13),
-              ),
-            ),
-            AlarmWidget(
-              text: Text(
-                '남동길',
-                style: TextStyle(fontSize: 17),
-              ),
-              text2: Text(
-                '나에게 채팅을 보냈네요?"안녕하세요? 뭐하고 계세요?"',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
-                ),
-              ),
-              text3: Text(
-                '10월 14일',
-                style: TextStyle(color: Colors.grey, fontSize: 13),
-              ),
-            ),
-          ],
+          children: List.generate(
+              10,
+              (index) => const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: SizedBox(
+                              width: 60, height: 60, child: CircleAvatar()),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "홍길동",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black87,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                Text(
+                                  "안녕하세요 !",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "9시간 전",
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        )
+                      ],
+                    ),
+                  )),
         ),
       ),
     );
