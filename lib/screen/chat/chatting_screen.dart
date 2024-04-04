@@ -1,6 +1,6 @@
 import 'package:dating/widget/chat/chatting_box.dart';
 import 'package:dating/widget/common_header.dart';
-import 'package:dating/screen/chat/chatting_in_screen.dart';
+import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +15,14 @@ class ChattingScreen extends StatefulWidget {
 class _ChattingScreenState extends State<ChattingScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tab;
+  final data = List.generate(
+      20,
+      (index) => Chat(
+          thumPath:
+              'https://i.pinimg.com/474x/88/0d/b9/880db9d816b47504adc3be91439cd77e.jpg',
+          name: "홍길동",
+          lastChat: "안녕하세요",
+          date: "9월 25일"));
 
   @override
   void initState() {
@@ -89,13 +97,15 @@ class _ChattingScreenState extends State<ChattingScreen>
             ),
             Column(
               children: List.generate(
-                50,
+                data.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      Get.to(() => const ChattingInScreen());
+                      Get.to(() => ChattingRoomScreen(
+                            name: data[index].name,
+                          ));
                     },
                   ),
                 ),
@@ -116,13 +126,15 @@ class _ChattingScreenState extends State<ChattingScreen>
             ),
             Column(
               children: List.generate(
-                50,
+                data.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      Get.to(() => const ChattingInScreen());
+                      Get.to(() => ChattingRoomScreen(
+                            name: data[index].name,
+                          ));
                     },
                   ),
                 ),
@@ -134,4 +146,18 @@ class _ChattingScreenState extends State<ChattingScreen>
           ],
         ),
       );
+}
+
+class Chat {
+  final String thumPath;
+  final String name;
+  final String lastChat;
+  final String date;
+
+  Chat({
+    required this.thumPath,
+    required this.name,
+    required this.lastChat,
+    required this.date,
+  });
 }
