@@ -30,9 +30,9 @@ class IconShape {
   static const iconNotificationOutline =
       Icon(Icons.notifications_outlined, size: 30, color: Colors.black);
 
-  static const iconAdd = Icon(Icons.add, size: 30, color: Colors.white);
+  static Icon iconAdd = Icon(Icons.add, size: 30, color: ThemeColor.fontColor);
 
-  static const iconMore = Icon(Icons.more_horiz, color: Colors.black);
+  static const iconMore = Icon(Icons.more_horiz, size: 30, color: Colors.black);
 
   static Icon get iconArrowForward =>
       Icon(Icons.arrow_forward_ios, size: 15, color: ThemeColor.iconColor);

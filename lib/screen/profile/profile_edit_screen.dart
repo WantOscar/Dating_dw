@@ -66,7 +66,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             onPressed: () {
               Get.to(() => const UploadScreen());
             },
-            icon: IconShape.iconPhotoCamera,
+            icon: IconShape.iconAdd,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -74,7 +74,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               onTap: () {
                 Get.to(() => const ProfileThumnailManageScreen());
               },
-              child: const Icon(Icons.add),
+              child: IconShape.iconMore,
             ),
           ),
         ],
