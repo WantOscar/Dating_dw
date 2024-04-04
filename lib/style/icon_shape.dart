@@ -37,8 +37,6 @@ class IconShape {
   static Icon get iconArrowForward =>
       Icon(Icons.arrow_forward_ios, size: 15, color: ThemeColor.iconColor);
 
-  static const iconClose = Icon(Icons.close, color: Colors.black);
-
   static const iconAddBoxOutlined =
       Icon(Icons.add_box_outlined, color: Colors.black, size: 35);
 
@@ -47,4 +45,10 @@ class IconShape {
 
   static Icon get iconNoImage =>
       const Icon(Icons.image_not_supported, color: Colors.white);
+
+  static Icon get iconClose =>
+      Icon(Icons.close, size: 25, color: ThemeColor.fontColor);
+
+  static Icon get iconArrowGoto =>
+      Icon(Icons.arrow_forward, size: 25, color: ThemeColor.fontColor);
 }
