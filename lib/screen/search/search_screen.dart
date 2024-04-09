@@ -31,17 +31,20 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   Widget _buildBody() {
+    final width = MediaQuery.of(context).size.width;
+
     return SingleChildScrollView(
       child: Center(
         child: Column(
+          /// 글 목록 10개 지정
           children: List.generate(
             10,
             (index) => Column(
               children: [
                 const SizedBox(height: 20),
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: MediaQuery.of(context).size.width * 0.9,
+                  width: width * 0.9,
+                  height: width * 1.2,
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       begin: Alignment.topCenter,
@@ -54,7 +57,70 @@ class _SearchScreenState extends State<SearchScreen> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Stack(
-                    children: [],
+                    children: [
+                      Column(
+                        children: [
+                          /// 글쓴이가 누구인지 보여줌
+                          Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                /// 글쓴이 프로필
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.13,
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.13,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+
+                                /// 글쓴이 정보
+                                const Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '홍길동',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Icon(Icons.location_on,
+                                              size: 20, color: Colors.black),
+                                          Text(
+                                            '성북구 20세 178cm',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                /// 차단 여부 버튼
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: IconShape.iconMore,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 20),
