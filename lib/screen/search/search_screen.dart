@@ -1,4 +1,3 @@
-import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/screen/search/writing_screen.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -53,6 +52,9 @@ class _SearchScreenState extends State<SearchScreen> {
                       ],
                     ),
                     borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Stack(
+                    children: [],
                   ),
                 ),
                 const SizedBox(height: 20),
