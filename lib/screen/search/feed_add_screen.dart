@@ -1,4 +1,3 @@
-import 'package:dating/screen/feed/feed_add_second_screen.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,9 +24,7 @@ class FeedAddScreen extends StatelessWidget {
         actions: [
           Center(
             child: GestureDetector(
-              onTap: () {
-                Get.to(() => const FeedAddSecondScreen());
-              },
+              onTap: () {},
               child: const Text(
                 "다음",
                 style: TextStyle(color: Colors.blue),
