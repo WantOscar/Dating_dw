@@ -1,7 +1,7 @@
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/widget/chat/chatting_box.dart';
 import 'package:dating/widget/common_header.dart';
-import 'package:dating/screen/chat/chatting_in_screen.dart';
+import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -95,7 +95,9 @@ class _ChattingScreenState extends State<ChattingScreen>
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      Get.to(() => const ChattingInScreen());
+                      Get.to(() => const ChattingRoom(
+                            chatRoomId: "1",
+                          ));
                     },
                   ),
                 ),
@@ -120,7 +122,9 @@ class _ChattingScreenState extends State<ChattingScreen>
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      Get.to(() => const ChattingInScreen());
+                      Get.to(() => const ChattingRoom(
+                            chatRoomId: "1",
+                          ));
                     },
                   ),
                 ),
