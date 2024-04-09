@@ -8,35 +8,55 @@ class UserFetch {
   final Dio dio;
   UserFetch({required this.dio});
 
+  /// 회원정보 GET 임시 목업 테스트 데이터 메소드
   Future<MainResponse?> fetchUserData() async {
-    const st = storage.FlutterSecureStorage();
-    final access = await st.read(key: "accessToken");
-    final refresh = await st.read(key: "refreshToken");
-
-    return dio
-        .get(ApiUrl.main,
-            options: Options(headers: {
-              "Authorization": "Bearer $access",
-              "refreshToken": "Bearer $refresh"
-            }))
-        .then((resp) {
-      // print(resp.data);
-      // return null;
-      final MainResponse response = MainResponse.fromJson(resp.data);
-      return response;
-      // if (resp.statusCode == 200) {
-      //   final List<MainResponse> users = [];
-      //   for (var data in resp.data) {
-      //     print(data);
-      //     // final MainResponse user = MainResponse.fromJson(data);
-      //     // users.add(user);
-      //   }
-      //   return users;
-      // } else {
-      //   throw Exception("Failed to send User data..");
-      // }
-    });
+    await Future.delayed(const Duration(seconds: 2));
+    return MainResponse(
+        notCheckAlert: 1,
+        sendHeartList: [],
+        receiverHeartList: [],
+        randomMemberList: [
+          {
+            "id": 1,
+            "name": "카리나",
+            "residence": "서울",
+            "age": 11,
+            "height": 190,
+            "image":
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa8z47iisrjvXdCtkZwUYhBpVaxGIoGHBeGA&s"
+          }
+        ]);
   }
+
+  // Future<MainResponse?> fetchUserData() async {
+  //   const st = storage.FlutterSecureStorage();
+  //   final access = await st.read(key: "accessToken");
+  //   final refresh = await st.read(key: "refreshToken");
+
+  //   return dio
+  //       .get(ApiUrl.main,
+  //           options: Options(headers: {
+  //             "Authorization": "Bearer $access",
+  //             "refreshToken": "Bearer $refresh"
+  //           }))
+  //       .then((resp) {
+  //     // print(resp.data);
+  //     // return null;
+  //     final MainResponse response = MainResponse.fromJson(resp.data);
+  //     return response;
+  //     // if (resp.statusCode == 200) {
+  //     //   final List<MainResponse> users = [];
+  //     //   for (var data in resp.data) {
+  //     //     print(data);
+  //     //     // final MainResponse user = MainResponse.fromJson(data);
+  //     //     // users.add(user);
+  //     //   }
+  //     //   return users;
+  //     // } else {
+  //     //   throw Exception("Failed to send User data..");
+  //     // }
+  //   });
+  // }
 
   Future<User> searchMyInfo() async {
     const st = storage.FlutterSecureStorage();
