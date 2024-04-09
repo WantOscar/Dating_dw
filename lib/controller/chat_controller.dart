@@ -1,42 +1,42 @@
 import 'package:dating/data/model/chat.dart';
+import 'package:dating/data/provider/chat_service.dart';
+import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:dating/utils/api_urls.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class ChatController extends GetxController {
-  var messages = <ChatMessage>[].obs;
+  final ChatService service;
+  static ChatController get to => Get.find();
+  ChatController({required this.service});
+  void makeChattingRoom(int memberId) async {
+    final token = await const FlutterSecureStorage().read(key: "accessToken");
+    if (token == null) {
+      print("토큰 갱신 필요");
+      return;
+    }
 
-  void addMessage(ChatMessage message) {
-    messages.add(message);
+    /// 채팅방 생성 api
+    final chatRoomId = await service.makeChattingRoom(memberId, token);
+    if (chatRoomId == "Error") {
+      print("서버 통신 에러");
+      return;
+    }
+    moveToChattingRoom(chatRoomId);
+
+    /// 채팅방 생성
   }
-}
 
-Future<List<ChatMessage>> fetchChatMessages() async {
-  final response =
-      await http.get(Uri.parse(ApiUrl.sendMessages)); // 석환이형 백엔드 url -> 메시지 패치
-
-  if (response.statusCode == 200) {
-    Iterable data = json.decode(response.body);
-    return data.map((message) => ChatMessage.fromJson(message)).toList();
-  } else {
-    throw Exception('Failed to load chat messages');
+  void moveToChattingRoom(String chatRoomId) {
+    Get.to(() => ChattingRoom(chatRoomId: chatRoomId));
   }
-}
 
-Future<ChatMessage> sendMessage(ChatMessage message) async {
-  // 메세지 보내기
-  final response = await http.post(
-    Uri.parse(ApiUrl.sendMessages),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(message.toJson()),
-  );
-
-  if (response.statusCode == 200) {
-    return ChatMessage.fromJson(json.decode(response.body));
-  } else {
-    throw Exception('Failed to send message');
+  void sendMessage(String message) {
+    final data = {
+      "messageType": "TALK",
+      "memberId": "1",
+      "chatRoomId": "1",
+      "message": message
+    };
   }
 }
