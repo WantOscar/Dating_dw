@@ -2,8 +2,8 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class FeedAddScreen extends StatelessWidget {
-  const FeedAddScreen({super.key});
+class WritingScreen extends StatelessWidget {
+  const WritingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

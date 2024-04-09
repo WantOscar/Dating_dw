@@ -1,3 +1,4 @@
+import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/widget/chat/chatting_box.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/screen/chat/chatting_in_screen.dart';
@@ -53,21 +54,22 @@ class _ChattingScreenState extends State<ChattingScreen>
             height: AppBar().preferredSize.height,
             width: double.infinity,
             child: TabBar(
-                labelStyle: const TextStyle(
-                    fontWeight: FontWeight.w600, color: Colors.black),
-                labelColor: Colors.black,
-                indicatorColor: ThemeColor.fontColor,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicatorWeight: 1.0,
-                controller: _tab,
-                tabs: const [
-                  Tab(
-                    text: "단톡",
-                  ),
-                  Tab(
-                    text: "1:1",
-                  ),
-                ]),
+              labelStyle: const TextStyle(
+                  fontWeight: FontWeight.w600, color: Colors.black),
+              labelColor: Colors.black,
+              indicatorColor: ThemeColor.fontColor,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorWeight: 1.0,
+              controller: _tab,
+              tabs: const [
+                Tab(
+                  text: "단톡",
+                ),
+                Tab(
+                  text: "1:1",
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -84,9 +86,7 @@ class _ChattingScreenState extends State<ChattingScreen>
   Widget _multiChat() => SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             Column(
               children: List.generate(
                 50,
@@ -101,9 +101,7 @@ class _ChattingScreenState extends State<ChattingScreen>
                 ),
               ),
             ),
-            const SizedBox(
-              height: 80,
-            )
+            const SizedBox(height: 80),
           ],
         ),
       );
@@ -128,9 +126,7 @@ class _ChattingScreenState extends State<ChattingScreen>
                 ),
               ),
             ),
-            const SizedBox(
-              height: 80,
-            )
+            const SizedBox(height: 80),
           ],
         ),
       );

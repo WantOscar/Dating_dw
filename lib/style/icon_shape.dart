@@ -7,8 +7,8 @@ class IconShape {
   static const iconLocationOn =
       Icon(Icons.location_on, size: 20, color: Colors.white);
 
-  static const iconSettings =
-      Icon(Icons.settings, color: Colors.black, size: 30);
+  static Icon get iconSettings =>
+      Icon(Icons.settings, color: ThemeColor.fontColor, size: 30);
 
   static const iconPhotoCamera =
       Icon(Icons.photo_camera, color: Colors.black, size: 30);
