@@ -1,5 +1,7 @@
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/icon_header.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BlockedAccountScreen extends StatelessWidget {
   const BlockedAccountScreen({super.key});
@@ -24,8 +26,19 @@ class BlockedAccountScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.13,
                         height: MediaQuery.of(context).size.width * 0.13,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(45),
-                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(100),
+                          color: Colors.white,
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => const SomeoneProfileScreen());
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.network(
+                                'https://img.khan.co.kr/news/2024/03/06/news-p.v1.20240306.36d040a925cd45deb5d87d7f2a0771fb_P1.webp',
+                                fit: BoxFit.cover),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -48,10 +61,21 @@ class BlockedAccountScreen extends StatelessWidget {
                                 Icon(Icons.location_on,
                                     size: 20, color: Colors.black),
                                 Text(
-                                  '성북구 20세 178cm',
+                                  '성북구',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.grey,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Text(
+                                    '20세',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ],
