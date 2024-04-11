@@ -66,7 +66,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             onPressed: () {
               Get.to(() => const UploadScreen());
             },
-            icon: IconShape.iconPhotoCamera,
+            icon: IconShape.iconAdd,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -74,146 +74,12 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               onTap: () {
                 Get.to(() => const ProfileThumnailManageScreen());
               },
-              child: const Icon(Icons.add),
+              child: IconShape.iconMore,
             ),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// 내 프로필 사진 업로드(6장 제한)
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      _imageIndex.length,
-                      (index) => Row(
-                        children:
-                            List.generate(_imageIndex[index].length, (jndex) {
-                          return Expanded(
-                            child: AspectRatio(
-                              aspectRatio: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.all(1.0),
-                                child: Container(
-                                  color: Colors.grey,
-                                  child: (file[_imageIndex[index][jndex]] !=
-                                          null)
-                                      ? Image.file(
-                                          File(file[_imageIndex[index][jndex]]!
-                                              .path),
-                                          fit: BoxFit.cover,
-                                        )
-                                      : IconShape.iconNoImage,
-                                ),
-                              ),
-                            ),
-                          );
-                        }),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                /// 닉네임 입력
-                const InputField(
-                  text1: '닉네임',
-                  text2: '압둘라 3세',
-                  widthPoint: 0.68,
-                  heightPoint: 0.05,
-                ),
-                const SizedBox(height: 7),
-
-                /// 한 줄 소개
-                const InputField(
-                  text1: '한줄 소개',
-                  text2: '소개 입력',
-                  widthPoint: 0.68,
-                  heightPoint: 0.05,
-                ),
-                const SizedBox(height: 7),
-
-                /// 성별 선택
-                const InputField(
-                  text1: '성별',
-                  text2: '여자',
-                  widthPoint: 0.68,
-                  heightPoint: 0.05,
-                ),
-                const SizedBox(height: 7),
-
-                /// 사는 곳 입력
-                const InputField(
-                  text1: '주소',
-                  text2: '주소 입력',
-                  widthPoint: 0.68,
-                  heightPoint: 0.05,
-                ),
-                const SizedBox(height: 7),
-
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    /// 나이 입력
-                    Expanded(
-                      child: InputField(
-                        text1: '나이',
-                        text2: '25세',
-                        widthPoint: 0.18,
-                        heightPoint: 0.05,
-                      ),
-                    ),
-
-                    /// 키 입력
-                    Expanded(
-                      child: InputField(
-                        text1: '키',
-                        text2: '키 입력',
-                        widthPoint: 0.18,
-                        heightPoint: 0.05,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-
-                /// 나누는 선
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Divider(
-                    color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                /// 내 인적사항
-                const PersonalInformation(),
-                const SizedBox(height: 7),
-
-                /// 내 성격
-                const Personality(),
-                const SizedBox(height: 7),
-
-                /// 내 이상형
-                const IdealType(),
-                const SizedBox(height: 7),
-
-                /// 내 관심사
-                const Interest(),
-                const SizedBox(height: 40),
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: _buildBody(),
 
       // modification complete
       bottomNavigationBar: BottomApplyBar(
@@ -221,6 +87,143 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         onTap: () {
           Get.back();
         },
+      ),
+    );
+  }
+
+  Widget _buildBody() {
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              /// 내 프로필 사진 업로드(6장 제한)
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    _imageIndex.length,
+                    (index) => Row(
+                      children:
+                          List.generate(_imageIndex[index].length, (jndex) {
+                        return Expanded(
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: Padding(
+                              padding: const EdgeInsets.all(1.0),
+                              child: Container(
+                                color: Colors.grey,
+                                child: (file[_imageIndex[index][jndex]] != null)
+                                    ? Image.file(
+                                        File(file[_imageIndex[index][jndex]]!
+                                            .path),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : IconShape.iconNoImage,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              /// 닉네임 입력
+              const InputField(
+                text1: '닉네임',
+                text2: '압둘라 3세',
+                widthPoint: 0.68,
+                heightPoint: 0.05,
+              ),
+              const SizedBox(height: 7),
+
+              /// 한 줄 소개
+              const InputField(
+                text1: '한줄 소개',
+                text2: '소개 입력',
+                widthPoint: 0.68,
+                heightPoint: 0.05,
+              ),
+              const SizedBox(height: 7),
+
+              /// 성별 선택
+              const InputField(
+                text1: '성별',
+                text2: '여자',
+                widthPoint: 0.68,
+                heightPoint: 0.05,
+              ),
+              const SizedBox(height: 7),
+
+              /// 사는 곳 입력
+              const InputField(
+                text1: '주소',
+                text2: '주소 입력',
+                widthPoint: 0.68,
+                heightPoint: 0.05,
+              ),
+              const SizedBox(height: 7),
+
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  /// 나이 입력
+                  Expanded(
+                    child: InputField(
+                      text1: '나이',
+                      text2: '25세',
+                      widthPoint: 0.18,
+                      heightPoint: 0.05,
+                    ),
+                  ),
+
+                  /// 키 입력
+                  Expanded(
+                    child: InputField(
+                      text1: '키',
+                      text2: '키 입력',
+                      widthPoint: 0.18,
+                      heightPoint: 0.05,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              /// 나누는 선
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Divider(
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 20),
+
+              /// 내 인적사항
+              const PersonalInformation(),
+              const SizedBox(height: 7),
+
+              /// 내 성격
+              const Personality(),
+              const SizedBox(height: 7),
+
+              /// 내 이상형
+              const IdealType(),
+              const SizedBox(height: 7),
+
+              /// 내 관심사
+              const Interest(),
+              const SizedBox(height: 40),
+            ],
+          ),
+        ],
       ),
     );
   }

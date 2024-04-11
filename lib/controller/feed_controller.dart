@@ -8,6 +8,8 @@ class FeedController extends GetxController {
 
   FeedController({required this.feedRepository});
 
+  static FeedController get to => Get.find();
+
   List<Feed> get feeds => _feeds.value;
   @override
   void onReady() {
