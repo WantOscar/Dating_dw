@@ -1,10 +1,8 @@
-import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/data/model/main_response.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/widget/chat/chat.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMain extends StatelessWidget {
@@ -138,7 +136,7 @@ class ProfileMain extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        ChatController.to.makeChattingRoom(randomUser["id"]);
+                        // ChatController.to.makeChattingRoom(randomUser["id"]);
                       },
                       child: Text(
                         '채팅하기',

@@ -1,4 +1,5 @@
 import 'package:dating/controller/feed_controller.dart';
+import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/widget/chat/chatting_box.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/screen/chat/chatting_room_screen.dart';
@@ -83,6 +84,7 @@ class _ChattingScreenState extends State<ChattingScreen>
     );
   }
 
+  /// 단체 채팅방 목록을 보여주는 위젯
   Widget _multiChat() => SingleChildScrollView(
         child: Column(
           children: [
@@ -95,9 +97,10 @@ class _ChattingScreenState extends State<ChattingScreen>
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      Get.to(() => const ChattingRoom(
-                            chatRoomId: "1",
-                          ));
+                      Get.to(() => const ChattingRoom(),
+                          binding: BindingsBuilder(() {
+                        Get.put(ChattingRoomController(chatRoomId: 15));
+                      }));
                     },
                   ),
                 ),
@@ -108,6 +111,7 @@ class _ChattingScreenState extends State<ChattingScreen>
         ),
       );
 
+  /// 개인 채팅방 목록을 보여주는 위젯.
   Widget _personalChat() => SingleChildScrollView(
         child: Column(
           children: [
@@ -122,9 +126,10 @@ class _ChattingScreenState extends State<ChattingScreen>
                   child: GestureDetector(
                     child: const ChattingBox(),
                     onTap: () {
-                      Get.to(() => const ChattingRoom(
-                            chatRoomId: "1",
-                          ));
+                      Get.to(() => const ChattingRoom(),
+                          binding: BindingsBuilder(() {
+                        Get.put(ChattingRoomController(chatRoomId: 15));
+                      }));
                     },
                   ),
                 ),
