@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dating/Widget/icon_header.dart';
+import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
 import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
@@ -36,19 +37,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     [3, 4, 5],
   ];
 
-  Future<void> _pickImage() async {
-    ImagePicker().pickImage(source: ImageSource.gallery).then(
-      (image) {
-        if (image != null) {
-          setState(() {
-            file[imageLength] = image;
-            imageLength++;
-          });
-        }
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // final width = MediaQuery.of(context).size.width;
@@ -62,12 +50,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           //   onPressed: _pickImage,
           //   icon: IconShape.iconPhotoCamera,
           // ),
-          IconButton(
-            onPressed: () {
-              Get.to(() => const UploadScreen());
-            },
-            icon: IconShape.iconAdd,
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
@@ -102,32 +84,43 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               /// 내 프로필 사진 업로드(6장 제한)
               Padding(
                 padding: const EdgeInsets.all(2.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    _imageIndex.length,
-                    (index) => Row(
-                      children:
-                          List.generate(_imageIndex[index].length, (jndex) {
-                        return Expanded(
-                          child: AspectRatio(
-                            aspectRatio: 1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(1.0),
-                              child: Container(
-                                color: Colors.grey,
-                                child: (file[_imageIndex[index][jndex]] != null)
-                                    ? Image.file(
-                                        File(file[_imageIndex[index][jndex]]!
-                                            .path),
-                                        fit: BoxFit.cover,
-                                      )
-                                    : IconShape.iconNoImage,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => const UploadScreen(),
+                        binding: BindingsBuilder(() {
+                      Get.put(
+                        ProfileImageController(),
+                      );
+                    }), transition: Transition.downToUp);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      _imageIndex.length,
+                      (index) => Row(
+                        children:
+                            List.generate(_imageIndex[index].length, (jndex) {
+                          return Expanded(
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.all(1.0),
+                                child: Container(
+                                  color: Colors.grey,
+                                  child: (file[_imageIndex[index][jndex]] !=
+                                          null)
+                                      ? Image.file(
+                                          File(file[_imageIndex[index][jndex]]!
+                                              .path),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : IconShape.iconNoImage,
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      }),
+                          );
+                        }),
+                      ),
                     ),
                   ),
                 ),
