@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/screen/profile/album_image.dart';
 import 'package:dating/screen/profile/change_album_screen.dart';
@@ -45,18 +47,21 @@ class UploadScreen extends GetView<ProfileImageController> {
   /// 선택한 사진 확인하는 영역
   Widget _preview() {
     return SliverToBoxAdapter(
-      child: Container(
-        height: Get.size.width * 1.1,
-        width: Get.size.width,
-        color: Colors.black,
-        child: (controller.image != null)
-            ? GestureDetector(
-                onTap: controller.clearImage,
-                child: AssetEntityImage(
-                  controller.image!,
-                  fit: BoxFit.cover,
-                ))
-            : null,
+      child: AspectRatio(
+        aspectRatio: 1.0,
+        child: Container(
+          color: Colors.black,
+          child: Container(
+            child: (controller.image != null)
+                ? GestureDetector(
+                    onTap: controller.clearImage,
+                    child: Image.file(
+                      File(controller.image!.path),
+                      fit: BoxFit.fill,
+                    ))
+                : null,
+          ),
+        ),
       ),
     );
   }
