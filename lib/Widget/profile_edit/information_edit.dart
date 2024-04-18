@@ -1,17 +1,18 @@
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
-class InputField extends StatelessWidget {
+class InformationEdit extends StatelessWidget {
   final String text1;
   final String text2;
   final double widthPoint;
   final double heightPoint;
-  const InputField(
-      {super.key,
-      required this.text1,
-      required this.text2,
-      required this.widthPoint,
-      required this.heightPoint});
+  const InformationEdit({
+    super.key,
+    required this.text1,
+    required this.text2,
+    required this.widthPoint,
+    required this.heightPoint,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,6 @@ class InputField extends StatelessWidget {
                   decoration: InputDecoration(
                     counterText: "",
                     hintText: text2,
-                    // border: OutlineInputBorder(),
                     border: InputBorder.none,
                     isDense: true,
                   ),

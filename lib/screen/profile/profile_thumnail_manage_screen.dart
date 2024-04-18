@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:dating/Widget/icon_header.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 
 class ProfileThumnailManageScreen extends StatelessWidget {
@@ -8,6 +10,12 @@ class ProfileThumnailManageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: IconHeader(
+        text: '취소할 사진 선택',
+        actions: [
+          IconButton(onPressed: () {}, icon: IconShape.iconArrowGoto),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: List.generate(
