@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dating/Widget/main/profile_main.dart';
+import 'package:dating/Widget/main/today_freinds_profile.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/main/circle_avatar.dart';
@@ -43,7 +43,7 @@ class MainScreen extends GetView<UserController> {
                     final user = controller.users!.randomMemberList[index];
 
                     // final user = controller.users[index];
-                    return ProfileMain(
+                    return TodayFriendsProfile(
                       randomUser: user,
                     );
                   },
