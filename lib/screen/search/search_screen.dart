@@ -1,8 +1,11 @@
+import 'package:dating/controller/feed_controller.dart';
+import 'package:dating/controller/feed_write_controller.dart';
+import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/show_toast.dart';
 import 'package:dating/widget/common_header.dart';
-import 'package:dating/screen/search/writing_screen.dart';
+import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,7 +27,10 @@ class _SearchScreenState extends State<SearchScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(() => const WritingScreen());
+              Get.to(() => const FeedWriteScreen(),
+                  binding: BindingsBuilder(() {
+                Get.put(FeedWriteController());
+              }));
             },
             icon: IconShape.iconAdd,
           ),

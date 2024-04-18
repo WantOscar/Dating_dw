@@ -80,6 +80,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         ],
       ),
       body: _buildBody(),
+      extendBody: true,
 
       // modification complete
       bottomNavigationBar: BottomApplyBar(
