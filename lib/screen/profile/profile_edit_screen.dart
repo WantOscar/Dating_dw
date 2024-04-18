@@ -64,12 +64,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           //   onPressed: _pickImage,
           //   icon: IconShape.iconPhotoCamera,
           // ),
-          IconButton(
-            onPressed: () {
-              Get.to(() => const UploadScreen());
-            },
-            icon: IconShape.iconAdd,
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
