@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/Widget/profile_edit/information_edit.dart';
+import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
 import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
@@ -108,14 +109,23 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         aspectRatio: 1,
                         child: Padding(
                           padding: const EdgeInsets.all(1.0),
-                          child: Container(
-                            color: Colors.grey,
-                            child: (file[_imageIndex[index][jndex]] != null)
-                                ? Image.file(
-                                    File(file[_imageIndex[index][jndex]]!.path),
-                                    fit: BoxFit.cover,
-                                  )
-                                : IconShape.iconNoImage,
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(() => const UploadScreen(),
+                                  binding: BindingsBuilder(() {
+                                Get.put(ProfileImageController());
+                              }));
+                            },
+                            child: Container(
+                              color: Colors.grey,
+                              child: (file[_imageIndex[index][jndex]] != null)
+                                  ? Image.file(
+                                      File(file[_imageIndex[index][jndex]]!
+                                          .path),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : IconShape.iconNoImage,
+                            ),
                           ),
                         ),
                       ),
@@ -224,19 +234,19 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   /// 선택할 키를 보여주는 함수
   void _showCupertinoPicker(BuildContext context) async {
-    final List<int> _items = List.generate(60, (index) => index);
-    int result = _items[0];
+    final List<int> items = List.generate(60, (index) => index);
+    int result = items[0];
 
     await showCupertinoModalPopup(
       context: context,
-      builder: (context) => Container(
+      builder: (context) => SizedBox(
         height: 200,
         child: CupertinoPicker(
           backgroundColor: Colors.white,
           itemExtent: 50,
           onSelectedItemChanged: (int index) {
             // result = _items[index];
-            selectedHeight = _items[index];
+            selectedHeight = items[index];
           },
           children: List.generate(
             60,

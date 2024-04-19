@@ -1,6 +1,6 @@
-import 'package:dating/Widget/profile/warning_window.dart';
 import 'package:dating/controller/login_controller.dart';
 import 'package:dating/widget/icon_header.dart';
+import 'package:dating/widget/profile/warning_window.dart';
 import 'package:dating/widget/setting_profile/alarm_setting.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
@@ -103,7 +103,6 @@ class SettingProfileScreen extends StatelessWidget {
                           titleText: '로그아웃',
                           explainText: '정말로 로그아웃 하시나요 ?',
                           btnText: '로그아웃',
-                          context: context,
                         );
                       },
                     );
@@ -137,7 +136,6 @@ class SettingProfileScreen extends StatelessWidget {
                           explainText:
                               '캠밋을 탈퇴하면 계정의 모든 정보가 삭제되며, 삭제된 정보는 복구할 수 없습니다.',
                           btnText: '회원탈퇴',
-                          context: context,
                         );
                       },
                     );

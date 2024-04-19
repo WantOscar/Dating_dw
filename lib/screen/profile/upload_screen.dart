@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:dating/controller/camera_controller.dart';
 import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/screen/profile/album_image.dart';
+import 'package:dating/screen/profile/camera_screen.dart';
 import 'package:dating/screen/profile/change_album_screen.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/icon_header.dart';
 import 'package:flutter/material.dart';
@@ -16,33 +19,66 @@ class UploadScreen extends GetView<ProfileImageController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        appBar: IconHeader(
-          text: '사진 업로드',
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconShape.iconArrowGoto,
-            ),
-          ],
-        ),
         body: _buildBody(),
       ),
     );
   }
 
   Widget _buildBody() {
-    return (controller.album.isNotEmpty)
+    return (controller.isReady)
         ? CustomScrollView(
             slivers: [
+              _appBar(),
               _preview(),
-              _header(),
-              _images(),
+              ...(controller.album.isNotEmpty)
+                  ? [
+                      _header(),
+                      _images(),
+                    ]
+                  : [
+                      _noImage(),
+                    ]
             ],
           )
         : const Center(
             child: CircularProgressIndicator.adaptive(),
           );
   }
+
+  /// 앱바
+  Widget _appBar() => SliverAppBar(
+        pinned: true,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
+            icon: IconShape.iconClose,
+            onPressed: controller.backToPreviousPage,
+          ),
+        ),
+        title: Text(
+          "사진 업로드",
+          style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: ThemeColor.fontColor),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.check,
+                color: ThemeColor.fontColor,
+              ),
+            ),
+          )
+        ],
+        toolbarHeight: 65,
+      );
 
   /// 선택한 사진 확인하는 영역
   Widget _preview() {
@@ -53,12 +89,10 @@ class UploadScreen extends GetView<ProfileImageController> {
           color: Colors.black,
           child: Container(
             child: (controller.image != null)
-                ? GestureDetector(
-                    onTap: controller.clearImage,
-                    child: Image.file(
-                      File(controller.image!.path),
-                      fit: BoxFit.fill,
-                    ))
+                ? Image.file(
+                    File(controller.image!.path),
+                    fit: BoxFit.fill,
+                  )
                 : null,
           ),
         ),
@@ -69,49 +103,36 @@ class UploadScreen extends GetView<ProfileImageController> {
   /// 앨범 선택 버튼 영역, 다양한 옵션 버튼들
   Widget _header() {
     return SliverToBoxAdapter(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextButton(
-                  onPressed: () {
-                    Get.to(() => const ChangeAlbumScreen(),
-                        transition: Transition.downToUp);
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        controller.album[controller.idx].name.toString(),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Icon(
-                        Icons.arrow_drop_down,
-                        size: 25,
-                        color: Colors.black,
-                      ),
-                    ],
+        child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
+          child: TextButton(
+            onPressed: () {
+              Get.to(() => const ChangeAlbumScreen(),
+                  transition: Transition.downToUp);
+            },
+            child: Row(
+              children: [
+                Text(
+                  controller.album[controller.idx].name.toString(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () {},
-              child: const Icon(Icons.photo_camera),
+                const Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black,
+                )
+              ],
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      ],
+    ));
   }
 
   Widget _images() {
@@ -121,24 +142,55 @@ class UploadScreen extends GetView<ProfileImageController> {
           mainAxisSpacing: 1.0,
           crossAxisSpacing: 1.0,
         ),
-        itemCount: controller.album[controller.idx].images!.length,
+        itemCount: controller.album[controller.idx].images!.length + 1,
         itemBuilder: (context, index) {
-          AssetEntity? image = controller.album[controller.idx].images?[index];
-
-          return GestureDetector(
-              onTap: () => controller.changeImage(image),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  AlbumImage(
-                    image: image!,
-                  ),
-                  Container(
-                    color: Colors.white
-                        .withOpacity((controller.image == image) ? 0.4 : 0.0),
-                  )
-                ],
-              ));
+          if (index == 0) {
+            return GestureDetector(
+              onTap: () {
+                Get.to(() => const CameraScreen(), binding: BindingsBuilder(() {
+                  Get.put(CameraScreenController());
+                }));
+              },
+              child: Container(
+                color: const Color(0xff4d4d4d),
+                child: const Icon(
+                  Icons.camera_alt,
+                  color: Colors.white,
+                  size: 40,
+                ),
+              ),
+            );
+          } else {
+            AssetEntity? image =
+                controller.album[controller.idx].images?[index - 1];
+            return GestureDetector(
+                onTap: () => controller.changeImage(image, index),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    AlbumImage(
+                      image: image!,
+                    ),
+                    Container(
+                      color: Colors.white.withOpacity(
+                          (controller.selectImageIndex == index) ? 0.4 : 0.0),
+                    )
+                  ],
+                ));
+          }
         });
   }
+
+  Widget _noImage() => SliverToBoxAdapter(
+        child: Container(
+          alignment: Alignment.center,
+          height: 250,
+          width: double.infinity,
+          child: const Text(
+            "갤러리에 이미지가 존재하지 않습니다.",
+            style: TextStyle(
+                fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black),
+          ),
+        ),
+      );
 }

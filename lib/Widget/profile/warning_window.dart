@@ -1,17 +1,14 @@
 import 'package:dating/style/constant.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WarningWindow extends StatelessWidget {
-  final BuildContext context;
   const WarningWindow({
     super.key,
     required this.onTap,
     required this.titleText,
     required this.explainText,
     required this.btnText,
-    required this.context,
   });
   final void Function()? onTap;
   final String titleText;
