@@ -1,10 +1,14 @@
 import 'package:camera/camera.dart';
+import 'package:dating/controller/profile_image_controller.dart';
+import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class CameraScreenController extends GetxController {
   late CameraController _controller;
+  late Rx<Future<void>> _initializedCameraController;
   final RxDouble _currentZoomLevel = 1.0.obs;
   final RxDouble _minZoomLevel = 1.0.obs;
   final RxDouble _maxZoomLevel = 1.0.obs;
@@ -27,16 +31,33 @@ class CameraScreenController extends GetxController {
 
   void _initCamera() async {
     final cameras = await availableCameras();
-    final camera = cameras[0];
-    _controller = CameraController(camera, ResolutionPreset.veryHigh);
-    await _controller.initialize();
-    _minZoomLevel.value = await _controller.getMinZoomLevel();
 
-    _maxZoomLevel.value = await _controller.getMaxZoomLevel();
-    print(_minZoomLevel.value);
-    print(_maxZoomLevel.value);
+    /// 카메라 앱이 존재하지 않는 경우
+    /// 사용자는 카메라 기능을 사용할 수 없기 때문에
+    /// 다시 이전 화면으로 라우팅됨.
+    if (cameras.isEmpty) {
+      Get.snackbar("카메라앱 에러", "사용 가능한 카메라앱이 존재하지 않습니다!");
+      Get.back();
+      return;
+    }
+
+    /// 가장 기본적으로 첫번째 후면 렌즈를 사용함.
+    final camera = cameras[0];
+    _controller = CameraController(camera, ResolutionPreset.veryHigh,
+        imageFormatGroup: ImageFormatGroup.jpeg);
+
+    /// 초기화가 완료되면 카메라가 기본적으로 제공하는
+    /// 줌 레벨을 각각 할당받아옴.
+    await _controller.initialize().then((_) async {
+      _minZoomLevel.value = await _controller.getMinZoomLevel();
+
+      _maxZoomLevel.value = await _controller.getMaxZoomLevel();
+      print(_minZoomLevel.value);
+      print(_maxZoomLevel.value);
+    });
 
     _isLoaded(true);
+    print(_isLoaded.value);
   }
 
   /// 카메라 확대 및 축소 메소드
@@ -52,11 +73,17 @@ class CameraScreenController extends GetxController {
 
   /// 사진 촬영 메소드
   void takePicture() async {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
+
     try {
-      final picture = await _controller.takePicture();
-      print(picture);
+      await _controller.initialize();
+      XFile picture = await _controller.takePicture();
+      print(picture.path);
       cropImage(picture);
     } on Exception catch (error) {
+      print("hello");
       print(error);
     }
   }
@@ -88,5 +115,10 @@ class CameraScreenController extends GetxController {
         // Web UI 설정
       ],
     );
+    if (cropImage != null) {
+      await ImageGallerySaver.saveFile(cropImage.path);
+      ProfileImageController.to.getAlbums();
+      Get.back();
+    }
   }
 }

@@ -1,18 +1,24 @@
 import 'dart:io';
+import 'package:dating/controller/camera_controller.dart';
 import 'package:dating/controller/upload_controller.dart';
 import 'package:dating/data/model/album.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/widget/profile/warning_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:photo_manager/photo_manager.dart';
+
+import '../screen/profile/camera_screen.dart';
 
 class ProfileImageController extends GetxController {
   final Rx<List<AlbumModel>> _albums = Rx<List<AlbumModel>>([]);
   final Rxn<CroppedFile> _selectImage = Rxn<CroppedFile>();
   final RxBool _isReady = false.obs;
   final RxnInt _selectImageIndex = RxnInt();
+
+  static ProfileImageController get to => Get.find();
 
   bool get isReady => _isReady.value;
 
@@ -51,6 +57,10 @@ class ProfileImageController extends GetxController {
 
   /// 갤러리 이미지를 가져오는 메소드
   Future<void> getAlbums() async {
+    if (_albums.value.isNotEmpty) {
+      _albums.value.clear();
+    }
+
     PhotoManager.getAssetPathList(type: RequestType.image).then((paths) {
       for (AssetPathEntity asset in paths) {
         asset.getAssetListRange(start: 0, end: 10000).then((images) {
@@ -96,44 +106,53 @@ class ProfileImageController extends GetxController {
   }
 
   void _cropImage(AssetEntity image, int index) async {
-    final File? file = await image.file;
+    try {
+      final File? file = await image.file;
 
-    /// 선택한 이미지가 존재한다면
-    /// 이미지 편집기를 실행시킴.
-    if (file != null) {
-      print(file.path);
-      final cropImage = await ImageCropper().cropImage(
-        sourcePath: file.path,
-        compressFormat: ImageCompressFormat.png,
-        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-        compressQuality: 100, // 저장할 이미지의 퀄리티
-        uiSettings: [
-          // 안드로이드 UI 설정
-          AndroidUiSettings(
-              toolbarTitle: '이미지 자르기/회전하기', // 타이틀바 제목
-              toolbarColor: Colors.black, // 타이틀바 배경색
-              toolbarWidgetColor: Colors.white, // 타이틀바 단추색
+      /// 선택한 이미지가 존재한다면
+      /// 이미지 편집기를 실행시킴.
+      if (file != null) {
+        print(file.path);
+        final cropImage = await ImageCropper().cropImage(
+          sourcePath: file.path,
+          compressFormat: ImageCompressFormat.png,
+          aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+          compressQuality: 100, // 저장할 이미지의 퀄리티
+          uiSettings: [
+            // 안드로이드 UI 설정
+            AndroidUiSettings(
+                toolbarTitle: '이미지 자르기/회전하기', // 타이틀바 제목
+                toolbarColor: Colors.black, // 타이틀바 배경색
+                toolbarWidgetColor: Colors.white, // 타이틀바 단추색
 
-              initAspectRatio:
-                  CropAspectRatioPreset.original, // 이미지 크로퍼 시작 시 원하는 가로 세로 비율
-              lockAspectRatio: true), // 고정 값으로 자르기 (기본값 : 사용안함)
-          // iOS UI 설정
-          IOSUiSettings(
-              title: '이미지 자르기/회전하기', // 보기 컨트롤러의 맨 위에 나타나는 제목
-              aspectRatioLockEnabled: true,
-              aspectRatioPickerButtonHidden: true,
-              resetButtonHidden: true,
-              doneButtonTitle: "완료",
-              cancelButtonTitle: "취소"),
-          // Web UI 설정
-        ],
-      );
+                initAspectRatio:
+                    CropAspectRatioPreset.original, // 이미지 크로퍼 시작 시 원하는 가로 세로 비율
+                lockAspectRatio: true), // 고정 값으로 자르기 (기본값 : 사용안함)
+            // iOS UI 설정
+            IOSUiSettings(
+                title: '이미지 자르기/회전하기', // 보기 컨트롤러의 맨 위에 나타나는 제목
+                aspectRatioLockEnabled: true,
+                aspectRatioPickerButtonHidden: true,
+                resetButtonHidden: true,
+                doneButtonTitle: "완료",
+                cancelButtonTitle: "취소"),
+            // Web UI 설정
+          ],
+        );
 
-      /// 이미지 편집을 완료하면
-      /// 예상 이미지에 해당 이미지 파일을 전달함.
-      if (cropImage != null) {
-        _selectImage(cropImage);
-        _selectImageIndex(index);
+        /// 이미지 편집을 완료하면
+        /// 예상 이미지에 해당 이미지 파일을 전달함.
+        if (cropImage != null) {
+          _selectImage(cropImage);
+          _selectImageIndex(index);
+        }
+      }
+    } on PlatformException catch (error) {
+      switch (error.code) {
+        case "crop_error":
+          PhotoManager.openSetting();
+          break;
+        default:
       }
     }
   }
@@ -164,5 +183,12 @@ class ProfileImageController extends GetxController {
     }
 
     Get.back();
+  }
+
+  /// 카메라 화면으로 이동하는 메소드
+  void moveToCameraScreen() {
+    Get.to(() => const CameraScreen(), binding: BindingsBuilder(() {
+      Get.put(CameraScreenController());
+    }));
   }
 }

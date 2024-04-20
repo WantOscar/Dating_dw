@@ -226,7 +226,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
           /// 내 관심사
           const Interest(),
-          const SizedBox(height: 40),
+          const SizedBox(height: 100),
         ],
       ),
     );

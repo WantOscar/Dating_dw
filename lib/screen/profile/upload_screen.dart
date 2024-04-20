@@ -146,11 +146,7 @@ class UploadScreen extends GetView<ProfileImageController> {
         itemBuilder: (context, index) {
           if (index == 0) {
             return GestureDetector(
-              onTap: () {
-                Get.to(() => const CameraScreen(), binding: BindingsBuilder(() {
-                  Get.put(CameraScreenController());
-                }));
-              },
+              onTap: controller.moveToCameraScreen,
               child: Container(
                 color: const Color(0xff4d4d4d),
                 child: const Icon(
@@ -186,10 +182,27 @@ class UploadScreen extends GetView<ProfileImageController> {
           alignment: Alignment.center,
           height: 250,
           width: double.infinity,
-          child: const Text(
-            "갤러리에 이미지가 존재하지 않습니다.",
-            style: TextStyle(
-                fontSize: 15, fontWeight: FontWeight.w600, color: Colors.black),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "이미지가 없습니다.",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+              GestureDetector(
+                onTap: controller.moveToCameraScreen,
+                child: Text(
+                  " 사진 추가하기",
+                  style: TextStyle(
+                      color: ThemeColor.fontColor,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700),
+                ),
+              )
+            ],
           ),
         ),
       );

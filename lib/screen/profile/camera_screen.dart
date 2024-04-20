@@ -1,4 +1,5 @@
 import 'package:dating/controller/camera_controller.dart';
+import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,11 +8,7 @@ class CameraScreen extends GetView<CameraScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-          backgroundColor: Colors.black,
-          body: (controller.isLoaded) ? _camera() : _loading()),
-    );
+    return Obx(() => Scaffold(backgroundColor: Colors.black, body: _camera()));
   }
 
   Widget _loading() => Container(
@@ -64,7 +61,12 @@ class CameraScreen extends GetView<CameraScreenController> {
   /// 카메라 렌즈 화면을 보여주는 프리뷰 영역
   Widget _preview() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 100.0),
-        child: Center(child: controller.controller.buildPreview()),
+        child: Center(
+            child: (controller.isLoaded)
+                ? controller.controller.buildPreview()
+                : Container(
+                    color: const Color(0xff2d2d2d),
+                  )),
       );
 
   /// 카메라 화면에서 뒤로 이동하는 좌측 상단 버튼
