@@ -148,9 +148,10 @@ class OnboardScreen extends GetView<OnboardingController> {
                     borderRadius: BorderRadiusDirectional.circular(12.0)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
-                  child: const TextField(
+                  child: TextField(
+                    controller: controller.nickName,
                     cursorColor: Colors.black87,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: "닉네임",
                         hintStyle:
                             TextStyle(fontSize: 15, color: Color(0xffafafaf)),
@@ -224,53 +225,44 @@ class OnboardScreen extends GetView<OnboardingController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffefefef),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "생년",
-                            style: TextStyle(
-                                color: Color(0xffafafaf), fontSize: 15),
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Color(0xffafafaf),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffefefef),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "월",
-                            style: TextStyle(
-                                color: Color(0xffafafaf), fontSize: 15),
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Color(0xffafafaf),
-                          )
-                        ],
+                    child: GestureDetector(
+                      onTap: controller.pickBirthdayYear,
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffefefef),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Obx(
+                              () => Text(
+                                (controller.year == "")
+                                    ? "생년"
+                                    : controller.year,
+                                style: TextStyle(
+                                    color: (controller.year == "")
+                                        ? const Color(0xffafafaf)
+                                        : Colors.black87,
+                                    fontSize: 15),
+                              ),
+                            ),
+                            const Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                                  child: VerticalDivider(),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color(0xffafafaf),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -278,26 +270,87 @@ class OnboardScreen extends GetView<OnboardingController> {
                     width: 8.0,
                   ),
                   Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffefefef),
-                        borderRadius: BorderRadius.circular(8.0),
+                    child: GestureDetector(
+                      onTap: controller.pickBirthdayMonth,
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffefefef),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Obx(
+                              () => Text(
+                                (controller.month == "")
+                                    ? "월"
+                                    : controller.month,
+                                style: TextStyle(
+                                    color: (controller.month == "")
+                                        ? const Color(0xffafafaf)
+                                        : Colors.black87,
+                                    fontSize: 15),
+                              ),
+                            ),
+                            const Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                                  child: VerticalDivider(),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color(0xffafafaf),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "일",
-                            style: TextStyle(
-                                color: Color(0xffafafaf), fontSize: 15),
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Color(0xffafafaf),
-                          )
-                        ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8.0,
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: controller.pickBirthdayDay,
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffefefef),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Obx(
+                              () => Text(
+                                (controller.day == "") ? "일" : controller.day,
+                                style: TextStyle(
+                                    color: (controller.day == "")
+                                        ? const Color(0xffafafaf)
+                                        : Colors.black87,
+                                    fontSize: 15),
+                              ),
+                            ),
+                            const Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                                  child: VerticalDivider(),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: Color(0xffafafaf),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )
@@ -329,6 +382,7 @@ class OnboardScreen extends GetView<OnboardingController> {
         ),
       );
 
+  ///사용자가 선택적인 프로필 입력을 할 수 있는 위젯
   Widget _optionalProfiles() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
         child: Column(
@@ -352,9 +406,10 @@ class OnboardScreen extends GetView<OnboardingController> {
                     BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: const TextField(
+                  child: TextField(
+                    controller: controller.description,
                     cursorColor: Colors.black87,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "한줄소개",
                       hintStyle:
                           TextStyle(color: Color(0xffafafaf), fontSize: 15),
@@ -374,32 +429,41 @@ class OnboardScreen extends GetView<OnboardingController> {
                   color: const Color(0xffefefef),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "신장",
-                        style: TextStyle(
-                          color: Color(0xffafafaf),
-                          fontSize: 15,
+                      Obx(
+                        () => Text(
+                          (controller.height == "")
+                              ? "신장"
+                              : "${controller.height}cm",
+                          style: TextStyle(
+                            color: (controller.height == "")
+                                ? const Color(0xffafafaf)
+                                : Colors.black87,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            "170cm",
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700),
-                          ),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Color(0xffafafaf),
-                          )
-                        ],
+                      GestureDetector(
+                        onTap: controller.pickMyHeight,
+                        child: const Row(
+                          children: [
+                            Text(
+                              "선택",
+                              style: TextStyle(
+                                  color: Color(0xffafafaf),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Color(0xffafafaf),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
