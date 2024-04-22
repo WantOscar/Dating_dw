@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
+import 'package:dating/controller/onboard_controller.dart';
 import 'package:dating/screen/profile/init_profile_upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OnboardScreen extends StatelessWidget {
+class OnboardScreen extends GetView<OnboardingController> {
   const OnboardScreen({super.key});
 
   @override
@@ -59,14 +62,27 @@ class OnboardScreen extends StatelessWidget {
               (i) => Row(
                     children: List.generate(
                         3,
-                        (j) => Expanded(
-                              child: AspectRatio(
-                                aspectRatio: 1.0,
-                                child: Container(
-                                  color: defaultThumNailBoxColors[i][j],
+                        (j) => Obx(() {
+                              return Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    /// 이미지 확대 기능 추가 예정.
+                                  },
+                                  child: AspectRatio(
+                                    aspectRatio: 1.0,
+                                    child: (controller.selectProfileImage[i]
+                                                [j] ==
+                                            null)
+                                        ? Container(
+                                            color: defaultThumNailBoxColors[i]
+                                                [j],
+                                          )
+                                        : Image.file(File(controller
+                                            .selectProfileImage[i][j]!)),
+                                  ),
                                 ),
-                              ),
-                            )),
+                              );
+                            })),
                   )),
         ),
         Positioned(
@@ -147,41 +163,59 @@ class OnboardScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: const Color(0xffefefef),
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: const Text(
-                        "남성",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xffafafaf)),
+              child: Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: controller.setGenderToMan,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: (controller.gender == Gender.MAN)
+                                  ? Colors.blue.withOpacity(0.5)
+                                  : const Color(0xffefefef),
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Text(
+                            "남성",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: (controller.gender == Gender.MAN)
+                                    ? Colors.white
+                                    : const Color(0xffafafaf)),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 10.0,
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: const Color(0xffefefef),
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: const Text(
-                        "여성",
-                        style:
-                            TextStyle(fontSize: 15, color: Color(0xffafafaf)),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: controller.setGenderToWoman,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: (controller.gender == Gender.WOMAN)
+                                  ? Colors.red.withOpacity(0.5)
+                                  : const Color(0xffefefef),
+                              borderRadius: BorderRadius.circular(8.0)),
+                          child: Text(
+                            "여성",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: (controller.gender == Gender.WOMAN)
+                                    ? Colors.white
+                                    : const Color(0xffafafaf)),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Padding(
