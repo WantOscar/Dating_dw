@@ -3,6 +3,7 @@ import 'package:dating/widget/profile/item_select_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum Gender { MAN, WOMAN }
@@ -42,6 +43,10 @@ class OnboardingController extends GetxController {
 
   /// 사용자의 신장크기 인덱스
   int _heightIndex = 0;
+
+  /// 사용자의 거주 주소
+  final Rxn<KopoModel> _address = Rxn<KopoModel>();
+  KopoModel? get address => _address.value;
 
   /// 텍스트 컨트롤러
   final TextEditingController _nickName = TextEditingController();
@@ -173,5 +178,18 @@ class OnboardingController extends GetxController {
         Get.back();
       },
     ));
+  }
+
+  /// 사용자 주소지 검색 api 함수
+  void searchMyAddress() async {
+    if (_address.value != null) {
+      _address.value = null;
+      return;
+    }
+
+    KopoModel? address = await Get.to(() => RemediKopo());
+    if (address != null) {
+      _address(address);
+    }
   }
 }

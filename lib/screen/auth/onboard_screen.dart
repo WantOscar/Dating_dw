@@ -366,10 +366,49 @@ class OnboardScreen extends GetView<OnboardingController> {
                   borderRadius: BorderRadius.circular(8.0),
                   color: const Color(0xffefefef),
                 ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Obx(
+                    () => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          (controller.address == null)
+                              ? "주소"
+                              : controller.address!.address!,
+                          style: const TextStyle(
+                            color: Color(0xffafafaf),
+                            fontSize: 15,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: controller.searchMyAddress,
+                          child: Icon(
+                            (controller.address == null)
+                                ? Icons.search
+                                : Icons.close,
+                            color: const Color(0xffafafaf),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: const Color(0xffefefef),
+                ),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
-                    "주소",
+                    "상세주소",
                     style: TextStyle(
                       color: Color(0xffafafaf),
                       fontSize: 15,
