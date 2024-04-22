@@ -7,7 +7,7 @@ class OnboardingController extends GetxController {
 
   @override
   void onInit() {
-    _getFirstLogin();
+    // _getFirstLogin();
     super.onInit();
   }
 

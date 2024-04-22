@@ -1,5 +1,8 @@
+import 'package:dating/controller/init_profile_upload_screen_controller.dart';
+import 'package:dating/screen/profile/init_profile_upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OnboardScreen extends StatelessWidget {
   const OnboardScreen({super.key});
@@ -34,31 +37,48 @@ class OnboardScreen extends StatelessWidget {
 
   /// 선택한 프로필 이미지를 보여주는 프리뷰 위젯
   /// 하단의 카메라 버튼을 통해서 이미지를 불러올 수 있음.
-  Widget _thumNails() => Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-                2,
-                (index) => Row(
-                      children: List.generate(
-                          3,
-                          (index) => Expanded(
-                                child: AspectRatio(
-                                  aspectRatio: 1.0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(1.0),
-                                    child: Container(
-                                      color: Colors.blue,
-                                    ),
-                                  ),
+  Widget _thumNails() {
+    List<List<Color>> defaultThumNailBoxColors = [
+      [
+        const Color(0xffcfa9a9),
+        const Color(0xffe7d3d3),
+        const Color(0xffffd4d4),
+      ],
+      [
+        const Color(0xffebebeb),
+        const Color(0xffffa5a5),
+        const Color(0xffb8afaf),
+      ]
+    ];
+    return Stack(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+              2,
+              (i) => Row(
+                    children: List.generate(
+                        3,
+                        (j) => Expanded(
+                              child: AspectRatio(
+                                aspectRatio: 1.0,
+                                child: Container(
+                                  color: defaultThumNailBoxColors[i][j],
                                 ),
-                              )),
-                    )),
-          ),
-          Positioned(
-            bottom: 10.0,
-            right: 10.0,
+                              ),
+                            )),
+                  )),
+        ),
+        Positioned(
+          bottom: 10.0,
+          right: 10.0,
+          child: GestureDetector(
+            onTap: () {
+              Get.to(() => const InitProfileUploadScreen(),
+                  binding: BindingsBuilder(() {
+                Get.put(InitProfileUploadScreenController());
+              }), transition: Transition.downToUp);
+            },
             child: Card(
               elevation: 3.0,
               shape: RoundedRectangleBorder(
@@ -80,9 +100,11 @@ class OnboardScreen extends StatelessWidget {
                 ),
               ),
             ),
-          )
-        ],
-      );
+          ),
+        )
+      ],
+    );
+  }
 
   /// 사용자가 기본 프로필 정보를 입력하는 위젯
   /// 이 위젯은 반드시 정보를 기입해야만,
