@@ -1,18 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dating/Widget/main/profile_main.dart';
+import 'package:dating/Widget/main/today_freinds_profile.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/main/circle_avatar.dart';
-import 'package:dating/Widget/main/mbti_recommend.dart';
-import 'package:dating/Widget/main/today_meet.dart';
-import 'package:dating/Widget/main/today_meet_box.dart';
 import 'package:dating/controller/user_controller.dart';
-import 'package:dating/data/model/mbti.dart';
-import 'package:dating/data/repository/mbti_repository.dart';
-import 'package:dating/screen/main/alarm_screen.dart';
 import 'package:dating/screen/main/main_favorite_me_screen.dart';
 import 'package:dating/screen/main/main_favorite_screen.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:dating/utils/status_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,28 +16,16 @@ class MainScreen extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonHeader(
-        text: '캠밋',
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              onPressed: () {
-                Get.to(() => const AlarmScreen());
-              },
-              icon: IconShape.iconNotificationOutline,
-            ),
-          ),
-        ],
-      ),
+      appBar: const CommonHeader(text: '캠밋'),
       body: Obx(
         () => RefreshIndicator.adaptive(
-            onRefresh: controller.fetchData,
-            child: (controller.status == Status.LOADING)
-                ? const Center(
-                    child: CircularProgressIndicator.adaptive(),
-                  )
-                : _buildBody()),
+          onRefresh: controller.fetchData,
+          child: (controller.status == Status.LOADING)
+              ? const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                )
+              : _buildBody(),
+        ),
       ),
     );
   }
@@ -62,7 +43,7 @@ class MainScreen extends GetView<UserController> {
                     final user = controller.users!.randomMemberList[index];
 
                     // final user = controller.users[index];
-                    return ProfileMain(
+                    return TodayFriendsProfile(
                       randomUser: user,
                     );
                   },

@@ -1,5 +1,4 @@
 import 'package:dating/widget/icon_header.dart';
-import 'package:dating/widget/main/alart_widget.dart';
 import 'package:flutter/material.dart';
 
 class MainFavoriteScreen extends StatelessWidget {
@@ -11,390 +10,72 @@ class MainFavoriteScreen extends StatelessWidget {
       appBar: const IconHeader(text: '내가 관심 있는 친구'),
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
+          children: List.generate(
+            10,
+            (index) => Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.13,
+                        height: MediaQuery.of(context).size.width * 0.13,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(45),
+                          color: Colors.grey,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '홍길동',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Row(
+                              children: [
+                                Icon(Icons.location_on,
+                                    size: 20, color: Colors.black),
+                                Text(
+                                  '성북구 20세 178cm',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFF006B),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: const Text(
+                          '채팅하기',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
                           ),
-                    ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0), // 컨테이너 내부에 패딩 추가
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B), // 배경색 설정
-                      borderRadius: BorderRadius.circular(50), // 컨테이너 모서리를 둥글게
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(
-                          color: Colors.white, fontSize: 12 // 텍스트 색상 설정
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            AlertWidget(
-              text: const Text('홍길동'),
-              text2: const Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.grey,
-                  ),
-                  Text(
-                    '성북구 20세 178cm',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                ],
-              ),
-              text3: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF006B),
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    child: const Text(
-                      '채팅하기',
-                      style: TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

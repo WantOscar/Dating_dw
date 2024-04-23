@@ -1,3 +1,4 @@
+import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/data/model/main_response.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
@@ -5,9 +6,9 @@ import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 
-class ProfileMain extends StatelessWidget {
+class TodayFriendsProfile extends StatelessWidget {
   final Map<String, dynamic> randomUser;
-  const ProfileMain({super.key, required this.randomUser});
+  const TodayFriendsProfile({super.key, required this.randomUser});
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,7 @@ class ProfileMain extends StatelessWidget {
           children: [
             /// 오늘의 추천인 사진
             Image.network(
-              randomUser["image"] ??
-                  'https://image.news1.kr/system/photos/2022/12/16/5742694/article.jpg/dims/quality/80/optimize',
+              randomUser["image"],
               fit: BoxFit.cover,
               width: width * 0.8,
               height: height * 0.8,
@@ -102,12 +102,12 @@ class ProfileMain extends StatelessWidget {
             Positioned(
               bottom: width * 0.17,
               left: height * 0.04,
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.location_on, color: Colors.white, size: 20),
+                  const Icon(Icons.location_on, color: Colors.white, size: 20),
                   Text(
-                    '홍대 1.2Km',
-                    style: TextStyle(
+                    "${randomUser["residence"]}",
+                    style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
@@ -137,7 +137,7 @@ class ProfileMain extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        chatToast();
+                        ChatController.to.makeChattingRoom(randomUser["id"]);
                       },
                       child: Text(
                         '채팅하기',

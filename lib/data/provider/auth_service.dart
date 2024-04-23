@@ -54,24 +54,26 @@ class AuthService extends GetxService {
   /// 회원정보를 반환
   /// 회원가입에 실패하면
   /// 에러메시지 반환
-  Future<void> signUp(Map<String, dynamic> json) async {
+  Future<String?> signUp(Map<String, dynamic> json) async {
     try {
       final response = await dio.post(
-        ApiUrl.login,
+        ApiUrl.signUp,
         data: json,
       );
 
       if (response.statusCode == 200) {
-        print("회원가입에 성공했습니다 !");
-      } else {
-        print(response.data["errorMessage"]);
+        return "회원가입에 성공했습니다!";
       }
     } on DioException catch (error) {
-      dioExceptionHander(error);
-      // final error = ErrorResponse.fromJson(response.data);
+      switch (error.type) {
+        case DioExceptionType.badResponse:
+          Get.snackbar("중복 회원", "이미 존재하는 회원정보입니다!");
+        default:
+      }
     } on Exception {
       Get.snackbar("회원가입 실패", "잠시후에 다시 시도해주세요 !");
     }
+    return null;
   }
 
   /// 로그아웃 메소드

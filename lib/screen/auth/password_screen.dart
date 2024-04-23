@@ -1,5 +1,6 @@
 import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,82 +9,149 @@ class PasswordScreen extends GetView<ResisterController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: ThemeColor.fontColor,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '비밀번호를 입력해주세요',
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: ThemeColor.fontColor),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              '이제 마지막 단계에요 :)',
-              style: TextStyle(
-                  fontSize: 13,
-                  color: ThemeColor.font2Color,
-                  fontWeight: FontWeight.w300),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.1,
-              decoration: BoxDecoration(
-                color: const Color(0xFFEDEDED),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-                child: TextFormField(
-                  controller: ResisterController.to.password,
-                  decoration: const InputDecoration(
-                    hintText: '비밀번호를 입력해주세요!',
-                    border: InputBorder.none,
-                    hintStyle: TextStyle(color: Colors.grey),
-                  ),
-                  obscureText: true,
-                ),
+    return GestureDetector(
+      onTap: FocusScope.of(context).unfocus,
+      child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: ThemeColor.fontColor,
               ),
             ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Obx(
-          () => BottomAppBar(
-            shadowColor: Colors.white,
+            backgroundColor: Colors.white,
             elevation: 0,
-            child: GestureDetector(
-              onTap: controller.isLoading ? null : controller.signUp,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _header(),
+                const SizedBox(
+                  height: 30,
+                ),
+                _passwordInput(),
+              ],
+            ),
+          ),
+          bottomNavigationBar: _signUpButton()),
+    );
+  }
+
+  /// 비밀번호 입력 페이지 상단 설명 위젯
+  Widget _header() => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '비밀번호를 입력해주세요',
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: ThemeColor.fontColor),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            '이제 마지막 단계에요 :)',
+            style: TextStyle(
+                fontSize: 13,
+                color: ThemeColor.font2Color,
+                fontWeight: FontWeight.w300),
+          ),
+        ],
+      );
+
+  Widget _passwordInput() => Column(
+        children: [
+          /// 회원가입 통합 테스트를 위한 임시 위젯
+          /// 추후에 삭제될 예정임.
+          /// 이메일은 이메일 인증에서 사용한 이메일을 그대로 사용함.
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+                  child: Text(
+                    "이메일",
+                    style: TextStyle(color: Colors.black87, fontSize: 12),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: CammitTextField(
+                    controller: ResisterController.to.email,
+                    hintText: "이메일을 입력해주세요!",
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+                  child: Text(
+                    "비밀번호",
+                    style: TextStyle(color: Colors.black87, fontSize: 12),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: CammitTextField(
+                    controller: ResisterController.to.password,
+                    hintText: "비밀번호를 입력해주세요!",
+                    obscureText: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+                  child: Text(
+                    "비밀번호 확인",
+                    style: TextStyle(color: Colors.black87, fontSize: 12),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: CammitTextField(
+                    controller: ResisterController.to.passwordAgain,
+                    hintText: "비밀번호를 다시 입력해주세요!",
+                    obscureText: true,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      );
+
+  Widget _signUpButton() => Obx(
+        () => GestureDetector(
+          onTap: controller.isLoading ? null : controller.signUp,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: SafeArea(
               child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.07,
+                height: 70,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(24.0),
                     color: ThemeColor.fontColor),
                 child: controller.isLoading
                     ? const CircularProgressIndicator()
@@ -100,7 +168,5 @@ class PasswordScreen extends GetView<ResisterController> {
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

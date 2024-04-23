@@ -1,6 +1,7 @@
 import 'package:dating/binding/home_binding.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/provider/auth_service.dart';
+import 'package:dating/screen/auth/onboard_screen.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -35,7 +36,7 @@ class LoginController extends GetxController {
     final token = await storage.read(key: "accessToken");
 
     if (token != null) {
-      Get.off(() => const HomeScreen(), binding: HomeBinding());
+      Get.off(() => const OnboardScreen(), binding: HomeBinding());
     }
     _isLoading(false);
   }

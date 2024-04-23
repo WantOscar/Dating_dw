@@ -1,9 +1,9 @@
 import 'package:dating/controller/bottom_nav_controller.dart';
 import 'package:dating/screen/chat/chatting_screen.dart';
-import 'package:dating/screen/feed/feed_screen.dart';
+import 'package:dating/screen/search/search_screen.dart';
+import 'package:dating/screen/alarm/alarm_screen.dart';
 import 'package:dating/screen/main/main_screen.dart';
 import 'package:dating/style/constant.dart';
-import 'package:dating/screen/meet/meeting_screen.dart';
 import 'package:dating/screen/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,10 +22,11 @@ class HomeScreen extends GetView<BottomNavController> {
           child: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-              BottomNavigationBarItem(icon: Icon(Icons.favorite), label: '과팅'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: '피드'),
+              BottomNavigationBarItem(icon: Icon(Icons.favorite), label: '탐색'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.chat_outlined), label: '채팅'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.notifications), label: '알림'),
               BottomNavigationBarItem(icon: Icon(Icons.circle), label: '프로필'),
             ],
             onTap: controller.changeIndex,
@@ -40,9 +41,9 @@ class HomeScreen extends GetView<BottomNavController> {
           index: controller.index,
           children: const [
             MainScreen(),
-            MeetingScreen(),
-            FeedScreen(),
+            SearchScreen(),
             ChattingScreen(),
+            AlarmScreen(),
             ProfileScreen(),
           ],
         ),

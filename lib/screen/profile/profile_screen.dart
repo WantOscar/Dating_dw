@@ -31,33 +31,34 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:
-            // Obx(
-            //   () {
-            //     if (UserController.to.status == Status.LOADING) {
-            //       return const Center(
-            //         child: CircularProgressIndicator.adaptive(),
-            //       );
-            //     } else if (UserController.to.status == Status.ERROR) {
-            //       return const Center(
-            //         child: Text("에러가 발생했습니다."),
-            //       );
-            //     } else {
-            //       return _buildBody();
-            //     }
-            //   },
-            // ),
-            CustomScrollView(
-      slivers: [
-        _appBar(),
-        _profile(),
-        _info(),
-        _personality(),
-        _interesting(),
-        _idealType(),
-        _story(),
-      ],
-    ));
+      body:
+          // Obx(
+          //   () {
+          //     if (UserController.to.status == Status.LOADING) {
+          //       return const Center(
+          //         child: CircularProgressIndicator.adaptive(),
+          //       );
+          //     } else if (UserController.to.status == Status.ERROR) {
+          //       return const Center(
+          //         child: Text("에러가 발생했습니다."),
+          //       );
+          //     } else {
+          //       return _buildBody();
+          //     }
+          //   },
+          // ),
+          CustomScrollView(
+        slivers: [
+          _appBar(),
+          _profile(),
+          _info(),
+          _personality(),
+          _interesting(),
+          _idealType(),
+          _story(),
+        ],
+      ),
+    );
   }
 
   Widget _profileImages() {
@@ -124,6 +125,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                 fontWeight: FontWeight.bold),
           ),
         ),
+        toolbarHeight: 65,
         leadingWidth: 200,
         backgroundColor: Colors.white,
         elevation: 0,
