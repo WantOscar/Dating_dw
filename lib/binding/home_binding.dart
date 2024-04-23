@@ -16,9 +16,11 @@ class HomeBinding implements Bindings {
   @override
   void dependencies() {
     Get.put(OnboardingController());
-    Get.put(UserController(
-        userRepository: UserRepository(service: UserFetch(dio: Dio()))));
-    Get.put(BottomNavController());
+    Get.put(
+        UserController(
+            userRepository: UserRepository(service: UserFetch(dio: Dio()))),
+        permanent: true);
+    Get.put(BottomNavController(), permanent: true);
     Get.put(ChatController(service: ChatService(dio: Dio())), permanent: true);
   }
 }

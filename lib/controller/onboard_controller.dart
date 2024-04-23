@@ -81,7 +81,7 @@ class OnboardingController extends GetxController {
     isFirstLogin = prefs.getBool("isFirstLogin");
     if (isFirstLogin != null) {
       Get.offAll(() => const HomeScreen());
-    } else {}
+    }
   }
 
   /// 성별을 남자로 설정하는 함수

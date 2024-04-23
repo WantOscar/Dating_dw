@@ -28,12 +28,13 @@ class LoginScreen extends GetView<LoginController> {
                       const SizedBox(
                         height: 50,
                       ),
-                      _body(),
+                      _loginFields(),
+                      _forgotAccount()
                     ],
                   ),
                 ),
               ),
-              bottomNavigationBar: _bottom(),
+              bottomNavigationBar: _signUp(),
             ),
           ),
           _loading(),
@@ -42,6 +43,7 @@ class LoginScreen extends GetView<LoginController> {
     );
   }
 
+  /// 앱 타이틀 위젯
   Widget _title() {
     return Column(
       children: [
@@ -63,7 +65,9 @@ class LoginScreen extends GetView<LoginController> {
     );
   }
 
-  Widget _body() {
+  /// 로그인을 위한 이메일과 비밀번호를 입력하는 텍스트 필드와
+  /// 로그인을 시도하는 버튼 위젯.
+  Widget _loginFields() {
     return Column(
       children: [
         Container(
@@ -160,25 +164,28 @@ class LoginScreen extends GetView<LoginController> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GestureDetector(
-            onTap: () {
-              Get.to(() => const AuthForgotScreen(),
-                  binding: ResetPasswordBinding());
-            },
-            child: Text(
-              '계정을 잃어버리셨나요?',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: ThemeColor.fontColor),
-            ),
-          ),
-        ),
       ],
     );
   }
 
-  Widget _bottom() {
+  /// 계정을 잊었을 때 이용하는 텍스트 버튼
+  Widget _forgotAccount() => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+          onTap: () {
+            Get.to(() => const AuthForgotScreen(),
+                binding: ResetPasswordBinding());
+          },
+          child: Text(
+            '계정을 잃어버리셨나요?',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, color: ThemeColor.fontColor),
+          ),
+        ),
+      );
+
+  /// 계정을 생성하기 위한 라우팅 버튼
+  Widget _signUp() {
     return BottomAppBar(
       shadowColor: Colors.white,
       elevation: 0,

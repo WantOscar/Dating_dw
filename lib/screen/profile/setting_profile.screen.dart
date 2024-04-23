@@ -1,5 +1,5 @@
-import 'package:dating/Widget/profile/warning_window.dart';
 import 'package:dating/controller/login_controller.dart';
+import 'package:dating/widget/common/warning_window.dart';
 import 'package:dating/widget/icon_header.dart';
 import 'package:dating/widget/setting_profile/alarm_setting.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';

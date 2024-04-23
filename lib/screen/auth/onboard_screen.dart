@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
 import 'package:dating/controller/onboard_controller.dart';
+import 'package:dating/screen/home_screen.dart';
 import 'package:dating/screen/profile/init_profile_upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
@@ -515,17 +516,24 @@ class OnboardScreen extends GetView<OnboardingController> {
 
   Widget _createProfileButton() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-        child: Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          height: 50,
-          decoration: BoxDecoration(
-              color: ThemeColor.fontColor,
-              borderRadius: BorderRadius.circular(12.0)),
-          child: const Text(
-            "프로필 생성",
-            style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+        child: GestureDetector(
+          onTap: () {
+            Get.off(() => const HomeScreen());
+          },
+          child: Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 50,
+            decoration: BoxDecoration(
+                color: ThemeColor.fontColor,
+                borderRadius: BorderRadius.circular(12.0)),
+            child: const Text(
+              "프로필 생성",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
+            ),
           ),
         ),
       );
