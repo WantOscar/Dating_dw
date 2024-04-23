@@ -2,6 +2,7 @@ import 'package:dating/binding/home_binding.dart';
 import 'package:dating/data/model/error_response.dart';
 import 'package:dating/data/model/login_response.dart';
 import 'package:dating/screen/auth/login_screen.dart';
+import 'package:dating/screen/auth/onboard_screen.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dio/dio.dart';
@@ -35,7 +36,7 @@ class AuthService extends GetxService {
           value: loginResponse.refreshToken,
         );
 
-        Get.to(() => const HomeScreen(), binding: HomeBinding());
+        Get.off(() => const OnboardScreen(), binding: HomeBinding());
       }
       // } else {
       //   final errorResponse = ErrorResponse.fromJson(response.data);
