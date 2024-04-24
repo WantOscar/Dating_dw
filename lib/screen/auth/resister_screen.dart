@@ -1,11 +1,13 @@
 import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/utils/status_enum.dart';
+import 'package:dating/widget/common/button_loading_indicator.dart';
 import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PasswordScreen extends GetView<ResisterController> {
-  const PasswordScreen({super.key});
+class ResisterScreen extends GetView<ResisterController> {
+  const ResisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +146,8 @@ class PasswordScreen extends GetView<ResisterController> {
 
   Widget _signUpButton() => Obx(
         () => GestureDetector(
-          onTap: controller.isLoading ? null : controller.signUp,
+          onTap:
+              (controller.loading == Status.loading) ? null : controller.signUp,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: SafeArea(
@@ -153,8 +156,8 @@ class PasswordScreen extends GetView<ResisterController> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(24.0),
                     color: ThemeColor.fontColor),
-                child: controller.isLoading
-                    ? const CircularProgressIndicator()
+                child: (controller.loading == Status.loading)
+                    ? const ButtonLoadingIndicator()
                     : const Center(
                         child: Text(
                           '회원가입',

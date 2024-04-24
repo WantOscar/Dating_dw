@@ -3,8 +3,8 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpPage extends GetView<ResisterController> {
-  const SignUpPage({super.key});
+class EmailVerifyPage extends GetView<ResisterController> {
+  const EmailVerifyPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,8 @@ import 'package:dating/binding/reset_password_binding.dart';
 import 'package:dating/binding/resister_binding.dart';
 import 'package:dating/controller/login_controller.dart';
 import 'package:dating/screen/auth/auth_forgot_screen.dart';
-import 'package:dating/screen/auth/password_screen.dart';
-import 'package:dating/screen/auth/signup_screen.dart';
+import 'package:dating/screen/auth/resister_screen.dart';
+import 'package:dating/screen/auth/email_verify_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -205,7 +205,7 @@ class LoginScreen extends GetView<LoginController> {
               onTap: () {
                 // Get.to(() => const SignUpPage(), binding: ResisterBinding());
                 /// 회원정보 등록을 위해 임의로 이메일 인증을 스킵.
-                Get.to(() => const PasswordScreen(),
+                Get.to(() => const ResisterScreen(),
                     binding: ResisterBinding());
               },
               child: Text(

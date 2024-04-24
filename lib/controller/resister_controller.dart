@@ -1,13 +1,14 @@
+import 'package:dating/data/model/member_join.dart';
 import 'package:dating/data/provider/auth_service.dart';
 import 'package:dating/screen/auth/login_screen.dart';
-import 'package:dating/screen/auth/password_screen.dart';
+import 'package:dating/screen/auth/resister_screen.dart';
+import 'package:dating/utils/status_enum.dart';
 import 'package:dating/widget/common/notification_window.dart';
-import 'package:dating/widget/common/warning_window.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ResisterController extends GetxController {
-  final RxBool _isLoading = false.obs;
+  final Rx<Status> _loading = Rx<Status>(Status.loaded);
   late String code;
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -19,7 +20,7 @@ class ResisterController extends GetxController {
   TextEditingController get email => _email;
   TextEditingController get password => _password;
   TextEditingController get passwordAgain => _passwordAgain;
-  bool get isLoading => _isLoading.value;
+  Status get loading => _loading.value;
 
   ///이메일로 인증메소드
   void emailVerify() async {
@@ -28,13 +29,13 @@ class ResisterController extends GetxController {
       Get.snackbar("이메일 미기입", "이메일을 입력하세요!");
       return;
     }
-    _isLoading(true);
+
     final data = {"email": _email.value.text.toString()};
 
     final response = await service.emailVerify(data);
     if (response != null) {
       code = response;
-      Get.to(() => const PasswordScreen());
+      Get.to(() => const ResisterScreen());
     }
     _email.clear();
   }
@@ -46,13 +47,15 @@ class ResisterController extends GetxController {
     if (_password.text.toString() != _passwordAgain.text.toString()) {
       return;
     }
-    final data = {
-      "email": _email.text.toString(),
-      "password": _password.toString(),
-    };
 
-    final result = await service.signUp(data);
-    if (result == "회원가입에 성공했습니다!") showCompeleteDialog();
+    _loading(Status.loading);
+    final memberJoin = MemberJoin(
+        email: _email.text.toString(), password: _password.text.toString());
+    final result = await service.signUp(memberJoin.toJson());
+    if (result == "회원가입에 성공했습니다!") {
+      showCompeleteDialog();
+    }
+    _loading(Status.loaded);
   }
 
   void showCompeleteDialog() {

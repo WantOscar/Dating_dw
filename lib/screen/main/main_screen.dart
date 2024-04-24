@@ -20,7 +20,7 @@ class MainScreen extends GetView<UserController> {
       body: Obx(
         () => RefreshIndicator.adaptive(
           onRefresh: controller.fetchData,
-          child: (controller.status == Status.LOADING)
+          child: (controller.isLoading)
               ? const Center(
                   child: CircularProgressIndicator.adaptive(),
                 )

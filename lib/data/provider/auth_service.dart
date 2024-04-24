@@ -1,20 +1,21 @@
 import 'package:dating/binding/home_binding.dart';
-import 'package:dating/data/model/error_response.dart';
 import 'package:dating/data/model/login_response.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/screen/auth/onboard_screen.dart';
-import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
+import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxService {
-  final Dio dio;
+  final Dio dio = Dio(BaseOptions(
+    baseUrl: ApiUrl.baseUrl,
+  ))
+    ..interceptors.add(BaseIntercepter());
   final FlutterSecureStorage storage;
-
-  AuthService({required this.dio, required this.storage});
+  AuthService({required this.storage});
 
   /// 로그인 메소드
   /// 로그인에 성공하면 서버로부터 JWT 토큰을 받고
@@ -38,15 +39,8 @@ class AuthService extends GetxService {
 
         Get.off(() => const OnboardScreen(), binding: HomeBinding());
       }
-      // } else {
-      //   final errorResponse = ErrorResponse.fromJson(response.data);
-      //   print(errorResponse.errorMessage);
-      // }
-    } on DioException catch (error) {
-      dioExceptionHander(error);
-      return;
     } on Exception {
-      Get.snackbar("로그인 실패!", "회원정보를 다시 확인해주세요 !");
+      return;
     }
   }
 
@@ -61,18 +55,11 @@ class AuthService extends GetxService {
         ApiUrl.signUp,
         data: json,
       );
-
       if (response.statusCode == 200) {
         return "회원가입에 성공했습니다!";
       }
-    } on DioException catch (error) {
-      switch (error.type) {
-        case DioExceptionType.badResponse:
-          Get.snackbar("중복 회원", "이미 존재하는 회원정보입니다!");
-        default:
-      }
     } on Exception {
-      Get.snackbar("회원가입 실패", "잠시후에 다시 시도해주세요 !");
+      return null;
     }
     return null;
   }
