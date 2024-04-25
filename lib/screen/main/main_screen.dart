@@ -6,7 +6,6 @@ import 'package:dating/widget/main/circle_avatar.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/main/main_favorite_me_screen.dart';
 import 'package:dating/screen/main/main_favorite_screen.dart';
-import 'package:dating/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

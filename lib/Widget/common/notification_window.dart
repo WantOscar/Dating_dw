@@ -6,8 +6,8 @@ class NotificationWindow extends StatelessWidget {
   final String content;
   final String? confirmLabel;
   final String? cancelLabel;
-  final void Function()? onConfirm;
-  final void Function()? onCancel;
+  final dynamic Function()? onConfirm;
+  final dynamic Function()? onCancel;
   const NotificationWindow(
       {super.key,
       required this.content,

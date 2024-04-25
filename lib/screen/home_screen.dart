@@ -13,39 +13,44 @@ class HomeScreen extends GetView<BottomNavController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        extendBody: true,
-        bottomNavigationBar: ClipRRect(
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
-          child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-              BottomNavigationBarItem(icon: Icon(Icons.favorite), label: '탐색'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.chat_outlined), label: '채팅'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.notifications), label: '알림'),
-              BottomNavigationBarItem(icon: Icon(Icons.circle), label: '프로필'),
-            ],
-            onTap: controller.changeIndex,
-            selectedItemColor: ThemeColor.fontColor,
-            unselectedItemColor: Colors.grey,
-            currentIndex: controller.index,
-            showUnselectedLabels: true,
-            type: BottomNavigationBarType.fixed,
+    return WillPopScope(
+      onWillPop: controller.popAction,
+      child: Obx(
+        () => Scaffold(
+          extendBody: true,
+          bottomNavigationBar: ClipRRect(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24.0),
+                topRight: Radius.circular(24.0)),
+            child: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite), label: '탐색'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.chat_outlined), label: '채팅'),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.notifications), label: '알림'),
+                BottomNavigationBarItem(icon: Icon(Icons.circle), label: '프로필'),
+              ],
+              onTap: controller.changeIndex,
+              selectedItemColor: ThemeColor.fontColor,
+              unselectedItemColor: Colors.grey,
+              currentIndex: controller.index,
+              showUnselectedLabels: true,
+              type: BottomNavigationBarType.fixed,
+            ),
           ),
-        ),
-        body: IndexedStack(
-          index: controller.index,
-          children: const [
-            MainScreen(),
-            SearchScreen(),
-            ChattingScreen(),
-            AlarmScreen(),
-            ProfileScreen(),
-          ],
+          body: IndexedStack(
+            index: controller.index,
+            children: const [
+              MainScreen(),
+              SearchScreen(),
+              ChattingScreen(),
+              AlarmScreen(),
+              ProfileScreen(),
+            ],
+          ),
         ),
       ),
     );
