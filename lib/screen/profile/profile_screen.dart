@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
+import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
@@ -61,6 +62,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  /// 사용자의 프로필 이미지를 보여주는 슬라이더 위젯
   Widget _profileImages() {
     return CarouselSlider.builder(
       itemCount: images.length,
@@ -113,6 +115,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  /// 프로필 화면 앱바 위젯
   Widget _appBar() => SliverAppBar(
         pinned: true,
         leading: Padding(
@@ -134,7 +137,10 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                Get.to(() => const SettingProfileScreen());
+                Get.to(() => const SettingProfileScreen(),
+                    binding: BindingsBuilder(() {
+                  Get.put(SettingController());
+                }));
               },
               icon: IconShape.iconSettings,
             ),

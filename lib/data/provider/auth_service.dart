@@ -1,19 +1,18 @@
 import 'package:dating/binding/home_binding.dart';
-import 'package:dating/data/model/error_response.dart';
-import 'package:dating/data/model/login_response.dart';
+import 'package:dating/data/model/token_provider.dart';
 import 'package:dating/screen/auth/login_screen.dart';
-import 'package:dating/screen/home_screen.dart';
+import 'package:dating/screen/auth/onboard_screen.dart';
 import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class AuthService extends GetxService {
-  final Dio dio;
-  final FlutterSecureStorage storage;
-
-  AuthService({required this.dio, required this.storage});
+  final TokenProvider tokenProvider = TokenProvider();
+  final Dio dio = Dio(BaseOptions(
+    baseUrl: ApiUrl.baseUrl,
+  ))
+    ..interceptors.add(BaseIntercepter());
 
   /// 로그인 메소드
   /// 로그인에 성공하면 서버로부터 JWT 토큰을 받고
@@ -23,29 +22,11 @@ class AuthService extends GetxService {
     try {
       final response = await dio.post(ApiUrl.login, data: data);
       if (response.statusCode == 200) {
-        final loginResponse = LoginResponse.fromJson(response.data);
-
-        const st = FlutterSecureStorage();
-        st.write(
-          key: "accessToken",
-          value: loginResponse.accessToken,
-        );
-        st.write(
-          key: "refreshToken",
-          value: loginResponse.refreshToken,
-        );
-
-        Get.to(() => const HomeScreen(), binding: HomeBinding());
+        tokenProvider.saveTokenInfo(response.data);
+        Get.off(() => const OnboardScreen(), binding: HomeBinding());
       }
-      // } else {
-      //   final errorResponse = ErrorResponse.fromJson(response.data);
-      //   print(errorResponse.errorMessage);
-      // }
-    } on DioException catch (error) {
-      dioExceptionHander(error);
-      return;
     } on Exception {
-      Get.snackbar("로그인 실패!", "회원정보를 다시 확인해주세요 !");
+      return;
     }
   }
 
@@ -54,24 +35,19 @@ class AuthService extends GetxService {
   /// 회원정보를 반환
   /// 회원가입에 실패하면
   /// 에러메시지 반환
-  Future<void> signUp(Map<String, dynamic> json) async {
+  Future<String?> signUp(Map<String, dynamic> json) async {
     try {
       final response = await dio.post(
-        ApiUrl.login,
+        ApiUrl.signUp,
         data: json,
       );
-
       if (response.statusCode == 200) {
-        print("회원가입에 성공했습니다 !");
-      } else {
-        print(response.data["errorMessage"]);
+        return "회원가입에 성공했습니다!";
       }
-    } on DioException catch (error) {
-      dioExceptionHander(error);
-      // final error = ErrorResponse.fromJson(response.data);
     } on Exception {
-      Get.snackbar("회원가입 실패", "잠시후에 다시 시도해주세요 !");
+      return null;
     }
+    return null;
   }
 
   /// 로그아웃 메소드
@@ -80,14 +56,9 @@ class AuthService extends GetxService {
   /// 삭제 후 로그인화면으로 이동함.
   /// 실패한 경우 에러메시지를 사용자에게 보여줌.
   Future<void> logOut() async {
-    try {
-      print("토큰 삭제");
-      await storage.delete(key: "accessToken");
-      await storage.delete(key: "refreshToken");
-      Get.offAll(() => const LoginScreen());
-    } catch (e) {
-      Get.snackbar('로그아웃에 실패하였습니다!', '잠시후 다시 시도해주세요');
-    }
+    print("토큰 삭제");
+    tokenProvider.deleteTokenInfo();
+    Get.offAll(() => const LoginScreen());
   }
 
   /// 이메일 인증 메소드
@@ -120,6 +91,25 @@ class AuthService extends GetxService {
       default:
         Get.snackbar("에러", "에러가 발생했습니다!");
         break;
+    }
+  }
+
+  /// 사용자 로그인 정보 무결성 검증 및 새 엑세스 토큰 발급 메소드
+  /// 사용자의 리프레시 토큰이 만료된 경우
+  /// 강제로 로그아웃됨.
+  /// 리프레시 토큰이 유효한 경우 새 엑세스 토큰을 발급 후 저장.
+  Future<bool> refreshToken(String refreshToken) async {
+    try {
+      final response = await dio.post("/refresh",
+          options: Options(headers: {"refreshToken": "Bearer $refreshToken"}));
+      if (response.statusCode == 200) {
+        await tokenProvider.saveAccessToken(response.data["accessToken"]);
+        return true;
+      } else {
+        return false;
+      }
+    } on Exception {
+      return false;
     }
   }
 }

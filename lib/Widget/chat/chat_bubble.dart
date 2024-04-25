@@ -76,8 +76,8 @@ class _ChatBubbleState extends State<ChatBubble> {
   /// 말풍선 꼬리의 방향을 정할 수 있음.
   Widget _bubble() {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       alignment: Alignment.center,
-      width: MediaQuery.of(context).size.width * 0.3,
       height: MediaQuery.of(context).size.height * 0.055,
       decoration: BoxDecoration(
         color: (isMe) ? ThemeColor.fontColor : const Color(0xFFF0F0F0),

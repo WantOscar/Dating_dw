@@ -1,12 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dating/Widget/main/profile_main.dart';
+import 'package:dating/Widget/main/today_freinds_profile.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/main/circle_avatar.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/main/main_favorite_me_screen.dart';
 import 'package:dating/screen/main/main_favorite_screen.dart';
-import 'package:dating/utils/status_enum.dart';
+import 'package:dating/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +20,7 @@ class MainScreen extends GetView<UserController> {
       body: Obx(
         () => RefreshIndicator.adaptive(
           onRefresh: controller.fetchData,
-          child: (controller.status == Status.LOADING)
+          child: (controller.isLoading)
               ? const Center(
                   child: CircularProgressIndicator.adaptive(),
                 )
@@ -43,7 +43,7 @@ class MainScreen extends GetView<UserController> {
                     final user = controller.users!.randomMemberList[index];
 
                     // final user = controller.users[index];
-                    return ProfileMain(
+                    return TodayFriendsProfile(
                       randomUser: user,
                     );
                   },

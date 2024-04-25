@@ -5,9 +5,9 @@ import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 
-class ProfileMain extends StatelessWidget {
+class TodayFriendsProfile extends StatelessWidget {
   final Map<String, dynamic> randomUser;
-  const ProfileMain({super.key, required this.randomUser});
+  const TodayFriendsProfile({super.key, required this.randomUser});
 
   @override
   Widget build(BuildContext context) {

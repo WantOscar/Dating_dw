@@ -14,8 +14,7 @@ class ChattingRoomController extends GetxController {
   final int chatRoomId;
   late final WebSocketChannel channel;
   final Rx<List<MessageModel>> _messages = Rx<List<MessageModel>>([]);
-  final _service =
-      MessageService(dio: Dio(), storage: const FlutterSecureStorage());
+  final _service = MessageService(storage: const FlutterSecureStorage());
   ChattingRoomController({required this.chatRoomId});
   final _messageController = TextEditingController();
 
@@ -30,20 +29,20 @@ class ChattingRoomController extends GetxController {
     super.onReady();
   }
 
-  void fetchData() async {
+  /// 서버의 채팅 소켓 서버와 연결하는 메소드
+
+  void _connectChannel() {
+    channel =
+        WebSocketChannel.connect(Uri.parse("ws://13.124.21.82:8082/ws/chat"));
+    _fetchData();
+  }
+
+  void _fetchData() async {
     final data = await _service.getMessages(chatRoomId);
     if (data != null) {
       _messages.value = data;
       _messages.refresh();
-      print(data);
     }
-  }
-
-  /// 서버의 채팅 소켓 서버와 연결하는 메소드
-  void _connectChannel() {
-    channel =
-        WebSocketChannel.connect(Uri.parse("ws://13.124.21.82:8082/ws/chat"));
-    fetchData();
   }
 
   /// 사용자가 입력한 채팅을 웹소켓 서버로
@@ -56,7 +55,7 @@ class ChattingRoomController extends GetxController {
         message: _messageController.text.toString());
 
     channel.sink.add(jsonEncode(message));
-    fetchData();
+    _fetchData();
     _messageController.clear();
   }
 }

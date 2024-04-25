@@ -1,19 +1,24 @@
 import 'package:dating/data/model/message_model.dart';
+import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class MessageService extends GetxService {
-  final Dio dio;
+  final Dio dio = Dio(BaseOptions(
+    baseUrl: ApiUrl.baseUrl,
+  ))
+    ..interceptors.add(AuthInterceptor())
+    ..interceptors.add(BaseIntercepter());
+
   final FlutterSecureStorage storage;
-  MessageService({required this.dio, required this.storage});
+  MessageService({required this.storage});
 
   Future<List<MessageModel>?> getMessages(int chatRoomId) async {
     try {
-      final token = await storage.read(key: "accessToken");
-      final messages = await dio.get(
-          "http://13.124.21.82:8082/chat/$chatRoomId",
-          options: Options(headers: {"Authorization": "Bearer $token"}));
+      final messages = await dio.get("/chat/$chatRoomId");
+
       if (messages.statusCode == 200) {
         List<MessageModel> messages0 = [];
         for (var data in messages.data["chatOneDtoList"]) {
