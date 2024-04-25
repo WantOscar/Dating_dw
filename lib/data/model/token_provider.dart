@@ -35,8 +35,8 @@ class TokenProvider {
   }
 
   /// 스토리지에 저장된 토큰 정보를 삭제하는 메소드
-  void deleteTokenInfo() {
-    storage.delete(key: _accessToken);
-    storage.delete(key: _refreshToken);
+  Future<void> deleteTokenInfo() async {
+    await storage.delete(key: _accessToken);
+    await storage.delete(key: _refreshToken);
   }
 }

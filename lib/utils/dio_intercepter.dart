@@ -1,10 +1,8 @@
 import 'package:dating/data/model/token_provider.dart';
 import 'package:dating/data/provider/auth_service.dart';
-import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class BaseIntercepter extends Interceptor {
   @override
@@ -14,8 +12,6 @@ class BaseIntercepter extends Interceptor {
     debugPrint("[ERROR OCCURED][$errorMessage]");
     switch (err.type) {
       case DioExceptionType.badResponse:
-        ToastMessage.showToast(
-            (errorMessage != null) ? errorMessage : "올바르지 못한 요청입니다.");
         debugPrint("올바르지 못한 요청입니다. url, 파라미터가 정확한지 확인하세요.");
         break;
       case DioExceptionType.cancel:
@@ -36,15 +32,16 @@ class BaseIntercepter extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    print("[REQUEST][${options.method}][${options.uri}][${options.data}]");
-    print("[REQUEST][${options.data}]");
+    debugPrint("[REQUEST][${options.method}][${options.uri}][${options.data}]");
+    debugPrint("[REQUEST][${options.data}]");
     handler.next(options);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    print("[RESPONSE][${response.statusCode}][${response.requestOptions.uri}]");
-    print("[RESPONSE][${response.data}]");
+    debugPrint(
+        "[RESPONSE][${response.statusCode}][${response.requestOptions.uri}]");
+    debugPrint("[RESPONSE][${response.data}]");
     handler.next(response);
   }
 }
@@ -72,14 +69,26 @@ class AuthInterceptor extends Interceptor {
     if (err.response?.statusCode == 403) {
       debugPrint("[ERROR OCCURED][Access Token 토큰 만료]");
 
-      final oldToken = await tokenProvider.getRefreshToken();
-      final authorization = await service.refreshToken(oldToken);
+      final refreshToken = await tokenProvider.getRefreshToken();
+      final authorization = await service.refreshToken(refreshToken);
       if (authorization) {
         err.requestOptions.headers["accessToken"] =
             await tokenProvider.getAccessToken();
         handler.resolve(await dio.fetch(err.requestOptions));
       }
+    } else {
+      handler.next(err);
     }
-    handler.next(err);
+  }
+}
+
+class MemberIntercetor extends Interceptor {
+  @override
+  void onError(DioException err, ErrorInterceptorHandler handler) {
+    if (err.response?.statusCode == 400) {
+      handler.reject(err);
+    } else {
+      handler.next(err);
+    }
   }
 }

@@ -4,6 +4,7 @@ import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/screen/auth/onboard_screen.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/dio_intercepter.dart';
+import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +24,6 @@ class AuthService extends GetxService {
       final response = await dio.post(ApiUrl.login, data: data);
       if (response.statusCode == 200) {
         tokenProvider.saveTokenInfo(response.data);
-        Get.off(() => const OnboardScreen(), binding: HomeBinding());
       }
     } on Exception {
       return;
@@ -71,26 +71,8 @@ class AuthService extends GetxService {
       } else {
         return null;
       }
-    } on DioException catch (error) {
-      dioExceptionHander(error);
-      return null;
     } on Exception {
-      Get.snackbar("에러 !", "잠시후에 다시 시도해주세요!");
-    }
-    return null;
-  }
-
-  void dioExceptionHander(DioException error) {
-    switch (error.type) {
-      case DioExceptionType.badResponse:
-        Get.snackbar("로그인 실패!", "회원정보를 확인해주세요!");
-        break;
-      case DioExceptionType.connectionTimeout:
-        Get.snackbar("네트워크 에러", "런타임 아웃 !");
-        break;
-      default:
-        Get.snackbar("에러", "에러가 발생했습니다!");
-        break;
+      return null;
     }
   }
 
@@ -109,6 +91,7 @@ class AuthService extends GetxService {
         return false;
       }
     } on Exception {
+      ToastMessage.showToast("장시간 로그인 되어 로그아웃 되었습니다.");
       return false;
     }
   }

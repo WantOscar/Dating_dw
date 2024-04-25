@@ -8,5 +8,5 @@ class UserRepository {
 
   Future<MainResponse?> getUserData() => service.fetchUserData();
 
-  Future<User> searchMyInfo() => service.searchMyInfo();
+  Future<User?> searchMyInfo() => service.searchMyInfo();
 }

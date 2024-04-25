@@ -1,41 +1,47 @@
 import 'dart:io';
 
+import 'package:dating/binding/home_binding.dart';
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
 import 'package:dating/controller/onboard_controller.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/screen/profile/init_profile_upload_screen.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class OnboardScreen extends GetView<OnboardingController> {
   const OnboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: FocusScope.of(context).unfocus,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("프로필 생성"),
-          titleTextStyle: TextStyle(
-              color: ThemeColor.fontColor,
-              fontSize: 20,
-              fontWeight: FontWeight.w600),
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              _thumNails(),
-              _basicProfiles(),
-              _optionalProfiles(),
-              _createProfileButton(),
-            ],
-          ),
-        ),
-      ),
+    return Obx(
+      () => (controller.isLoading)
+          ? _loading()
+          : GestureDetector(
+              onTap: FocusScope.of(context).unfocus,
+              child: Scaffold(
+                  appBar: AppBar(
+                    title: const Text("프로필 생성"),
+                    titleTextStyle: TextStyle(
+                        color: ThemeColor.fontColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600),
+                    backgroundColor: Colors.white,
+                    elevation: 0.0,
+                  ),
+                  body: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        _thumNails(),
+                        _basicProfiles(),
+                        _optionalProfiles(),
+                        _createProfileButton(),
+                      ],
+                    ),
+                  )),
+            ),
     );
   }
 
@@ -176,7 +182,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                           alignment: Alignment.center,
                           height: 50,
                           decoration: BoxDecoration(
-                              color: (controller.gender == Gender.MAN)
+                              color: (controller.gender == Gender.man)
                                   ? Colors.blue.withOpacity(0.5)
                                   : const Color(0xffefefef),
                               borderRadius: BorderRadius.circular(8.0)),
@@ -184,7 +190,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                             "남성",
                             style: TextStyle(
                                 fontSize: 15,
-                                color: (controller.gender == Gender.MAN)
+                                color: (controller.gender == Gender.man)
                                     ? Colors.white
                                     : const Color(0xffafafaf)),
                           ),
@@ -201,7 +207,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                           alignment: Alignment.center,
                           height: 50,
                           decoration: BoxDecoration(
-                              color: (controller.gender == Gender.WOMAN)
+                              color: (controller.gender == Gender.woman)
                                   ? Colors.red.withOpacity(0.5)
                                   : const Color(0xffefefef),
                               borderRadius: BorderRadius.circular(8.0)),
@@ -209,7 +215,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                             "여성",
                             style: TextStyle(
                                 fontSize: 15,
-                                color: (controller.gender == Gender.WOMAN)
+                                color: (controller.gender == Gender.woman)
                                     ? Colors.white
                                     : const Color(0xffafafaf)),
                           ),
@@ -517,9 +523,7 @@ class OnboardScreen extends GetView<OnboardingController> {
   Widget _createProfileButton() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
         child: GestureDetector(
-          onTap: () {
-            Get.off(() => const HomeScreen());
-          },
+          onTap: controller.updateUserInfo,
           child: Container(
             alignment: Alignment.center,
             width: double.infinity,
@@ -534,6 +538,31 @@ class OnboardScreen extends GetView<OnboardingController> {
                   fontSize: 18,
                   fontWeight: FontWeight.w600),
             ),
+          ),
+        ),
+      );
+
+  Widget _loading() => Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: LoadingAnimationWidget.fourRotatingDots(
+                    color: ThemeColor.fontColor, size: 40),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "계정 정보 확인중...",
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
           ),
         ),
       );

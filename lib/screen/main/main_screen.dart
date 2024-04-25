@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/main/today_freinds_profile.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common_header.dart';
 import 'package:dating/widget/main/circle_avatar.dart';
 import 'package:dating/controller/user_controller.dart';
@@ -14,11 +15,12 @@ class MainScreen extends GetView<UserController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CommonHeader(text: '캠밋'),
-      body: Obx(
-        () => RefreshIndicator.adaptive(
+    return Obx(
+      () => Scaffold(
+        appBar: const CommonHeader(text: '캠밋'),
+        body: RefreshIndicator.adaptive(
           onRefresh: controller.fetchData,
+          color: ThemeColor.fontColor,
           child: (controller.isLoading)
               ? const Center(
                   child: CircularProgressIndicator.adaptive(),

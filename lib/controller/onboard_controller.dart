@@ -1,18 +1,23 @@
-import 'package:dating/screen/auth/onboard_screen.dart';
+import 'package:dating/binding/home_binding.dart';
+import 'package:dating/data/provider/user_fetch.dart';
 import 'package:dating/screen/home_screen.dart';
+import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/profile/item_select_bottom_sheet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-enum Gender { MAN, WOMAN }
 
 class OnboardingController extends GetxController {
+  final UserFetch userService;
   static OnboardingController get to => Get.find();
+  OnboardingController({required this.userService});
   final Rx<List<List<String?>>> _selectProfileImages = Rx<List<List<String?>>>(
       List.generate(2, (index) => List.generate(3, (index) => null)));
+
+  final RxBool _isLoading = true.obs;
+
+  bool get isLoading => _isLoading.value;
 
   final Rxn<Gender> _gender = Rxn<Gender>();
 
@@ -66,7 +71,7 @@ class OnboardingController extends GetxController {
 
   @override
   void onInit() {
-    _getFirstLogin();
+    _getUserData();
     super.onInit();
   }
 
@@ -76,22 +81,26 @@ class OnboardingController extends GetxController {
     _day.value = "";
   }
 
-  /// 최초 로그인인지 확인하는 함수
-  void _getFirstLogin() async {
-    final prefs = await SharedPreferences.getInstance();
-    isFirstLogin = prefs.getBool("isFirstLogin");
-    if (isFirstLogin != null) {
-      Get.offAll(() => const HomeScreen());
+  /// 사용자의 프로필 정보가 이미 등록되어 있는지
+  /// 확인하는 메소드
+  /// 사용자 정보가 있다면 바로 홈 페이지로 라이팅함.
+  void _getUserData() async {
+    await Future.delayed(const Duration(seconds: 3));
+    final memberInfo = await userService.searchMyInfo();
+    if (memberInfo != null) {
+      Get.off(() => const HomeScreen(), binding: HomeBinding());
+    } else {
+      _isLoading(false);
     }
   }
 
   /// 성별을 남자로 설정하는 함수
   /// 이미 설정되어 있으면 다시 초기화함.
   void setGenderToMan() {
-    if (_gender.value == Gender.MAN) {
+    if (_gender.value == Gender.man) {
       _gender.value = null;
     } else {
-      _gender.value = Gender.MAN;
+      _gender.value = Gender.man;
     }
     _gender.refresh();
   }
@@ -99,10 +108,10 @@ class OnboardingController extends GetxController {
   /// 성별을 여자로 설정하는 함수
   /// 이미 설정되어 있으면 다시 초기화함.
   void setGenderToWoman() {
-    if (_gender.value == Gender.WOMAN) {
+    if (_gender.value == Gender.woman) {
       _gender.value = null;
     } else {
-      _gender.value = Gender.WOMAN;
+      _gender.value = Gender.woman;
     }
     _gender.refresh();
   }
@@ -192,5 +201,14 @@ class OnboardingController extends GetxController {
     if (address != null) {
       _address(address);
     }
+  }
+
+  /// 사용자 정보 등록 메소드
+  /// 사용자가 정보 등록을 시도하고 완료하면 홈 페이지로 라우팅됨.
+  void updateUserInfo() {
+    /// 회원 정보 갱신 로직
+    ///
+    ///
+    Get.off(() => const HomeScreen(), binding: HomeBinding());
   }
 }
