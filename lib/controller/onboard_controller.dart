@@ -1,18 +1,21 @@
+import 'dart:io';
+
 import 'package:dating/binding/home_binding.dart';
 import 'package:dating/data/provider/user_fetch.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/profile/item_select_bottom_sheet.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
+import 'package:uuid/uuid.dart';
 
 class OnboardingController extends GetxController {
   final UserFetch userService;
   static OnboardingController get to => Get.find();
   OnboardingController({required this.userService});
-  final Rx<List<List<String?>>> _selectProfileImages = Rx<List<List<String?>>>(
+  final Rx<List<List<File?>>> _selectProfileImages = Rx<List<List<File?>>>(
       List.generate(2, (index) => List.generate(3, (index) => null)));
 
   final RxBool _isLoading = true.obs;
@@ -63,9 +66,9 @@ class OnboardingController extends GetxController {
   final int selectProfileImagesLength = 0;
   Gender? get gender => _gender.value;
 
-  List<List<String?>> get selectProfileImage => _selectProfileImages.value;
+  List<List<File?>> get selectProfileImage => _selectProfileImages.value;
 
-  set selectProfileImage(List<List<String?>> images) {
+  set selectProfileImage(List<List<File?>> images) {
     _selectProfileImages.value = images;
   }
 
@@ -205,10 +208,32 @@ class OnboardingController extends GetxController {
 
   /// 사용자 정보 등록 메소드
   /// 사용자가 정보 등록을 시도하고 완료하면 홈 페이지로 라우팅됨.
-  void updateUserInfo() {
+  void updateUserInfo() async {
     /// 회원 정보 갱신 로직
-    ///
-    ///
-    Get.off(() => const HomeScreen(), binding: HomeBinding());
+    const uuid = Uuid();
+    if (_selectProfileImages.value.isNotEmpty) {
+      List<File> images = [];
+      for (List<File?> rows in _selectProfileImages.value) {
+        for (File? image in rows) {
+          if (image != null) {
+            images.add(image);
+          }
+        }
+      }
+      print(images);
+      dio.FormData data = dio.FormData();
+      for (var image in images) {
+        data.files.add(MapEntry(
+            "file",
+            await dio.MultipartFile.fromFile(image.path,
+                filename: "${uuid.v1()}.png")));
+      }
+      // final data = dio.FormData.fromMap({"file": multiPartFiles});
+      print(data.files);
+      final response = await userService.uploadImage(data);
+      if (response.isNotEmpty) {
+        Get.off(() => const HomeScreen(), binding: HomeBinding());
+      }
+    }
   }
 }

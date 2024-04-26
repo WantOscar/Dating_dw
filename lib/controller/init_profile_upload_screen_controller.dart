@@ -131,7 +131,7 @@ class InitProfileUploadScreenController extends GetxController {
     if (_selectImages.value.isEmpty) {
       return;
     }
-    final List<List<String?>> selectProfileImages = [
+    final List<List<File?>> selectProfileImages = [
       [null, null, null],
       [null, null, null]
     ];
@@ -143,8 +143,8 @@ class InitProfileUploadScreenController extends GetxController {
 
         /// 선택한 이미지가 이미 선택되었다면
         /// 추가하지 않음.
-        final path = _selectImages.value.first.path;
-        selectProfileImages[i][j] = path;
+        final path = _selectImages.value[0].path;
+        selectProfileImages[i][j] = File(path);
         _selectImages.value.removeAt(0);
       }
     }

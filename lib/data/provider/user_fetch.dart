@@ -36,7 +36,9 @@ class UserFetch {
 
   Future<User?> searchMyInfo() async {
     try {
-      final response = await dio.get(ApiUrl.profile);
+      final response = await dio.get(
+        ApiUrl.profile,
+      );
 
       if (response.statusCode == 200) {
         return User.fromJson(response.data);
@@ -45,5 +47,23 @@ class UserFetch {
       return null;
     }
     return null;
+  }
+
+  Future<List<String>> uploadImage(FormData data) async {
+    try {
+      final response =
+          await dio.post("/images/s3-upload", data: data, queryParameters: {
+        "type": "profile",
+      });
+
+      if (response.statusCode == 201) {
+        return response.data["imageList"];
+      } else {
+        return [];
+      }
+    } on Exception catch (e) {
+      print(e.toString());
+    }
+    return [];
   }
 }

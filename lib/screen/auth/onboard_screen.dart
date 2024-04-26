@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'package:dating/binding/home_binding.dart';
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
 import 'package:dating/controller/onboard_controller.dart';
-import 'package:dating/screen/home_screen.dart';
 import 'package:dating/screen/profile/init_profile_upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';
@@ -84,8 +82,8 @@ class OnboardScreen extends GetView<OnboardingController> {
                                             color: defaultThumNailBoxColors[i]
                                                 [j],
                                           )
-                                        : Image.file(File(controller
-                                            .selectProfileImage[i][j]!)),
+                                        : Image.file(controller
+                                            .selectProfileImage[i][j]!),
                                   ),
                                 ),
                               );

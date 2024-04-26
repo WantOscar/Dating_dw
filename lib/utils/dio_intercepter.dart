@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class BaseIntercepter extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    final errorMessage = err.response?.data["errorMessage"];
+    final errorMessage = err.response?.data;
     debugPrint("[ERROR OCCURED][${err.type}][${err.requestOptions.uri}]");
     debugPrint("[ERROR OCCURED][$errorMessage]");
     switch (err.type) {
@@ -32,8 +32,9 @@ class BaseIntercepter extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    debugPrint("[REQUEST][${options.method}][${options.uri}][${options.data}]");
+    debugPrint("[REQUEST][${options.method}][${options.uri}]");
     debugPrint("[REQUEST][${options.data}]");
+    debugPrint("[REQUEST][${options.headers}]");
     handler.next(options);
   }
 
@@ -85,6 +86,7 @@ class AuthInterceptor extends Interceptor {
 class MemberIntercetor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
+    debugPrint(err.response?.statusCode.toString());
     if (err.response?.statusCode == 400) {
       handler.reject(err);
     } else {
