@@ -212,28 +212,28 @@ class OnboardingController extends GetxController {
     /// 회원 정보 갱신 로직
     const uuid = Uuid();
     if (_selectProfileImages.value.isNotEmpty) {
-      List<File> images = [];
-      for (List<File?> rows in _selectProfileImages.value) {
-        for (File? image in rows) {
-          if (image != null) {
-            images.add(image);
-          }
-        }
-      }
-      print(images);
-      dio.FormData data = dio.FormData();
-      for (var image in images) {
-        data.files.add(MapEntry(
-            "file",
-            await dio.MultipartFile.fromFile(image.path,
-                filename: "${uuid.v1()}.png")));
-      }
-      // final data = dio.FormData.fromMap({"file": multiPartFiles});
-      print(data.files);
-      final response = await userService.uploadImage(data);
-      if (response.isNotEmpty) {
-        Get.off(() => const HomeScreen(), binding: HomeBinding());
-      }
+      // List<File> images = [];
+      // for (List<File?> rows in _selectProfileImages.value) {
+      //   for (File? image in rows) {
+      //     if (image != null) {
+      //       images.add(image);
+      //     }
+      //   }
+      // }
+      // print(images);
+      // dio.FormData data = dio.FormData();
+      // for (var image in images) {
+      //   data.files.add(MapEntry(
+      //       "file",
+      //       await dio.MultipartFile.fromFile(image.path,
+      //           filename: "${uuid.v1()}.png")));
+      // }
+      // // final data = dio.FormData.fromMap({"file": multiPartFiles});
+      // print(data.files);
+      // final response = await userService.uploadImage(data);
+      // if (response.isNotEmpty) {
+      Get.off(() => const HomeScreen(), binding: HomeBinding());
+      // }
     }
   }
 }
