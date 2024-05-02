@@ -4,6 +4,7 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 /// 최초 로그인한 사용자가 프로필을 등록하기 위하여
 /// 가장 최초로 사용하게 되는 업로드 화면
