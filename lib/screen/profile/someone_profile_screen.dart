@@ -1,4 +1,3 @@
-import 'package:dating/Widget/profile/warning_window.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/widget/profile/personal_information.dart';
 import 'package:dating/widget/profile/personality.dart';
@@ -7,7 +6,7 @@ import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/utils/status_enum.dart';
+import 'package:dating/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';

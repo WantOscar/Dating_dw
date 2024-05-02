@@ -1,4 +1,3 @@
-import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/data/model/main_response.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
@@ -137,7 +136,7 @@ class TodayFriendsProfile extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        ChatController.to.makeChattingRoom(randomUser["id"]);
+                        // ChatController.to.makeChattingRoom(randomUser["id"]);
                       },
                       child: Text(
                         '채팅하기',

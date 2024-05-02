@@ -1,11 +1,10 @@
 import 'package:dating/controller/resister_controller.dart';
-import 'package:dating/screen/auth/password_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpPage extends GetView<ResisterController> {
-  const SignUpPage({super.key});
+class EmailVerifyPage extends GetView<ResisterController> {
+  const EmailVerifyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +74,7 @@ class SignUpPage extends GetView<ResisterController> {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
           child: BottomAppBar(
             shadowColor: Colors.white,
             elevation: 0,

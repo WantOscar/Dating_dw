@@ -49,6 +49,10 @@ dependencies:
   web_socket_channel: ^2.4.0
   image_cropper: ^5.0.1
   photo_manager_image_provider: ^2.1.1
+  shared_preferences: ^2.2.3
+  remedi_kopo: ^0.0.2
+  loading_animation_widget: ^1.2.1
+  uuid: ^4.2.2
 
 dev_dependencies:
   flutter_test:
