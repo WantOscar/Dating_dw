@@ -18,7 +18,7 @@ class ProfilePositionedLocation extends StatelessWidget {
             icon: IconShape.iconLocationOn,
           ),
           Text(
-            '${user.residence}',
+            '${user.address}',
             style: const TextStyle(
               fontSize: 13,
               color: Colors.white,

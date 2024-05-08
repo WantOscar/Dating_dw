@@ -1,5 +1,8 @@
+import 'package:dating/controller/email_verify_controller.dart';
 import 'package:dating/data/model/member_join.dart';
 import 'package:dating/data/provider/auth_service.dart';
+import 'package:dating/screen/auth/auth_forgot_screen.dart';
+import 'package:dating/screen/auth/code_input_screen.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/screen/auth/resister_screen.dart';
 import 'package:dating/utils/enums.dart';
@@ -31,13 +34,14 @@ class ResisterController extends GetxController {
     }
 
     final data = {"email": _email.value.text.toString()};
-
+    Get.focusScope?.unfocus();
     final response = await service.emailVerify(data);
     if (response != null) {
       code = response;
-      Get.to(() => const ResisterScreen());
+      Get.to(() => const VerifyScreen(), binding: BindingsBuilder(() {
+        Get.put(EmailVerifyController(service: service, authCode: code));
+      }));
     }
-    _email.clear();
   }
 
   ///회원가입 메소드

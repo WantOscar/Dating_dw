@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dating/binding/home_binding.dart';
+import 'package:dating/data/model/user.dart';
 import 'package:dating/data/provider/user_fetch.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/enums.dart';
@@ -38,14 +39,14 @@ class OnboardingController extends GetxController {
 
   /// 사용자의 생년월일 정보를 담는
   /// 옵저블 변수
-  final RxString _year = "".obs;
-  final RxString _month = "".obs;
-  final RxString _day = "".obs;
+  RxInt _year = 0.obs;
+  RxInt _month = 0.obs;
+  RxInt _day = 0.obs;
 
   /// 선택한 생년월일 옵저블 변수
-  String get year => _year.value;
-  String get month => _month.value;
-  String get day => _day.value;
+  int get year => _year.value;
+  int get month => _month.value;
+  int get day => _day.value;
 
   final RxString _height = "".obs;
   String get height => _height.value;
@@ -79,9 +80,9 @@ class OnboardingController extends GetxController {
   }
 
   _initBirthDay() {
-    _year.value = "";
-    _month.value = "";
-    _day.value = "";
+    _year.value = 0;
+    _month.value = 0;
+    _day.value = 0;
   }
 
   /// 사용자의 프로필 정보가 이미 등록되어 있는지
@@ -130,7 +131,7 @@ class OnboardingController extends GetxController {
         if (_year.value != "" || _month.value != "" || _day.value != "") {
           _initBirthDay();
         }
-        _year(_yearsList[_yearIndex]);
+        _year(_yearIndex + 1901);
 
         _monthList = List.generate(12, (index) => "${index + 1}월");
         Get.back();
@@ -150,7 +151,7 @@ class OnboardingController extends GetxController {
         _monthIndex = value;
       },
       onDone: () {
-        _month(_monthList[_monthIndex]);
+        _month(_monthIndex + 1);
 
         /// 월별 마지막 일수 계산 후 배열 초기화
         _dayList = List.generate(
@@ -173,7 +174,7 @@ class OnboardingController extends GetxController {
         _dayIndex = value;
       },
       onDone: () {
-        _day(_dayList[_dayIndex]);
+        _day(_dayIndex + 1);
 
         Get.back();
       },
@@ -206,34 +207,54 @@ class OnboardingController extends GetxController {
     }
   }
 
+  /// 임시 홈화면 라우팅 메소드
+  /// 계정 등록 기능이 완성되면
+  /// 삭제될 예정
+  void goToHome() => Get.off(() => HomeScreen(), binding: HomeBinding());
+
   /// 사용자 정보 등록 메소드
   /// 사용자가 정보 등록을 시도하고 완료하면 홈 페이지로 라우팅됨.
   void updateUserInfo() async {
     /// 회원 정보 갱신 로직
+
     const uuid = Uuid();
     if (_selectProfileImages.value.isNotEmpty) {
-      // List<File> images = [];
-      // for (List<File?> rows in _selectProfileImages.value) {
-      //   for (File? image in rows) {
-      //     if (image != null) {
-      //       images.add(image);
-      //     }
-      //   }
-      // }
-      // print(images);
-      // dio.FormData data = dio.FormData();
-      // for (var image in images) {
-      //   data.files.add(MapEntry(
-      //       "file",
-      //       await dio.MultipartFile.fromFile(image.path,
-      //           filename: "${uuid.v1()}.png")));
-      // }
-      // // final data = dio.FormData.fromMap({"file": multiPartFiles});
-      // print(data.files);
-      // final response = await userService.uploadImage(data);
-      // if (response.isNotEmpty) {
-      Get.off(() => const HomeScreen(), binding: HomeBinding());
-      // }
+      List<dio.MultipartFile> images = [];
+      for (List<File?> rows in _selectProfileImages.value) {
+        for (File? image in rows) {
+          if (image != null) {
+            images.add(dio.MultipartFile.fromFileSync(image.path,
+                filename: "${uuid.v1()}.jpeg"));
+          }
+        }
+      }
+
+      dio.FormData data = dio.FormData.fromMap({"file": images});
+
+      // final data = dio.FormData.fromMap({"file": multiPartFiles});
+      print(data.files);
+      final urls = await userService.uploadImage(data);
+      if (urls.isNotEmpty) {
+        User user = User(
+            nickName: _nickName.text.toString().trim(),
+            description: _description.text.toString(),
+            birthDay: DateTime(
+                    int.parse(_year.value.toString()),
+                    int.parse(_month.value.toString()),
+                    int.parse(_day.value.toString()))
+                .toString(),
+            address: _address.value!.address.toString(),
+            gender: _gender.value!.name,
+            age: DateTime.now().year - int.parse(_year.value.toString()) + 1,
+            height: int.parse(_height.value.toString()),
+            images: urls,
+            image: urls.first);
+
+        final data = user.toJson();
+        final response = userService.updateUserInfo(data);
+
+        // Get.off(() => const HomeScreen(), binding: HomeBinding());
+      }
     }
   }
 }

@@ -14,7 +14,7 @@ class ProfilePositionedName extends StatelessWidget {
       child: TextButton(
         onPressed: () {},
         child: Text(
-          '${user.name}',
+          '${user.nickName}',
           style: const TextStyle(
             fontSize: 40,
             color: Colors.white,
