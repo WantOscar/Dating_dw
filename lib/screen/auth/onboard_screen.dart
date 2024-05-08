@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dating/Widget/common/property_text_field.dart';
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
 import 'package:dating/controller/onboard_controller.dart';
 import 'package:dating/screen/profile/init_profile_upload_screen.dart';
@@ -148,26 +149,11 @@ class OnboardScreen extends GetView<OnboardingController> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadiusDirectional.circular(12.0)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.0),
-                  child: TextField(
-                    controller: controller.nickName,
-                    cursorColor: Colors.black87,
-                    decoration: const InputDecoration(
-                        hintText: "닉네임",
-                        hintStyle:
-                            TextStyle(fontSize: 15, color: Color(0xffafafaf)),
-                        border: InputBorder.none,
-                        fillColor: Color(0xffefefef),
-                        filled: true),
-                  ),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: PropertyTextField(
+                  controller: controller.nickName,
+                  label: "닉네임",
+                )),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Obx(
@@ -335,7 +321,9 @@ class OnboardScreen extends GetView<OnboardingController> {
                           children: [
                             Obx(
                               () => Text(
-                                (controller.day == 0) ? "일" : controller.day.toString(),
+                                (controller.day == 0)
+                                    ? "일"
+                                    : controller.day.toString(),
                                 style: TextStyle(
                                     color: (controller.day == 0)
                                         ? const Color(0xffafafaf)
@@ -444,28 +432,11 @@ class OnboardScreen extends GetView<OnboardingController> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Container(
-                height: 50,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(8.0)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: TextField(
-                    controller: controller.description,
-                    cursorColor: Colors.black87,
-                    decoration: const InputDecoration(
-                      hintText: "한줄소개",
-                      hintStyle:
-                          TextStyle(color: Color(0xffafafaf), fontSize: 15),
-                      fillColor: Color(0xffefefef),
-                      filled: true,
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: PropertyTextField(
+                  controller: controller.description,
+                  label: "한줄소개",
+                )),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Container(
@@ -520,17 +491,15 @@ class OnboardScreen extends GetView<OnboardingController> {
       );
 
   Widget _createProfileButton() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-        child: BottomButton(
-          onTap: controller.goToHome,
-          child: Text(
-              "프로필 생성",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600)),
-        )
-      );
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      child: BottomButton(
+        onTap: controller.goToHome,
+        child: Text("프로필 생성",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600)),
+      ));
 
   Widget _loading() => Scaffold(
         body: Padding(
