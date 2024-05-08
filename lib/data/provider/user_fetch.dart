@@ -49,7 +49,7 @@ class UserFetch {
     return null;
   }
 
-  Future<List<String>> uploadImage(FormData data) async {
+  Future<List> uploadImage(FormData data) async {
     try {
       final response =
           await dio.post("/images/s3-upload", data: data, queryParameters: {
@@ -65,5 +65,15 @@ class UserFetch {
       print(e.toString());
     }
     return [];
+  }
+
+  updateUserInfo(Map<String, dynamic> data) async{
+    final response = await dio.post("/member/profile/update", data: data);
+
+    if (response.statusCode == 200) {
+      print(response.data);
+    } else {
+      print("error");
+    }
   }
 }

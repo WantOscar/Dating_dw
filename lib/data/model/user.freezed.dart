@@ -12,7 +12,7 @@ part of 'user.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 User _$UserFromJson(Map<String, dynamic> json) {
   return _User.fromJson(json);
@@ -20,15 +20,16 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String? get name => throw _privateConstructorUsedError;
-  String? get comment => throw _privateConstructorUsedError;
+  String? get nickName => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+  String? get birthDay => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
-  String? get residence => throw _privateConstructorUsedError;
   int? get age => throw _privateConstructorUsedError;
   int? get height => throw _privateConstructorUsedError;
+  List<dynamic>? get images => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  String? get personalInfo =>
-      throw _privateConstructorUsedError; // String? mbti,
+  String? get personalInfo => throw _privateConstructorUsedError;
   String? get personality => throw _privateConstructorUsedError;
   String? get interest => throw _privateConstructorUsedError;
   String? get likePersonality => throw _privateConstructorUsedError;
@@ -44,12 +45,14 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {String? name,
-      String? comment,
+      {String? nickName,
+      String? description,
+      String? birthDay,
+      String? address,
       String? gender,
-      String? residence,
       int? age,
       int? height,
+      List<dynamic>? images,
       String? image,
       String? personalInfo,
       String? personality,
@@ -70,12 +73,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? comment = freezed,
+    Object? nickName = freezed,
+    Object? description = freezed,
+    Object? birthDay = freezed,
+    Object? address = freezed,
     Object? gender = freezed,
-    Object? residence = freezed,
     Object? age = freezed,
     Object? height = freezed,
+    Object? images = freezed,
     Object? image = freezed,
     Object? personalInfo = freezed,
     Object? personality = freezed,
@@ -83,21 +88,25 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? likePersonality = freezed,
   }) {
     return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      nickName: freezed == nickName
+          ? _value.nickName
+          : nickName // ignore: cast_nullable_to_non_nullable
               as String?,
-      comment: freezed == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthDay: freezed == birthDay
+          ? _value.birthDay
+          : birthDay // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String?,
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
-      residence: freezed == residence
-          ? _value.residence
-          : residence // ignore: cast_nullable_to_non_nullable
               as String?,
       age: freezed == age
           ? _value.age
@@ -107,6 +116,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
               as int?,
+      images: freezed == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -139,12 +152,14 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String? name,
-      String? comment,
+      {String? nickName,
+      String? description,
+      String? birthDay,
+      String? address,
       String? gender,
-      String? residence,
       int? age,
       int? height,
+      List<dynamic>? images,
       String? image,
       String? personalInfo,
       String? personality,
@@ -162,12 +177,14 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? comment = freezed,
+    Object? nickName = freezed,
+    Object? description = freezed,
+    Object? birthDay = freezed,
+    Object? address = freezed,
     Object? gender = freezed,
-    Object? residence = freezed,
     Object? age = freezed,
     Object? height = freezed,
+    Object? images = freezed,
     Object? image = freezed,
     Object? personalInfo = freezed,
     Object? personality = freezed,
@@ -175,21 +192,25 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? likePersonality = freezed,
   }) {
     return _then(_$UserImpl(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      nickName: freezed == nickName
+          ? _value.nickName
+          : nickName // ignore: cast_nullable_to_non_nullable
               as String?,
-      comment: freezed == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthDay: freezed == birthDay
+          ? _value.birthDay
+          : birthDay // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String?,
       gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
-      residence: freezed == residence
-          ? _value.residence
-          : residence // ignore: cast_nullable_to_non_nullable
               as String?,
       age: freezed == age
           ? _value.age
@@ -199,6 +220,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
               as int?,
+      images: freezed == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -227,38 +252,52 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   _$UserImpl(
-      {this.name,
-      this.comment,
+      {this.nickName,
+      this.description,
+      this.birthDay,
+      this.address,
       this.gender,
-      this.residence,
       this.age,
       this.height,
+      final List<dynamic>? images,
       this.image,
       this.personalInfo,
       this.personality,
       this.interest,
-      this.likePersonality});
+      this.likePersonality})
+      : _images = images;
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  final String? name;
+  final String? nickName;
   @override
-  final String? comment;
+  final String? description;
+  @override
+  final String? birthDay;
+  @override
+  final String? address;
   @override
   final String? gender;
-  @override
-  final String? residence;
   @override
   final int? age;
   @override
   final int? height;
+  final List<dynamic>? _images;
+  @override
+  List<dynamic>? get images {
+    final value = _images;
+    if (value == null) return null;
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final String? image;
   @override
   final String? personalInfo;
-// String? mbti,
   @override
   final String? personality;
   @override
@@ -268,21 +307,25 @@ class _$UserImpl implements _User {
 
   @override
   String toString() {
-    return 'User(name: $name, comment: $comment, gender: $gender, residence: $residence, age: $age, height: $height, image: $image, personalInfo: $personalInfo, personality: $personality, interest: $interest, likePersonality: $likePersonality)';
+    return 'User(nickName: $nickName, description: $description, birthDay: $birthDay, address: $address, gender: $gender, age: $age, height: $height, images: $images, image: $image, personalInfo: $personalInfo, personality: $personality, interest: $interest, likePersonality: $likePersonality)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.nickName, nickName) ||
+                other.nickName == nickName) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.birthDay, birthDay) ||
+                other.birthDay == birthDay) &&
+            (identical(other.address, address) || other.address == address) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.residence, residence) ||
-                other.residence == residence) &&
             (identical(other.age, age) || other.age == age) &&
             (identical(other.height, height) || other.height == height) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.personalInfo, personalInfo) ||
                 other.personalInfo == personalInfo) &&
@@ -296,8 +339,21 @@ class _$UserImpl implements _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, comment, gender, residence,
-      age, height, image, personalInfo, personality, interest, likePersonality);
+  int get hashCode => Object.hash(
+      runtimeType,
+      nickName,
+      description,
+      birthDay,
+      address,
+      gender,
+      age,
+      height,
+      const DeepCollectionEquality().hash(_images),
+      image,
+      personalInfo,
+      personality,
+      interest,
+      likePersonality);
 
   @JsonKey(ignore: true)
   @override
@@ -315,12 +371,14 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   factory _User(
-      {final String? name,
-      final String? comment,
+      {final String? nickName,
+      final String? description,
+      final String? birthDay,
+      final String? address,
       final String? gender,
-      final String? residence,
       final int? age,
       final int? height,
+      final List<dynamic>? images,
       final String? image,
       final String? personalInfo,
       final String? personality,
@@ -330,22 +388,26 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String? get name;
+  String? get nickName;
   @override
-  String? get comment;
+  String? get description;
+  @override
+  String? get birthDay;
+  @override
+  String? get address;
   @override
   String? get gender;
-  @override
-  String? get residence;
   @override
   int? get age;
   @override
   int? get height;
   @override
+  List<dynamic>? get images;
+  @override
   String? get image;
   @override
   String? get personalInfo;
-  @override // String? mbti,
+  @override
   String? get personality;
   @override
   String? get interest;

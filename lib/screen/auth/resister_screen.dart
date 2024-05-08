@@ -1,6 +1,7 @@
 import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';
+import 'package:dating/widget/common/bottom_button.dart';
 import 'package:dating/widget/common/button_loading_indicator.dart';
 import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:flutter/material.dart';
@@ -32,15 +33,23 @@ class ResisterScreen extends GetView<ResisterController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _header(),
-                const SizedBox(
-                  height: 30,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _header(),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      _passwordInput(),
+                    ],
+                  ),
                 ),
-                _passwordInput(),
+                _signUpButton(),
               ],
             ),
           ),
-          bottomNavigationBar: _signUpButton()),
+      ),
     );
   }
 
@@ -70,31 +79,6 @@ class ResisterScreen extends GetView<ResisterController> {
 
   Widget _passwordInput() => Column(
         children: [
-          /// 회원가입 통합 테스트를 위한 임시 위젯
-          /// 추후에 삭제될 예정임.
-          /// 이메일은 이메일 인증에서 사용한 이메일을 그대로 사용함.
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
-                  child: Text(
-                    "이메일",
-                    style: TextStyle(color: Colors.black87, fontSize: 12),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: CammitTextField(
-                    controller: ResisterController.to.email,
-                    hintText: "이메일을 입력해주세요!",
-                  ),
-                ),
-              ],
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: Column(
@@ -145,31 +129,19 @@ class ResisterScreen extends GetView<ResisterController> {
       );
 
   Widget _signUpButton() => Obx(
-        () => GestureDetector(
-          onTap:
-              (controller.loading == Status.loading) ? null : controller.signUp,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: SafeArea(
-              child: Container(
-                height: 70,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24.0),
-                    color: ThemeColor.fontColor),
-                child: (controller.loading == Status.loading)
-                    ? const ButtonLoadingIndicator()
-                    : const Center(
-                        child: Text(
-                          '회원가입',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 15),
-                        ),
-                      ),
-              ),
-            ),
-          ),
-        ),
+        () => SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BottomButton(onTap: () {
+                (controller.loading == Status.loading) ? null : controller.signUp();
+              }, child: (controller.loading == Status.loading)?  Center(child: CircularProgressIndicator(
+                
+              ),) : Text(
+                "회원가입",
+                style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600),),)
+            ))
       );
 }

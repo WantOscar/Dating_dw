@@ -6,15 +6,16 @@ part 'user.g.dart';
 @freezed
 class User with _$User {
   factory User({
-    String? name,
-    String? comment,
+    String? nickName,
+    String? description,
+    String? birthDay,
+    String? address,
     String? gender,
-    String? residence,
     int? age,
     int? height,
+    List? images,
     String? image,
     String? personalInfo,
-    // String? mbti,
     String? personality,
     String? interest,
     String? likePersonality,

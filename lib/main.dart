@@ -23,18 +23,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class Example extends StatelessWidget {
-  const Example({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CachedNetworkImage(
-            imageUrl:
-                "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qazws78941@naver.com/2504a6a0-3bf2-1f94-b640-27515fd5ce30.png"),
-      ),
-    );
-  }
-}

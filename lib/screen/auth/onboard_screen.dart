@@ -5,6 +5,7 @@ import 'package:dating/controller/onboard_controller.dart';
 import 'package:dating/screen/profile/init_profile_upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';
+import 'package:dating/widget/common/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -244,11 +245,11 @@ class OnboardScreen extends GetView<OnboardingController> {
                           children: [
                             Obx(
                               () => Text(
-                                (controller.year == "")
+                                (controller.year == 0)
                                     ? "생년"
-                                    : controller.year,
+                                    : controller.year.toString(),
                                 style: TextStyle(
-                                    color: (controller.year == "")
+                                    color: (controller.year == 0)
                                         ? const Color(0xffafafaf)
                                         : Colors.black87,
                                     fontSize: 15),
@@ -289,11 +290,11 @@ class OnboardScreen extends GetView<OnboardingController> {
                           children: [
                             Obx(
                               () => Text(
-                                (controller.month == "")
+                                (controller.month == 0)
                                     ? "월"
-                                    : controller.month,
+                                    : controller.month.toString(),
                                 style: TextStyle(
-                                    color: (controller.month == "")
+                                    color: (controller.month == 0)
                                         ? const Color(0xffafafaf)
                                         : Colors.black87,
                                     fontSize: 15),
@@ -334,9 +335,9 @@ class OnboardScreen extends GetView<OnboardingController> {
                           children: [
                             Obx(
                               () => Text(
-                                (controller.day == "") ? "일" : controller.day,
+                                (controller.day == 0) ? "일" : controller.day.toString(),
                                 style: TextStyle(
-                                    color: (controller.day == "")
+                                    color: (controller.day == 0)
                                         ? const Color(0xffafafaf)
                                         : Colors.black87,
                                     fontSize: 15),
@@ -520,47 +521,23 @@ class OnboardScreen extends GetView<OnboardingController> {
 
   Widget _createProfileButton() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-        child: GestureDetector(
-          onTap: controller.updateUserInfo,
-          child: Container(
-            alignment: Alignment.center,
-            width: double.infinity,
-            height: 50,
-            decoration: BoxDecoration(
-                color: ThemeColor.fontColor,
-                borderRadius: BorderRadius.circular(12.0)),
-            child: const Text(
+        child: BottomButton(
+          onTap: controller.goToHome,
+          child: Text(
               "프로필 생성",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
-                  fontWeight: FontWeight.w600),
-            ),
-          ),
-        ),
+                  fontWeight: FontWeight.w600)),
+        )
       );
 
   Widget _loading() => Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: LoadingAnimationWidget.fourRotatingDots(
-                    color: ThemeColor.fontColor, size: 40),
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  "계정 정보 확인중...",
-                  style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ],
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: LoadingAnimationWidget.fourRotatingDots(
+                color: ThemeColor.fontColor, size: 40),
           ),
         ),
       );

@@ -104,9 +104,9 @@ class InitProfileUploadScreen
                                     width: double.infinity,
                                     color: Colors.white.withOpacity(0.3),
                                     child: Text(
-                                      controller.selectImageIndex
-                                          .indexOf(index)
-                                          .toString(),
+                                      "${controller.selectImageIndex
+                                          .indexOf(index)+1}"
+                                          ,
                                       style: const TextStyle(
                                           fontSize: 50,
                                           color: Colors.white,
