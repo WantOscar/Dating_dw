@@ -1,15 +1,14 @@
 import 'dart:io';
 
 import 'package:dating/Widget/icon_header.dart';
-import 'package:dating/Widget/profile_edit/information_edit.dart';
 import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/widget/profile/interest.dart';
 import 'package:dating/widget/profile/personal_information.dart';
 import 'package:dating/widget/profile/personality.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,7 +57,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       appBar: IconHeader(
         text: '프로필 수정',

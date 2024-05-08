@@ -1,12 +1,11 @@
-import 'package:dating/controller/login_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
+import 'package:dating/screen/profile/account_information_screen.dart';
+import 'package:dating/screen/profile/blocked_account_screen.dart';
+import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/warning_window.dart';
 import 'package:dating/widget/icon_header.dart';
 import 'package:dating/widget/setting_profile/alarm_setting.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
-import 'package:dating/screen/profile/account_information_screen.dart';
-import 'package:dating/screen/profile/blocked_account_screen.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -123,7 +122,6 @@ class SettingProfileScreen extends StatelessWidget {
                           explainText:
                               '캠밋을 탈퇴하면 계정의 모든 정보가 삭제되며, 삭제된 정보는 복구할 수 없습니다.',
                           btnText: '회원탈퇴',
-                          context: context,
                         );
                       },
                     );

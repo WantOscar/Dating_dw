@@ -12,6 +12,11 @@ class ChangeAlbumScreen extends GetView<ProfileImageController> {
     return Obx(
       () => Scaffold(
         appBar: AppBar(
+          leading: GestureDetector(
+            onTap: Get.back,
+            child: const Icon(Icons.arrow_back),
+          ),
+          foregroundColor: Colors.black,
           backgroundColor: Colors.white,
           elevation: 0.0,
           title: const Text(
