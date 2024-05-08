@@ -207,13 +207,10 @@ class OnboardingController extends GetxController {
     }
   }
 
-
-
   /// 임시 홈화면 라우팅 메소드
   /// 계정 등록 기능이 완성되면
   /// 삭제될 예정
   void goToHome() => Get.off(() => HomeScreen(), binding: HomeBinding());
-
 
   /// 사용자 정보 등록 메소드
   /// 사용자가 정보 등록을 시도하고 완료하면 홈 페이지로 라우팅됨.
@@ -226,31 +223,32 @@ class OnboardingController extends GetxController {
       for (List<File?> rows in _selectProfileImages.value) {
         for (File? image in rows) {
           if (image != null) {
-            images.add(dio.MultipartFile.fromFileSync(image.path, filename: "${uuid.v1()}.jpeg"));
+            images.add(dio.MultipartFile.fromFileSync(image.path,
+                filename: "${uuid.v1()}.jpeg"));
           }
         }
       }
 
-      dio.FormData data = dio.FormData.fromMap({
-        "file" : images
-      });
+      dio.FormData data = dio.FormData.fromMap({"file": images});
 
       // final data = dio.FormData.fromMap({"file": multiPartFiles});
       print(data.files);
       final urls = await userService.uploadImage(data);
       if (urls.isNotEmpty) {
         User user = User(
-          nickName: _nickName.text.toString().trim(),
-          description: _description.text.toString(),
-          birthDay: DateTime(int.parse(_year.value.toString()), int.parse(_month.value.toString()), int.parse(_day.value.toString())).toString(),
-          address: _address.value!.address.toString(),
-          gender: _gender.value!.name,
-          age: DateTime.now().year - int.parse(_year.value.toString()) + 1,
-          height: int.parse(_height.value.toString()),
-          images : urls,
-          image : urls.first
-
-        );
+            nickName: _nickName.text.toString().trim(),
+            description: _description.text.toString(),
+            birthDay: DateTime(
+                    int.parse(_year.value.toString()),
+                    int.parse(_month.value.toString()),
+                    int.parse(_day.value.toString()))
+                .toString(),
+            address: _address.value!.address.toString(),
+            gender: _gender.value!.name,
+            age: DateTime.now().year - int.parse(_year.value.toString()) + 1,
+            height: int.parse(_height.value.toString()),
+            images: urls,
+            image: urls.first);
 
         final data = user.toJson();
         final response = userService.updateUserInfo(data);

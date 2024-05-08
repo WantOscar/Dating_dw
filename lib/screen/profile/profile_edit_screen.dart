@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dating/Widget/icon_header.dart';
 import 'package:dating/Widget/profile_edit/information_edit.dart';
 import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/widget/profile/interest.dart';
@@ -55,6 +56,9 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: IconHeader(
         text: '프로필 수정',
@@ -74,7 +78,300 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           ),
         ],
       ),
-      body: _buildBody(),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// 내 프로필 사진 업로드(6장 제한)
+            _uploadMyProfile(),
+            const SizedBox(height: 20),
+
+            /// 닉네임 입력(수정 가능)
+            // const InformationEdit(
+            //   text1: '닉네임',
+            //   text2: '압둘라 3세',
+            //   widthPoint: 0.68,
+            //   heightPoint: 0.05,
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+                  child: Text('닉네임'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 17.0),
+                  child: Container(
+                    width: width * 0.68,
+                    height: height * 0.05,
+                    decoration: BoxDecoration(
+                      color: ThemeColor.inputColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: TextFormField(
+                          maxLength: 10,
+                          style: const TextStyle(
+                            decorationThickness: 0,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            counterText: "",
+                            hintText: '압둘라 3세',
+                            border: InputBorder.none,
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 7),
+
+            /// 한 줄 소개 입력(수정 가능)
+            // const InformationEdit(
+            //   text1: '한줄 소개',
+            //   text2: '소개 입력',
+            //   widthPoint: 0.68,
+            //   heightPoint: 0.05,
+            // ),
+            // const SizedBox(height: 7),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+                  child: Text('한줄 소개'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 17.0),
+                  child: Container(
+                    width: width * 0.68,
+                    height: height * 0.05,
+                    decoration: BoxDecoration(
+                      color: ThemeColor.inputColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: TextFormField(
+                          maxLength: 10,
+                          style: const TextStyle(
+                            decorationThickness: 0,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            counterText: "",
+                            hintText: '소개 입력',
+                            border: InputBorder.none,
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            /// 본인 성별 나타냄(수정 불가)
+            // const InformationEdit(
+            //   text1: '성별',
+            //   text2: '여자',
+            //   widthPoint: 0.68,
+            //   heightPoint: 0.05,
+            // ),
+            // const SizedBox(height: 7),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+                  child: Text('성별'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 17.0),
+                  child: Container(
+                    width: width * 0.68,
+                    height: height * 0.05,
+                    decoration: BoxDecoration(
+                      color: ThemeColor.inputColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: TextFormField(
+                          maxLength: 10,
+                          style: const TextStyle(
+                            decorationThickness: 0,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            counterText: "",
+                            hintText: '여자',
+                            border: InputBorder.none,
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            /// 사는 곳 선택하기(수정 가능 or 앱 위치 추적으로 자동으로 설정)
+            // const InformationEdit(
+            //   text1: '주소',
+            //   text2: '주소 입력',
+            //   widthPoint: 0.68,
+            //   heightPoint: 0.05,
+            // ),
+            // const SizedBox(height: 7),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+                  child: Text('주소'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 17.0),
+                  child: Container(
+                    width: width * 0.68,
+                    height: height * 0.05,
+                    decoration: BoxDecoration(
+                      color: ThemeColor.inputColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: TextFormField(
+                          maxLength: 10,
+                          style: const TextStyle(
+                            decorationThickness: 0,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            counterText: "",
+                            hintText: '주소 입력',
+                            border: InputBorder.none,
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            /// 본인 나이 나타냄(수정 불가)
+            // const InformationEdit(
+            //   text1: '나이',
+            //   text2: '25세',
+            //   widthPoint: 0.18,
+            //   heightPoint: 0.05,
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+                  child: Text('나이'),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 17.0),
+                  child: Container(
+                    width: width * 0.68,
+                    height: height * 0.05,
+                    decoration: BoxDecoration(
+                      color: ThemeColor.inputColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: TextFormField(
+                          maxLength: 10,
+                          style: const TextStyle(
+                            decorationThickness: 0,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          decoration: const InputDecoration(
+                            counterText: "",
+                            hintText: '23세',
+                            border: InputBorder.none,
+                            isDense: true,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            /// 키 선택하기(수정 가능)
+            _selectHeight(context),
+            const SizedBox(height: 20),
+
+            /// 나누는 선
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Divider(
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            /// 내 인적사항
+            const PersonalInformation(),
+            const SizedBox(height: 7),
+
+            /// 내 성격
+            const Personality(),
+            const SizedBox(height: 7),
+
+            /// 내 이상형
+            const IdealType(),
+            const SizedBox(height: 7),
+
+            /// 내 관심사
+            const Interest(),
+            const SizedBox(height: 40),
+          ],
+        ),
+      ),
       extendBody: true,
 
       // modification complete
@@ -87,136 +384,56 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
   }
 
-  Widget _buildBody() {
-    return SingleChildScrollView(
+  Row _selectHeight(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+          child: Text('키'),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+          child: CupertinoButton(
+            child: Text('$selectedHeight cm'),
+            onPressed: () {
+              _showCupertinoPicker(context);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Padding _uploadMyProfile() {
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          /// 내 프로필 사진 업로드(6장 제한)
-          Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                _imageIndex.length,
-                (index) => Row(
-                  children: List.generate(_imageIndex[index].length, (jndex) {
-                    return Expanded(
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.all(1.0),
-                          child: Container(
-                            color: Colors.grey,
-                            child: (file[_imageIndex[index][jndex]] != null)
-                                ? Image.file(
-                                    File(file[_imageIndex[index][jndex]]!.path),
-                                    fit: BoxFit.cover,
-                                  )
-                                : IconShape.iconNoImage,
-                          ),
-                        ),
-                      ),
-                    );
-                  }),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          _imageIndex.length,
+          (index) => Row(
+            children: List.generate(_imageIndex[index].length, (jndex) {
+              return Expanded(
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: Container(
+                      color: Colors.grey,
+                      child: (file[_imageIndex[index][jndex]] != null)
+                          ? Image.file(
+                              File(file[_imageIndex[index][jndex]]!.path),
+                              fit: BoxFit.cover,
+                            )
+                          : IconShape.iconNoImage,
+                    ),
+                  ),
                 ),
-              ),
-            ),
+              );
+            }),
           ),
-          const SizedBox(height: 20),
-
-          /// 닉네임 입력(수정 가능)
-          const InformationEdit(
-            text1: '닉네임',
-            text2: '압둘라 3세',
-            widthPoint: 0.68,
-            heightPoint: 0.05,
-          ),
-          const SizedBox(height: 7),
-
-          /// 한 줄 소개 입력(수정 가능)
-          const InformationEdit(
-            text1: '한줄 소개',
-            text2: '소개 입력',
-            widthPoint: 0.68,
-            heightPoint: 0.05,
-          ),
-          const SizedBox(height: 7),
-
-          /// 본인 성별 나타냄(수정 불가)
-          const InformationEdit(
-            text1: '성별',
-            text2: '여자',
-            widthPoint: 0.68,
-            heightPoint: 0.05,
-          ),
-          const SizedBox(height: 7),
-
-          /// 사는 곳 선택하기(수정 가능 or 앱 위치 추적으로 자동으로 설정)
-          const InformationEdit(
-            text1: '주소',
-            text2: '주소 입력',
-            widthPoint: 0.68,
-            heightPoint: 0.05,
-          ),
-          const SizedBox(height: 7),
-
-          /// 본인 나이 나타냄(수정 불가)
-          const InformationEdit(
-            text1: '나이',
-            text2: '25세',
-            widthPoint: 0.18,
-            heightPoint: 0.05,
-          ),
-
-          /// 키 선택하기(수정 가능)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
-                child: Text('키'),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
-                child: CupertinoButton(
-                  child: Text('$selectedHeight cm'),
-                  onPressed: () {
-                    _showCupertinoPicker(context);
-                  },
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-
-          /// 나누는 선
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Divider(
-              color: Colors.grey,
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          /// 내 인적사항
-          const PersonalInformation(),
-          const SizedBox(height: 7),
-
-          /// 내 성격
-          const Personality(),
-          const SizedBox(height: 7),
-
-          /// 내 이상형
-          const IdealType(),
-          const SizedBox(height: 7),
-
-          /// 내 관심사
-          const Interest(),
-          const SizedBox(height: 40),
-        ],
+        ),
       ),
     );
   }
@@ -240,13 +457,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           children: List.generate(
             60,
             (index) => GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedHeight = index + 140;
-                  });
-                  Get.back();
-                },
-                child: Text("${index + 140} cm")),
+              onTap: () {
+                setState(() {
+                  selectedHeight = index + 140;
+                });
+                Get.back();
+              },
+              child: Text("${index + 140} cm"),
+            ),
           ),
         ),
       ),
