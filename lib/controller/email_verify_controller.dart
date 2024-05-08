@@ -1,22 +1,25 @@
 import 'package:dating/data/provider/auth_service.dart';
 import 'package:dating/screen/auth/auth_forgot_screen.dart';
+import 'package:dating/screen/auth/code_input_screen.dart';
+import 'package:dating/screen/auth/resister_screen.dart';
 import 'package:dating/utils/show_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class ResetPasswordController extends GetxController with UseToast {
-  final RxList<String> _code = ["", "", "", "", "", ""].obs;
+class EmailVerifyController extends GetxController with UseToast {
+  final RxList<String> _inputCode = ["", "", "", "", "", ""].obs;
   final RxInt _cnt = 0.obs;
-  static ResetPasswordController get to => Get.find();
+  static EmailVerifyController get to => Get.find();
   final TextEditingController _email = TextEditingController();
   final AuthService service;
+  final String authCode;
   String _authCode = "";
 
-  ResetPasswordController({required this.service});
+  EmailVerifyController({required this.service, required this.authCode});
 
   TextEditingController get email => _email;
-  List get code => _code;
+  List get code => _inputCode;
   int get cnt => _cnt.value;
 
   /// 인증코드 입력 전달 함수
@@ -32,7 +35,7 @@ class ResetPasswordController extends GetxController with UseToast {
       case 3:
       case 4:
       case 5:
-        _code[_cnt.value++] = value;
+        _inputCode[_cnt.value++] = value;
       default:
         break;
     }
@@ -47,7 +50,7 @@ class ResetPasswordController extends GetxController with UseToast {
     if (_cnt.value == 0) {
       return;
     }
-    _code[_cnt.value-- - 1] = "";
+    _inputCode[_cnt.value-- - 1] = "";
   }
 
   /// 숫자를 누르는 경우
@@ -72,6 +75,8 @@ class ResetPasswordController extends GetxController with UseToast {
   /// 일치하는지 확인하는 메소드
   /// 일치한다면 다음단계로 넘어감
   void validateAuthCode() async {
+    print(authCode);
+    print(_inputCode.join());
     Get.dialog(
         const Center(
           child: CircularProgressIndicator.adaptive(),
@@ -79,8 +84,9 @@ class ResetPasswordController extends GetxController with UseToast {
         barrierDismissible: false);
     await Future.delayed(const Duration(seconds: 1));
     Get.back();
-    if (_authCode == _code.join()) {
+    if (authCode == _inputCode.value.join()) {
       showToast("인증에 성공했습니다 !", gravity: ToastGravity.CENTER);
+      Get.to(() => const ResisterScreen());
     } else {
       showToast("인증코드가 다릅니다 !", gravity: ToastGravity.CENTER);
     }
@@ -101,7 +107,7 @@ class ResetPasswordController extends GetxController with UseToast {
 
   /// AC 버튼 함수
   void resetCode() {
-    _code.value = ["", "", "", "", "", ""];
+    _inputCode.value = ["", "", "", "", "", ""];
     _cnt.value = 0;
   }
 }

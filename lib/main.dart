@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/binding/login_binding.dart';
 import 'package:dating/screen/auth/login_screen.dart';
+import 'package:dating/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,10 +19,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(scaffoldBackgroundColor: Colors.white),
       home: const LoginScreen(),
-      // home: const HomeScreen(),
-
-      debugShowCheckedModeBanner: false,
       initialBinding: LoginBinding(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

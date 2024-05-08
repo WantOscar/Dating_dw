@@ -1,11 +1,11 @@
-import 'package:dating/controller/login_controller.dart';
-import 'package:dating/widget/icon_header.dart';
-import 'package:dating/widget/profile/warning_window.dart';
-import 'package:dating/widget/setting_profile/alarm_setting.dart';
-import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
+import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dating/widget/common/warning_window.dart';
+import 'package:dating/widget/icon_header.dart';
+import 'package:dating/widget/setting_profile/alarm_setting.dart';
+import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,8 +14,6 @@ class SettingProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: const IconHeader(text: '설정'),
       body: Column(
@@ -94,19 +92,7 @@ class SettingProfileScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
                 IconButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return WarningWindow(
-                          onTap: LoginController.to.logout,
-                          titleText: '로그아웃',
-                          explainText: '정말로 로그아웃 하시나요 ?',
-                          btnText: '로그아웃',
-                        );
-                      },
-                    );
-                  },
+                  onPressed: SettingController.to.showLogoutDialog,
                   icon: IconShape.iconArrowForward,
                 ),
               ],

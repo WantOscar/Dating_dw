@@ -1,9 +1,8 @@
 import 'dart:io';
+
 import 'package:dating/controller/camera_controller.dart';
-import 'package:dating/controller/upload_controller.dart';
 import 'package:dating/data/model/album.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
-import 'package:dating/widget/profile/warning_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -11,6 +10,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 import '../screen/profile/camera_screen.dart';
+import '../widget/common/warning_window.dart';
 
 class ProfileImageController extends GetxController {
   final Rx<List<AlbumModel>> _albums = Rx<List<AlbumModel>>([]);
