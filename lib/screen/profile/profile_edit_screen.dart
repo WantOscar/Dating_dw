@@ -85,59 +85,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             const SizedBox(height: 20),
 
             /// 닉네임 입력(수정 가능)
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Text('닉네임'),
-                  Text(
-                    '가재맨',
-                    textAlign: TextAlign.start,
-                  ),
-                ],
-              ),
-            ),
+            _nickNameInput(),
             const SizedBox(height: 7),
 
             /// 한 줄 소개 입력(수정 가능)
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text('한줄 소개'),
-                  Container(
-                    width: width * 0.68,
-                    height: height * 0.05,
-                    decoration: BoxDecoration(
-                      color: ThemeColor.inputColor,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Center(
-                      child: TextFormField(
-                        maxLength: 10,
-                        style: const TextStyle(
-                          decorationThickness: 0,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        decoration: const InputDecoration(
-                          counterText: "",
-                          hintText: '소개 입력',
-                          border: InputBorder.none,
-                          isDense: true,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _introduceInput(width, height),
 
             /// 본인 성별 나타냄(수정 불가)
             Padding(
@@ -297,6 +249,60 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
   }
 
+  Widget _introduceInput(double width, double height) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('한줄 소개'),
+          Container(
+            width: width * 0.68,
+            height: height * 0.05,
+            decoration: BoxDecoration(
+              color: ThemeColor.inputColor,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Center(
+              child: TextFormField(
+                maxLength: 10,
+                style: const TextStyle(
+                  decorationThickness: 0,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+                decoration: const InputDecoration(
+                  counterText: "",
+                  hintText: '소개 입력',
+                  border: InputBorder.none,
+                  isDense: true,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _nickNameInput() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Text('닉네임'),
+          Text(
+            '가재맨',
+            textAlign: TextAlign.start,
+          ),
+        ],
+      ),
+    );
+  }
+
   Row _selectHeight(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -318,7 +324,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
   }
 
-  Padding _uploadMyProfile() {
+  Widget _uploadMyProfile() {
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Column(
