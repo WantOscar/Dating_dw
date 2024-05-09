@@ -1,32 +1,29 @@
-// import 'dart:convert';
+import 'dart:io';
 
-// import 'package:dating/utils/api_urls.dart';
-// import 'package:get/get.dart';
-// import 'package:http/http.dart' as http;
-// import '../model/user.dart';
+import 'package:get/get.dart';
+import 'package:remedi_kopo/remedi_kopo.dart';
 
-// class ProfileController extends GetxController {
-//   final Rx<User> user = User().obs;
+class ProfileEditController extends GetxController {
+  final Rx<List<File?>> _files = Rx<List<File?>>([
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
+  final List<List<int>> _imageIndex = [
+    [0, 1, 2],
+    [3, 4, 5],
+  ];
 
-//   Future<void> fetchProfile() async {
-//     // Fetch the initial profile data from the API or other source
-//     // and set it to the user.value
-//   }
+  final Rxn<KopoModel> _address = Rxn<KopoModel>();
 
-//   Future<void> updateProfile() async {
-//     final profileData = user.value.toJson();
+  List<File?> get files => _files.value;
 
-//     // Send a PUT request to update the profile
-//     final response = await http.put(
-//       Uri.parse(ApiUrl.profileUpdate),
-//       headers: {'Content-Type': 'application/json'},
-//       body: json.encode(profileData),
-//     );
+  List<List<int>> get imageIndex => _imageIndex;
 
-//     if (response.statusCode == 200) {
-//       // Profile updated successfully
-//     } else {
-//       throw Exception("Failed to update profile");
-//     }
-//   }
-// }
+  void searchAddress() {
+    Get.to(() => RemediKopo());
+  }
+}

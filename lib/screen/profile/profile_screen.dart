@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
+import 'package:dating/controller/profile_edit_controller.dart';
+import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
@@ -56,7 +58,6 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
           _personality(),
           _interesting(),
           _idealType(),
-          _story(),
         ],
       ),
     );
@@ -248,12 +249,11 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfileEditScreen(),
-                    ),
-                  );
+                  Get.to(() => const ProfileEditScreen(),
+                      binding: BindingsBuilder(() {
+                    // ProfileImageController();
+                    Get.put(ProfileEditController());
+                  }));
                 },
                 child: const Text(
                   '프로필 편집',
@@ -414,15 +414,5 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
             ),
           ],
         ),
-      );
-
-  Widget _story() => SliverPadding(
-        padding: const EdgeInsets.only(
-            top: 40.0, bottom: 80.0, right: 1.0, left: 1.0),
-        sliver: SliverGrid.builder(
-            itemCount: 3,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, mainAxisSpacing: 1.0, crossAxisSpacing: 1.0),
-            itemBuilder: (context, index) => const MyPhotos()),
       );
 }
