@@ -3,7 +3,6 @@ import 'package:dating/data/repository/auth_repository.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/dio_intercepter.dart';
-import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
@@ -99,7 +98,6 @@ class AuthService implements AuthRepository {
         return false;
       }
     } on Exception {
-      ToastMessage.showToast("장시간 로그인 되어 로그아웃 되었습니다.");
       return false;
     }
   }

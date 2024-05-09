@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
 import 'package:dating/controller/onboard_controller.dart';
 import 'package:dating/screen/profile/init_profile_upload_screen.dart';
@@ -335,7 +333,9 @@ class OnboardScreen extends GetView<OnboardingController> {
                           children: [
                             Obx(
                               () => Text(
-                                (controller.day == 0) ? "일" : controller.day.toString(),
+                                (controller.day == 0)
+                                    ? "일"
+                                    : controller.day.toString(),
                                 style: TextStyle(
                                     color: (controller.day == 0)
                                         ? const Color(0xffafafaf)
@@ -520,17 +520,15 @@ class OnboardScreen extends GetView<OnboardingController> {
       );
 
   Widget _createProfileButton() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-        child: BottomButton(
-          onTap: controller.goToHome,
-          child: Text(
-              "프로필 생성",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600)),
-        )
-      );
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      child: BottomButton(
+        onTap: controller.updateUserInfo,
+        child: const Text("프로필 생성",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600)),
+      ));
 
   Widget _loading() => Scaffold(
         body: Padding(
