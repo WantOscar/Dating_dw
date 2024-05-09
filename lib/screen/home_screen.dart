@@ -13,8 +13,9 @@ class HomeScreen extends GetView<BottomNavController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: controller.popAction,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: controller.popAction,
       child: Obx(
         () => Scaffold(
           extendBody: true,

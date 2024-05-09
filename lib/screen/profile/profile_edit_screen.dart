@@ -1,7 +1,10 @@
 import 'dart:io';
 
 import 'package:dating/Widget/icon_header.dart';
+import 'package:dating/binding/upload_binding.dart';
+import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
+import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/bottom_apply_bar.dart';
@@ -86,12 +89,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             const SizedBox(height: 20),
 
             /// 닉네임 입력(수정 가능)
-            // const InformationEdit(
-            //   text1: '닉네임',
-            //   text2: '압둘라 3세',
-            //   widthPoint: 0.68,
-            //   heightPoint: 0.05,
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -137,13 +134,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             const SizedBox(height: 7),
 
             /// 한 줄 소개 입력(수정 가능)
-            // const InformationEdit(
-            //   text1: '한줄 소개',
-            //   text2: '소개 입력',
-            //   widthPoint: 0.68,
-            //   heightPoint: 0.05,
-            // ),
-            // const SizedBox(height: 7),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -188,13 +178,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             ),
 
             /// 본인 성별 나타냄(수정 불가)
-            // const InformationEdit(
-            //   text1: '성별',
-            //   text2: '여자',
-            //   widthPoint: 0.68,
-            //   heightPoint: 0.05,
-            // ),
-            // const SizedBox(height: 7),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -239,13 +222,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             ),
 
             /// 사는 곳 선택하기(수정 가능 or 앱 위치 추적으로 자동으로 설정)
-            // const InformationEdit(
-            //   text1: '주소',
-            //   text2: '주소 입력',
-            //   widthPoint: 0.68,
-            //   heightPoint: 0.05,
-            // ),
-            // const SizedBox(height: 7),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -290,12 +266,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             ),
 
             /// 본인 나이 나타냄(수정 불가)
-            // const InformationEdit(
-            //   text1: '나이',
-            //   text2: '25세',
-            //   widthPoint: 0.18,
-            //   heightPoint: 0.05,
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -417,14 +387,22 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   aspectRatio: 1,
                   child: Padding(
                     padding: const EdgeInsets.all(1.0),
-                    child: Container(
-                      color: Colors.grey,
-                      child: (file[_imageIndex[index][jndex]] != null)
-                          ? Image.file(
-                              File(file[_imageIndex[index][jndex]]!.path),
-                              fit: BoxFit.cover,
-                            )
-                          : IconShape.iconNoImage,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const UploadScreen(),
+                            binding: BindingsBuilder(() {
+                          Get.put(ProfileImageController());
+                        }));
+                      },
+                      child: Container(
+                        color: Colors.grey,
+                        child: (file[_imageIndex[index][jndex]] != null)
+                            ? Image.file(
+                                File(file[_imageIndex[index][jndex]]!.path),
+                                fit: BoxFit.cover,
+                              )
+                            : IconShape.iconNoImage,
+                      ),
                     ),
                   ),
                 ),

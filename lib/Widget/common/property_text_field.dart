@@ -19,9 +19,10 @@ class PropertyTextField extends StatelessWidget {
           cursorColor: Colors.black87,
           decoration: InputDecoration(
               hintText: label,
-              hintStyle: TextStyle(fontSize: 15, color: Color(0xffafafaf)),
+              hintStyle:
+                  const TextStyle(fontSize: 15, color: Color(0xffafafaf)),
               border: InputBorder.none,
-              fillColor: Color(0xffefefef),
+              fillColor: const Color(0xffefefef),
               filled: true),
         ),
       ),
