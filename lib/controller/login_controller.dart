@@ -1,15 +1,14 @@
-import 'package:dating/binding/home_binding.dart';
 import 'package:dating/controller/onboard_controller.dart';
 import 'package:dating/data/model/token_provider.dart';
 import 'package:dating/data/provider/auth_service.dart';
 import 'package:dating/data/provider/user_fetch.dart';
 import 'package:dating/screen/auth/onboard_screen.dart';
-import 'package:dating/screen/home_screen.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+import '../utils/show_toast.dart';
+
+class LoginController extends GetxController with UseToast {
   final RxBool _isLoading = false.obs;
   final tokenProvider = TokenProvider();
   final AuthService authService;
@@ -64,13 +63,15 @@ class LoginController extends GetxController {
       "password": _password.value.text.toString()
     };
 
-    await authService.login(data);
+    final response = await authService.login(data);
+    print("respnose : $response");
+    if (response != null) {
+      ///컨트롤러 값 초기화
+      _email.clear();
+      _password.clear();
+      _moveToOnboard();
+    }
     _isLoading(false);
-
-    ///컨트롤러 값 초기화
-    _email.clear();
-    _password.clear();
-    _moveToOnboard();
   }
 
   void logout() => authService.logOut();

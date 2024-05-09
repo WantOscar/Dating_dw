@@ -12,7 +12,7 @@ class TokenProvider {
   factory TokenProvider() => _instance;
 
   /// 서버로부터 발급받은 토큰을 스토리지에 저장하는 메소드
-  void saveTokenInfo(Map<String, dynamic> json) {
+  Future<void> saveTokenInfo(Map<String, dynamic> json) async {
     storage.write(key: _accessToken, value: json[_accessToken]);
     storage.write(key: _refreshToken, value: json[_refreshToken]);
   }
