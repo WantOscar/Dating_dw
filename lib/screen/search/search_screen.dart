@@ -1,12 +1,9 @@
-import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/controller/feed_write_controller.dart';
-import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
-import 'package:dating/style/constant.dart';
-import 'package:dating/utils/show_toast.dart';
-import 'package:dating/widget/common_header.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -22,19 +19,26 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonHeader(
-        text: '탐색',
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(() => const FeedWriteScreen(),
-                  binding: BindingsBuilder(() {
-                Get.put(FeedWriteController());
-              }));
-            },
-            icon: IconShape.iconAdd,
-          ),
-        ],
+      appBar: PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: CammitAppBar(
+          title: '탐색',
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Get.to(() => const FeedWriteScreen(),
+                    binding: BindingsBuilder(() {
+                  Get.put(FeedWriteController());
+                }));
+              },
+              child: Icon(
+                Icons.add,
+                color: ThemeColor.fontColor,
+                size: 30,
+              ),
+            ),
+          ],
+        ),
       ),
       body: _buildBody(),
     );
@@ -44,7 +48,8 @@ class _SearchScreenState extends State<SearchScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
-      child: Center(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 70),
         child: Column(
           /// 글 목록 10개 지정
           children: List.generate(
