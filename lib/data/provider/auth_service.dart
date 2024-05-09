@@ -1,8 +1,6 @@
-import 'package:dating/binding/home_binding.dart';
 import 'package:dating/data/model/token_provider.dart';
 import 'package:dating/data/repository/auth_repository.dart';
 import 'package:dating/screen/auth/login_screen.dart';
-import 'package:dating/screen/auth/onboard_screen.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dating/utils/toast_message.dart';
@@ -21,14 +19,17 @@ class AuthService implements AuthRepository {
   /// 로컬 스토리지에 저장됨
   /// 실패할 경우 에러메시지를 반환함.
   @override
-  Future<void> login(Map<String, dynamic> data) async {
+  Future<String?> login(Map<String, dynamic> data) async {
     try {
       final response = await dio.post(ApiUrl.login, data: data);
       if (response.statusCode == 200) {
-        tokenProvider.saveTokenInfo(response.data);
+        await tokenProvider.saveTokenInfo(response.data);
+        return tokenProvider.getAccessToken();
+      } else {
+        return null;
       }
-    } on Exception {
-      return;
+    } on Exception catch (error) {
+      return null;
     }
   }
 
