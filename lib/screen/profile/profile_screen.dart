@@ -9,6 +9,7 @@ import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -34,6 +35,26 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: CammitAppBar(
+          title: "프로필",
+          actions: [
+            GestureDetector(
+                onTap: () {
+                  Get.to(() => const SettingProfileScreen(),
+                      binding: BindingsBuilder(() {
+                    Get.put(SettingController());
+                  }));
+                },
+                child: Icon(
+                  Icons.settings,
+                  color: ThemeColor.fontColor,
+                  size: 30,
+                ))
+          ],
+        ),
+      ),
       body:
           // Obx(
           //   () {
@@ -50,15 +71,17 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
           //     }
           //   },
           // ),
-          CustomScrollView(
-        slivers: [
-          _appBar(),
-          _profile(),
-          _info(),
-          _personality(),
-          _interesting(),
-          _idealType(),
-        ],
+          Padding(
+        padding: const EdgeInsets.only(bottom: 70),
+        child: CustomScrollView(
+          slivers: [
+            _profile(),
+            _info(),
+            _personality(),
+            _interesting(),
+            _idealType(),
+          ],
+        ),
       ),
     );
   }
@@ -115,39 +138,6 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
       ],
     );
   }
-
-  /// 프로필 화면 앱바 위젯
-  Widget _appBar() => SliverAppBar(
-        pinned: true,
-        leading: Padding(
-          padding: const EdgeInsets.all(14.0),
-          child: Text(
-            "프로필",
-            style: TextStyle(
-                fontSize: 25,
-                color: ThemeColor.fontColor,
-                fontWeight: FontWeight.bold),
-          ),
-        ),
-        toolbarHeight: 65,
-        leadingWidth: 200,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              onPressed: () {
-                Get.to(() => const SettingProfileScreen(),
-                    binding: BindingsBuilder(() {
-                  Get.put(SettingController());
-                }));
-              },
-              icon: IconShape.iconSettings,
-            ),
-          ),
-        ],
-      );
 
   Widget _profile() => SliverToBoxAdapter(
         child: Stack(

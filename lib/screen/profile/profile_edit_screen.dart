@@ -8,7 +8,7 @@ import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
 import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/widget/bottom_apply_bar.dart';
+import 'package:dating/widget/common/bottom_apply_bar.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/widget/profile/interest.dart';
 import 'package:dating/widget/profile/personal_information.dart';

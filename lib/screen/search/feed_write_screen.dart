@@ -1,9 +1,8 @@
+import 'package:dating/Widget/common/icon_header.dart';
 import 'package:dating/controller/feed_write_controller.dart';
 import 'package:dating/screen/profile/upload_screen.dart';
-import 'package:dating/screen/search/search_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/widget/icon_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

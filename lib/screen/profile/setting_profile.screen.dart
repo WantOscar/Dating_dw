@@ -2,8 +2,8 @@ import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/common/warning_window.dart';
-import 'package:dating/widget/icon_header.dart';
 import 'package:dating/widget/setting_profile/alarm_setting.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,22 @@ class SettingProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const IconHeader(text: '설정'),
+      appBar: PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: CammitAppBar(
+          title: "프로필 수정",
+          showCloseButton: true,
+          actions: [
+            GestureDetector(
+                onTap: () {},
+                child: const Icon(
+                  Icons.more_horiz,
+                  color: Colors.black,
+                  size: 30,
+                ))
+          ],
+        ),
+      ),
       body: Column(
         children: [
           /// 이메일 확인/비밀번호 변경

@@ -1,18 +1,21 @@
 import 'dart:io';
 
 import 'package:dating/binding/home_binding.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/provider/user_fetch.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/enums.dart';
+import 'package:dating/utils/toast_message.dart';
 import 'package:dating/widget/profile/item_select_bottom_sheet.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:uuid/uuid.dart';
 
-class OnboardingController extends GetxController {
+class OnboardingController extends GetxController with ToastMessage {
   final UserFetch userService;
   static OnboardingController get to => Get.find();
   OnboardingController({required this.userService});
@@ -93,6 +96,7 @@ class OnboardingController extends GetxController {
     final memberInfo = await userService.searchMyInfo();
     if (memberInfo != null) {
       Get.off(() => const HomeScreen(), binding: HomeBinding());
+      UserController.to.setMyInfo(memberInfo);
     } else {
       _isLoading(false);
     }
@@ -218,43 +222,44 @@ class OnboardingController extends GetxController {
     /// 회원 정보 갱신 로직
 
     const uuid = Uuid();
-    if (_selectProfileImages.value.isNotEmpty) {
-      List<dio.MultipartFile> images = [];
-      for (List<File?> rows in _selectProfileImages.value) {
-        for (File? image in rows) {
-          if (image != null) {
-            images.add(dio.MultipartFile.fromFileSync(image.path,
-                filename: "${uuid.v1()}.jpeg"));
-          }
+    List<dio.MultipartFile> images = [];
+    for (List<File?> rows in _selectProfileImages.value) {
+      for (File? image in rows) {
+        if (image != null) {
+          images.add(dio.MultipartFile.fromFileSync(image.path,
+              filename: "${uuid.v1()}.jpeg"));
         }
       }
+    }
 
-      dio.FormData data = dio.FormData.fromMap({"file": images});
+    if (images.length <= 3) {
+      showToast("최소 3개 이상 프로필을 등록해주세요!");
+      return;
+    }
 
-      // final data = dio.FormData.fromMap({"file": multiPartFiles});
-      print(data.files);
-      final urls = await userService.uploadImage(data);
-      if (urls.isNotEmpty) {
-        User user = User(
-            nickName: _nickName.text.toString().trim(),
-            description: _description.text.toString(),
-            birthDay: DateTime(
-                    int.parse(_year.value.toString()),
-                    int.parse(_month.value.toString()),
-                    int.parse(_day.value.toString()))
-                .toString(),
-            address: _address.value!.address.toString(),
-            gender: _gender.value!.name,
-            age: DateTime.now().year - int.parse(_year.value.toString()) + 1,
-            height: int.parse(_height.value.toString()),
-            images: urls,
-            image: urls.first);
+    dio.FormData data = dio.FormData.fromMap({"file": images});
 
-        final data = user.toJson();
-        final response = userService.updateUserInfo(data);
+    // final data = dio.FormData.fromMap({"file": multiPartFiles});
+    print(data.files);
+    final urls = await userService.uploadImage(data);
+    if (urls.isNotEmpty) {
+      NumberFormat format = NumberFormat("00");
+      User user = User(
+          nickName: _nickName.text.toString().trim(),
+          description: _description.text.toString(),
+          birthDay:
+              "${_year.value}-${format.format(_month.value)}-${format.format(_day.value)}",
+          address: _address.value!.address.toString(),
+          gender: _gender.value!.name,
+          age: DateTime.now().year - int.parse(_year.value.toString()) + 1,
+          height: int.parse(_height.value.toString()),
+          images: urls,
+          image: urls.first);
 
-        // Get.off(() => const HomeScreen(), binding: HomeBinding());
-      }
+      final data = user.toJson();
+      final response = userService.updateUserInfo(data);
+
+      Get.off(() => const HomeScreen(), binding: HomeBinding());
     }
   }
 }

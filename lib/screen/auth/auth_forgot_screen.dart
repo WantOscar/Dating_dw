@@ -1,8 +1,7 @@
 import 'package:dating/controller/email_verify_controller.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/style/constant.dart';
-import 'package:dating/widget/code_box.dart';
-import 'package:dating/widget/keyboard_key.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

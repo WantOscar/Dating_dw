@@ -491,16 +491,15 @@ class OnboardScreen extends GetView<OnboardingController> {
       );
 
   Widget _createProfileButton() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-        child: BottomButton(
-          onTap: controller.goToHome,
-          child: const Text(
-            "프로필 생성",
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      child: BottomButton(
+        onTap: controller.goToHome,
+        child: Text("프로필 생성",
             style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
-          ),
-        ),
-      );
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600)),
+      ));
 
   Widget _loading() => Scaffold(
         body: Padding(
