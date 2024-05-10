@@ -43,23 +43,6 @@ class BottomNavController extends GetxController {
     debugPrint(_history.toString());
   }
 
-  /// 안드로이드 사용자는 히스토리 직전의 페이지로 팝 액션을 수행함.
-  Future<bool> popAction() async {
-    if (Platform.isIOS) {
-      return true;
-    }
-
-    if (_history.length > 1) {
-      _history.removeLast();
-      _index(_history.last);
-      debugPrint(_history.toString());
-
-      return false;
-    } else {
-      return _showAppCloseDialog();
-    }
-  }
-
   /// 안드로이드 사용자가 앱을 종료할 경우
   /// 활성화 되는 다이얼로그 메소드
   _showAppCloseDialog() {
@@ -75,5 +58,15 @@ class BottomNavController extends GetxController {
         Get.back();
       },
     ));
+  }
+
+  /// 안드로이드 사용자는 히스토리 직전의 페이지로 팝 액션을 수행함.
+  void popAction(bool didPop) {
+    if (_history.length == 1) {
+      _showAppCloseDialog();
+    } else {
+      _history.removeLast();
+      _index(_history.last);
+    }
   }
 }

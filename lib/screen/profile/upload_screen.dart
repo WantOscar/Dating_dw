@@ -1,13 +1,10 @@
 import 'dart:io';
 
-import 'package:dating/controller/camera_controller.dart';
 import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/screen/profile/album_image.dart';
-import 'package:dating/screen/profile/camera_screen.dart';
 import 'package:dating/screen/profile/change_album_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/widget/icon_header.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_manager/photo_manager.dart';
