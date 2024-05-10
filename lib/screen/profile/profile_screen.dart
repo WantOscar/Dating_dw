@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
-import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
-import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
@@ -30,6 +28,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
     'https://cdn.mediafine.co.kr/news/photo/202310/43998_70230_3725.jpg',
     'https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2023/04/19/dfc7ca64-8974-4fdf-ac8e-34dfd9d27eed.jpg',
   ];
+
   int _current = 0;
 
   @override
@@ -55,23 +54,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-      body:
-          // Obx(
-          //   () {
-          //     if (UserController.to.status == Status.LOADING) {
-          //       return const Center(
-          //         child: CircularProgressIndicator.adaptive(),
-          //       );
-          //     } else if (UserController.to.status == Status.ERROR) {
-          //       return const Center(
-          //         child: Text("에러가 발생했습니다."),
-          //       );
-          //     } else {
-          //       return _buildBody();
-          //     }
-          //   },
-          // ),
-          Padding(
+      body: Padding(
         padding: const EdgeInsets.only(bottom: 70),
         child: CustomScrollView(
           slivers: [
@@ -86,75 +69,66 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  /// 사용자의 프로필 이미지를 보여주는 슬라이더 위젯
-  Widget _profileImages() {
-    return CarouselSlider.builder(
-      itemCount: images.length,
-      itemBuilder: (context, index, realIndex) {
-        return AspectRatio(
-          aspectRatio: 1.1,
-          child: Container(
-            color: Colors.black,
-            child: ClipRRect(
-              child: CachedNetworkImage(
-                imageUrl: images[index],
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        );
-      },
-      options: CarouselOptions(
-        enableInfiniteScroll: false,
-        aspectRatio: 1,
-        viewportFraction: 1,
-        onPageChanged: (index, reason) {
-          setState(() {
-            _current = index;
-          });
-        },
-      ),
-    );
-  }
-
-  Widget _options() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        (images.length == 1)
-            ? Container()
-            : AnimatedSmoothIndicator(
-                activeIndex: _current,
-                count: images.length,
-                effect: ScrollingDotsEffect(
-                  dotColor: Colors.grey,
-                  activeDotColor: ThemeColor.fontColor,
-                  activeDotScale: 1,
-                  spacing: 4.0,
-                  dotWidth: 10.0,
-                  dotHeight: 10.0,
-                ),
-              ),
-      ],
-    );
-  }
-
+  /// 사용자의 프로필을 보여주는 위젯
   Widget _profile() => SliverToBoxAdapter(
         child: Stack(
           children: [
-            /// 내 프로필 사진들
-            _profileImages(),
+            /// 사용자의 프로필 이미지를 보여주는 슬라이더 위젯
+            CarouselSlider.builder(
+              itemCount: images.length,
+              itemBuilder: (context, index, realIndex) {
+                return AspectRatio(
+                  aspectRatio: 1.1,
+                  child: Container(
+                    color: Colors.black,
+                    child: ClipRRect(
+                      child: CachedNetworkImage(
+                        imageUrl: images[index],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                );
+              },
+              options: CarouselOptions(
+                enableInfiniteScroll: false,
+                aspectRatio: 1,
+                viewportFraction: 1,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _current = index;
+                  });
+                },
+              ),
+            ),
 
             /// 이미지 슬라이더
             Positioned(
               right: 10,
               left: 10,
               bottom: 10,
-              child: _options(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  (images.length == 1)
+                      ? Container()
+                      : AnimatedSmoothIndicator(
+                          activeIndex: _current,
+                          count: images.length,
+                          effect: ScrollingDotsEffect(
+                            dotColor: Colors.grey,
+                            activeDotColor: ThemeColor.fontColor,
+                            activeDotScale: 1,
+                            spacing: 4.0,
+                            dotWidth: 10.0,
+                            dotHeight: 10.0,
+                          ),
+                        ),
+                ],
+              ),
             ),
 
-            /// 내 이름
-            // ProfilePositionedName(user: UserController.to.myInfo!),
+            /// 내 닉네임을 보여줌
             Positioned(
               top: 240,
               left: 20,
@@ -171,8 +145,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            /// 내 나이
-            // ProfilePositionedAge(user: UserController.to.myInfo!),
+            /// 내 나이와 키를 보여줌
             Positioned(
               top: 300,
               left: 20,
@@ -203,8 +176,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
               ),
             ),
 
-            /// 내 위치
-            // ProfilePositionedLocation(user: UserController.to.myInfo!),
+            /// 내 위치를 나타냄
             Positioned(
               top: 320,
               left: 20,
@@ -241,7 +213,6 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                 onPressed: () {
                   Get.to(() => const ProfileEditScreen(),
                       binding: BindingsBuilder(() {
-                    // ProfileImageController();
                     Get.put(ProfileEditController());
                   }));
                 },
@@ -259,6 +230,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
         ),
       );
 
+  /// 내 인적사항을 보여줌
   Widget _info() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -292,6 +264,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
         ),
       );
 
+  /// 내 성격을 보여줌
   Widget _personality() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -340,6 +313,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
         ),
       );
 
+  /// 내 관심사를 보여줌
   Widget _interesting() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -373,6 +347,7 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
         ),
       );
 
+  /// 내 이상형을 보여줌
   Widget _idealType() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
