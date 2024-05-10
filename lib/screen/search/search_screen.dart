@@ -40,53 +40,51 @@ class _SearchScreenState extends State<SearchScreen> {
           ],
         ),
       ),
-      body: _buildBody(),
-    );
-  }
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 70),
+          child: Column(
+            /// 글 목록 10개 지정
+            children: List.generate(
+              10,
+              (index) => Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.width * 1.2,
+                    decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color.fromARGB(255, 206, 204, 204),
+                          Color.fromARGB(255, 226, 109, 148),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        /// 글쓴이 프로필과 간략한 정보
+                        _profile(context),
 
-  Widget _buildBody() {
-    final width = MediaQuery.of(context).size.width;
+                        const Text('과팅할사람~'),
 
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 70),
-        child: Column(
-          /// 글 목록 10개 지정
-          children: List.generate(
-            10,
-            (index) => Column(
-              children: [
-                const SizedBox(height: 20),
-                Container(
-                  width: width * 0.9,
-                  height: width * 1.2,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color.fromARGB(255, 206, 204, 204),
-                        Color.fromARGB(255, 226, 109, 148),
+                        /// 참여 신청 버튼
+                        _participate(),
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      _writerProfile(),
-                      _write(),
-                      _joinBtn(),
-                    ],
+                  const SizedBox(height: 20),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Divider(color: Colors.grey),
                   ),
-                ),
-                const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Divider(color: Colors.grey),
-                ),
-                const SizedBox(height: 20),
-              ],
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           ),
         ),
@@ -94,10 +92,9 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  /// 글쓴이 프로필과 간략한 정보
-  Padding _writerProfile() {
-    final width = MediaQuery.of(context).size.width;
-
+  /// 글쓴이의 프로필을 보여줌
+  /// 우측 아이콘은 글쓴이를 차단/취소 가능.
+  Widget _profile(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Column(
@@ -107,8 +104,8 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               /// 글쓴이 프로필
               Container(
-                width: width * 0.13,
-                height: width * 0.13,
+                width: MediaQuery.of(context).size.width * 0.13,
+                height: MediaQuery.of(context).size.width * 0.13,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: Colors.white,
@@ -120,7 +117,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Image.network(
-                        'https://img.khan.co.kr/news/2024/03/06/news-p.v1.20240306.36d040a925cd45deb5d87d7f2a0771fb_P1.webp',
+                        'https://postfiles.pstatic.net/MjAyMjA4MDNfMTA5/MDAxNjU5NDk2ODM5ODg3.uC0PshEiib8q26jwPjQ6GoHdP_h3BIp-0kMw9lOxwdYg.fidwJGXN_KjzDVGvtkJz-212ExplHUOz_3y69_cWz6gg.PNG.duswnekd0/Image_015.png?type=w966',
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -244,7 +241,7 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   /// 참여 신청 버튼
-  Widget _joinBtn() {
+  Positioned _participate() {
     return Positioned(
       bottom: 10,
       child: SizedBox(
@@ -277,10 +274,6 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
     );
-  }
-
-  Widget _write() {
-    return Text('과팅할사람~');
   }
 }
 
