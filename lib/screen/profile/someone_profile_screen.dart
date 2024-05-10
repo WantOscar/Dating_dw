@@ -51,11 +51,11 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
     );
   }
 
-  /// 사용자의 프로필을 보여주는 위젯
+  /// 상대방의 프로필을 보여주는 위젯
   Widget _profile() => SliverToBoxAdapter(
         child: Stack(
           children: [
-            /// 사용자의 프로필 이미지를 보여주는 슬라이더 위젯
+            /// 상대방의 프로필 이미지를 보여주는 슬라이더 위젯
             CarouselSlider.builder(
               itemCount: images.length,
               itemBuilder: (context, index, realIndex) {
@@ -110,7 +110,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
               ),
             ),
 
-            /// 내 닉네임을 보여줌
+            /// 상대방 닉네임을 보여줌
             Positioned(
               top: 240,
               left: 20,
@@ -127,7 +127,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
               ),
             ),
 
-            /// 내 나이와 키를 보여줌
+            /// 상대방 나이와 키를 보여줌
             Positioned(
               top: 300,
               left: 20,
@@ -158,7 +158,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
               ),
             ),
 
-            /// 내 위치를 나타냄
+            /// 상대방 위치를 나타냄
             Positioned(
               top: 320,
               left: 20,
@@ -180,7 +180,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
               ),
             ),
 
-            /// 채팅하기 버튼
+            /// 채팅하기 신청 버튼
             Positioned(
               top: 340,
               right: 80,
@@ -248,7 +248,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
         ),
       );
 
-  /// 내 인적사항을 보여줌
+  /// 상대방의 인적사항을 보여줌
   Widget _info() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -282,7 +282,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
         ),
       );
 
-  /// 내 성격을 보여줌
+  /// 상대방의 성격을 보여줌
   Widget _personality() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -331,7 +331,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
         ),
       );
 
-  /// 내 관심사를 보여줌
+  /// 상대방의 관심사를 보여줌
   Widget _interesting() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -365,7 +365,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
         ),
       );
 
-  /// 내 이상형을 보여줌
+  /// 상대방의 이상형을 보여줌
   Widget _idealType() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -399,6 +399,9 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
         ),
       );
 
+  /// 커스텀 앱바를 제작
+  /// 앱바 우측 아이콘을 누르면
+  /// 사용자는 상대방을 차단/취소 가능.
   Widget _appbar(BuildContext context) {
     return SliverAppBar(
       elevation: 0.0,
@@ -494,6 +497,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
     );
   }
 
+  /// 상대방 스토리 텍스트
   Widget _storyHeader() {
     return SliverToBoxAdapter(
       child: Padding(
@@ -509,6 +513,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
     );
   }
 
+  /// 상대방 스토리를 보여줌
   Widget _story() {
     return SliverGrid.builder(
       itemCount: 10,
