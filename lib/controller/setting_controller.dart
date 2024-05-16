@@ -1,5 +1,4 @@
 import 'package:dating/controller/login_controller.dart';
-import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/widget/common/notification_window.dart';
 import 'package:get/get.dart';
 

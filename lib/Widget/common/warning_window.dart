@@ -17,7 +17,7 @@ class WarningWindow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final width = Get.size.width;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(

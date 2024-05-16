@@ -135,8 +135,7 @@ class ProfileScreen extends GetView<UserController> {
               child: _options(),
             ),
 
-            /// 내 이름
-            // ProfilePositionedName(user: UserController.to.myInfo!),
+            /// 내 닉네임을 보여줌
             Positioned(
               top: 240,
               left: 20,
@@ -153,8 +152,7 @@ class ProfileScreen extends GetView<UserController> {
               ),
             ),
 
-            /// 내 나이
-            // ProfilePositionedAge(user: UserController.to.myInfo!),
+            /// 내 나이와 키를 보여줌
             Positioned(
               top: 300,
               left: 20,
@@ -185,8 +183,7 @@ class ProfileScreen extends GetView<UserController> {
               ),
             ),
 
-            /// 내 위치
-            // ProfilePositionedLocation(user: UserController.to.myInfo!),
+            /// 내 위치를 나타냄
             Positioned(
               top: 320,
               left: 20,
@@ -241,6 +238,7 @@ class ProfileScreen extends GetView<UserController> {
         ),
       );
 
+  /// 내 인적사항을 보여줌
   Widget _info() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -274,6 +272,7 @@ class ProfileScreen extends GetView<UserController> {
         ),
       );
 
+  /// 내 성격을 보여줌
   Widget _personality() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -322,6 +321,7 @@ class ProfileScreen extends GetView<UserController> {
         ),
       );
 
+  /// 내 관심사를 보여줌
   Widget _interesting() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -355,6 +355,7 @@ class ProfileScreen extends GetView<UserController> {
         ),
       );
 
+  /// 내 이상형을 보여줌
   Widget _idealType() => const SliverToBoxAdapter(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
