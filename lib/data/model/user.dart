@@ -1,25 +1,63 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class User {
+  String? nickName;
+  String? description;
+  String? birthDay;
+  String? address;
+  String? gender;
+  int? age;
+  int? height;
+  List? images;
+  String? image;
+  String? personalInfo;
+  String? personality;
+  String? interest;
+  String? likePersonality;
+  User({
+    this.nickName,
+    this.description,
+    this.birthDay,
+    this.address,
+    this.gender,
+    this.age,
+    this.height,
+    this.images,
+    this.image,
+    this.personalInfo,
+    this.personality,
+    this.interest,
+    this.likePersonality,
+  });
 
-part 'user.freezed.dart';
-part 'user.g.dart';
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+        nickName: json["nickName"],
+        description: json["description"],
+        birthDay: json["birthDay"],
+        address: json["address"],
+        gender: json["gender"],
+        age: json["age"],
+        height: json["height"],
+        images: json["images"],
+        image: json["image"],
+        personalInfo: json["personalInfo"],
+        personality: json["personality"],
+        interest: json["interest"],
+        likePersonality: json["likePersonality"]);
+  }
 
-@freezed
-class User with _$User {
-  factory User({
-    String? nickName,
-    String? description,
-    String? birthDay,
-    String? address,
-    String? gender,
-    int? age,
-    int? height,
-    List? images,
-    String? image,
-    String? personalInfo,
-    String? personality,
-    String? interest,
-    String? likePersonality,
-  }) = _User;
-
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => {
+        "nickName": nickName,
+        "description": description,
+        "birthDay": birthDay,
+        "address": address,
+        "gender": gender,
+        "age": age,
+        "height": height,
+        "images": images,
+        "image": image,
+        "personalInfo": personalInfo,
+        "personality": personality,
+        "interest": interest,
+        "likePersonality": likePersonality
+      };
 }

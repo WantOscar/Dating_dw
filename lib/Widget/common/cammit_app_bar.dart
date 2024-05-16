@@ -6,13 +6,15 @@ class CammitAppBar extends StatelessWidget {
   final String title;
   final List<Widget>? actions;
   final bool showCloseButton;
+  final void Function()? backAction;
   final PreferredSizeWidget? bottom;
   const CammitAppBar(
       {super.key,
       required this.title,
       this.actions,
       this.showCloseButton = false,
-      this.bottom});
+      this.bottom,
+      this.backAction});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class CammitAppBar extends StatelessWidget {
       backgroundColor: Colors.white,
       leading: (showCloseButton)
           ? GestureDetector(
-              onTap: Get.back,
+              onTap: backAction ?? Get.back,
               child: Icon(
                 Icons.close,
                 color: ThemeColor.fontColor,

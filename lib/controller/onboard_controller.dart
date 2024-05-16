@@ -58,8 +58,8 @@ class OnboardingController extends GetxController with ToastMessage {
   int _heightIndex = 0;
 
   /// 사용자의 거주 주소
-  final Rxn<KopoModel> _address = Rxn<KopoModel>();
-  KopoModel? get address => _address.value;
+  final RxString _address = "".obs;
+  String get address => _address.value;
 
   /// 텍스트 컨트롤러
   final TextEditingController _nickName = TextEditingController();
@@ -185,6 +185,7 @@ class OnboardingController extends GetxController with ToastMessage {
     ));
   }
 
+  /// 사용자의 키를 설정하는 함수
   void pickMyHeight() {
     Get.bottomSheet(ItemSelectBottomSheet(
       items: List.generate(100, (index) => "${index + 150}cm"),
@@ -200,14 +201,19 @@ class OnboardingController extends GetxController with ToastMessage {
 
   /// 사용자 주소지 검색 api 함수
   void searchMyAddress() async {
-    if (_address.value != null) {
-      _address.value = null;
+    if (_address.value.isEmpty) {
+      _address.value = "";
       return;
     }
 
-    KopoModel? address = await Get.to(() => RemediKopo());
-    if (address != null) {
-      _address(address);
+    KopoModel? result = await Get.to(() => RemediKopo());
+    if (result != null) {
+      _address(result.address
+          .toString()
+          .split(" ")
+          .getRange(0, 3)
+          .toList()
+          .join(" "));
     }
   }
 
@@ -249,7 +255,7 @@ class OnboardingController extends GetxController with ToastMessage {
           description: _description.text.toString(),
           birthDay:
               "${_year.value}-${format.format(_month.value)}-${format.format(_day.value)}",
-          address: _address.value!.address.toString(),
+          address: _address.value,
           gender: _gender.value!.name,
           age: DateTime.now().year - int.parse(_year.value.toString()) + 1,
           height: int.parse(_height.value.toString()),

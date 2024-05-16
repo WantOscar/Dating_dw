@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:dating/Widget/common/icon_header.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/profile_image_controller.dart';
@@ -8,16 +5,14 @@ import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
 import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/widget/common/bottom_apply_bar.dart';
+import 'package:dating/widget/common/bottom_button.dart';
+import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/profile/ideal_type.dart';
 import 'package:dating/widget/profile/interest.dart';
-import 'package:dating/widget/profile/personal_information.dart';
 import 'package:dating/widget/profile/personality.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 class ProfileEditScreen extends GetView<ProfileEditController> {
   const ProfileEditScreen({super.key});
@@ -26,19 +21,24 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        appBar: IconHeader(
-          text: '프로필 수정',
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(() => const ProfileThumnailManageScreen());
-                },
-                child: IconShape.iconMore,
+        appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize,
+          child: CammitAppBar(
+            showCloseButton: true,
+            backAction: controller.back,
+            title: '프로필 수정',
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => const ProfileThumnailManageScreen());
+                  },
+                  child: IconShape.iconMore,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -52,7 +52,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               _showGender(),
               _address(),
               _age(),
-              _selectHeight(context),
+              _selectHeight(),
 
               /// 나누는 선
               const Padding(
@@ -108,18 +108,13 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               /// 내 관심사
               const Interest(),
               const SizedBox(height: 100),
+              _completeButton(),
             ],
           ),
         ),
         extendBody: true,
 
         // modification complete
-        bottomNavigationBar: BottomApplyBar(
-          text: '수정완료',
-          onTap: () {
-            Get.back();
-          },
-        ),
       ),
     );
   }
@@ -127,52 +122,51 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   /// 프로필 사진을 최소 3장 ~ 최대 6장 선택하여 적용시킴(수정 가능)
   Widget _uploadMyProfile() {
     return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List.generate(
-          controller.imageIndex.length,
-          (index) => Row(
-            children:
-                List.generate(controller.imageIndex[index].length, (jndex) {
-              return Expanded(
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.all(1.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => const UploadScreen(),
-                            binding: BindingsBuilder(() {
-                          Get.put(ProfileImageController());
-                        }));
-                      },
-                      child: Container(
-                        color: Colors.grey,
-                        child: (controller.files[controller.imageIndex[index]
-                                    [jndex]] !=
-                                null)
-                            ? Image.file(
-                                controller.files[controller.imageIndex[index]
-                                    [jndex]]!,
-                                fit: BoxFit.cover,
-                              )
-                            : IconShape.iconNoImage,
+        padding: const EdgeInsets.all(2.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            controller.imageIndex.length,
+            (index) => Row(
+              children: List.generate(
+                controller.imageIndex[index].length,
+                (jndex) => Expanded(
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.all(1.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.to(() => const UploadScreen(),
+                              binding: BindingsBuilder(() {
+                            Get.put(ProfileImageController());
+                          }));
+                        },
+                        child: Container(
+                          color: Colors.grey,
+                          child: (controller.files[controller.imageIndex[index]
+                                      [jndex]] !=
+                                  null)
+                              ? Image.file(
+                                  controller.files[controller.imageIndex[index]
+                                      [jndex]]!,
+                                  fit: BoxFit.cover,
+                                )
+                              : IconShape.iconNoImage,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              );
-            }),
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   /// 회원정보에서 입력한 닉네임을 보여줌(수정 불가)
   Widget _nickNameInput() {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,7 +179,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
           SizedBox(
             width: 280,
             child: Text(
-              '가재맨',
+              controller.user!.nickName!,
               style: TextStyle(fontSize: 14, color: Colors.black87),
             ),
           ),
@@ -225,9 +219,9 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                     color: Colors.black87,
                     fontWeight: FontWeight.bold,
                   ),
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     counterText: "",
-                    hintText: '소개 입력 (최대 30자)',
+                    hintText: controller.user!.description ?? "한줄 소개를 입력해주세요.",
                     border: InputBorder.none,
                     isDense: true,
                   ),
@@ -242,7 +236,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
 
   /// 회원정보에서 선택한 성별을 보여줌(수정 불가)
   Widget _showGender() {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -255,7 +249,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
           SizedBox(
             width: 280,
             child: Text(
-              '여자',
+              controller.user!.gender! == "woman" ? "여자" : "남자",
               style: TextStyle(fontSize: 14, color: Colors.black87),
             ),
           ),
@@ -277,7 +271,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
             style: TextStyle(fontSize: 14, color: Colors.black87),
           ),
           GestureDetector(
-            onTap: controller.searchAddress,
+            onTap: controller.searchMyAddress,
             child: Container(
               height: 40,
               width: 280,
@@ -285,14 +279,17 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                 color: ThemeColor.inputColor,
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '주소 검색',
-                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                    Flexible(
+                      child: Text(
+                        controller.user!.address!,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                      ),
                     ),
                     Icon(Icons.search),
                   ],
@@ -307,20 +304,20 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
 
   /// 회원정보에서 입력한 나이를 보여줌(수정 불가)
   Widget _age() {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            '나이',
+            "나이",
             style: TextStyle(fontSize: 14, color: Colors.black87),
           ),
           SizedBox(
             width: 280,
             child: Text(
-              '22세',
+              "${controller.user!.age!}세",
               style: TextStyle(fontSize: 14, color: Colors.black87),
             ),
           ),
@@ -330,7 +327,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   }
 
   /// 키를 수정하여 프로필에 적용시킴(수정 가능)
-  Widget _selectHeight(BuildContext context) {
+  Widget _selectHeight() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
       child: Row(
@@ -350,7 +347,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    '170 cm',
+                    '${controller.user!.height!} cm',
                     style: TextStyle(fontSize: 14, color: ThemeColor.fontColor),
                   ),
                 ],
@@ -362,4 +359,15 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
       ),
     );
   }
+
+  Widget _completeButton() => Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      child: BottomButton(
+        onTap: controller.updateUserInfo,
+        child: Text("수정 완료",
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600)),
+      ));
 }
