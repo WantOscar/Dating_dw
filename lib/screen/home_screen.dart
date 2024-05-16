@@ -27,12 +27,13 @@ class HomeScreen extends GetView<BottomNavController> {
                 topRight: Radius.circular(24.0)),
             child: BottomNavigationBar(
               items: [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
+                    icon: Icon(Icons.home), label: '홈'),
+                const BottomNavigationBarItem(
                     icon: Icon(Icons.favorite), label: '탐색'),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                     icon: Icon(Icons.chat_outlined), label: '채팅'),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                     icon: Icon(Icons.notifications), label: '알림'),
                 BottomNavigationBarItem(
                     icon:

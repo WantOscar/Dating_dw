@@ -2,53 +2,53 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 
 class IconShape {
+  /// 사용자의 나이와 키 앞에 보여주는
+  /// 사람 아이콘
   static const iconPerson = Icon(Icons.person, size: 20, color: Colors.white);
 
+  /// 사용자의 거주지 or 현재 위치 앞에 보여주는
+  /// 위치 아이콘
   static const iconLocationOn =
       Icon(Icons.location_on, size: 20, color: Colors.white);
 
+  /// 설정 아이콘
   static Icon get iconSettings =>
       Icon(Icons.settings, color: ThemeColor.fontColor, size: 30);
 
-  static const iconPhotoCamera =
-      Icon(Icons.photo_camera, color: Colors.black, size: 30);
+  /// 성별이 남자임을 보여주는 아이콘
+  static const iconMale = Icon(Icons.male, size: 20, color: Colors.blue);
 
-  static Icon get iconArrowBack =>
-      Icon(Icons.arrow_back, color: ThemeColor.fontColor, size: 30);
+  /// 성별이 여자임을 보여주는 아이콘
+  static const iconFemale = Icon(Icons.female, size: 20, color: Colors.red);
 
-  static const iconMale = Icon(Icons.people, size: 20, color: Colors.blue);
-
-  static const iconFemale = Icon(Icons.people, size: 20, color: Colors.red);
-
-  static const iconSchool = Icon(Icons.school, size: 50);
-
-  static const iconEmojiPeople = Icon(Icons.emoji_people, size: 50);
-
+  /// 뒤로 가기 아이콘
   static const iconArrowBackIos =
       Icon(Icons.arrow_back_ios, color: Colors.pink);
 
-  static const iconNotificationOutline =
-      Icon(Icons.notifications_outlined, size: 30, color: Colors.black);
-
-  static Icon iconAdd = Icon(Icons.add, size: 30, color: ThemeColor.fontColor);
-
+  /// 상대방을 차단할 것인지 선택할 수 있는 아이콘
   static const iconMore = Icon(Icons.more_horiz, size: 30, color: Colors.black);
 
+  /// 다음 화면으로 넘어가는 아이콘
   static Icon get iconArrowForward =>
-      Icon(Icons.arrow_forward_ios, size: 15, color: ThemeColor.iconColor);
+      Icon(Icons.arrow_forward_ios, size: 25, color: ThemeColor.iconColor);
 
-  static const iconAddBoxOutlined =
-      Icon(Icons.add_box_outlined, color: Colors.black, size: 35);
-
+  /// 좋아요를 누를 수 있는 아이콘
   static Icon get iconFavorite =>
       const Icon(Icons.favorite, color: Colors.white, size: 25);
 
+  /// 올린 사진이 없을 때 초기의 빈 화면을 보여주는 아이콘
   static Icon get iconNoImage =>
       const Icon(Icons.image_not_supported, color: Colors.white);
 
+  /// 현재 화면을 닫는 아이콘
   static Icon get iconClose =>
       Icon(Icons.close, size: 25, color: ThemeColor.fontColor);
 
+  /// 다음 화면으로 넘어가는 아이콘
   static Icon get iconArrowGoto =>
       Icon(Icons.arrow_forward, size: 25, color: ThemeColor.fontColor);
+
+  /// 글을 쓰는 화면으로 넘어가는 아이콘
+  static Icon get iconEditNote =>
+      Icon(Icons.edit_note, color: ThemeColor.fontColor, size: 30);
 }

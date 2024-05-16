@@ -31,11 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   Get.put(FeedWriteController());
                 }));
               },
-              child: Icon(
-                Icons.add,
-                color: ThemeColor.fontColor,
-                size: 30,
-              ),
+              child: IconShape.iconEditNote,
             ),
           ],
         ),
@@ -49,26 +45,30 @@ class _SearchScreenState extends State<SearchScreen> {
               10,
               (index) => Column(
                 children: [
-                  Container(
-                    height: Get.size.width * 0.4,
-                    width: Get.size.width * 0.9,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Color.fromARGB(255, 206, 204, 204),
-                          Color.fromARGB(255, 226, 109, 148),
+                  GestureDetector(
+                    onTap: () {
+                      _showApply(context);
+                    },
+                    child: Container(
+                      height: Get.size.width * 0.4,
+                      width: Get.size.width * 0.9,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromARGB(255, 206, 204, 204),
+                            Color.fromARGB(255, 226, 109, 148),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Column(
+                        children: [
+                          _profile(context),
+                          _title(),
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Column(
-                      children: [
-                        _profile(context),
-                        _title(),
-                        // _join(),
-                      ],
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -86,11 +86,66 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  /// 상대방의 피드를 누르면 팝업창이 뜸
+  /// 세부 글 내용을 볼 수 있고,
+  /// 참여 신청버튼을 통해 신청 가능.
+  Future<dynamic> _showApply(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        title: _profile(context),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      '3:3 과팅할래?',
+                      style: TextStyle(
+                          fontSize: 17,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      '국민대 얼짱 3명이 심심해서 놀고 싶어요~ 저희랑 과팅할 남자 3명 구해요!',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          _join(),
+        ],
+      ),
+    );
+  }
+
   /// 글쓴이의 프로필을 보여줌
   /// 우측 아이콘은 글쓴이를 차단/취소 가능.
   Widget _profile(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -257,37 +312,42 @@ class _SearchScreenState extends State<SearchScreen> {
 
   /// 참여 신청 버튼
   Widget _join() {
-    return Positioned(
-      bottom: 10,
-      child: SizedBox(
-        height: 50,
-        child: Card(
-          elevation: 5.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: SizedBox(
+            height: 50,
+            child: Card(
+              elevation: 5.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ThemeColor.fontColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  onPressed: () {
+                    joinToast();
+                  },
+                  child: const Text(
+                    '참여하기',
+                    style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
-              onPressed: () {
-                joinToast();
-              },
-              child: Text(
-                '참여하기',
-                style: TextStyle(
-                    fontSize: 17,
-                    color: ThemeColor.fontColor,
-                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
