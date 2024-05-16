@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dating/controller/camera_controller.dart';
+import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/data/model/album.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:flutter/material.dart';
@@ -190,5 +191,15 @@ class ProfileImageController extends GetxController {
     Get.to(() => const CameraScreen(), binding: BindingsBuilder(() {
       Get.put(CameraScreenController());
     }));
+  }
+
+  void addNewProfileImage() {
+    if (_selectImage.value == null) {
+      return;
+    } else {
+      ProfileEditController.to
+          .addNewProfileImage(File(_selectImage.value!.path));
+      Get.back();
+    }
   }
 }

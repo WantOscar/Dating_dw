@@ -66,7 +66,7 @@ class UploadScreen extends GetView<ProfileImageController> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: controller.addNewProfileImage,
               child: Icon(
                 Icons.check,
                 color: ThemeColor.fontColor,

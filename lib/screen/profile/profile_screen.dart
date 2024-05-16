@@ -3,6 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
+import 'package:dating/controller/user_controller.dart';
+import 'package:dating/data/provider/user_fetch.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
@@ -12,120 +14,125 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends GetView<UserController> {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _SomeoneProfileScreenState();
-}
-
-class _SomeoneProfileScreenState extends State<ProfileScreen> {
-  final List<String> images = [
-    'https://img.tvreportcdn.de/cms-content/uploads/2023/10/20/93f856ee-e4ac-49a4-a4a1-df134b34bb8a.jpg',
-    'https://file.sportsseoul.com/news/cms/2024/01/04/news-p.v1.20240104.de25dc94af0b4040a998eee49d73c995_P1.png',
-    'https://file.sportsseoul.com/news/cms/2024/01/04/news-p.v1.20240104.448eb72daab14eb2bd91f4241c2e1d1f_P1.png',
-    'https://file.sportsseoul.com/news/cms/2024/01/04/news-p.v1.20240104.9e1be962b18e4f35b7a048682b5aa116_P1.png',
-    'https://cdn.mediafine.co.kr/news/photo/202310/43998_70230_3725.jpg',
-    'https://talkimg.imbc.com/TVianUpload/tvian/TViews/image/2023/04/19/dfc7ca64-8974-4fdf-ac8e-34dfd9d27eed.jpg',
-  ];
-
-  int _current = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: AppBar().preferredSize,
-        child: CammitAppBar(
-          title: "프로필",
-          actions: [
-            GestureDetector(
-                onTap: () {
-                  Get.to(() => const SettingProfileScreen(),
-                      binding: BindingsBuilder(() {
-                    Get.put(SettingController());
-                  }));
-                },
-                child: Icon(
-                  Icons.settings,
-                  color: ThemeColor.fontColor,
-                  size: 30,
-                ))
-          ],
+    return Obx(
+      () => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize,
+          child: CammitAppBar(
+            title: "프로필",
+            actions: [
+              GestureDetector(
+                  onTap: () {
+                    Get.to(() => const SettingProfileScreen(),
+                        binding: BindingsBuilder(() {
+                      Get.put(SettingController());
+                    }));
+                  },
+                  child: Icon(
+                    Icons.settings,
+                    color: ThemeColor.fontColor,
+                    size: 30,
+                  ))
+            ],
+          ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 70),
-        child: CustomScrollView(
-          slivers: [
-            _profile(),
-            _info(),
-            _personality(),
-            _interesting(),
-            _idealType(),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.only(bottom: 70),
+          child: CustomScrollView(
+            slivers: [
+              _profile(),
+              _info(),
+              _personality(),
+              _interesting(),
+              _idealType(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  /// 사용자의 프로필을 보여주는 위젯
-  Widget _profile() => SliverToBoxAdapter(
-        child: Stack(
-          children: [
-            /// 사용자의 프로필 이미지를 보여주는 슬라이더 위젯
-            CarouselSlider.builder(
-              itemCount: images.length,
+  /// 사용자의 프로필 이미지를 보여주는 슬라이더 위젯
+  Widget _profileImages() {
+    return GetX<UserController>(builder: (controller) {
+      return (controller.myInfo?.images == [])
+          ? CarouselSlider.builder(
+              itemCount: 6,
               itemBuilder: (context, index, realIndex) {
                 return AspectRatio(
-                  aspectRatio: 1.1,
-                  child: Container(
-                    color: Colors.black,
-                    child: ClipRRect(
-                      child: CachedNetworkImage(
-                        imageUrl: images[index],
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                );
+                    aspectRatio: 1.1,
+                    child: Container(
+                      color: Colors.grey,
+                    ));
               },
               options: CarouselOptions(
                 enableInfiniteScroll: false,
                 aspectRatio: 1,
                 viewportFraction: 1,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                },
+                onPageChanged: controller.changeImageIndex,
               ),
-            ),
+            )
+          : CarouselSlider.builder(
+              itemCount: controller.myInfo!.images!.length,
+              itemBuilder: (context, index, realIndex) {
+                return AspectRatio(
+                    aspectRatio: 1.1,
+                    child: Container(
+                      color: Colors.grey,
+                      child: CachedNetworkImage(
+                        imageUrl: controller.myInfo!.images![index],
+                      ),
+                    ));
+              },
+              options: CarouselOptions(
+                enableInfiniteScroll: false,
+                aspectRatio: 1,
+                viewportFraction: 1,
+                onPageChanged: controller.changeImageIndex,
+              ),
+            );
+    });
+  }
+
+  Widget _options() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        (controller.myInfo?.images?.length == 0)
+            ? Container()
+            : AnimatedSmoothIndicator(
+                activeIndex: controller.imageIndex,
+                count: controller.myInfo!.images!.length,
+                effect: ScrollingDotsEffect(
+                  dotColor: Colors.grey,
+                  activeDotColor: ThemeColor.fontColor,
+                  activeDotScale: 1,
+                  spacing: 4.0,
+                  dotWidth: 10.0,
+                  dotHeight: 10.0,
+                ),
+              ),
+      ],
+    );
+  }
+
+  Widget _profile() => SliverToBoxAdapter(
+        child: Stack(
+          children: [
+            /// 내 프로필 사진들
+            _profileImages(),
 
             /// 이미지 슬라이더
             Positioned(
               right: 10,
               left: 10,
               bottom: 10,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  (images.length == 1)
-                      ? Container()
-                      : AnimatedSmoothIndicator(
-                          activeIndex: _current,
-                          count: images.length,
-                          effect: ScrollingDotsEffect(
-                            dotColor: Colors.grey,
-                            activeDotColor: ThemeColor.fontColor,
-                            activeDotScale: 1,
-                            spacing: 4.0,
-                            dotWidth: 10.0,
-                            dotHeight: 10.0,
-                          ),
-                        ),
-                ],
-              ),
+              child: _options(),
             ),
 
             /// 내 닉네임을 보여줌
@@ -134,9 +141,9 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
               left: 20,
               child: TextButton(
                 onPressed: () {},
-                child: const Text(
-                  '아무개',
-                  style: TextStyle(
+                child: Text(
+                  controller.myInfo!.nickName!,
+                  style: const TextStyle(
                     fontSize: 40,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -155,18 +162,18 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                     onPressed: () {},
                     icon: IconShape.iconPerson,
                   ),
-                  const Text(
-                    '22세',
-                    style: TextStyle(
+                  Text(
+                    controller.myInfo!.age!.toString(),
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(width: 10),
-                  const Text(
-                    '167cm',
-                    style: TextStyle(
+                  Text(
+                    "${controller.myInfo!.height!}cm",
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -186,9 +193,9 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                     onPressed: () {},
                     icon: IconShape.iconLocationOn,
                   ),
-                  const Text(
-                    '서울 강북구',
-                    style: TextStyle(
+                  Text(
+                    controller.myInfo!.address!,
+                    style: const TextStyle(
                       fontSize: 13,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -213,7 +220,8 @@ class _SomeoneProfileScreenState extends State<ProfileScreen> {
                 onPressed: () {
                   Get.to(() => const ProfileEditScreen(),
                       binding: BindingsBuilder(() {
-                    Get.put(ProfileEditController());
+                    // ProfileImageController();
+                    Get.put(ProfileEditController(userService: UserFetch()));
                   }));
                 },
                 child: const Text(

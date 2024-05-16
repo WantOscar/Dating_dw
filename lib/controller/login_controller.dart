@@ -65,13 +65,13 @@ class LoginController extends GetxController with UseToast {
 
     final response = await authService.login(data);
     print("respnose : $response");
+    _isLoading(false);
     if (response != null) {
       ///컨트롤러 값 초기화
       _email.clear();
       _password.clear();
       _moveToOnboard();
     }
-    _isLoading(false);
   }
 
   void logout() => authService.logOut();

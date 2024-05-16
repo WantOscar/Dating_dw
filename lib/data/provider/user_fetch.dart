@@ -57,6 +57,7 @@ class UserFetch {
       });
 
       if (response.statusCode == 201) {
+        print(response.data);
         return response.data["imageList"];
       } else {
         return [];
@@ -67,8 +68,8 @@ class UserFetch {
     return [];
   }
 
-  updateUserInfo(Map<String, dynamic> data) async{
-    final response = await dio.post("/member/profile/update", data: data);
+  updateUserInfo(Map<String, dynamic> data) async {
+    final response = await dio.post("/member/profile/save", data: data);
 
     if (response.statusCode == 200) {
       print(response.data);

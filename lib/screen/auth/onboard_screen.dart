@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dating/Widget/common/property_text_field.dart';
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
 import 'package:dating/controller/onboard_controller.dart';
@@ -369,7 +367,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                         Text(
                           (controller.address == null)
                               ? "주소"
-                              : controller.address!.address!,
+                              : controller.address,
                           style: const TextStyle(
                             color: Color(0xffafafaf),
                             fontSize: 15,

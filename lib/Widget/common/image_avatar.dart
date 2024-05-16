@@ -23,7 +23,7 @@ class ImageAvatar extends StatelessWidget {
         ),
       );
     } else {
-      return CircleAvatar();
+      return SizedBox(width: 25, height: 25, child: CircleAvatar());
     }
   }
 }
