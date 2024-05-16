@@ -229,6 +229,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                              /// 차단버튼
                               InkWell(
                                 child: Container(
                                   alignment: Alignment.center,
@@ -245,10 +246,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ),
                                 onTap: () {},
                               ),
+
+                              /// 나누는 선
                               const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10.0),
                                 child: Divider(),
                               ),
+
+                              /// 취소버튼
                               InkWell(
                                 child: Container(
                                   alignment: Alignment.center,
