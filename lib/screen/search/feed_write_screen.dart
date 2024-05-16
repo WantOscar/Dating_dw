@@ -23,22 +23,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
           ),
         ],
       ),
-
-      /// 사진 업로드하기
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(() => const UploadScreen());
-        },
-        backgroundColor: ThemeColor.fontColor,
-        elevation: 3.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-        child: const Icon(
-          Icons.photo_camera,
-          color: Colors.white,
-          size: 20,
-        ),
-      ),
-
+      floatingActionButton: _uploadPhoto(),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -52,7 +37,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
                 child: TextField(
                   controller: controller.textController,
                   maxLines: 20,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '글을 작성해주세요.',
                     border: InputBorder.none,
                   ),
@@ -61,6 +46,23 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  /// 글에 사진을 추가하기 위한 플로팅액션버튼
+  FloatingActionButton _uploadPhoto() {
+    return FloatingActionButton(
+      onPressed: () {
+        Get.to(() => const UploadScreen());
+      },
+      backgroundColor: ThemeColor.fontColor,
+      elevation: 3.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+      child: const Icon(
+        Icons.photo_camera,
+        color: Colors.white,
+        size: 20,
       ),
     );
   }

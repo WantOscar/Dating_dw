@@ -491,7 +491,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
               backgroundColor: Colors.transparent,
             );
           },
-          icon: const Icon(Icons.more_vert, color: Colors.black, size: 25),
+          icon: IconShape.iconMore,
         ),
       ],
     );
