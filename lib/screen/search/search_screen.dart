@@ -53,12 +53,12 @@ class _SearchScreenState extends State<SearchScreen> {
                       height: Get.size.width * 0.4,
                       width: Get.size.width * 0.9,
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
+                        gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            Color.fromARGB(255, 206, 204, 204),
-                            Color.fromARGB(255, 226, 109, 148),
+                            const Color.fromARGB(255, 247, 205, 223),
+                            ThemeColor.fontColor,
                           ],
                         ),
                         borderRadius: BorderRadius.circular(30),

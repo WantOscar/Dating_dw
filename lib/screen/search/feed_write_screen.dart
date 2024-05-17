@@ -3,6 +3,7 @@ import 'package:dating/controller/feed_write_controller.dart';
 import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,15 +32,62 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
               /// 사진 업로드를 하지 않으면 빈 컨테이너, 업로드를 하면 컨테이너 안에 사진 추가
               Container(),
 
-              /// 글 작성하기
+              /// 제목 쓰기 칸(title)
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: controller.textController,
-                  maxLines: 20,
-                  decoration: const InputDecoration(
-                    hintText: '글을 작성해주세요.',
-                    border: InputBorder.none,
+                child: DottedBorder(
+                  strokeWidth: 2,
+                  color: Colors.grey,
+                  borderType: BorderType.RRect,
+                  radius: const Radius.circular(10),
+                  dashPattern: const [5, 5],
+                  child: SizedBox(
+                    height: Get.size.width * 0.15,
+                    width: Get.size.width * 0.9,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Flexible(
+                        child: TextField(
+                          controller: controller.textController1,
+                          maxLength: 30,
+                          decoration: const InputDecoration(
+                            hintText: '제목을 작성해주세요.',
+                            border: InputBorder.none,
+                            counterText: '',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              /// 세부 글 작성 칸(sub)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: DottedBorder(
+                  strokeWidth: 2,
+                  color: Colors.grey,
+                  borderType: BorderType.RRect,
+                  radius: const Radius.circular(10),
+                  dashPattern: const [5, 5],
+                  child: SizedBox(
+                    height: Get.size.width * 0.6,
+                    width: Get.size.width * 0.9,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Flexible(
+                        child: TextField(
+                          controller: controller.textController2,
+                          maxLength: 50,
+                          decoration: const InputDecoration(
+                            hintText: '글을 작성해주세요.',
+                            border: InputBorder.none,
+                            counterText: '',
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
