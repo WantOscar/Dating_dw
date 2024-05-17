@@ -97,27 +97,12 @@ class _SearchScreenState extends State<SearchScreen> {
           borderRadius: BorderRadius.circular(15.0),
         ),
         title: _profile(context),
-        content: const Column(
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      '3:3 과팅할래?',
-                      style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
+            _title(),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: Row(
                 children: [
                   Flexible(
@@ -145,7 +130,7 @@ class _SearchScreenState extends State<SearchScreen> {
   /// 우측 아이콘은 글쓴이를 차단/취소 가능.
   Widget _profile(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -290,27 +275,22 @@ class _SearchScreenState extends State<SearchScreen> {
 
   /// 피드 타이틀을 보여줌
   /// ex) 3:3 과팅 구해요
-  Padding _title() {
+  Widget _title() {
     return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.0),
-        child: SizedBox(
-          child: Row(
-            children: [
-              Flexible(
-                child: Text(
-                  '국민대 이쁜이 3명 대기 중! 남자 3명 구해요',
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Row(
+        children: [
+          Flexible(
+            child: Text(
+              '국민대 이쁜이 3명 대기 중!',
+              style: TextStyle(
+                fontSize: 17,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
