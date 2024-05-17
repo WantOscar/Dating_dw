@@ -21,39 +21,41 @@ class ItemSelectBottomSheet extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12.0), topRight: Radius.circular(12.0))),
-      child: Column(
-        children: [
-          Expanded(
-            child: CupertinoPicker(
-              itemExtent: 40.0,
-              onSelectedItemChanged: onSelectedItemChanged,
-              children: items
-                  .map((year) => GestureDetector(
-                        onTap: onDone,
-                        child: Text(
-                          year,
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                      ))
-                  .toList(),
-            ),
-          ),
-          GestureDetector(
-            onTap: onDone,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "선택",
-                    style: TextStyle(color: Colors.blue, fontSize: 18),
-                  ),
-                ],
+      child: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: CupertinoPicker(
+                itemExtent: 40.0,
+                onSelectedItemChanged: onSelectedItemChanged,
+                children: items
+                    .map((year) => GestureDetector(
+                          onTap: onDone,
+                          child: Text(
+                            year,
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ))
+                    .toList(),
               ),
             ),
-          ),
-        ],
+            GestureDetector(
+              onTap: onDone,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "선택",
+                      style: TextStyle(color: Colors.blue, fontSize: 18),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

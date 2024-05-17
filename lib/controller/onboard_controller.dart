@@ -201,7 +201,7 @@ class OnboardingController extends GetxController with ToastMessage {
 
   /// 사용자 주소지 검색 api 함수
   void searchMyAddress() async {
-    if (_address.value.isEmpty) {
+    if (_address.value.isNotEmpty) {
       _address.value = "";
       return;
     }
@@ -238,7 +238,7 @@ class OnboardingController extends GetxController with ToastMessage {
       }
     }
 
-    if (images.length <= 3) {
+    if (images.length < 3) {
       showToast("최소 3개 이상 프로필을 등록해주세요!");
       return;
     }
@@ -265,6 +265,7 @@ class OnboardingController extends GetxController with ToastMessage {
       final data = user.toJson();
       final response = userService.updateUserInfo(data);
 
+      UserController.to.setMyInfo(user);
       Get.off(() => const HomeScreen(), binding: HomeBinding());
     }
   }
