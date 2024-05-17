@@ -365,7 +365,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          (controller.address == null)
+                          (controller.address.isEmpty)
                               ? "주소"
                               : controller.address,
                           style: const TextStyle(
@@ -376,7 +376,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                         GestureDetector(
                           onTap: controller.searchMyAddress,
                           child: Icon(
-                            (controller.address == null)
+                            (controller.address.isEmpty)
                                 ? Icons.search
                                 : Icons.close,
                             color: const Color(0xffafafaf),
@@ -491,7 +491,7 @@ class OnboardScreen extends GetView<OnboardingController> {
   Widget _createProfileButton() => Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: BottomButton(
-        onTap: controller.goToHome,
+        onTap: controller.updateUserInfo,
         child: Text("프로필 생성",
             style: TextStyle(
                 color: Colors.white,

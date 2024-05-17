@@ -69,12 +69,14 @@ class UserFetch {
   }
 
   updateUserInfo(Map<String, dynamic> data) async {
-    final response = await dio.post("/member/profile/save", data: data);
+    try {
+      final response = await dio.post("/member/profile/save", data: data);
 
-    if (response.statusCode == 200) {
-      print(response.data);
-    } else {
-      print("error");
+      if (response.statusCode == 200) {
+        print(response.data);
+      }
+    } on Exception catch (e) {
+        print("error");
     }
   }
 }
