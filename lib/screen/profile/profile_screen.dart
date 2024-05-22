@@ -163,7 +163,7 @@ class ProfileScreen extends GetView<UserController> {
                     icon: IconShape.iconPerson,
                   ),
                   Text(
-                    controller.myInfo!.age!.toString(),
+                    "${controller.myInfo!.age!.toString()}세",
                     style: const TextStyle(
                       fontSize: 13,
                       color: Colors.white,
