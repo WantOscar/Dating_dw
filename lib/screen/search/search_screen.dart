@@ -154,12 +154,23 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '홍길동',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      '홍길동',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        '20세',
+                        style: TextStyle(fontSize: 12, color: Colors.black),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 4),
                 Row(
@@ -170,16 +181,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        '20세',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                        ),
                       ),
                     ),
                   ],
