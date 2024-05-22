@@ -53,14 +53,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       height: Get.size.width * 0.4,
                       width: Get.size.width * 0.9,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            const Color.fromARGB(255, 247, 205, 223),
-                            ThemeColor.fontColor,
-                          ],
-                        ),
+                        color: const Color.fromARGB(255, 252, 207, 222),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Column(
@@ -74,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   const SizedBox(height: 10),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Divider(color: Color.fromARGB(255, 201, 198, 198)),
+                    child: Divider(color: Color.fromARGB(255, 252, 207, 222)),
                   ),
                   const SizedBox(height: 10),
                 ],

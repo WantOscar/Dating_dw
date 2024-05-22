@@ -113,8 +113,6 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
           ),
         ),
         extendBody: true,
-
-        // modification complete
       ),
     );
   }
@@ -167,12 +165,12 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   /// 회원정보에서 입력한 닉네임을 보여줌(수정 불가)
   Widget _nickNameInput() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             '닉네임',
             style: TextStyle(fontSize: 14, color: Colors.black87),
           ),
@@ -180,7 +178,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
             width: 280,
             child: Text(
               controller.user!.nickName!,
-              style: TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(fontSize: 14, color: Colors.black87),
             ),
           ),
         ],
@@ -237,12 +235,12 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   /// 회원정보에서 선택한 성별을 보여줌(수정 불가)
   Widget _showGender() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             '성별',
             style: TextStyle(fontSize: 14, color: Colors.black87),
           ),
@@ -250,7 +248,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
             width: 280,
             child: Text(
               controller.user!.gender! == "woman" ? "여자" : "남자",
-              style: TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(fontSize: 14, color: Colors.black87),
             ),
           ),
         ],
@@ -280,7 +278,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -288,10 +286,11 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                       child: Text(
                         controller.user!.address!,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                        style: const TextStyle(
+                            fontSize: 14, color: Colors.black87),
                       ),
                     ),
-                    Icon(Icons.search),
+                    const Icon(Icons.search),
                   ],
                 ),
               ),
@@ -305,12 +304,12 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   /// 회원정보에서 입력한 나이를 보여줌(수정 불가)
   Widget _age() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 17.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "나이",
             style: TextStyle(fontSize: 14, color: Colors.black87),
           ),
@@ -318,7 +317,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
             width: 280,
             child: Text(
               "${controller.user!.age!}세",
-              style: TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(fontSize: 14, color: Colors.black87),
             ),
           ),
         ],
@@ -361,13 +360,14 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   }
 
   Widget _completeButton() => Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-      child: BottomButton(
-        onTap: controller.updateUserInfo,
-        child: Text("수정 완료",
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+        child: BottomButton(
+          onTap: controller.updateUserInfo,
+          child: const Text(
+            "수정 완료",
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600)),
-      ));
+                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+        ),
+      );
 }

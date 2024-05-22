@@ -1,7 +1,6 @@
+import 'package:dating/Widget/common/bottom_button.dart';
 import 'package:dating/Widget/common/cammit_app_bar.dart';
-import 'package:dating/Widget/common/icon_header.dart';
 import 'package:dating/controller/feed_write_controller.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,44 +11,22 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          // IconHeader(
-          //   text: '글 쓰기',
-          //   actions: [
-          //     IconButton(
-          //       onPressed: () {
-          //         Get.back();
-          //       },
-          //       icon: IconShape.iconArrowGoto,
-          //     ),
-          //   ],
-          // ),
-          PreferredSize(
+      appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
         child: CammitAppBar(
           showCloseButton: true,
           backAction: controller.cancel,
           title: "글 쓰기",
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: IconShape.iconArrowGoto,
-              ),
-            )
-          ],
         ),
       ),
-      // floatingActionButton: _uploadPhoto(),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
               _title(),
               sub(),
+              const SizedBox(height: 170),
+              _completeButton(),
             ],
           ),
         ),
@@ -121,20 +98,21 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
     );
   }
 
-  /// 글에 사진을 추가하기 위한 플로팅액션버튼
-  // FloatingActionButton _uploadPhoto() {
-  //   return FloatingActionButton(
-  //     onPressed: () {
-  //       Get.to(() => const UploadScreen());
-  //     },
-  //     backgroundColor: ThemeColor.fontColor,
-  //     elevation: 3.0,
-  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-  //     child: const Icon(
-  //       Icons.photo_camera,
-  //       color: Colors.white,
-  //       size: 20,
-  //     ),
-  //   );
-  // }
+  /// 작성을 완료한 후,
+  /// 이 버튼을 누르면 탐색 창에서 작성한 글이 올라감.
+  Widget _completeButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+      child: BottomButton(
+        onTap: () {
+          Get.back();
+        },
+        child: const Text(
+          "작성 완료",
+          style: TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
+  }
 }
