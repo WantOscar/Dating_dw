@@ -2,13 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
-import 'package:dating/controller/profile_edit_controller.dart';
-import 'package:dating/controller/setting_controller.dart';
-import 'package:dating/screen/profile/profile_edit_screen.dart';
-import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -36,17 +31,20 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          _appbar(context),
-          _profile(),
-          _info(),
-          _personality(),
-          _interesting(),
-          _idealType(),
-          _storyHeader(),
-          _story(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: CustomScrollView(
+          slivers: [
+            _appbar(context),
+            _profile(),
+            _info(),
+            _personality(),
+            _interesting(),
+            _idealType(),
+            // _storyHeader(),
+            // _story(),
+          ],
+        ),
       ),
     );
   }
