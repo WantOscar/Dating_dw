@@ -10,8 +10,9 @@ class FeedRepository {
     ..interceptors.add(AuthInterceptor())
     ..interceptors.add(BaseIntercepter());
 
-  Future<Feed?> getFeed() async {
-    final response = await dio.get('/search/{id}');
+  /// 글 상세 조회를 위한 함수
+  Future<Feed?> getFeed(int id) async {
+    final response = await dio.get('/search/$id');
 
     if (response.statusCode == 200) {
       return Feed.fromJson(response.data);
@@ -20,6 +21,7 @@ class FeedRepository {
     }
   }
 
+  /// 글 전체 조회를 위한 함수
   Future<List<Feed>?> getAllFeeds() async {
     final response = await dio.get('/search');
 
@@ -31,7 +33,8 @@ class FeedRepository {
     }
   }
 
-  Future<void> postFeed() async {
-    final response = await dio.get('/search');
+  /// 글 쓰기를 위한 함수
+  Future<void> postFeed(Map<String, dynamic> data) async {
+    final response = await dio.post('/search', data: data);
   }
 }
