@@ -1,14 +1,13 @@
 import 'package:photo_manager/photo_manager.dart';
 
-class AlbumModel {
+class Album {
   String? name;
   String? id;
   List<AssetEntity>? images;
 
-  AlbumModel({required this.name, required this.id, required this.images});
+  Album({required this.name, required this.id, required this.images});
 
-  factory AlbumModel.fromGallery(
-      String name, String id, List<AssetEntity> images) {
-    return AlbumModel(name: name, id: id, images: images);
+  factory Album.fromGallery(String name, String id, List<AssetEntity> images) {
+    return Album(name: name, id: id, images: images);
   }
 }

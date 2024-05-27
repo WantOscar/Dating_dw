@@ -28,7 +28,7 @@ class InitProfileAlbumChangeScreen
           ? ListView.builder(
               itemCount: controller.albums.length,
               itemBuilder: (context, index) {
-                final AlbumModel album = controller.albums[index];
+                final Album album = controller.albums[index];
                 // return Text(album.toString());
                 return Container(
                   child: Padding(

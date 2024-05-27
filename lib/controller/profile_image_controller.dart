@@ -14,7 +14,7 @@ import '../screen/profile/camera_screen.dart';
 import '../widget/common/warning_window.dart';
 
 class ProfileImageController extends GetxController {
-  final Rx<List<AlbumModel>> _albums = Rx<List<AlbumModel>>([]);
+  final Rx<List<Album>> _albums = Rx<List<Album>>([]);
   final Rxn<CroppedFile> _selectImage = Rxn<CroppedFile>();
   final RxBool _isReady = false.obs;
   final RxnInt _selectImageIndex = RxnInt();
@@ -23,7 +23,7 @@ class ProfileImageController extends GetxController {
 
   bool get isReady => _isReady.value;
 
-  List<AlbumModel> get album => _albums.value;
+  List<Album> get album => _albums.value;
 
   final RxInt _albumIndex = 0.obs;
 
@@ -66,7 +66,7 @@ class ProfileImageController extends GetxController {
       for (AssetPathEntity asset in paths) {
         asset.getAssetListRange(start: 0, end: 10000).then((images) {
           if (images.isNotEmpty) {
-            final album = AlbumModel.fromGallery(
+            final album = Album.fromGallery(
               asset.name,
               asset.id,
               images,
