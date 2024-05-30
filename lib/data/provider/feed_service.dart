@@ -10,6 +10,6 @@ class FeedService {
 
   Future<List<Feed>?> getAllFeeds() => feedRepository.getAllFeeds();
 
-  Future<void> postFeed(Map<String, dynamic> data) =>
+  Future<Feed?> postFeed(Map<String, dynamic> data) =>
       feedRepository.postFeed(data);
 }

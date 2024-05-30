@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:dating/controller/feed_controller.dart';
+import 'package:dating/data/provider/feed_service.dart';
+import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/notification_window.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +19,12 @@ class BottomNavController extends GetxController {
     final page = PageName.values[value];
     switch (page) {
       case PageName.main:
-      case PageName.search:
       case PageName.chat:
       case PageName.alarm:
       case PageName.profile:
-        _moveToPage(value);
+      case PageName.search:
     }
+    _moveToPage(value);
   }
 
   /// 안드로이드 라우팅 정책

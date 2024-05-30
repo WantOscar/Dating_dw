@@ -34,7 +34,12 @@ class FeedRepository {
   }
 
   /// 글 쓰기를 위한 함수
-  Future<void> postFeed(Map<String, dynamic> data) async {
+  Future<Feed?> postFeed(Map<String, dynamic> data) async {
     final response = await dio.post('/search', data: data);
+    if (response.statusCode == 201) {
+      return Feed.fromJson(response.data);
+    } else {
+      return null;
+    }
   }
 }

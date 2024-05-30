@@ -35,38 +35,6 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
   }
 
   /// 제목 쓰기 칸(title)
-  Widget sub() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: DottedBorder(
-        strokeWidth: 2,
-        color: Colors.grey,
-        borderType: BorderType.RRect,
-        radius: const Radius.circular(10),
-        dashPattern: const [5, 5],
-        child: SizedBox(
-          height: Get.size.width * 0.6,
-          width: Get.size.width * 0.9,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Flexible(
-              child: TextField(
-                controller: controller.textController2,
-                maxLength: 50,
-                decoration: const InputDecoration(
-                  hintText: '글을 작성해주세요.',
-                  border: InputBorder.none,
-                  counterText: '',
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  /// 세부 글 작성 칸(sub)
   Widget _title() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -81,15 +49,45 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
           width: Get.size.width * 0.9,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Flexible(
-              child: TextField(
-                controller: controller.textController1,
-                maxLength: 30,
-                decoration: const InputDecoration(
-                  hintText: '제목을 작성해주세요.',
-                  border: InputBorder.none,
-                  counterText: '',
-                ),
+            child: TextField(
+              controller: controller.title,
+              maxLength: 30,
+              maxLines: 3,
+              decoration: const InputDecoration(
+                hintText: '제목을 작성해주세요.',
+                border: InputBorder.none,
+                counterText: '',
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// 세부 글 작성 칸(sub)
+  Widget sub() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: DottedBorder(
+        strokeWidth: 2,
+        color: Colors.grey,
+        borderType: BorderType.RRect,
+        radius: const Radius.circular(10),
+        dashPattern: const [5, 5],
+        child: SizedBox(
+          height: Get.size.width * 0.6,
+          width: Get.size.width * 0.9,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: controller.content,
+              maxLength: 50,
+              maxLines: 30,
+              decoration: const InputDecoration(
+                hintText: '글을 작성해주세요.',
+                border: InputBorder.none,
+                counterText: '',
               ),
             ),
           ),
