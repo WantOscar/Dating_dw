@@ -27,5 +27,7 @@ class FeedWriteController extends GetxController {
     final Feed feed = Feed(title: _title.text, content: _content.text);
 
     FeedController.to.writeFeed(feed);
+
+    Get.back();
   }
 }

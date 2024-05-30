@@ -102,9 +102,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: BottomButton(
-        onTap: () {
-          Get.back();
-        },
+        onTap: controller.writeFeed,
         child: const Text(
           "작성 완료",
           style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:dating/controller/feed_write_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/data/provider/feed_service.dart';
+import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +16,13 @@ class FeedController extends GetxController {
   FeedController({
     required this.feedService,
   });
+
+  void fetchFeeds() async {
+    final result = await feedService.getAllFeeds();
+    if (result != null) {
+      _feeds(result);
+    }
+  }
 
   void writeFeed(Feed feed) async {
     final result = await feedService.postFeed(feed.toJson());
