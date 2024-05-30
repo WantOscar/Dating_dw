@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FeedWriteController extends GetxController {
-  final _textController1 = TextEditingController();
-  final _textController2 = TextEditingController();
+  final TextEditingController _title = TextEditingController();
+  final TextEditingController _content = TextEditingController();
 
-  TextEditingController get textController1 => _textController1;
-  TextEditingController get textController2 => _textController2;
+  TextEditingController get title => _title;
+  TextEditingController get content => _content;
 
-  /// 뒤로 이동하는 함수
+  /// 피드 작성을 취소할건지 물어보고 뒤로 돌아가는 함수
   void cancel() {
     Get.dialog(WarningWindow(
       titleText: '피드 작성 취소',
