@@ -60,9 +60,13 @@ class AuthService implements AuthRepository {
   /// 실패한 경우 에러메시지를 사용자에게 보여줌.
   @override
   Future<void> logOut() async {
-    print("토큰 삭제");
-    tokenProvider.deleteTokenInfo();
-    Get.offAll(() => const LoginScreen());
+    final response = await dio.post(ApiUrl.logout);
+    if (response.statusCode == 200) {
+      tokenProvider.deleteTokenInfo();
+      Get.offAll(() => const LoginScreen());
+    } else {
+      print('로그아웃');
+    }
   }
 
   /// 이메일 인증 메소드
