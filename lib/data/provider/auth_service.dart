@@ -13,25 +13,6 @@ class AuthService implements AuthRepository {
   ))
     ..interceptors.add(BaseIntercepter());
 
-  /// 로그인 메소드
-  /// 로그인에 성공하면 서버로부터 JWT 토큰을 받고
-  /// 로컬 스토리지에 저장됨
-  /// 실패할 경우 에러메시지를 반환함.
-  @override
-  Future<String?> login(Map<String, dynamic> data) async {
-    try {
-      final response = await dio.post(ApiUrl.login, data: data);
-      if (response.statusCode == 200) {
-        await tokenProvider.saveTokenInfo(response.data);
-        return tokenProvider.getAccessToken();
-      } else {
-        return null;
-      }
-    } on Exception catch (error) {
-      return null;
-    }
-  }
-
   /// 회원가입 메소드
   /// 회원가입에 성공하면
   /// 회원정보를 반환
@@ -51,6 +32,25 @@ class AuthService implements AuthRepository {
       return null;
     }
     return null;
+  }
+
+  /// 로그인 메소드
+  /// 로그인에 성공하면 서버로부터 JWT 토큰을 받고
+  /// 로컬 스토리지에 저장됨
+  /// 실패할 경우 에러메시지를 반환함.
+  @override
+  Future<String?> login(Map<String, dynamic> data) async {
+    try {
+      final response = await dio.post(ApiUrl.login, data: data);
+      if (response.statusCode == 200) {
+        await tokenProvider.saveTokenInfo(response.data);
+        return tokenProvider.getAccessToken();
+      } else {
+        return null;
+      }
+    } on Exception catch (error) {
+      return null;
+    }
   }
 
   /// 로그아웃 메소드

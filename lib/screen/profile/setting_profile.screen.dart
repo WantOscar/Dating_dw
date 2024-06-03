@@ -9,14 +9,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SettingProfileScreen extends StatefulWidget {
-  const SettingProfileScreen({super.key});
+class SettingAccountScreen extends StatefulWidget {
+  const SettingAccountScreen({super.key});
 
   @override
-  State<SettingProfileScreen> createState() => _SettingProfileScreenState();
+  State<SettingAccountScreen> createState() => _SettingAccountScreenState();
 }
 
-class _SettingProfileScreenState extends State<SettingProfileScreen> {
+class _SettingAccountScreenState extends State<SettingAccountScreen> {
   bool switchValue = true;
 
   @override

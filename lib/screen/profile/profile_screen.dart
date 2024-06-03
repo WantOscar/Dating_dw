@@ -28,7 +28,7 @@ class ProfileScreen extends GetView<UserController> {
             actions: [
               GestureDetector(
                   onTap: () {
-                    Get.to(() => const SettingProfileScreen(),
+                    Get.to(() => const SettingAccountScreen(),
                         binding: BindingsBuilder(() {
                       Get.put(SettingController());
                     }));
