@@ -8,9 +8,7 @@ import 'package:get/get.dart';
 
 class AuthService implements AuthRepository {
   final TokenProvider tokenProvider = TokenProvider();
-  late final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl, headers: {
-    "Authorization": tokenProvider.getAccessToken(),
-  }))
+  late final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
     ..interceptors.add(BaseIntercepter());
 
   /// 회원가입 메소드
@@ -60,7 +58,10 @@ class AuthService implements AuthRepository {
   /// 실패한 경우 에러메시지를 사용자에게 보여줌.
   @override
   Future<void> logOut() async {
-    final response = await dio.post(ApiUrl.logout);
+    final response = await dio.post(ApiUrl.logout,
+        options: Options(headers: {
+          "Authorization": tokenProvider.getAccessToken(),
+        }));
     if (response.statusCode == 200) {
       tokenProvider.deleteTokenInfo();
       Get.offAll(() => const LoginScreen());

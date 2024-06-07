@@ -1,7 +1,6 @@
 import 'package:dating/controller/feed_write_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/data/service/feed_service.dart';
-import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:get/get.dart';
 

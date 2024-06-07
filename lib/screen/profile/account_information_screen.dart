@@ -1,10 +1,12 @@
 import 'package:dating/Widget/common/icon_header.dart';
+import 'package:dating/controller/setting_password_controller.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/profile/change_password.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AccountInformationScreen extends StatelessWidget {
+class AccountInformationScreen extends GetView<SettingPasswordController> {
   const AccountInformationScreen({super.key});
 
   @override
@@ -19,9 +21,9 @@ class AccountInformationScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: Text('연동된 이메일'),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text('abcdfg@gmail.com'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text("${UserController.to.myInfo!.nickName}"),
           ),
           Padding(
             padding:
