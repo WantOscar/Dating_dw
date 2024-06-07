@@ -45,7 +45,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
           _blockedAccount(),
           _dormantAccount(),
           _logout(),
-          _withdrawal(context),
+          _deleteMember(context),
         ],
       ),
     );
@@ -162,7 +162,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
   }
 
   /// 회원탈퇴 알림창
-  Widget _withdrawal(BuildContext context) {
+  Widget _deleteMember(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Row(
@@ -174,22 +174,9 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
             style: TextStyle(fontSize: 16, color: Colors.black),
           ),
           IconButton(
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return WarningWindow(
-                    onTap: () {},
-                    titleText: '회원탈퇴',
-                    explainText:
-                        '캠밋을 탈퇴하면 계정의 모든 정보가 삭제되며, 삭제된 정보는 복구할 수 없습니다.',
-                    btnText: '회원탈퇴',
-                  );
-                },
-              );
-            },
+            onPressed: SettingController.to.showDeleteDialog,
             icon: IconShape.iconArrowForward,
-          )
+          ),
         ],
       ),
     );

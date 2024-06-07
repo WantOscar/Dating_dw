@@ -10,7 +10,6 @@ class UserFetch {
   final Dio dio = Dio(BaseOptions(
     baseUrl: ApiUrl.baseUrl,
   ))
-    ..interceptors.add(AuthInterceptor())
     ..interceptors.add(MemberIntercetor())
     ..interceptors.add(BaseIntercepter());
 
@@ -76,7 +75,7 @@ class UserFetch {
         print(response.data);
       }
     } on Exception catch (e) {
-        print("error");
+      print("error");
     }
   }
 }

@@ -76,6 +76,8 @@ class LoginController extends GetxController with UseToast {
 
   void logout() => authService.logOut();
 
+  void delete() => authService.delete();
+
   void _moveToOnboard() {
     Get.off(() => const OnboardScreen(), binding: BindingsBuilder(() {
       Get.put(OnboardingController(userService: UserFetch()));

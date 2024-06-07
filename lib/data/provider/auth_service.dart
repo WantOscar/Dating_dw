@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 
 class AuthService implements AuthRepository {
   final TokenProvider tokenProvider = TokenProvider();
-  final Dio dio = Dio(BaseOptions(
-    baseUrl: ApiUrl.baseUrl,
-  ))
+  late final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl, headers: {
+    "Authorization": tokenProvider.getAccessToken(),
+  }))
     ..interceptors.add(BaseIntercepter());
 
   /// 회원가입 메소드
@@ -66,6 +66,22 @@ class AuthService implements AuthRepository {
       Get.offAll(() => const LoginScreen());
     } else {
       print('로그아웃');
+    }
+  }
+
+  /// 회원탈퇴 메소드
+  /// 회원탈퇴를 시도하는 경우
+  /// 저장된 토큰을 삭제.
+  /// 삭제 후 로그인 화면으로 이동.
+  /// 실패할 겨웅 에러 메시지를 사용자에게 보여줌.
+  @override
+  Future<void> delete() async {
+    final response = await dio.delete(ApiUrl.delete);
+    if (response.statusCode == 200) {
+      tokenProvider.deleteTokenInfo();
+      Get.offAll(() => const LoginScreen());
+    } else {
+      print('회원탈퇴');
     }
   }
 

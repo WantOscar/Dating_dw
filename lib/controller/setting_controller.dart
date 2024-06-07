@@ -15,4 +15,15 @@ class SettingController extends GetxController {
       onCancel: Get.back,
     ));
   }
+
+  void showDeleteDialog() {
+    Get.dialog(NotificationWindow(
+      content: "정말로 회원을 탈퇴하시겠습니까?",
+      title: "회원탈퇴",
+      confirmLabel: "회원탈퇴",
+      onConfirm: LoginController.to.delete,
+      cancelLabel: "취소",
+      onCancel: Get.back,
+    ));
+  }
 }
