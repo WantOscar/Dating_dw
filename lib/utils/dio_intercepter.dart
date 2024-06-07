@@ -1,5 +1,5 @@
 import 'package:dating/data/model/token_provider.dart';
-import 'package:dating/data/provider/auth_service.dart';
+import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

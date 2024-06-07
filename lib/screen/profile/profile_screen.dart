@@ -4,7 +4,7 @@ import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/user_controller.dart';
-import 'package:dating/data/provider/user_fetch.dart';
+import 'package:dating/data/service/user_fetch.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';

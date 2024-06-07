@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dating/data/model/message_model.dart';
-import 'package:dating/data/provider/message_service.dart';
+import 'package:dating/data/service/message_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

@@ -1,4 +1,4 @@
-import 'package:dating/data/provider/auth_service.dart';
+import 'package:dating/data/service/auth_service.dart';
 
 abstract class AuthRepository {
   /// 사용자 로그인 인터페이스

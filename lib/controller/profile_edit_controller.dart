@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/provider/user_fetch.dart';
+import 'package:dating/data/service/user_fetch.dart';
 import 'package:dating/widget/common/warning_window.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';

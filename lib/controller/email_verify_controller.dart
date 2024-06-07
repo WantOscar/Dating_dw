@@ -1,4 +1,4 @@
-import 'package:dating/data/provider/auth_service.dart';
+import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/screen/auth/auth_forgot_screen.dart';
 import 'package:dating/screen/auth/code_input_screen.dart';
 import 'package:dating/screen/auth/resister_screen.dart';

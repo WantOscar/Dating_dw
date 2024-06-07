@@ -1,6 +1,6 @@
 import 'package:dating/data/model/main_response.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/provider/user_fetch.dart';
+import 'package:dating/data/service/user_fetch.dart';
 
 class UserRepository {
   UserFetch service;

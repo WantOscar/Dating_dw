@@ -1,7 +1,7 @@
 import 'package:dating/controller/login_controller.dart';
 import 'package:dating/controller/user_controller.dart';
-import 'package:dating/data/provider/auth_service.dart';
-import 'package:dating/data/provider/user_fetch.dart';
+import 'package:dating/data/service/user_fetch.dart';
+import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:get/get.dart';
 
