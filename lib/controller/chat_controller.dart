@@ -1,5 +1,5 @@
 import 'package:dating/data/model/chatting_room_model.dart';
-import 'package:dating/data/provider/chat_service.dart';
+import 'package:dating/data/service/chat_service.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
