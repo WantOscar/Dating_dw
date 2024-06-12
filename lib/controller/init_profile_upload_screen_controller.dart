@@ -9,13 +9,13 @@ import 'package:photo_manager/photo_manager.dart';
 
 class InitProfileUploadScreenController extends GetxController {
   static InitProfileUploadScreenController get to => Get.find();
-  final Rx<List<AlbumModel>> _albums = Rx<List<AlbumModel>>([]);
+  final Rx<List<Album>> _albums = Rx<List<Album>>([]);
   final RxInt _albumIndex = 0.obs;
   final RxBool _isReady = false.obs;
   final Rx<List<CroppedFile>> _selectImages = Rx<List<CroppedFile>>([]);
   final Rx<List<int>> _selectImagesIndex = Rx<List<int>>([]);
 
-  List<AlbumModel> get albums => _albums.value;
+  List<Album> get albums => _albums.value;
   int get albumIndex => _albumIndex.value;
   bool get isReady => _isReady.value;
 
@@ -39,13 +39,13 @@ class InitProfileUploadScreenController extends GetxController {
   void _getAlbums() async {
     final assets = await PhotoManager.getAssetPathList(type: RequestType.image);
     if (assets.isNotEmpty) {
-      final List<AlbumModel> albums = [];
+      final List<Album> albums = [];
       for (AssetPathEntity _asset in assets) {
         final assetEntities =
             await _asset.getAssetListRange(start: 0, end: 10000);
 
-        final AlbumModel album =
-            AlbumModel.fromGallery(_asset.name, _asset.id, assetEntities);
+        final Album album =
+            Album.fromGallery(_asset.name, _asset.id, assetEntities);
         albums.add(album);
       }
 

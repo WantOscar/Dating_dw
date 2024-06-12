@@ -1,6 +1,6 @@
-import 'package:dating/controller/feed_write_controller.dart';
+import 'package:dating/controller/feed_controller.dart';
+import 'package:dating/data/model/feed.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
-import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
@@ -8,14 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends GetView<FeedController> {
   const SearchScreen({super.key});
 
-  @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,63 +20,66 @@ class _SearchScreenState extends State<SearchScreen> {
           title: '탐색',
           actions: [
             GestureDetector(
-              onTap: () {
-                Get.to(() => const FeedWriteScreen(),
-                    binding: BindingsBuilder(() {
-                  Get.put(FeedWriteController());
-                }));
-              },
+              onTap: controller.moveToWriteScreen,
               child: IconShape.iconEditNote,
             ),
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 70),
-          child: Column(
-            /// 글 목록 10개 지정
-            children: List.generate(
-              10,
-              (index) => Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      _showApply(context);
-                    },
-                    child: Container(
-                      height: Get.size.width * 0.4,
-                      width: Get.size.width * 0.9,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            const Color.fromARGB(255, 247, 205, 223),
-                            ThemeColor.fontColor,
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Column(
+      body: Obx(
+        () {
+          if (controller.feeds.isEmpty) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 70),
+                child: Column(
+                  /// 글 목록 10개 지정
+                  children: List.generate(
+                    controller.feeds.length,
+                    (index) {
+                      final feed = controller.feeds[index];
+
+                      return Column(
                         children: [
-                          _profile(context),
-                          _title(),
+                          GestureDetector(
+                            onTap: () {
+                              _showApply(context, feed);
+                            },
+                            child: Container(
+                              height: Get.size.width * 0.4,
+                              width: Get.size.width * 0.9,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 252, 207, 222),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Column(
+                                children: [
+                                  _profile(context, feed),
+                                  _title(feed),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Divider(
+                                color: Color.fromARGB(255, 252, 207, 222)),
+                          ),
+                          const SizedBox(height: 10),
                         ],
-                      ),
-                    ),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 10),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Divider(color: Color.fromARGB(255, 201, 198, 198)),
-                  ),
-                  const SizedBox(height: 10),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
+            );
+          }
+        },
       ),
     );
   }
@@ -89,26 +87,27 @@ class _SearchScreenState extends State<SearchScreen> {
   /// 상대방의 피드를 누르면 팝업창이 뜸
   /// 세부 글 내용을 볼 수 있고,
   /// 참여 신청버튼을 통해 신청 가능.
-  Future<dynamic> _showApply(BuildContext context) {
+  Future<dynamic> _showApply(BuildContext context, Feed feed) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        title: _profile(context),
+        title: _profile(context, feed),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _title(),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            _title(feed),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: Row(
                 children: [
                   Flexible(
                     child: Text(
-                      '국민대 얼짱 3명이 심심해서 놀고 싶어요~ 저희랑 과팅할 남자 3명 구해요!',
-                      style: TextStyle(
+                      feed.content.toString(),
+                      style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black87,
                       ),
@@ -128,7 +127,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   /// 글쓴이의 프로필을 보여줌
   /// 우측 아이콘은 글쓴이를 차단/취소 가능.
-  Widget _profile(BuildContext context) {
+  Widget _profile(BuildContext context, Feed feed) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Row(
@@ -161,12 +160,23 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '홍길동',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      '홍길동',
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        '20세',
+                        style: TextStyle(fontSize: 12, color: Colors.black),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 4),
                 Row(
@@ -177,16 +187,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        '20세',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                        ),
                       ),
                     ),
                   ],
@@ -275,15 +275,15 @@ class _SearchScreenState extends State<SearchScreen> {
 
   /// 피드 타이틀을 보여줌
   /// ex) 3:3 과팅 구해요
-  Widget _title() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+  Widget _title(Feed feed) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Row(
         children: [
           Flexible(
             child: Text(
-              '국민대 이쁜이 3명 대기 중!',
-              style: TextStyle(
+              feed.title.toString(),
+              style: const TextStyle(
                 fontSize: 17,
                 color: Colors.black87,
                 fontWeight: FontWeight.w600,

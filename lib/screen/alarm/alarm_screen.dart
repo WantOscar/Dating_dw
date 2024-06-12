@@ -1,5 +1,7 @@
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AlarmScreen extends StatelessWidget {
   const AlarmScreen({super.key});
@@ -8,7 +10,7 @@ class AlarmScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: CammitAppBar(
+        child: const CammitAppBar(
           title: "알림",
         ),
       ),
@@ -18,17 +20,25 @@ class AlarmScreen extends StatelessWidget {
           child: Column(
             children: List.generate(
               10,
-              (index) => const Padding(
-                padding: EdgeInsets.all(8.0),
+              (index) => Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                          width: 60, height: 60, child: CircleAvatar()),
+                        width: 60,
+                        height: 60,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.to(() => const SomeoneProfileScreen());
+                          },
+                          child: const CircleAvatar(),
+                        ),
+                      ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Column(
@@ -49,7 +59,7 @@ class AlarmScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "9시간 전",
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),

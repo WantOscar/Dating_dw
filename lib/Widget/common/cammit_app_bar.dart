@@ -42,7 +42,7 @@ class CammitAppBar extends StatelessWidget {
           ? List.generate(
               actions!.length,
               (index) => Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: actions![index],
                   ))
           : null,

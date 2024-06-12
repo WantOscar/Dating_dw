@@ -1,8 +1,8 @@
+import 'package:dating/Widget/chat/chatting_box.dart';
 import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:dating/style/constant.dart';
-import 'package:dating/widget/chat/chatting_box.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

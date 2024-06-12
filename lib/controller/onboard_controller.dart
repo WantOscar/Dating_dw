@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dating/binding/home_binding.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/provider/user_fetch.dart';
+import 'package:dating/data/service/user_fetch.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/toast_message.dart';

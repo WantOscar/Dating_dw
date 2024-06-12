@@ -9,7 +9,6 @@ class MessageService extends GetxService {
   final Dio dio = Dio(BaseOptions(
     baseUrl: ApiUrl.baseUrl,
   ))
-    ..interceptors.add(AuthInterceptor())
     ..interceptors.add(BaseIntercepter());
 
   final FlutterSecureStorage storage;

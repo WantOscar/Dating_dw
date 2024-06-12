@@ -4,7 +4,7 @@ import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/user_controller.dart';
-import 'package:dating/data/provider/user_fetch.dart';
+import 'package:dating/data/service/user_fetch.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
@@ -28,7 +28,7 @@ class ProfileScreen extends GetView<UserController> {
             actions: [
               GestureDetector(
                   onTap: () {
-                    Get.to(() => const SettingProfileScreen(),
+                    Get.to(() => const SettingAccountScreen(),
                         binding: BindingsBuilder(() {
                       Get.put(SettingController());
                     }));
@@ -152,53 +152,70 @@ class ProfileScreen extends GetView<UserController> {
               ),
             ),
 
-            /// 내 나이와 키를 보여줌
+            /// 내 나이를 보여줌
             Positioned(
-              top: 300,
-              left: 20,
+              top: 310,
+              left: 35,
               child: Row(
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: IconShape.iconPerson,
-                  ),
-                  Text(
-                    controller.myInfo!.age!.toString(),
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  // IconButton(
+                  //   onPressed: () {},
+                  //   icon: IconShape.iconPerson,
+                  // ),
+                  IconShape.iconPerson,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      "${controller.myInfo!.age!.toString()}세",
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  Text(
-                    "${controller.myInfo!.height!}cm",
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                ],
+              ),
+            ),
+
+            /// 내 키를 보여줌
+            Positioned(
+              top: 330,
+              left: 35,
+              child: Row(
+                children: [
+                  const Icon(Icons.height, size: 20, color: Colors.white),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      "${controller.myInfo!.height!}cm",
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
 
             /// 내 위치를 나타냄
             Positioned(
-              top: 320,
-              left: 20,
+              top: 350,
+              left: 35,
               child: Row(
                 children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: IconShape.iconLocationOn,
-                  ),
-                  Text(
-                    controller.myInfo!.address!,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  IconShape.iconLocationOn,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      controller.myInfo!.address!,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   )
                 ],

@@ -1,5 +1,6 @@
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BottomApplyBar extends StatelessWidget {
   final String text;
@@ -8,8 +9,7 @@ class BottomApplyBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    // final height = MediaQuery.of(context).size.height;
+    final width = Get.size.width;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),

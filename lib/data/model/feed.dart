@@ -1,23 +1,41 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class Feed {
+  String? nickName;
+  String? address;
+  String? title;
+  String? content;
+  int? age;
+  int? height;
+  int? memberId;
+  int? id;
 
-part 'feed.freezed.dart';
-part 'feed.g.dart';
+  Feed({
+    this.nickName,
+    this.address,
+    this.title,
+    this.content,
+    this.age,
+    this.height,
+    this.memberId,
+    this.id,
+  });
 
-@freezed
-class Feed with _$Feed {
-  factory Feed(
-      {String? name,
-      String? residence,
-      int? age,
-      int? height,
-      String? profileImage,
-      String? feedImage,
-      String? comment,
-      String? hashTag,
-      int? commentCnt,
-      int? likeCnt,
-      int? bookmarkCnt,
-      String? updateAt}) = _Feed;
+  factory Feed.fromJson(Map<String, dynamic> json) {
+    return Feed(
+      nickName: json['nickname'],
+      address: json['address'],
+      title: json['title'],
+      content: json['content'],
+      age: json['age'],
+      height: json['height'],
+      memberId: json['memberId'],
+      id: json['id'],
+    );
+  }
 
-  factory Feed.fromJson(Map<String, dynamic> json) => _$FeedFromJson(json);
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'content': content,
+    };
+  }
 }

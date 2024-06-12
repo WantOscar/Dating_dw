@@ -1,23 +1,33 @@
 import 'package:dating/Widget/common/warning_window.dart';
+import 'package:dating/controller/feed_controller.dart';
+import 'package:dating/data/model/feed.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FeedWriteController extends GetxController {
-  final _textController1 = TextEditingController();
-  final _textController2 = TextEditingController();
+  final TextEditingController _title = TextEditingController();
+  final TextEditingController _content = TextEditingController();
 
-  TextEditingController get textController1 => _textController1;
-  TextEditingController get textController2 => _textController2;
+  TextEditingController get title => _title;
+  TextEditingController get content => _content;
 
-  /// 뒤로 이동하는 함수
+  /// 피드 작성을 취소할건지 물어보고 뒤로 돌아가는 함수
   void cancel() {
     Get.dialog(WarningWindow(
       titleText: '피드 작성 취소',
       explainText: '현재 입력사항을 모두 취소하고 돌아가시겠습니까?',
       onTap: () {
-        Get.until((route) => Get.currentRoute == "/HomeScreen");
+        Get.until((route) => Get.currentRoute == "/SearchScreen");
       },
       btnText: "작성취소",
     ));
+  }
+
+  void writeFeed() {
+    final Feed feed = Feed(title: _title.text, content: _content.text);
+
+    FeedController.to.writeFeed(feed);
+
+    Get.back();
   }
 }

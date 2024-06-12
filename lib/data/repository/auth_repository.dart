@@ -1,4 +1,4 @@
-import 'package:dating/data/provider/auth_service.dart';
+import 'package:dating/data/service/auth_service.dart';
 
 abstract class AuthRepository {
   /// 사용자 로그인 인터페이스
@@ -6,6 +6,9 @@ abstract class AuthRepository {
 
   /// 사용자 로그아웃 인터페이스
   Future<void> logOut();
+
+  /// 사용자 회원 탈퇴 인터페이스
+  Future<void> delete();
 
   /// 사용자 회원가입 인터페이스
   Future<String?> signUp(Map<String, dynamic> data);
