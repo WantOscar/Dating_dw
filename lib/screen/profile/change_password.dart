@@ -30,7 +30,14 @@ class _ChangePasswordState extends State<ChangePassword> {
           // 현재 비밀번호 입력
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Text('현재 비밀번호 입력'),
+            child: Text(
+              '현재 비밀번호 입력',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           Padding(
             padding:
@@ -55,7 +62,14 @@ class _ChangePasswordState extends State<ChangePassword> {
           // 변경할 비밀번호 입력
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Text('변경할 비밀번호 입력'),
+            child: Text(
+              '변경할 비밀번호 입력',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           Padding(
             padding:
@@ -80,7 +94,14 @@ class _ChangePasswordState extends State<ChangePassword> {
           // 변경된 비밀번호 확인
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Text('변경된 비밀번호 확인'),
+            child: Text(
+              '변경된 비밀번호 확인',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           Padding(
             padding:
