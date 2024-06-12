@@ -11,6 +11,7 @@ class UserFetch {
     baseUrl: ApiUrl.baseUrl,
   ))
     ..interceptors.add(MemberIntercetor())
+    ..interceptors.add(AuthInterceptor())
     ..interceptors.add(BaseIntercepter());
 
   /// 회원정보 GET 임시 목업 테스트 데이터 메소드

@@ -108,6 +108,7 @@ class AuthService implements AuthRepository {
   /// 사용자의 리프레시 토큰이 만료된 경우
   /// 강제로 로그아웃됨.
   /// 리프레시 토큰이 유효한 경우 새 엑세스 토큰을 발급 후 저장.
+  @override
   Future<bool> refreshToken(String refreshToken) async {
     try {
       final response = await dio.post("/refresh",
