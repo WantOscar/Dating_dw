@@ -10,8 +10,8 @@ class ImageAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     if (imagePath != null) {
       return SizedBox(
-        width: 25,
-        height: 25,
+        width: size,
+        height: size,
         child: CircleAvatar(
           child: ClipRRect(
             borderRadius: BorderRadius.circular(100),

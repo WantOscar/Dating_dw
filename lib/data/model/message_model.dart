@@ -1,31 +1,18 @@
-class MessageModel {
-  final int? myId;
-  final int? id;
-  final String? image;
-  final String? message;
-  final DateTime? createAt;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  MessageModel({this.myId, this.id, this.image, this.message, this.createAt});
+part 'message_model.freezed.dart';
+part 'message_model.g.dart';
 
-  factory MessageModel.fromJson(Map<String, dynamic> json) {
-    return MessageModel(
-        myId: json["myId"],
-        id: json["id"],
-        image: json["image"],
-        message: json["message"],
-        createAt: DateTime.parse(json["createAt"]));
-  }
+@freezed
+class MessageModel with _$MessageModel {
+  factory MessageModel({
+    String? nickName,
+    String? message,
+    String? messageType,
+    String? createAt,
+    int? chatRoomId,
+  }) = _MessageModel;
 
-  static Map<String, dynamic> toJson({
-    required int memberId,
-    required String chatRoomId,
-    required String message,
-  }) {
-    return {
-      "messageType": "TALK",
-      "memberId": memberId,
-      "chatRoomId": chatRoomId,
-      "message": message,
-    };
-  }
+  factory MessageModel.fromJson(Map<String, dynamic> json) =>
+      _$MessageModelFromJson(json);
 }

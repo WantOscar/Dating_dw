@@ -9,15 +9,15 @@ part of 'feed.dart';
 _$FeedImpl _$$FeedImplFromJson(Map<String, dynamic> json) => _$FeedImpl(
       name: json['name'] as String?,
       residence: json['residence'] as String?,
-      age: json['age'] as int?,
-      height: json['height'] as int?,
+      age: (json['age'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
       profileImage: json['profileImage'] as String?,
       feedImage: json['feedImage'] as String?,
       comment: json['comment'] as String?,
       hashTag: json['hashTag'] as String?,
-      commentCnt: json['commentCnt'] as int?,
-      likeCnt: json['likeCnt'] as int?,
-      bookmarkCnt: json['bookmarkCnt'] as int?,
+      commentCnt: (json['commentCnt'] as num?)?.toInt(),
+      likeCnt: (json['likeCnt'] as num?)?.toInt(),
+      bookmarkCnt: (json['bookmarkCnt'] as num?)?.toInt(),
       updateAt: json['updateAt'] as String?,
     );
 

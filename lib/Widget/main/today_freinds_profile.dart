@@ -1,4 +1,4 @@
-import 'package:dating/data/model/main_response.dart';
+import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
@@ -6,8 +6,8 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 
 class TodayFriendsProfile extends StatelessWidget {
-  final Map<String, dynamic> randomUser;
-  const TodayFriendsProfile({super.key, required this.randomUser});
+  final User user;
+  const TodayFriendsProfile({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class TodayFriendsProfile extends StatelessWidget {
           children: [
             /// 오늘의 추천인 사진
             Image.network(
-              randomUser["image"],
+              user.image!,
               fit: BoxFit.cover,
               width: width * 0.8,
               height: height * 0.8,
@@ -67,7 +67,7 @@ class TodayFriendsProfile extends StatelessWidget {
               bottom: width * 0.3,
               left: height * 0.04,
               child: Text(
-                '${randomUser["name"]}',
+                user.nickName!,
                 style: const TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
@@ -105,7 +105,7 @@ class TodayFriendsProfile extends StatelessWidget {
                 children: [
                   const Icon(Icons.location_on, color: Colors.white, size: 20),
                   Text(
-                    "${randomUser["residence"]}",
+                    user.address!,
                     style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ class TodayFriendsProfile extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        // ChatController.to.makeChattingRoom(randomUser["id"]);
+                        ChatController.to.makeChattingRoom(2);
                       },
                       child: Text(
                         '채팅하기',
