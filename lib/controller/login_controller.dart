@@ -36,22 +36,9 @@ class LoginController extends GetxController with UseToast {
     await Future.delayed(const Duration(seconds: 1));
     final token = await tokenProvider.getRefreshToken();
     if (token != "") {
-      _checkAuthoriztion(token);
+      _moveToOnboard();
     }
     _isLoading(false);
-  }
-
-  /// 토큰 유효성 검사 메소드
-  /// 토큰 유효성을 검사하는 동안 사용자에게 검사중 메시지를 전달하고
-  /// 유효성 검사에서 통과하면 자동 로그인
-  void _checkAuthoriztion(String token) async {
-    final authorization = await authService.refreshToken(token);
-    if (authorization) {
-      _moveToOnboard();
-    } else {
-      await tokenProvider.deleteTokenInfo();
-      return;
-    }
   }
 
   /// 로그인 후 프로필 등록 온보딩 페이지 혹은 메인 페이지로 라우팅됨.
