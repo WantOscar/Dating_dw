@@ -1,5 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
+import 'package:dating/widget/main/today_freinds_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -13,16 +17,42 @@ class MainScreen extends StatelessWidget {
           title: '캠밋',
         ),
       ),
-      // body: RefreshIndicator.adaptive(
-      //   onRefresh: controller.fetchData,
-      //   color: ThemeColor.fontColor,
-      //   child: (controller.isLoading)
-      //       ? const Center(
-      //           child: CircularProgressIndicator.adaptive(),
-      //         )
-      //       : _buildBody(),
-      // ),
+      body: _buildBody(),
     );
+  }
+
+  Widget _buildBody() {
+    return GetX<UserController>(builder: (controller) {
+      return (controller.users != null)
+          ? CarouselSlider.builder(
+              itemCount: controller.users!.length,
+              itemBuilder: (context, index, realIndex) {
+                final user = controller.users![index];
+
+                // final user = controller.users[index];
+                return TodayFriendsProfile(
+                  user: user,
+                );
+              },
+              options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  aspectRatio: 1,
+                  autoPlay: true,
+                  viewportFraction: 0.8),
+            )
+          : const SizedBox(
+              height: 300,
+              child: Center(
+                child: Text(
+                  "아직 사용자 없습니다 !",
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            );
+    });
   }
 
   // Widget _buildBody() {

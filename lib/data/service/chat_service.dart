@@ -1,18 +1,38 @@
+import 'package:dating/data/model/chatting_room_model.dart';
+import 'package:dating/data/model/token_provider.dart';
+import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
 
 class ChatService {
-  final Dio dio;
-  ChatService({required this.dio});
+  final TokenProvider tokenProvider = TokenProvider();
+  final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
+    ..interceptors.add(AuthInterceptor())
+    ..interceptors.add(BaseIntercepter());
 
-  Future<String> makeChattingRoom(int memberId, String accessToken) async {
-    final response = await dio.post(
-        "http://13.124.21.82:8082/chat/create/$memberId",
-        options: Options(headers: {"Authorization": "Bearer $accessToken"}));
+  Future<String> makeChattingRoom(int memberId) async {
+    final response = await dio
+        .post("/chat/create/$memberId", queryParameters: {"type": "one"});
     if (response.statusCode == 200) {
       return response.data["chatRoomId"];
     } else {
       print("Error");
       return "Error";
+    }
+  }
+
+  Future<List<ChattingRoomModel>?> getMyChattingList() async {
+    final response =
+        await dio.get("/chat/list", queryParameters: {"type": "one"});
+    if (response.statusCode == 200) {
+      final List<ChattingRoomModel> result = [];
+      for (var json in response.data["chatRoomList"]) {
+        final chatRoom = ChattingRoomModel.fromJson(json);
+        result.add(chatRoom);
+      }
+      return result;
+    } else {
+      return null;
     }
   }
 }

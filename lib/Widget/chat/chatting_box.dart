@@ -1,10 +1,14 @@
+import 'package:dating/data/model/chatting_room_model.dart';
+import 'package:dating/widget/common/image_avatar.dart';
 import 'package:flutter/material.dart';
 
 import '../../style/constant.dart';
 
 class ChattingBox extends StatelessWidget {
+  final ChattingRoomModel chat;
   const ChattingBox({
     super.key,
+    required this.chat,
   });
 
   @override
@@ -29,9 +33,8 @@ class ChattingBox extends StatelessWidget {
                       color: Colors.grey),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(60),
-                    child: Image.network(
-                      'https://i.pinimg.com/474x/88/0d/b9/880db9d816b47504adc3be91439cd77e.jpg',
-                      fit: BoxFit.cover,
+                    child: ImageAvatar(
+                      imagePath: chat.image,
                     ),
                   ),
                 ),
@@ -41,7 +44,7 @@ class ChattingBox extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '홍길동',
+                        chat.name,
                         style: TextStyle(
                             color: ThemeColor.font2Color,
                             fontWeight: FontWeight.bold),
@@ -50,7 +53,7 @@ class ChattingBox extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        '안녕하세요',
+                        chat.lastMessage,
                         style: TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.w400,
@@ -61,9 +64,11 @@ class ChattingBox extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-              '9월 25일',
-              style: TextStyle(fontSize: 12, color: ThemeColor.font2Color),
+            Flexible(
+              child: Text(
+                style: TextStyle(fontSize: 12, color: ThemeColor.font2Color),
+                chat.time,
+              ),
             )
           ],
         ),

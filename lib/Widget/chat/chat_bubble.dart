@@ -1,4 +1,6 @@
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/widget/common/image_avatar.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/model/message_model.dart';
@@ -8,9 +10,11 @@ import '../../data/model/message_model.dart';
 /// 채팅방에서 사용되는 버블위젯.
 class ChatBubble extends StatefulWidget {
   final MessageModel message;
+  final String notMyProfile;
   const ChatBubble({
     super.key,
     required this.message,
+    required this.notMyProfile,
   });
 
   @override
@@ -22,7 +26,7 @@ class _ChatBubbleState extends State<ChatBubble> {
 
   @override
   void initState() {
-    isMe = widget.message.id == 2;
+    isMe = widget.message.nickName == UserController.to.myInfo!.nickName;
     super.initState();
   }
 
@@ -38,10 +42,11 @@ class _ChatBubbleState extends State<ChatBubble> {
   /// 채팅을 보내는 사용자의 프로필 사진을
   /// 보여주는 프로필 위젯
   Widget _profile() {
-    return const Padding(
-      padding: EdgeInsets.all(8.0),
-      child: CircleAvatar(
-        backgroundColor: Color(0xffededed),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ImageAvatar(
+        imagePath: widget.notMyProfile,
+        size: 40,
       ),
     );
   }
