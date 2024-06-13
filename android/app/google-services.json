@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070609839474",
+    "project_id": "cammit-project",
+    "storage_bucket": "cammit-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070609839474:android:878e202c4d68287996d9eb",
+        "android_client_info": {
+          "package_name": "com.example.dating"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAidaNaLuz7uTpUaCy39JCW6etFgIYTLts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
