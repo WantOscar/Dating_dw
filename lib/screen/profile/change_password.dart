@@ -54,43 +54,13 @@ class _ChangePasswordState extends State<ChangePassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Text(
-                  '현재 비밀번호 입력',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+              _currentPwTxt(),
               _currentPW(),
               const SizedBox(height: 10),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Text(
-                  '변경할 비밀번호 입력',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+              _newPwTxt(),
+              _checkNewPwTxt(),
               _newPW(),
               const SizedBox(height: 10),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                child: Text(
-                  '변경된 비밀번호 확인',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
               _checkNewPW(),
               (_new != _checkNew)
                   ? Center(
@@ -109,6 +79,21 @@ class _ChangePasswordState extends State<ChangePassword> {
           onTap: () {
             Get.back();
           },
+        ),
+      ),
+    );
+  }
+
+  /// 현재 비밀번호 입력을 보여주는 text
+  Widget _currentPwTxt() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Text(
+        '현재 비밀번호 입력',
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.black87,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );
@@ -136,6 +121,21 @@ class _ChangePasswordState extends State<ChangePassword> {
     );
   }
 
+  /// 변경할 비밀번호 입력을 보여주는 txt
+  Widget _newPwTxt() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Text(
+        '변경할 비밀번호 입력',
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.black87,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+
   /// 새로운 비밀번호를 입력하는 textfield
   Widget _newPW() {
     return Padding(
@@ -158,6 +158,21 @@ class _ChangePasswordState extends State<ChangePassword> {
             icon:
                 Icon(_isTextVisible ? Icons.visibility : Icons.visibility_off),
           ),
+        ),
+      ),
+    );
+  }
+
+  /// 변경할 비밀번호 확인 입력을 보여주는 txt
+  Padding _checkNewPwTxt() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Text(
+        '변경된 비밀번호 확인',
+        style: TextStyle(
+          fontSize: 15,
+          color: Colors.black87,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );
