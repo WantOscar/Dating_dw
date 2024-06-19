@@ -6,14 +6,12 @@ class UserRepository {
   UserFetch service;
   UserRepository({required this.service});
 
-  Future<MainResponse?> getUserData() => service.fetchUserData();
-
   Future<User?> searchMyInfo() => service.searchMyInfo();
 
   Future<List<User>> getAllUserData() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
-    final _users = [
+    final users = [
       {
         "nickName": "karina",
         "description": "",
@@ -35,6 +33,6 @@ class UserRepository {
         "likePersonality": null
       },
     ];
-    return _users.map((user) => User.fromJson(user)).toList();
+    return users.map((user) => User.fromJson(user)).toList();
   }
 }

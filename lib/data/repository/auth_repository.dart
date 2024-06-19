@@ -15,7 +15,4 @@ abstract class AuthRepository {
 
   /// 이메일 인증 인터페이스
   Future<String?> emailVerify(Map<String, dynamic> email);
-
-  /// 사용자 토큰 갱신 인터페이스
-  Future<bool> refreshToken(String refreshToken);
 }

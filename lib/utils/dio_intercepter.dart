@@ -1,8 +1,11 @@
 import 'package:dating/data/model/token_provider.dart';
 import 'package:dating/data/service/auth_service.dart';
+import 'package:dating/screen/auth/login_screen.dart';
+import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' as g;
 
 class BaseIntercepter extends Interceptor with ToastMessage {
   @override
@@ -51,7 +54,9 @@ class BaseIntercepter extends Interceptor with ToastMessage {
 class AuthInterceptor extends Interceptor {
   final tokenProvider = TokenProvider();
   final service = AuthService();
-  final dio = Dio();
+  final dio = Dio(
+    BaseOptions(baseUrl: ApiUrl.baseUrl),
+  );
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
@@ -71,16 +76,37 @@ class AuthInterceptor extends Interceptor {
     if (err.response?.statusCode == 403) {
       debugPrint("[ERROR OCCURED][Access Token 토큰 만료]");
 
-      final refreshToken = await tokenProvider.getRefreshToken();
-      final authorization = await service.refreshToken(refreshToken);
-      if (authorization) {
+      // 리프레시 토큰 가져오기
+      final token = await tokenProvider.getRefreshToken();
+      print(token);
+      // 액세스 토큰 갱신
+      try {
+        final authorization = await refreshToken(token);
+
+        /// 성공하면 새롭게 요청을 수행함
+        /// 실패하면 로그아웃됨
         err.requestOptions.headers["accessToken"] =
             await tokenProvider.getAccessToken();
         handler.resolve(await dio.fetch(err.requestOptions));
+      } on DioException catch (e) {
+        tokenProvider.deleteTokenInfo();
+        g.Get.off(() => const LoginScreen());
       }
-    } else {
-      handler.next(err);
     }
+  }
+
+  /// 사용자 로그인 정보 무결성 검증 및 새 엑세스 토큰 발급 메소드
+  /// 사용자의 리프레시 토큰이 만료된 경우
+  /// 강제로 로그아웃됨.
+  /// 리프레시 토큰이 유효한 경우 새 엑세스 토큰을 발급 후 저장.
+  Future<bool> refreshToken(String refreshToken) async {
+    final response = await dio.post("/refresh",
+        options: Options(headers: {"refreshToken": "Bearer $refreshToken"}));
+    if (response.statusCode == 200) {
+      await tokenProvider.saveAccessToken(response.data["accessToken"]);
+      return true;
+    }
+    return false;
   }
 }
 
