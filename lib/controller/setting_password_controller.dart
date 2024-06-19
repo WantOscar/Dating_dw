@@ -35,4 +35,10 @@ class SettingPasswordController extends GetxController {
   void setCheckNewPw(String value) {
     _checkNewPw(value);
   }
+
+  void changePassword(Map<String, dynamic> data) async {
+    final result = await settingPasswordService.postSettingPassword(data);
+
+    if (result != null) {}
+  }
 }
