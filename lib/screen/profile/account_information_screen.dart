@@ -19,7 +19,14 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            child: Text('연동된 이메일'),
+            child: Text(
+              '연동된 이메일',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -34,7 +41,11 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
               children: [
                 const Text(
                   '비밀번호 변경',
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 IconButton(
                     onPressed: () {
