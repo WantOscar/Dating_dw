@@ -14,25 +14,6 @@ class UserFetch {
     ..interceptors.add(AuthInterceptor())
     ..interceptors.add(BaseIntercepter());
 
-  /// 회원정보 GET 임시 목업 테스트 데이터 메소드
-  Future<MainResponse?> fetchUserData() async {
-    await Future.delayed(const Duration(seconds: 2));
-    return MainResponse(
-        notCheckAlert: 1,
-        sendHeartList: [],
-        receiverHeartList: [],
-        randomMemberList: [
-          {
-            "id": 1,
-            "name": "카리나",
-            "residence": "서울",
-            "age": 11,
-            "height": 190,
-            "image":
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa8z47iisrjvXdCtkZwUYhBpVaxGIoGHBeGA&s"
-          }
-        ]);
-  }
 
   Future<User?> searchMyInfo() async {
     try {
