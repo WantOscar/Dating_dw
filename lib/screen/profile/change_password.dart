@@ -23,27 +23,37 @@ class ChangePassword extends GetView<SettingPasswordController> {
               const SizedBox(height: 10),
               _newPwTxt(),
               _newPW(),
+              Obx(
+                () => (controller.currentPw != controller.newPw)
+                    ? Center(
+                        child: Text(
+                          controller.validateNewPW,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      )
+                    : Container(),
+              ),
               const SizedBox(height: 10),
               _checkNewPwTxt(),
               _checkNewPW(),
               const SizedBox(height: 10),
-              (controller.newPw != controller.newPw)
-                  ? Center(
-                      child: Text(
-                        controller.validateNewPassword,
-                        style: const TextStyle(color: Colors.red),
-                      ),
-                    )
-                  : Container(),
+              Obx(
+                () => (controller.newPw != controller.checkNewPw)
+                    ? Center(
+                        child: Text(
+                          controller.validateCheckNewPW,
+                          style: const TextStyle(color: Colors.red),
+                        ),
+                      )
+                    : Container(),
+              ),
               const SizedBox(height: 10),
             ],
           ),
         ),
         bottomNavigationBar: BottomApplyBar(
           text: '확인',
-          onTap: () {
-            Get.back();
-          },
+          onTap: controller.changePassword,
         ),
       ),
     );
