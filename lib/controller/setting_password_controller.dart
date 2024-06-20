@@ -11,10 +11,6 @@ class SettingPasswordController extends GetxController {
 
   final RxBool _isTextVisible = false.obs;
   final RxString _validateMg = "".obs;
-  // final RxString _validateNewPW = "현재 비밀번호와 동일합니다!".obs;
-  // final RxString _validateNewPW = "".obs;
-  // final RxString _validateCheckNewPW = "비밀번호가 일치하지 않습니다!".obs;
-  // final RxString _validateCheckNewPW = "".obs;
   final RxString _currentPw = "".obs;
   final RxString _newPw = "".obs;
   final RxString _checkNewPw = "".obs;
@@ -24,9 +20,6 @@ class SettingPasswordController extends GetxController {
 
   bool get isTextVisible => _isTextVisible.value;
   String get validateMg => _validateMg.value;
-  // String get validateNewPW => _validateNewPW.value;
-  // String get validateCheckNewPW => _validateCheckNewPW.value;
-
   String get currentPw => _currentPw.value;
   String get newPw => _newPw.value;
   String get checkNewPw => _checkNewPw.value;
