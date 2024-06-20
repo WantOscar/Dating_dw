@@ -23,25 +23,15 @@ class ChangePassword extends GetView<SettingPasswordController> {
               const SizedBox(height: 10),
               _newPwTxt(),
               _newPW(),
-              Obx(
-                () => (controller.currentPw != controller.newPw)
-                    ? Center(
-                        child: Text(
-                          controller.validateNewPW,
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      )
-                    : Container(),
-              ),
               const SizedBox(height: 10),
               _checkNewPwTxt(),
               _checkNewPW(),
               const SizedBox(height: 10),
               Obx(
-                () => (controller.newPw != controller.checkNewPw)
+                () => (controller.validateMg.isNotEmpty)
                     ? Center(
                         child: Text(
-                          controller.validateCheckNewPW,
+                          controller.validateMg,
                           style: const TextStyle(color: Colors.red),
                         ),
                       )
@@ -83,6 +73,7 @@ class ChangePassword extends GetView<SettingPasswordController> {
         maxLength: 15,
         style: const TextStyle(decorationThickness: 0, fontSize: 15),
         obscureText: !controller.isTextVisible,
+        onChanged: controller.setCurrentPw,
         decoration: InputDecoration(
           counterText: '',
           hintText: '비밀번호 최대 15자 제한',
