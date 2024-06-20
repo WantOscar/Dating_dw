@@ -103,7 +103,7 @@ class ProfileScreen extends GetView<UserController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        (controller.myInfo?.images?.length == 0)
+        (controller.myInfo!.images!.isEmpty)
             ? Container()
             : AnimatedSmoothIndicator(
                 activeIndex: controller.imageIndex,

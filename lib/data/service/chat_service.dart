@@ -35,4 +35,8 @@ class ChatService {
       return null;
     }
   }
+
+  void sendPushNotification(Map<String, dynamic> data) {
+    dio.post("/fcm", data: data);
+  }
 }

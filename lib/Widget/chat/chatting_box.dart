@@ -39,7 +39,7 @@ class ChattingBox extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -49,12 +49,12 @@ class ChattingBox extends StatelessWidget {
                             color: ThemeColor.font2Color,
                             fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(
                         chat.lastMessage,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.w400,
                             fontSize: 12),

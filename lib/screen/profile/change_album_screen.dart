@@ -1,7 +1,6 @@
 import 'package:dating/controller/profile_image_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:photo_manager/photo_manager.dart';
 import 'package:photo_manager_image_provider/photo_manager_image_provider.dart';
 
 class ChangeAlbumScreen extends GetView<ProfileImageController> {

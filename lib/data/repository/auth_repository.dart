@@ -1,5 +1,3 @@
-import 'package:dating/data/service/auth_service.dart';
-
 abstract class AuthRepository {
   /// 사용자 로그인 인터페이스
   Future<void> login(Map<String, dynamic> data);
@@ -15,4 +13,7 @@ abstract class AuthRepository {
 
   /// 이메일 인증 인터페이스
   Future<String?> emailVerify(Map<String, dynamic> email);
+
+  /// 사용자 FCM 토큰 갱신
+  Future<void> updateFCMtoken(String token);
 }

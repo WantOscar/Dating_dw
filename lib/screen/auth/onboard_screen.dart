@@ -492,7 +492,7 @@ class OnboardScreen extends GetView<OnboardingController> {
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: BottomButton(
         onTap: controller.updateUserInfo,
-        child: Text("프로필 생성",
+        child: const Text("프로필 생성",
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,

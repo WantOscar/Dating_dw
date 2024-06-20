@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 
 class MainResponse {
   final int notCheckAlert;

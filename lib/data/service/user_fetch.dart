@@ -1,4 +1,3 @@
-import 'package:dating/data/model/main_response.dart';
 import 'package:dating/data/model/token_provider.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/utils/api_urls.dart';
@@ -56,7 +55,7 @@ class UserFetch {
       if (response.statusCode == 200) {
         print(response.data);
       }
-    } on Exception catch (e) {
+    } on Exception {
       print("error");
     }
   }

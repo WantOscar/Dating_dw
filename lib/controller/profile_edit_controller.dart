@@ -12,8 +12,8 @@ import 'package:uuid/uuid.dart';
 class ProfileEditController extends GetxController {
   static ProfileEditController get to => Get.find();
   final UserFetch userService;
-  Rx<User?> _user = UserController.to.myInfo.obs;
-  Rx<List<File?>> _files = Rx<List<File?>>(List.generate(6, (index) => null));
+  final Rx<User?> _user = UserController.to.myInfo.obs;
+  final Rx<List<File?>> _files = Rx<List<File?>>(List.generate(6, (index) => null));
   final List<List<int>> _imageIndex = [
     [0, 1, 2],
     [3, 4, 5],
@@ -22,7 +22,7 @@ class ProfileEditController extends GetxController {
     required this.userService,
   });
 
-  RxString _address = "".obs;
+  final RxString _address = "".obs;
 
   List<File?> get files => _files.value;
 
@@ -71,7 +71,7 @@ class ProfileEditController extends GetxController {
   }
 
   void updateUserInfo() async {
-    final Uuid uuid = Uuid();
+    const Uuid uuid = Uuid();
     final images = [];
     for (var file in _files.value) {
       if (file != null) {

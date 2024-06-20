@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/user_controller.dart';
+import 'package:dating/data/model/FCMSend.dart';
 import 'package:dating/data/model/message_model.dart';
+import 'package:dating/data/service/chat_service.dart';
 import 'package:dating/data/service/message_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -14,12 +16,13 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 /// 채팅방에서 필요한 비즈니스 로직을 수행하는 컨트롤러임.
 /// 채팅 전송, 채팅 내용을 불러오는 역활을 수행함.
 class ChattingRoomController extends GetxController {
+  final String targetName;
   final int chatRoomId;
   late final WebSocketChannel channel;
   final Rx<List<MessageModel>> _previous = Rx<List<MessageModel>>([]);
   final Rx<List<MessageModel>> _messages = Rx<List<MessageModel>>([]);
   final _service = MessageService(storage: const FlutterSecureStorage());
-  ChattingRoomController({required this.chatRoomId});
+  ChattingRoomController({required this.chatRoomId, required this.targetName});
   final _messageController = TextEditingController();
 
   TextEditingController get message => _messageController;
@@ -77,6 +80,13 @@ class ChattingRoomController extends GetxController {
       createAt: DateFormat('yyyy-MM-dd-HH:mm:ss').format(DateTime.now()),
       chatRoomId: chatRoomId,
     );
+
+    final fcmSend = FCMSend(
+        targetName: targetName,
+        title: UserController.to.myInfo!.nickName,
+        body: _messageController.text.toString());
+
+    ChatService().sendPushNotification(fcmSend.toJson());
 
     channel.sink.add(jsonEncode(message.toJson()));
     _messageController.clear();

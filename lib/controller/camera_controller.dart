@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:dating/controller/profile_image_controller.dart';
-import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
