@@ -58,10 +58,9 @@ class AuthService implements AuthRepository {
   /// 실패한 경우 에러메시지를 사용자에게 보여줌.
   @override
   Future<void> logOut() async {
-    final response = await dio.post(ApiUrl.logout,
-        options: Options(headers: {
-          "Authorization": tokenProvider.getAccessToken(),
-        }));
+    final refreshToken = await tokenProvider.getRefreshToken();
+    final response = await dio.delete(ApiUrl.logout,
+        options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}));
     if (response.statusCode == 200) {
       tokenProvider.deleteTokenInfo();
       Get.offAll(() => const LoginScreen());
@@ -77,7 +76,10 @@ class AuthService implements AuthRepository {
   /// 실패할 겨웅 에러 메시지를 사용자에게 보여줌.
   @override
   Future<void> delete() async {
-    final response = await dio.delete(ApiUrl.delete);
+    final refreshToken = await tokenProvider.getRefreshToken();
+
+    final response = await dio.delete(ApiUrl.delete,
+        options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}));
     if (response.statusCode == 200) {
       tokenProvider.deleteTokenInfo();
       Get.offAll(() => const LoginScreen());
@@ -101,6 +103,19 @@ class AuthService implements AuthRepository {
       }
     } on Exception {
       return null;
+    }
+  }
+
+  @override
+  Future<void> updateFCMtoken(String fcmToken) async {
+    final accessToken = await tokenProvider.getAccessToken();
+    final response = await dio.post("/member/deviceToken",
+        queryParameters: {"deviceToken": fcmToken},
+        options: Options(headers: {"Authorization": "Bearer $accessToken"}));
+    if (response.statusCode == 201) {
+      return;
+    } else {
+      throw Exception("디바이스 토큰 갱신 에러");
     }
   }
 }

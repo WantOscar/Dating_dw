@@ -97,7 +97,8 @@ class _ChattingScreenState extends State<ChattingScreen>
                                         controller.chattings[index].image,
                                   ), binding: BindingsBuilder(() {
                             Get.put(ChattingRoomController(
-                                chatRoomId: controller.chattings[index].id));
+                                chatRoomId: controller.chattings[index].id,
+                                targetName: controller.chattings[index].name));
                           }));
                         },
                       ),
@@ -137,7 +138,8 @@ class _ChattingScreenState extends State<ChattingScreen>
                                         controller.chattings[index].image,
                                   ), binding: BindingsBuilder(() {
                             Get.put(ChattingRoomController(
-                                chatRoomId: controller.chattings[index].id));
+                                chatRoomId: controller.chattings[index].id,
+                                targetName: controller.chattings[index].name));
                           }));
                         },
                       ),

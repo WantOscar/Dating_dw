@@ -3,6 +3,7 @@ import 'package:dating/data/model/token_provider.dart';
 import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/data/service/user_fetch.dart';
 import 'package:dating/screen/auth/onboard_screen.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -54,6 +55,12 @@ class LoginController extends GetxController with UseToast {
     print("respnose : $response");
     _isLoading(false);
     if (response != null) {
+      /// FCM Token 갱신
+      final fcmToken = await FirebaseMessaging.instance.getToken();
+      if (fcmToken != null) {
+        authService.updateFCMtoken(fcmToken);
+      }
+
       ///컨트롤러 값 초기화
       _email.clear();
       _password.clear();

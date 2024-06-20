@@ -13,7 +13,7 @@ class BaseIntercepter extends Interceptor with ToastMessage {
     final errorMessage = err.response?.data;
     debugPrint("[ERROR OCCURED][${err.type}][${err.requestOptions.uri}]");
     debugPrint("[ERROR OCCURED][$errorMessage]");
-    showToast("${errorMessage["errorMessage"]}");
+    // showToast("${errorMessage["errorMessage"]}");
     switch (err.type) {
       case DioExceptionType.badResponse:
         debugPrint("올바르지 못한 요청입니다. url, 파라미터가 정확한지 확인하세요.");
