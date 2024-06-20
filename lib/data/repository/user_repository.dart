@@ -1,4 +1,3 @@
-import 'package:dating/data/model/main_response.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/service/user_fetch.dart';
 

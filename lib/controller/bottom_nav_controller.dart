@@ -1,8 +1,5 @@
 import 'dart:io';
 
-import 'package:dating/controller/feed_controller.dart';
-import 'package:dating/data/service/feed_service.dart';
-import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/notification_window.dart';
 import 'package:flutter/material.dart';

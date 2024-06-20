@@ -37,8 +37,8 @@ class UserController extends GetxController {
   }
 
   void getAllUsers() async {
-    final List<User> _result = await userRepository.getAllUserData();
-    print(_result);
-    _users(_result);
+    final List<User> result = await userRepository.getAllUserData();
+    print(result);
+    _users(result);
   }
 }

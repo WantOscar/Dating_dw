@@ -42,9 +42,9 @@ class OnboardingController extends GetxController with ToastMessage {
 
   /// 사용자의 생년월일 정보를 담는
   /// 옵저블 변수
-  RxInt _year = 0.obs;
-  RxInt _month = 0.obs;
-  RxInt _day = 0.obs;
+  final RxInt _year = 0.obs;
+  final RxInt _month = 0.obs;
+  final RxInt _day = 0.obs;
 
   /// 선택한 생년월일 옵저블 변수
   int get year => _year.value;
@@ -220,7 +220,7 @@ class OnboardingController extends GetxController with ToastMessage {
   /// 임시 홈화면 라우팅 메소드
   /// 계정 등록 기능이 완성되면
   /// 삭제될 예정
-  void goToHome() => Get.off(() => HomeScreen(), binding: HomeBinding());
+  void goToHome() => Get.off(() => const HomeScreen(), binding: HomeBinding());
 
   /// 사용자 정보 등록 메소드
   /// 사용자가 정보 등록을 시도하고 완료하면 홈 페이지로 라우팅됨.

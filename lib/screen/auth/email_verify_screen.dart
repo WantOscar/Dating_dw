@@ -86,7 +86,7 @@ class EmailVerifyPage extends GetView<ResisterController> {
   Widget _verifyButton() => SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BottomButton(onTap: controller.emailVerify, child: Text(
+        child: BottomButton(onTap: controller.emailVerify, child: const Text(
   "인증번호발송",
   style: TextStyle(
   color: Colors.white,

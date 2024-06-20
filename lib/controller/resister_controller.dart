@@ -1,10 +1,8 @@
 import 'package:dating/controller/email_verify_controller.dart';
 import 'package:dating/data/model/member_join.dart';
 import 'package:dating/data/service/auth_service.dart';
-import 'package:dating/screen/auth/auth_forgot_screen.dart';
 import 'package:dating/screen/auth/code_input_screen.dart';
 import 'package:dating/screen/auth/login_screen.dart';
-import 'package:dating/screen/auth/resister_screen.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/notification_window.dart';
 import 'package:flutter/material.dart';

@@ -88,7 +88,7 @@ class AuthInterceptor extends Interceptor {
         err.requestOptions.headers["accessToken"] =
             await tokenProvider.getAccessToken();
         handler.resolve(await dio.fetch(err.requestOptions));
-      } on DioException catch (e) {
+      } on DioException {
         tokenProvider.deleteTokenInfo();
         g.Get.off(() => const LoginScreen());
       }

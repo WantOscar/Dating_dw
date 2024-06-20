@@ -3,7 +3,6 @@ import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
-import 'package:dating/widget/common/warning_window.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

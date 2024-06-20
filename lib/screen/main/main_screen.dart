@@ -13,7 +13,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: CammitAppBar(
+        child: const CammitAppBar(
           title: '캠밋',
         ),
       ),

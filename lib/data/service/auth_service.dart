@@ -46,7 +46,7 @@ class AuthService implements AuthRepository {
       } else {
         return null;
       }
-    } on Exception catch (error) {
+    } on Exception {
       return null;
     }
   }

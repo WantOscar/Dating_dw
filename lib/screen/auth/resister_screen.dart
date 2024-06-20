@@ -2,7 +2,6 @@ import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/bottom_button.dart';
-import 'package:dating/widget/common/button_loading_indicator.dart';
 import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -134,9 +133,9 @@ class ResisterScreen extends GetView<ResisterController> {
               padding: const EdgeInsets.all(8.0),
               child: BottomButton(onTap: () {
                 (controller.loading == Status.loading) ? null : controller.signUp();
-              }, child: (controller.loading == Status.loading)?  Center(child: CircularProgressIndicator(
+              }, child: (controller.loading == Status.loading)?  const Center(child: CircularProgressIndicator(
                 
-              ),) : Text(
+              ),) : const Text(
                 "회원가입",
                 style: TextStyle(
                 color: Colors.white,
