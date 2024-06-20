@@ -53,7 +53,7 @@ class ChangePassword extends GetView<SettingPasswordController> {
         ),
         bottomNavigationBar: BottomApplyBar(
           text: '확인',
-          onTap: controller.changePassword,
+          onTap: controller.completeChangePw,
         ),
       ),
     );

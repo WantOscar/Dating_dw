@@ -41,8 +41,8 @@ class SettingPasswordController extends GetxController {
     _checkNewPw(value);
   }
 
-  void changePassword(Map<String, dynamic> data) async {
-    final result = await settingPasswordService.postSettingPassword(data);
+  void completeChangePw(Map<String, dynamic> data) async {
+    // final result = await settingPasswordService.postSettingPassword(data);
     Get.to(() => const ProfileScreen());
   }
 }
