@@ -13,7 +13,9 @@ class SettingPasswordRepository {
 
   /// 사용자 비밀번호 변경 인터페이스
   Future<String> postSettingPassword(Map<String, dynamic> data) async {
+    print("1");
     final accessToken = await tokenProvider.getAccessToken();
+
     final response = await dio.post(ApiUrl.settingPassword,
         data: data,
         options: Options(headers: {"Authorization": "Bearer $accessToken"}));
