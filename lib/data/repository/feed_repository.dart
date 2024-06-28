@@ -7,6 +7,7 @@ class FeedRepository {
   final dio = Dio(BaseOptions(
     baseUrl: ApiUrl.baseUrl,
   ))
+    ..interceptors.add(AuthInterceptor())
     ..interceptors.add(BaseIntercepter());
 
   /// 글 상세 조회를 위한 함수
