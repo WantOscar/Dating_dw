@@ -1,4 +1,4 @@
-package com.example.dating
+package com.aandi.cammit
 
 import io.flutter.embedding.android.FlutterActivity
 
