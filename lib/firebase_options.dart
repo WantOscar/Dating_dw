@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAidaNaLuz7uTpUaCy39JCW6etFgIYTLts',
-    appId: '1:1070609839474:android:878e202c4d68287996d9eb',
+    appId: '1:1070609839474:android:baded78d9dac422096d9eb',
     messagingSenderId: '1070609839474',
     projectId: 'cammit-project',
     storageBucket: 'cammit-project.appspot.com',
@@ -59,10 +59,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDfNhJtZZlTcSMneSLY7VrLmJw8EAxRNOs',
-    appId: '1:1070609839474:ios:cf1bbbb47a6058b296d9eb',
+    appId: '1:1070609839474:ios:6756f084052a6e0796d9eb',
     messagingSenderId: '1070609839474',
     projectId: 'cammit-project',
     storageBucket: 'cammit-project.appspot.com',
-    iosBundleId: 'com.example.dating',
+    iosBundleId: 'com.aandi.cammit',
   );
+
 }
