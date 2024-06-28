@@ -13,6 +13,9 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
 class FirebaseApi {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
+  @pragma('vm:entry-point')
+  void backgroundHandler(NotificationResponse details) {}
+
   Future<void> initNotification() async {
     NotificationSettings settings =
         await _firebaseMessaging.requestPermission();
@@ -34,8 +37,12 @@ class FirebaseApi {
             importance: Importance.max));
 
     await flutterLocalNotificationsPlugin.initialize(
-        const InitializationSettings(
-            android: AndroidInitializationSettings("@mipmap/ic_launcher")));
+      const InitializationSettings(
+        android: AndroidInitializationSettings("@mipmap/ic_launcher"),
+        iOS: DarwinInitializationSettings(),
+      ),
+      onDidReceiveBackgroundNotificationResponse: backgroundHandler,
+    );
 
     _firebaseMessaging.setForegroundNotificationPresentationOptions(
       badge: true,
