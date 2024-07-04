@@ -12,7 +12,7 @@ class ChatService {
 
   Future<String> makeChattingRoom(int memberId) async {
     final response = await dio
-        .post("/chat/create/$memberId", queryParameters: {"type": "one"});
+        .post("/chat/create/$memberId", queryParameters: {"type": "dm"});
     if (response.statusCode == 200) {
       return response.data["chatRoomId"];
     } else {
@@ -23,7 +23,7 @@ class ChatService {
 
   Future<List<ChattingRoomModel>?> getMyChattingList() async {
     final response =
-        await dio.get("/chat/list", queryParameters: {"type": "one"});
+        await dio.get("/chat/list", queryParameters: {"type": "dm"});
     if (response.statusCode == 200) {
       final List<ChattingRoomModel> result = [];
       for (var json in response.data["chatRoomList"]) {

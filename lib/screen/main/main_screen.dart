@@ -1,5 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dating/Widget/main/circle_avatar.dart';
 import 'package:dating/controller/user_controller.dart';
+import 'package:dating/screen/main/main_favorite_me_screen.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/main/today_freinds_profile.dart';
 import 'package:flutter/material.dart';
@@ -17,92 +20,112 @@ class MainScreen extends StatelessWidget {
           title: '캠밋',
         ),
       ),
-      body: _buildBody(),
+      body: Column(
+        children: [
+          _todayIntroduce(),
+          _likeMeDetail(),
+          _likeMeList(),
+        ],
+      ),
     );
   }
 
-  Widget _buildBody() {
-    return GetX<UserController>(builder: (controller) {
-      return (controller.users != null)
-          ? CarouselSlider.builder(
-              itemCount: controller.users!.length,
-              itemBuilder: (context, index, realIndex) {
-                final user = controller.users![index];
-
-                // final user = controller.users[index];
-                return TodayFriendsProfile(
-                  user: user,
-                );
-              },
-              options: CarouselOptions(
-                  enlargeCenterPage: true,
-                  aspectRatio: 1,
-                  autoPlay: true,
-                  viewportFraction: 0.8),
-            )
-          : const SizedBox(
-              height: 300,
-              child: Center(
-                child: Text(
-                  "아직 사용자 없습니다 !",
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
+  /// 24시간 간격이며 인원 10명 제한으로,
+  /// 랜덤 이성을 소개해줌
+  Widget _todayIntroduce() {
+    return GetX<UserController>(
+      builder: (controller) {
+        return (controller.users != null)
+            ? CarouselSlider.builder(
+                itemCount: controller.users!.length,
+                itemBuilder: (context, index, realIndex) {
+                  final user = controller.users![index];
+                  return TodayFriendsProfile(
+                    user: user,
+                  );
+                },
+                options: CarouselOptions(
+                    enlargeCenterPage: true,
+                    aspectRatio: 1,
+                    autoPlay: true,
+                    viewportFraction: 0.8),
+              )
+            : const SizedBox(
+                height: 300,
+                child: Center(
+                  child: Text(
+                    "아직 사용자 없습니다 !",
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
-            );
-    });
+              );
+      },
+    );
   }
 
-  // Widget _buildBody() {
-  //   return SingleChildScrollView(
-  //     child: Padding(
-  //       padding: const EdgeInsets.only(bottom: 70),
-  //       child: Column(
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           /// 오늘의 추천 상대(상대방 무작위 하루 10명 제한 줄 것.)
-  //           (controller.users!.randomMemberList.isNotEmpty)
-  //               ? CarouselSlider.builder(
-  //                   itemCount: controller.users!.randomMemberList.length,
-  //                   itemBuilder: (context, index, realIndex) {
-  //                     final user = controller.users!.randomMemberList[index];
-  //
-  //                     // final user = controller.users[index];
-  //                     return TodayFriendsProfile(
-  //                       randomUser: user,
-  //                     );
-  //                   },
-  //                   options: CarouselOptions(
-  //                       enlargeCenterPage: true,
-  //                       aspectRatio: 1,
-  //                       autoPlay: true,
-  //                       viewportFraction: 0.8),
-  //                 )
-  //               : const SizedBox(
-  //                   height: 300,
-  //                   child: Center(
-  //                     child: Text(
-  //                       "아직 사용자 없습니다 !",
-  //                       style: TextStyle(
-  //                           color: Colors.grey,
-  //                           fontSize: 15,
-  //                           fontWeight: FontWeight.w600),
-  //                     ),
-  //                   ),
-  //                 ),
-  //
-  //           // Title and Info
-  //           // const TodayMeet(),
-  //           // const SizedBox(height: 20),
-  //
-  //           // // Gesture Box List
-  //           // const SingleChildScrollView(
-  //           //   scrollDirection: Axis.horizontal,
-  //           //   child: TodayMeetBox(),
-  //           // ),
-  //           // const SizedBox(height: 30),
+  /// 나한테 관심있는 상대 텍스트, 나한테 관심있는 상대방 목록 세부 페이지
+  Widget _likeMeDetail() {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            '나한테 관심 있는 친구',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 30),
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Get.to(() => const MainFavoriteMeScreen());
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 나한테 관심있는 상대방 목록
+  Widget _likeMeList() {
+    return SizedBox(
+      height: 200,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(
+              50,
+              (index) => Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Avatar(
+                  onTap: () {
+                    Get.to(() => const SomeoneProfileScreen());
+                  },
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+      // : const Center(
+      //     child: Text(
+      //       "아직 사용자 없습니다 !",
+      //       style: TextStyle(
+      //           color: Colors.grey,
+      //           fontSize: 15,
+      //           fontWeight: FontWeight.w600),
+      //     ),
+      //   ),
+    );
+  }
+
   //
   //           /// 내가 관심있는 상대 텍스트, 관심있는 상대방 목록 세부 페이지
   //           Padding(
@@ -174,94 +197,4 @@ class MainScreen extends StatelessWidget {
   //                     ),
   //                   ),
   //           ),
-  //
-  //           /// 나한테 관심있는 상대 텍스트, 나한테 관심있는 상대방 목록 세부 페이지
-  //           Padding(
-  //             padding: const EdgeInsets.symmetric(horizontal: 20),
-  //             child: Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //               children: [
-  //                 const Text(
-  //                   '나한테 관심 있는 친구',
-  //                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-  //                 ),
-  //                 const SizedBox(height: 30),
-  //                 IconButton(
-  //                   icon: const Icon(Icons.add),
-  //                   onPressed: () {
-  //                     Get.to(() => const MainFavoriteMeScreen());
-  //                   },
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //
-  //           /// 나한테 관심있는 상대방 목록
-  //           SizedBox(
-  //             height: 200,
-  //             child: (controller.users!.receiverHeartList.isNotEmpty)
-  //                 ? SingleChildScrollView(
-  //                     scrollDirection: Axis.horizontal,
-  //                     child: Padding(
-  //                       padding: const EdgeInsets.symmetric(horizontal: 10),
-  //                       child: Row(
-  //                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //                         children: List.generate(
-  //                           50,
-  //                           (index) => Padding(
-  //                             padding: const EdgeInsets.symmetric(
-  //                                 vertical: 10, horizontal: 10),
-  //                             child: Avatar(
-  //                               onTap: () {
-  //                                 Get.to(() => const SomeoneProfileScreen());
-  //                               },
-  //                             ),
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ),
-  //                   )
-  //                 : const Center(
-  //                     child: Text(
-  //                       "아직 사용자 없습니다 !",
-  //                       style: TextStyle(
-  //                           color: Colors.grey,
-  //                           fontSize: 15,
-  //                           fontWeight: FontWeight.w600),
-  //                     ),
-  //                   ),
-  //           ),
-  //           const SizedBox(height: 80),
-  //
-  //           /// mbti별 추천 조합
-  //           // FutureBuilder<List<Mbti>>(
-  //           //   future: MbtiRepository().getListMbtiData(),
-  //           //   builder: (context, snapshot) {
-  //           //     if (snapshot.connectionState == ConnectionState.waiting) {
-  //           //       return const Center(
-  //           //         child: CircularProgressIndicator(),
-  //           //       );
-  //           //     } else if (snapshot.hasError) {
-  //           //       return Center(
-  //           //         child: Text('Error : ${snapshot.error}'),
-  //           //       );
-  //           //     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-  //           //       return const Center(
-  //           //         child: Text('No Data Available'),
-  //           //       );
-  //           //     } else {
-  //           //       List<Mbti> mbtis = snapshot.data!;
-  //           //       int index = 0;
-  //           //       final mbti = mbtis[index];
-  //           //       return MbtiRecommend(
-  //           //         mbti: mbti,
-  //           //       );
-  //           //     }
-  //           //   },
-  //           // ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }
