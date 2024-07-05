@@ -52,7 +52,7 @@ class _ChattingScreenState extends State<ChattingScreen>
                 controller: _tab,
                 tabs: const [
                   Tab(
-                    text: "단톡",
+                    text: "미팅",
                   ),
                   Tab(
                     text: "1:1",

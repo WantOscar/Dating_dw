@@ -1,6 +1,8 @@
 import 'package:dating/Widget/common/icon_header.dart';
 import 'package:dating/controller/setting_password_controller.dart';
 import 'package:dating/controller/user_controller.dart';
+import 'package:dating/data/repository/setting_password.repository.dart';
+import 'package:dating/data/service/setting_password_service.dart';
 import 'package:dating/screen/profile/change_password.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +51,13 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
                 ),
                 IconButton(
                     onPressed: () {
-                      Get.to(() => const ChangePassword());
+                      Get.to(() => const ChangePassword(),
+                          binding: BindingsBuilder(() {
+                        Get.put(SettingPasswordController(
+                            settingPasswordService: SettingPasswordService(
+                                settingPasswordRepository:
+                                    SettingPasswordRepository())));
+                      }));
                     },
                     icon: IconShape.iconArrowForward),
               ],
