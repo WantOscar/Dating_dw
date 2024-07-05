@@ -48,9 +48,9 @@ class ChattingRoom extends GetView<ChattingRoomController> {
         body: Column(
           children: [
             _chatBody(),
+            _messageInput(),
           ],
         ),
-        bottomNavigationBar: _messageInput(),
         extendBodyBehindAppBar: true,
       ),
     );
@@ -99,6 +99,9 @@ class ChattingRoom extends GetView<ChattingRoomController> {
   /// 메시지가 입력되고 전송되면
   /// 사용자의 메시지 박스의 내용을 모두 지움.
   Widget _messageInput() => SafeArea(
+        top: false,
+        left: false,
+        right: false,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
           child: TextField(

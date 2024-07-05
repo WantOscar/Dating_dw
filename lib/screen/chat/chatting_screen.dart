@@ -66,8 +66,8 @@ class _ChattingScreenState extends State<ChattingScreen>
       body: TabBarView(
         controller: _tab,
         children: [
-          _multiChat(),
           _personalChat(),
+          _multiChat(),
         ],
       ),
     );

@@ -51,14 +51,14 @@ class LoginController extends GetxController with UseToast {
       "password": _password.value.text.toString()
     };
 
-    final response = await authService.login(data);
-    print("respnose : $response");
+    final accessToken = await authService.login(data);
+    print("respnose : $accessToken");
     _isLoading(false);
-    if (response != null) {
+    if (accessToken != null) {
       /// FCM Token 갱신
       final fcmToken = await FirebaseMessaging.instance.getToken();
       if (fcmToken != null) {
-        authService.updateFCMtoken(fcmToken);
+        authService.updateFCMtoken(fcmToken, accessToken);
       }
 
       ///컨트롤러 값 초기화
