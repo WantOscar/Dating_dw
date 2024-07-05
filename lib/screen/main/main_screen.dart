@@ -10,14 +10,17 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: AppBar().preferredSize,
-        child: const CammitAppBar(
-          title: '캠밋',
+    return GestureDetector(
+      onTap: Get.focusScope?.unfocus,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize,
+          child: const CammitAppBar(
+            title: '캠밋',
+          ),
         ),
+        body: _buildBody(),
       ),
-      body: _buildBody(),
     );
   }
 
