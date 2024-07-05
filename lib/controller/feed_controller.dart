@@ -16,6 +16,12 @@ class FeedController extends GetxController {
     required this.feedService,
   });
 
+  @override
+  void onReady() {
+    fetchFeeds();
+    super.onReady();
+  }
+
   void fetchFeeds() async {
     final result = await feedService.getAllFeeds();
     if (result != null) {
