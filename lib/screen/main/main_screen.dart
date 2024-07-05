@@ -1,14 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/main/circle_avatar.dart';
+import 'package:dating/controller/main_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/main/main_favorite_me_screen.dart';
-import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/main/today_freinds_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends GetView<MainController> {
   const MainScreen({super.key});
 
   @override
@@ -80,9 +80,7 @@ class MainScreen extends StatelessWidget {
           const SizedBox(height: 30),
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {
-              Get.to(() => const MainFavoriteMeScreen());
-            },
+            onPressed: controller.myFanDetailList,
           ),
         ],
       ),
@@ -91,40 +89,54 @@ class MainScreen extends StatelessWidget {
 
   /// 나한테 관심있는 상대방 목록
   Widget _likeMeList() {
-    return SizedBox(
-      height: 200,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: List.generate(
-              50,
-              (index) => Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Avatar(
-                  onTap: () {
-                    Get.to(() => const SomeoneProfileScreen());
-                  },
+    return Obx(
+      () {
+        return (controller.myFanMembers.isNotEmpty)
+            ? SizedBox(
+                height: 200,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(
+                        controller.myFanMembers.length,
+                        (index) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          child: Avatar(
+                            onTap: controller.otherProfile,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
-        ),
-      ),
-      // : const Center(
-      //     child: Text(
-      //       "아직 사용자 없습니다 !",
-      //       style: TextStyle(
-      //           color: Colors.grey,
-      //           fontSize: 15,
-      //           fontWeight: FontWeight.w600),
-      //     ),
-      //   ),
+              )
+            : const SizedBox(
+                height: 200,
+                child: Text(
+                  '나에게 관심있는 사람이 아직 없습니다.',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w600),
+                ),
+              );
+      },
     );
   }
+
+  // : const Center(
+  //     child: Text(
+  //       "아직 사용자 없습니다 !",
+  //       style: TextStyle(
+  //           color: Colors.grey,
+  //           fontSize: 15,
+  //           fontWeight: FontWeight.w600),
+  //     ),
+  //   ),
 
   //
   //           /// 내가 관심있는 상대 텍스트, 관심있는 상대방 목록 세부 페이지
