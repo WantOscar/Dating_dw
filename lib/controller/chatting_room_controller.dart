@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/user_controller.dart';
-import 'package:dating/data/model/FCMSend.dart';
+import 'package:dating/data/model/fcm_send.dart';
 import 'package:dating/data/model/message_model.dart';
 import 'package:dating/data/service/chat_service.dart';
 import 'package:dating/data/service/message_service.dart';
