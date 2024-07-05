@@ -55,7 +55,7 @@ class FirebaseApi {
 
       if (notification != null) {
         print(notification.body);
-        showNotification(notification);
+        // showNotification(notification);
       }
     });
   }
@@ -66,14 +66,11 @@ class FirebaseApi {
         notification.title,
         notification.body,
         const NotificationDetails(
-            android: AndroidNotificationDetails(
-                "high_importance_channel", "high_importance_notification",
-                playSound: true,
-                importance: Importance.max,
-                sound: RawResourceAndroidNotificationSound('notification')),
-            iOS: DarwinNotificationDetails(
-              presentBadge: true,
-              presentSound: true,
-            )));
+          android: AndroidNotificationDetails(
+              "high_importance_channel", "high_importance_notification",
+              playSound: true,
+              importance: Importance.max,
+              sound: RawResourceAndroidNotificationSound('notification')),
+        ));
   }
 }

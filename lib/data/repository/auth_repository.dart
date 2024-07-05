@@ -15,5 +15,5 @@ abstract class AuthRepository {
   Future<String?> emailVerify(Map<String, dynamic> email);
 
   /// 사용자 FCM 토큰 갱신
-  Future<void> updateFCMtoken(String token);
+  Future<void> updateFCMtoken(String token, String accessToken);
 }

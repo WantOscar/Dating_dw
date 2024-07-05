@@ -42,7 +42,7 @@ class AuthService implements AuthRepository {
       final response = await dio.post(ApiUrl.login, data: data);
       if (response.statusCode == 200) {
         await tokenProvider.saveTokenInfo(response.data);
-        return tokenProvider.getAccessToken();
+        return response.data["accessToken"];
       } else {
         return null;
       }
@@ -107,8 +107,7 @@ class AuthService implements AuthRepository {
   }
 
   @override
-  Future<void> updateFCMtoken(String fcmToken) async {
-    final accessToken = await tokenProvider.getAccessToken();
+  Future<void> updateFCMtoken(String fcmToken, String accessToken) async {
     final response = await dio.post("/member/deviceToken",
         queryParameters: {"deviceToken": fcmToken},
         options: Options(headers: {"Authorization": "Bearer $accessToken"}));
