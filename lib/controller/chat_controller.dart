@@ -2,7 +2,8 @@ import 'package:dating/data/model/chatting_room_model.dart';
 import 'package:dating/data/service/chat_service.dart';
 import 'package:get/get.dart';
 
-class ChatController extends GetxController {
+class ChatController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   final ChatService service;
   final Rx<List<ChattingRoomModel>> _chattings =
       Rx<List<ChattingRoomModel>>([]);
