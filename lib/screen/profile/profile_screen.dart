@@ -129,127 +129,26 @@ class ProfileScreen extends GetView<UserController> {
 
             /// 이미지 슬라이더
             Positioned(
-              right: 10,
-              left: 10,
-              bottom: 10,
-              child: _options(),
-            ),
-
-            /// 내 닉네임을 보여줌
-            Positioned(
-              top: 240,
-              left: 20,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  controller.myInfo!.nickName!,
-                  style: const TextStyle(
-                    fontSize: 40,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-
-            /// 내 나이를 보여줌
-            Positioned(
-              top: 310,
-              left: 35,
-              child: Row(
+              left: 33,
+              bottom: 44,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // IconButton(
-                  //   onPressed: () {},
-                  //   icon: IconShape.iconPerson,
-                  // ),
-                  IconShape.iconPerson,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      "${controller.myInfo!.age!.toString()}세",
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
+                  _userName(),
+                  _age(),
+                  _height(),
+                  _address(),
                 ],
               ),
             ),
 
-            /// 내 키를 보여줌
-            Positioned(
-              top: 330,
-              left: 35,
-              child: Row(
-                children: [
-                  const Icon(Icons.height, size: 20, color: Colors.white),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      "${controller.myInfo!.height!}cm",
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            /// 내 위치를 나타냄
-            Positioned(
-              top: 350,
-              left: 35,
-              child: Row(
-                children: [
-                  IconShape.iconLocationOn,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      controller.myInfo!.address!,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            Positioned(right: 1, left: 1, bottom: 10, child: _options()),
 
             /// 프로필 편집 버튼
             Positioned(
-              top: 340,
               right: 20,
-              // child: ProfileEditButton(),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ThemeColor.fontColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-                onPressed: () {
-                  Get.to(() => const ProfileEditScreen(),
-                      binding: BindingsBuilder(() {
-                    // ProfileImageController();
-                    Get.put(ProfileEditController(userService: UserFetch()));
-                  }));
-                },
-                child: const Text(
-                  '프로필 편집',
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              bottom: 44,
+              child: _editProfile(),
             ),
           ],
         ),
@@ -403,6 +302,89 @@ class ProfileScreen extends GetView<UserController> {
               ),
             ),
           ],
+        ),
+      );
+
+  Widget _userName() => Text(
+        controller.myInfo!.nickName!,
+        style: const TextStyle(
+          fontSize: 40,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+
+  Widget _age() => Row(
+        children: [
+          IconShape.iconPerson,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              "${controller.myInfo!.age!.toString()}세",
+              style: const TextStyle(
+                fontSize: 13,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      );
+
+  Widget _height() => Row(
+        children: [
+          const Icon(Icons.height, size: 20, color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              "${controller.myInfo!.height!}cm",
+              style: const TextStyle(
+                fontSize: 13,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      );
+
+  Widget _address() => Row(
+        children: [
+          IconShape.iconLocationOn,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              controller.myInfo!.address!,
+              style: const TextStyle(
+                fontSize: 13,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          )
+        ],
+      );
+
+  Widget _editProfile() => ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: ThemeColor.fontColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+        ),
+        onPressed: () {
+          Get.to(() => const ProfileEditScreen(), binding: BindingsBuilder(() {
+            // ProfileImageController();
+            Get.put(ProfileEditController(userService: UserFetch()));
+          }));
+        },
+        child: const Text(
+          '프로필 편집',
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       );
 }
