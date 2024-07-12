@@ -55,7 +55,7 @@ class FirebaseApi {
 
       if (notification != null) {
         print(notification.body);
-        // showNotification(notification);
+        showNotification(notification);
       }
     });
   }
