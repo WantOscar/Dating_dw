@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class Avatar extends StatelessWidget {
+class ImageAvatar extends StatelessWidget {
   final void Function()? onTap;
-  const Avatar({super.key, this.onTap});
+  const ImageAvatar({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
