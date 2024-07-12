@@ -111,8 +111,20 @@ class MainScreen extends GetView<MainController> {
                                   "https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/19/SpoHankook/20230119052512141eivc.jpg",
                             ),
                           ),
-                          Text('카리나'),
-                          Text('20세'),
+                          const Text(
+                            '카리나',
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87),
+                          ),
+                          const Text(
+                            '20세',
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87),
+                          ),
                         ],
                       ),
                     ),
