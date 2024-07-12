@@ -106,24 +106,10 @@ class MainScreen extends GetView<MainController> {
                           GestureDetector(
                             onTap: controller.otherProfile,
                             child: const ImageAvatar(
-                              size: 80,
+                              size: 70,
                               imagePath:
-                                  "https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/19/SpoHankook/20230119052512141eivc.jpg",
+                                  'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzExMjVfMjUz%2FMDAxNzAwODgyNDg4MDcw.IpsQAl23KhWrJBMSA4SuAtL0nJZ-9shOUbUOWndfY9cg.McX4wkpUSAEnZrZLLaI_IO86jg_yA5yP617zCIEORCIg.JPEG.dileedarling%2FIMG_5174.JPG&type=sc960_832',
                             ),
-                          ),
-                          const Text(
-                            '카리나',
-                            style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87),
-                          ),
-                          const Text(
-                            '20세',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87),
                           ),
                         ],
                       ),
