@@ -32,13 +32,7 @@ class MainFavoriteMeScreen extends GetView<MainController> {
                               ],
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Divider(
-                              color: Color.fromARGB(255, 203, 201, 201),
-                              thickness: 0.5,
-                            ),
-                          ),
+                          _divider(),
                         ],
                       ),
                     ),
@@ -122,6 +116,17 @@ class MainFavoriteMeScreen extends GetView<MainController> {
             fontSize: 12,
           ),
         ),
+      ),
+    );
+  }
+
+  /// 목록 나누는 선
+  Widget _divider() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Divider(
+        color: Color.fromARGB(255, 203, 201, 201),
+        thickness: 0.5,
       ),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dating/Widget/main/image_avatar.dart';
 import 'package:dating/controller/main_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
+import 'package:dating/widget/common/image_avatar.dart';
 import 'package:dating/widget/main/today_freinds_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,12 +19,14 @@ class MainScreen extends GetView<MainController> {
           title: '캠밋',
         ),
       ),
-      body: Column(
-        children: [
-          _todayIntroduce(),
-          _likeMeDetail(),
-          _likeMeList(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _todayIntroduce(),
+            _likeMeDetail(),
+            _likeMeList(),
+          ],
+        ),
       ),
     );
   }
@@ -91,23 +93,27 @@ class MainScreen extends GetView<MainController> {
     return Obx(
       () {
         return (controller.myFanMembers.isNotEmpty)
-            ? SizedBox(
-                height: 200,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(
-                        controller.myFanMembers.length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: ImageAvatar(
+            ? SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: List.generate(
+                      controller.myFanMembers.length,
+                      (index) => Column(
+                        children: [
+                          GestureDetector(
                             onTap: controller.otherProfile,
+                            child: const ImageAvatar(
+                              size: 80,
+                              imagePath:
+                                  "https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/19/SpoHankook/20230119052512141eivc.jpg",
+                            ),
                           ),
-                        ),
+                          Text('카리나'),
+                          Text('20세'),
+                        ],
                       ),
                     ),
                   ),
