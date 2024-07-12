@@ -138,6 +138,7 @@ class ProfileScreen extends GetView<UserController> {
                   _age(),
                   _height(),
                   _address(),
+                  _introduce(),
                 ],
               ),
             ),
@@ -362,6 +363,30 @@ class ProfileScreen extends GetView<UserController> {
               ),
             ),
           )
+        ],
+      );
+
+  Widget _introduce() => const Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.0),
+            child: Text(
+              "한줄 소개: ",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Text(
+            "안녕하세요",
+            style: TextStyle(
+              fontSize: 13,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       );
 

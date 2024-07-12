@@ -13,7 +13,8 @@ class ProfileEditController extends GetxController {
   static ProfileEditController get to => Get.find();
   final UserFetch userService;
   final Rx<User?> _user = UserController.to.myInfo.obs;
-  final Rx<List<File?>> _files = Rx<List<File?>>(List.generate(6, (index) => null));
+  final Rx<List<File?>> _files =
+      Rx<List<File?>>(List.generate(6, (index) => null));
   final List<List<int>> _imageIndex = [
     [0, 1, 2],
     [3, 4, 5],
@@ -73,18 +74,22 @@ class ProfileEditController extends GetxController {
   void updateUserInfo() async {
     const Uuid uuid = Uuid();
     final images = [];
+    var imageUrls = [];
     for (var file in _files.value) {
       if (file != null) {
         images.add(dio.MultipartFile.fromFileSync(file.path,
             filename: "${uuid.v1()}.jpeg"));
       }
     }
-    print(images);
-    dio.FormData data = dio.FormData.fromMap({"file": images});
-    print(data.files);
-    final imageUrls = await userService.uploadImage(data);
-    print(imageUrls);
-    if (imageUrls.isNotEmpty && _user.value != null) {
+    if (images.isNotEmpty) {
+      print(images);
+      dio.FormData data = dio.FormData.fromMap({"file": images});
+      print(data.files);
+      imageUrls = await userService.uploadImage(data);
+      print(imageUrls);
+    }
+
+    if (_user.value != null) {
       final User user = User(
           nickName: _user.value!.nickName,
           description: _user.value!.description,
@@ -94,7 +99,7 @@ class ProfileEditController extends GetxController {
           age: _user.value!.age,
           height: _user.value!.height,
           images: imageUrls,
-          image: imageUrls.first);
+          image: imageUrls.firstOrNull);
       print(user.toJson());
       final response = await userService.updateUserInfo(user.toJson());
       print(response);
