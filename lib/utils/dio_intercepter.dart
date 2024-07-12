@@ -77,16 +77,16 @@ class AuthInterceptor extends Interceptor {
       debugPrint("[ERROR OCCURED][Access Token 토큰 만료]");
 
       // 리프레시 토큰 가져오기
-      final token = await tokenProvider.getRefreshToken();
-      print(token);
+      final refreshToken = await tokenProvider.getRefreshToken();
+      print(refreshToken);
       // 액세스 토큰 갱신
       try {
-        final authorization = await refreshToken(token);
-
         /// 성공하면 새롭게 요청을 수행함
         /// 실패하면 로그아웃됨
-        err.requestOptions.headers["accessToken"] =
-            await tokenProvider.getAccessToken();
+        ///
+        await issueNewAccessToken(refreshToken);
+        final newAccessToken = await tokenProvider.getAccessToken();
+        err.requestOptions.headers["Authorization"] = newAccessToken;
         handler.resolve(await dio.fetch(err.requestOptions));
       } on DioException {
         tokenProvider.deleteTokenInfo();
@@ -99,14 +99,12 @@ class AuthInterceptor extends Interceptor {
   /// 사용자의 리프레시 토큰이 만료된 경우
   /// 강제로 로그아웃됨.
   /// 리프레시 토큰이 유효한 경우 새 엑세스 토큰을 발급 후 저장.
-  Future<bool> refreshToken(String refreshToken) async {
+  Future<void> issueNewAccessToken(String refreshToken) async {
     final response = await dio.post("/refresh",
         options: Options(headers: {"refreshToken": "Bearer $refreshToken"}));
     if (response.statusCode == 200) {
       await tokenProvider.saveAccessToken(response.data["accessToken"]);
-      return true;
     }
-    return false;
   }
 }
 
