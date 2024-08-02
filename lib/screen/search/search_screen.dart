@@ -1,12 +1,8 @@
 import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
-import 'package:dating/data/model/feed.dart';
-import 'package:dating/screen/profile/someone_profile_screen.dart';
-import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class SearchScreen extends GetView<FeedController> {

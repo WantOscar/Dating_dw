@@ -32,37 +32,33 @@ class MainScreen extends GetView<MainController> {
   /// 24시간 간격이며 인원 10명 제한으로,
   /// 랜덤 이성을 소개해줌
   Widget _todayIntroduce() {
-    return GetX<UserController>(
-      builder: (controller) {
-        return (controller.users != null)
-            ? CarouselSlider.builder(
-                itemCount: controller.users!.length,
-                itemBuilder: (context, index, realIndex) {
-                  final user = controller.users![index];
-                  return TodayFriendsProfile(
-                    user: user,
-                  );
-                },
-                options: CarouselOptions(
-                    enlargeCenterPage: true,
-                    aspectRatio: 1,
-                    autoPlay: true,
-                    viewportFraction: 0.8),
-              )
-            : const SizedBox(
-                height: 300,
-                child: Center(
-                  child: Text(
-                    "아직 사용자 없습니다 !",
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
+    return (controller.recommendMembers.isNotEmpty)
+        ? CarouselSlider.builder(
+            itemCount: controller.recommendMembers.length,
+            itemBuilder: (context, index, realIndex) {
+              final user = controller.recommendMembers[index];
+              return TodayFriendsProfile(
+                user: user,
               );
-      },
-    );
+            },
+            options: CarouselOptions(
+                enlargeCenterPage: true,
+                aspectRatio: 1,
+                autoPlay: true,
+                viewportFraction: 0.8),
+          )
+        : const SizedBox(
+            height: 300,
+            child: Center(
+              child: Text(
+                "아직 사용자 없습니다 !",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
+          );
   }
 
   /// 나한테 관심있는 상대 텍스트, 나한테 관심있는 상대방 목록 세부 페이지
@@ -99,16 +95,18 @@ class MainScreen extends GetView<MainController> {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(
-                        controller.myFanMembers.length,
-                        (index) => Padding(
+                      children: List.generate(controller.myFanMembers.length,
+                          (index) {
+                        final user = controller.myFanMembers[index];
+                        return Padding(
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 10),
                           child: Avatar(
+                            user: user,
                             onTap: controller.otherProfile,
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                     ),
                   ),
                 ),

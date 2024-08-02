@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/data/model/user.dart';
 import 'package:flutter/material.dart';
 
 class Avatar extends StatelessWidget {
   final void Function()? onTap;
-  const Avatar({super.key, this.onTap});
+  final User user;
+  const Avatar({super.key, this.onTap, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +30,8 @@ class Avatar extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(60),
-              child: Image.network(
-                'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/19/SpoHankook/20230119052512141eivc.jpg',
+              child: CachedNetworkImage(
+                imageUrl: user.image!,
                 fit: BoxFit.cover,
               ),
             ),
@@ -37,13 +40,13 @@ class Avatar extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        const Text(
-          '카리나',
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+        Text(
+          user.nickName!,
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
         ),
-        const Text(
-          '20세',
-          style: TextStyle(
+        Text(
+          '${user.age}세',
+          style: const TextStyle(
               fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey),
         )
       ],
