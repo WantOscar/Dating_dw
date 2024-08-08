@@ -87,18 +87,18 @@ class SettingPasswordController extends GetxController {
 
   void completeChangePw() async {
     final data = {
-      "currentPassword": _currentPw,
-      "newPassword": _newPw,
-      "checkNewPassword": _checkNewPw,
+      "currentPassword": _currentPw.value,
+      "newPassword": _newPw.value,
+      "checkNewPassword": _checkNewPw.value,
     };
     try {
       final result = await settingPasswordService.postSettingPassword(data);
       Get.snackbar("성공", result, snackPosition: SnackPosition.BOTTOM);
       Get.off(() => const ProfileScreen());
     } catch (e) {
+      print('Error: $e');
       Get.snackbar('오류', "비밀번호 변경을 실패했습니다.",
           snackPosition: SnackPosition.BOTTOM);
     }
-    Get.off(() => const ProfileScreen());
   }
 }

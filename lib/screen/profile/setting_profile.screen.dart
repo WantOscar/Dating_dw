@@ -26,18 +26,9 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: CammitAppBar(
+        child: const CammitAppBar(
           title: "계정 설정",
           showCloseButton: true,
-          actions: [
-            GestureDetector(
-                onTap: () {},
-                child: const Icon(
-                  Icons.more_horiz,
-                  color: Colors.black,
-                  size: 30,
-                ))
-          ],
         ),
       ),
       body: Column(

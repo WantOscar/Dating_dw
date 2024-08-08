@@ -120,38 +120,37 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   /// 프로필 사진을 최소 3장 ~ 최대 6장 선택하여 적용시킴(수정 가능)
   Widget _uploadMyProfile() {
     return Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            controller.imageIndex.length,
-            (index) => Row(
-              children: List.generate(
-                controller.imageIndex[index].length,
-                (jndex) => Expanded(
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.to(() => const UploadScreen(),
-                              binding: BindingsBuilder(() {
-                            Get.put(ProfileImageController());
-                          }));
-                        },
-                        child: Container(
-                          color: Colors.grey,
-                          child: (controller.files[controller.imageIndex[index]
-                                      [jndex]] !=
-                                  null)
-                              ? Image.file(
-                                  controller.files[controller.imageIndex[index]
-                                      [jndex]]!,
-                                  fit: BoxFit.cover,
-                                )
-                              : IconShape.iconNoImage,
-                        ),
+      padding: const EdgeInsets.all(2.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          controller.imageIndex.length,
+          (index) => Row(
+            children: List.generate(
+              controller.imageIndex[index].length,
+              (jndex) => Expanded(
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const UploadScreen(),
+                            binding: BindingsBuilder(() {
+                          Get.put(ProfileImageController());
+                        }));
+                      },
+                      child: Container(
+                        color: Colors.grey,
+                        child: (controller.files[controller.imageIndex[index]
+                                    [jndex]] !=
+                                null)
+                            ? Image.file(
+                                controller.files[controller.imageIndex[index]
+                                    [jndex]]!,
+                                fit: BoxFit.cover,
+                              )
+                            : IconShape.iconNoImage,
                       ),
                     ),
                   ),
@@ -159,7 +158,9 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   /// 회원정보에서 입력한 닉네임을 보여줌(수정 불가)
