@@ -16,10 +16,7 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
         appBar: const IconHeader(text: '비밀번호 변경'),
         body: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _currentPwTxt(),
               _currentPW(),
               const SizedBox(height: 10),
               _newPwTxt(),
@@ -50,35 +47,38 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
     );
   }
 
-  /// 현재 비밀번호 입력을 보여주는 text
-  Widget _currentPwTxt() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Text(
-        '현재 비밀번호 입력',
-        style: TextStyle(
-          fontSize: 15,
-          color: Colors.black87,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
   /// 현재 비밀번호를 입력하는 textfield
   Widget _currentPW() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: PropertyTextField(
-        controller: controller.currentPassword,
-        label: "현재 비밀번호",
-        sufficIcon: IconButton(
-          onPressed: controller.toggleTextVisibility,
-          icon: Icon(controller.isTextVisible
-              ? Icons.visibility
-              : Icons.visibility_off),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          child: Text(
+            '현재 비밀번호 입력',
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black87,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          child: PropertyTextField(
+            controller: controller.currentPassword,
+            onChanged: controller.setCurrentPw,
+            label: "현재 비밀번호",
+            sufficIcon: IconButton(
+              onPressed: controller.toggleTextVisibility,
+              icon: Icon(controller.isTextVisible
+                  ? Icons.visibility
+                  : Icons.visibility_off),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

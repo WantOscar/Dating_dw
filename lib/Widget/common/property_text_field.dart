@@ -6,8 +6,13 @@ class PropertyTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? label;
   final Widget? sufficIcon;
+  final void Function(String)? onChanged;
   const PropertyTextField(
-      {super.key, this.controller, this.label, this.sufficIcon});
+      {super.key,
+      this.controller,
+      this.label,
+      this.sufficIcon,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +23,7 @@ class PropertyTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
         child: TextField(
           controller: controller,
+          onChanged: onChanged,
           cursorColor: Colors.black87,
           decoration: InputDecoration(
             hintText: label,
