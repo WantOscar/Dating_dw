@@ -91,6 +91,8 @@ class AuthInterceptor extends Interceptor {
         tokenProvider.deleteTokenInfo();
         g.Get.off(() => const LoginScreen());
       }
+    } else {
+      handler.next(err);
     }
   }
 

@@ -32,7 +32,7 @@ class AlarmScreen extends StatelessWidget {
                         height: 60,
                         child: GestureDetector(
                           onTap: () {
-                            Get.to(() => const SomeoneProfileScreen());
+                            // Get.to(() => const SomeoneProfileScreen());
                           },
                           child: const CircleAvatar(),
                         ),

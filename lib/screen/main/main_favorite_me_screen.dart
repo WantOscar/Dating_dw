@@ -62,7 +62,7 @@ class MainFavoriteMeScreen extends GetView<MainController> {
   /// 나에게 관심표현을 한 상대 프로필 사진을 보여줌
   Widget _miniProfile() {
     return GestureDetector(
-      onTap: controller.otherProfile,
+      // onTap: () => controller.otherProfile(),
       child: Container(
         width: Get.size.width * 0.13,
         height: Get.size.width * 0.13,

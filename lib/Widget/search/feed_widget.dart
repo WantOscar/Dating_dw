@@ -102,7 +102,7 @@ class FeedWidget extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => const SomeoneProfileScreen());
+                // Get.to(() => const SomeoneProfileScreen());
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),

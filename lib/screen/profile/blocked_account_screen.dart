@@ -31,7 +31,7 @@ class BlockedAccountScreen extends StatelessWidget {
                         ),
                         child: GestureDetector(
                           onTap: () {
-                            Get.to(() => const SomeoneProfileScreen());
+                            // Get.to(() => const SomeoneProfileScreen(user: ,));
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
