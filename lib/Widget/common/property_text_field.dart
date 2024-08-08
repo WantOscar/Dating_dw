@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 class PropertyTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? label;
-  const PropertyTextField({super.key, this.controller, this.label});
+  final Widget? sufficIcon;
+  const PropertyTextField(
+      {super.key, this.controller, this.label, this.sufficIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,13 @@ class PropertyTextField extends StatelessWidget {
           controller: controller,
           cursorColor: Colors.black87,
           decoration: InputDecoration(
-              hintText: label,
-              hintStyle:
-                  const TextStyle(fontSize: 15, color: Color(0xffafafaf)),
-              border: InputBorder.none,
-              fillColor: const Color(0xffefefef),
-              filled: true),
+            hintText: label,
+            hintStyle: const TextStyle(fontSize: 15, color: Color(0xffafafaf)),
+            border: InputBorder.none,
+            fillColor: const Color(0xffefefef),
+            filled: true,
+            suffixIcon: sufficIcon,
+          ),
         ),
       ),
     );
