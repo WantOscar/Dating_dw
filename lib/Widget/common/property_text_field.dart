@@ -6,15 +6,16 @@ class PropertyTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? label;
   final Widget? sufficIcon;
-  final bool obscureText;
+  // final bool obscureText;
   final void Function(String)? onChanged;
-  const PropertyTextField(
-      {super.key,
-      this.controller,
-      this.label,
-      this.sufficIcon,
-      this.onChanged,
-      required this.obscureText});
+  const PropertyTextField({
+    super.key,
+    this.controller,
+    this.label,
+    this.sufficIcon,
+    this.onChanged,
+    // required this.obscureText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class PropertyTextField extends StatelessWidget {
         child: TextField(
           controller: controller,
           onChanged: onChanged,
-          obscureText: obscureText,
+          // obscureText: obscureText,
           cursorColor: Colors.black87,
           decoration: InputDecoration(
             hintText: label,

@@ -62,7 +62,7 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           child: PropertyTextField(
-            obscureText: !controller.isTextVisible,
+            // obscureText: !controller.isTextVisible,
             controller: controller.currentPassword,
             onChanged: controller.setCurrentPw,
             label: "현재 비밀번호",
@@ -99,7 +99,7 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           child: PropertyTextField(
-            obscureText: !controller.isTextVisible,
+            // obscureText: !controller.isTextVisible,
             controller: controller.newPassword,
             onChanged: controller.setNewPw,
             label: "현재 비밀번호",
@@ -136,7 +136,7 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           child: PropertyTextField(
-            obscureText: !controller.isTextVisible,
+            // obscureText: !controller.isTextVisible,
             controller: controller.checkNewPassword,
             onChanged: controller.setCheckNewPw,
             label: "현재 비밀번호",
