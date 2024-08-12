@@ -11,6 +11,7 @@ class BaseIntercepter extends Interceptor with ToastMessage {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final errorMessage = err.response?.data;
+    debugPrint("[ERROR OCCURED][${err.response?.statusCode}]");
     debugPrint("[ERROR OCCURED][${err.type}][${err.requestOptions.uri}]");
     debugPrint("[ERROR OCCURED][$errorMessage]");
     // showToast("${errorMessage["errorMessage"]}");

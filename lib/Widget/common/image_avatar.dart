@@ -8,22 +8,21 @@ class ImageAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (imagePath != null) {
-      return SizedBox(
-        width: size,
-        height: size,
-        child: CircleAvatar(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: CachedNetworkImage(
-              imageUrl: imagePath!,
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
-      );
-    } else {
-      return const SizedBox(width: 25, height: 25, child: CircleAvatar());
-    }
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: (imagePath != null)
+          ? ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: CachedNetworkImage(
+                imageUrl: imagePath!,
+                fit: BoxFit.cover,
+              ),
+            )
+          : null,
+    );
   }
 }

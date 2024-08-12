@@ -120,38 +120,37 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   /// 프로필 사진을 최소 3장 ~ 최대 6장 선택하여 적용시킴(수정 가능)
   Widget _uploadMyProfile() {
     return Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            controller.imageIndex.length,
-            (index) => Row(
-              children: List.generate(
-                controller.imageIndex[index].length,
-                (jndex) => Expanded(
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Get.to(() => const UploadScreen(),
-                              binding: BindingsBuilder(() {
-                            Get.put(ProfileImageController());
-                          }));
-                        },
-                        child: Container(
-                          color: Colors.grey,
-                          child: (controller.files[controller.imageIndex[index]
-                                      [jndex]] !=
-                                  null)
-                              ? Image.file(
-                                  controller.files[controller.imageIndex[index]
-                                      [jndex]]!,
-                                  fit: BoxFit.cover,
-                                )
-                              : IconShape.iconNoImage,
-                        ),
+      padding: const EdgeInsets.all(2.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          controller.imageIndex.length,
+          (index) => Row(
+            children: List.generate(
+              controller.imageIndex[index].length,
+              (jndex) => Expanded(
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.all(1.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => const UploadScreen(),
+                            binding: BindingsBuilder(() {
+                          Get.put(ProfileImageController());
+                        }));
+                      },
+                      child: Container(
+                        color: Colors.grey,
+                        child: (controller.files[controller.imageIndex[index]
+                                    [jndex]] !=
+                                null)
+                            ? Image.file(
+                                controller.files[controller.imageIndex[index]
+                                    [jndex]]!,
+                                fit: BoxFit.cover,
+                              )
+                            : IconShape.iconNoImage,
                       ),
                     ),
                   ),
@@ -159,7 +158,9 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   /// 회원정보에서 입력한 닉네임을 보여줌(수정 불가)
@@ -203,7 +204,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
             height: 40,
             width: 280,
             decoration: BoxDecoration(
-              color: ThemeColor.inputColor,
+              color: ThemeColor.textfieldFill,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
@@ -215,11 +216,16 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                     decorationThickness: 0,
                     fontSize: 14,
                     color: Colors.black87,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w400,
                   ),
                   decoration: InputDecoration(
                     counterText: "",
                     hintText: controller.user!.description ?? "한줄 소개를 입력해주세요.",
+                    hintStyle: TextStyle(
+                      fontSize: 14,
+                      color: ThemeColor.textfieldText,
+                      fontWeight: FontWeight.w400,
+                    ),
                     border: InputBorder.none,
                     isDense: true,
                   ),
@@ -274,7 +280,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               height: 40,
               width: 280,
               decoration: BoxDecoration(
-                color: ThemeColor.inputColor,
+                color: ThemeColor.textfieldFill,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Padding(
@@ -286,8 +292,11 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                       child: Text(
                         controller.user!.address!,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontSize: 14, color: Colors.black87),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: ThemeColor.textfieldText,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     const Icon(Icons.search),
@@ -347,7 +356,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                 children: [
                   Text(
                     '${controller.user!.height!} cm',
-                    style: TextStyle(fontSize: 14, color: ThemeColor.fontColor),
+                    style: const TextStyle(fontSize: 14, color: Colors.black87),
                   ),
                 ],
               ),

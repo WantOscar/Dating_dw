@@ -1,7 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/main/circle_avatar.dart';
 import 'package:dating/controller/main_controller.dart';
-import 'package:dating/controller/user_controller.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/main/today_freinds_profile.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +18,14 @@ class MainScreen extends GetView<MainController> {
           title: '캠밋',
         ),
       ),
-      body: Column(
-        children: [
-          _todayIntroduce(),
-          _likeMeDetail(),
-          _likeMeList(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            _todayIntroduce(),
+            _likeMeDetail(),
+            _likeMeList(),
+          ],
+        ),
       ),
     );
   }
@@ -116,16 +117,16 @@ class MainScreen extends GetView<MainController> {
                 child: Text(
                   '나에게 관심있는 사람이 아직 없습니다.',
                   style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w600),
+                    fontSize: 15,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               );
       },
     );
   }
 
-  //
   //           /// 내가 관심있는 상대 텍스트, 관심있는 상대방 목록 세부 페이지
   //           Padding(
   //             padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -1,4 +1,7 @@
 import 'package:dating/controller/setting_controller.dart';
+import 'package:dating/controller/setting_password_controller.dart';
+import 'package:dating/data/repository/setting_password.repository.dart';
+import 'package:dating/data/service/setting_password_service.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -23,18 +26,9 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: CammitAppBar(
+        child: const CammitAppBar(
           title: "계정 설정",
           showCloseButton: true,
-          actions: [
-            GestureDetector(
-                onTap: () {},
-                child: const Icon(
-                  Icons.more_horiz,
-                  color: Colors.black,
-                  size: 30,
-                ))
-          ],
         ),
       ),
       body: Column(
@@ -64,7 +58,13 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
           ),
           IconButton(
             onPressed: () {
-              Get.to(() => const AccountInformationScreen());
+              Get.to(() => const AccountInformationScreen(),
+                  binding: BindingsBuilder(() {
+                Get.put(SettingPasswordController(
+                    settingPasswordService: SettingPasswordService(
+                        settingPasswordRepository:
+                            SettingPasswordRepository())));
+              }));
             },
             icon: IconShape.iconArrowForward,
           ),

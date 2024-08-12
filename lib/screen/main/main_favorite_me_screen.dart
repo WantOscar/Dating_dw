@@ -1,6 +1,7 @@
 import 'package:dating/Widget/common/icon_header.dart';
 import 'package:dating/controller/main_controller.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dating/widget/common/image_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,19 +27,12 @@ class MainFavoriteMeScreen extends GetView<MainController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 _miniProfile(),
-                                const SizedBox(width: 10),
                                 _otherInformation(),
                                 _sendChatRequest(),
                               ],
                             ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Divider(
-                              color: Color.fromARGB(255, 203, 201, 201),
-                              thickness: 0.5,
-                            ),
-                          ),
+                          _divider(),
                         ],
                       ),
                     ),
@@ -122,6 +116,17 @@ class MainFavoriteMeScreen extends GetView<MainController> {
             fontSize: 12,
           ),
         ),
+      ),
+    );
+  }
+
+  /// 목록 나누는 선
+  Widget _divider() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.0),
+      child: Divider(
+        color: Color.fromARGB(255, 203, 201, 201),
+        thickness: 0.5,
       ),
     );
   }

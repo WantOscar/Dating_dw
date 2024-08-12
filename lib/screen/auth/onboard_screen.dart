@@ -149,6 +149,7 @@ class OnboardScreen extends GetView<OnboardingController> {
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: PropertyTextField(
+                  // obscureText: true,
                   controller: controller.nickName,
                   label: "닉네임",
                 )),
@@ -432,6 +433,7 @@ class OnboardScreen extends GetView<OnboardingController> {
             Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: PropertyTextField(
+                  // obscureText: true,
                   controller: controller.description,
                   label: "한줄소개",
                 )),

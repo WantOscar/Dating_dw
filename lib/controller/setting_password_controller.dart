@@ -96,6 +96,7 @@ class SettingPasswordController extends GetxController {
       Get.snackbar("성공", result, snackPosition: SnackPosition.BOTTOM);
       Get.off(() => const ProfileScreen());
     } catch (e) {
+      print('Error: $e');
       Get.snackbar('오류', "비밀번호 변경을 실패했습니다.",
           snackPosition: SnackPosition.BOTTOM);
     }
