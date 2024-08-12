@@ -37,7 +37,7 @@ class UserFetch {
 
       if (response.statusCode == 201) {
         print(response.data);
-        return response.data["imageList"];
+        return List<String>.from(response.data["imageList"]);
       } else {
         return [];
       }
