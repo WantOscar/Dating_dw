@@ -93,7 +93,7 @@ class AuthService implements AuthServiceImpl {
   /// 그 이메일을 통해 인증 번호를 전송해줌
   @override
   Future<String?> emailVerify(Map<String, dynamic> email) async {
-    final response = await dio.post(ApiUrl.emailVerify, queryParameters: email);
+    final response = await dio.post(ApiUrl.emailVerify, data: email);
     if (response.statusCode == 200) {
       return response.data["code"];
     } else {
