@@ -74,7 +74,7 @@ class ProfileEditController extends GetxController {
   void updateUserInfo() async {
     const Uuid uuid = Uuid();
     final images = [];
-    var imageUrls = [];
+    List<String> imageUrls = [];
     for (var file in _files.value) {
       if (file != null) {
         images.add(dio.MultipartFile.fromFileSync(file.path,

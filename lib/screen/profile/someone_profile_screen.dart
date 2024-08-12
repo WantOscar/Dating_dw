@@ -19,15 +19,6 @@ class SomeoneProfileScreen extends StatefulWidget {
 }
 
 class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
-  final List<String> images = [
-    'https://imgnews.pstatic.net/image/015/2023/09/05/0004887746_001_20230905124105171.jpg?type=w647',
-    'https://image.xportsnews.com/contents/images/upload/article/2022/1224/1671876788340459.jpg',
-    'https://imgnews.pstatic.net/image/241/2023/02/16/0003257608_001_20230216112903475.jpg?type=w647',
-    'https://postfiles.pstatic.net/MjAyMzAzMzFfNDkg/MDAxNjgwMjY4Nzg4NTE1.bpksu-ULqGXjw9D2wTa-SAtgsPbg6WV_nu7KptNtvgUg.fY9dUrFyNlcy7N806tcLeWp8WyAFHcTzds-BbqSWnYkg.JPEG.namah2016/Screenshot%EF%BC%BF20230331%EF%BC%8D221139%EF%BC%BFChrome.jpg?type=w966',
-    'https://postfiles.pstatic.net/MjAyMzAzMzFfMTYz/MDAxNjgwMjY4Nzg2MDAy.Nm2AJDl7njNc8pgfFidJm9LkPma5YDVPvgsBmTM0uXcg.mcFue_6OBYLdyolGB_XqKGFFNKJGLmXz4dTgsVuml4Yg.JPEG.namah2016/Screenshot%EF%BC%BF20230331%EF%BC%8D220812%EF%BC%BFChrome.jpg?type=w966',
-    'https://www.sportsq.co.kr/news/photo/202211/446549_491017_2625.jpg',
-  ];
-
   int _current = 0;
 
   @override
@@ -57,7 +48,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
           children: [
             /// 상대방의 프로필 이미지를 보여주는 슬라이더 위젯
             CarouselSlider.builder(
-              itemCount: images.length,
+              itemCount: widget.user.images?.length,
               itemBuilder: (context, index, realIndex) {
                 return AspectRatio(
                   aspectRatio: 1.1,
@@ -65,7 +56,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                     color: Colors.black,
                     child: ClipRRect(
                       child: CachedNetworkImage(
-                        imageUrl: images[index],
+                        imageUrl: widget.user.images![index],
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -92,11 +83,11 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  (images.length == 1)
+                  (widget.user.images?.length == 1)
                       ? Container()
                       : AnimatedSmoothIndicator(
                           activeIndex: _current,
-                          count: images.length,
+                          count: widget.user.images!.length,
                           effect: ScrollingDotsEffect(
                             dotColor: Colors.grey,
                             activeDotColor: ThemeColor.fontColor,

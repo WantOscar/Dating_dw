@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/main/circle_avatar.dart';
 import 'package:dating/controller/main_controller.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/main/today_freinds_profile.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +43,13 @@ class MainScreen extends GetView<MainController> {
             itemCount: controller.recommendMembers.length,
             itemBuilder: (context, index, realIndex) {
               final user = controller.recommendMembers[index];
-              return TodayFriendsProfile(
-                user: user,
+              return GestureDetector(
+                onTap: () {
+                  Get.to(() => SomeoneProfileScreen(user: user));
+                },
+                child: TodayFriendsProfile(
+                  user: user,
+                ),
               );
             },
             options: CarouselOptions(

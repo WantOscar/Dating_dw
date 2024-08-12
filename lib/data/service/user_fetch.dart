@@ -13,7 +13,6 @@ class UserFetch {
     ..interceptors.add(AuthInterceptor())
     ..interceptors.add(BaseIntercepter());
 
-
   Future<User?> searchMyInfo() async {
     try {
       final response = await dio.get(
@@ -29,7 +28,7 @@ class UserFetch {
     return null;
   }
 
-  Future<List> uploadImage(FormData data) async {
+  Future<List<String>> uploadImage(FormData data) async {
     try {
       final response =
           await dio.post("/images/s3-upload", data: data, queryParameters: {
