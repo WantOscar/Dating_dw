@@ -36,7 +36,7 @@ class ResisterController extends GetxController {
     final response = await service.emailVerify(data);
     if (response != null) {
       code = response;
-      Get.to(() => const VerifyScreen(), binding: BindingsBuilder(() {
+      Get.to(() => const CodeInputScreen(), binding: BindingsBuilder(() {
         Get.put(EmailVerifyController(service: service, authCode: code));
       }));
     }

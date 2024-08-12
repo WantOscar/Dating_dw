@@ -14,40 +14,40 @@ class ResisterScreen extends GetView<ResisterController> {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: ThemeColor.fontColor,
-              ),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: ThemeColor.fontColor,
             ),
-            backgroundColor: Colors.white,
-            elevation: 0,
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _header(),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      _passwordInput(),
-                    ],
-                  ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _header(),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    _passwordInput(),
+                  ],
                 ),
-                _signUpButton(),
-              ],
-            ),
+              ),
+              _signUpButton(),
+            ],
           ),
+        ),
       ),
     );
   }
@@ -127,20 +127,25 @@ class ResisterScreen extends GetView<ResisterController> {
         ],
       );
 
-  Widget _signUpButton() => Obx(
-        () => SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BottomButton(onTap: () {
-                (controller.loading == Status.loading) ? null : controller.signUp();
-              }, child: (controller.loading == Status.loading)?  const Center(child: CircularProgressIndicator(
-                
-              ),) : const Text(
-                "회원가입",
-                style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600),),)
-            ))
-      );
+  Widget _signUpButton() => Obx(() => SafeArea(
+      child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BottomButton(
+            onTap: () {
+              (controller.loading == Status.loading)
+                  ? null
+                  : controller.signUp();
+            },
+            child: (controller.loading == Status.loading)
+                ? const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : const Text(
+                    "회원가입",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  ),
+          ))));
 }
