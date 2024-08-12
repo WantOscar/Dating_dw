@@ -23,35 +23,35 @@ class SearchScreen extends GetView<FeedController> {
           ],
         ),
       ),
-      body: Obx(
-        () {
-          if (controller.feeds.isEmpty) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 70),
-                child: Column(
-                  /// 글 목록 10개 지정
-                  children: List.generate(
-                    controller.feeds.length,
-                    (index) {
-                      final feed = controller.feeds[index];
-
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: FeedWidget(feed: feed),
-                      );
-                    },
-                  ),
-                ),
-              ),
-            );
-          }
-        },
-      ),
+      body: Obx(() => (controller.isLoading) ? _loading() : _body()),
     );
   }
+
+  Widget _loading() => const Center(
+        child: CircularProgressIndicator(),
+      );
+
+  Widget _body() => (controller.feeds.isEmpty)
+      ? const Center(
+          child: Text("아직 피드가 없습니다."),
+        )
+      : SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 70),
+            child: Column(
+              /// 글 목록 10개 지정
+              children: List.generate(
+                controller.feeds.length,
+                (index) {
+                  final feed = controller.feeds[index];
+
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: FeedWidget(feed: feed),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
 }
