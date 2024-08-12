@@ -7,10 +7,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController with UseToast {
+  final RxBool _isLoading = false.obs;
   final HomeService homeService;
   final Rx<List<User>> _recommendMembers = Rx<List<User>>([]);
   final Rx<List<User>> _myFavoriteMembers = Rx<List<User>>([]);
   final Rx<List<User>> _myFanMembers = Rx<List<User>>([]);
+
+  bool get isLoading => _isLoading.value;
 
   List<User> get recommendMembers => _recommendMembers.value;
   List<User> get myFavoriteMember => _myFavoriteMembers.value;
