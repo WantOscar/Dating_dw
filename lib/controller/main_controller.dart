@@ -40,9 +40,9 @@ class MainController extends GetxController with UseToast {
   }
 
   void otherProfile(User user) {
-    Get.to(() => SomeoneProfileScreen(
-          user: user,
-        ));
+    Get.to(
+      () => SomeoneProfileScreen(user: user),
+    );
   }
 
   void requestChatAlarm() {
