@@ -204,7 +204,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
             height: 40,
             width: 280,
             decoration: BoxDecoration(
-              color: ThemeColor.inputColor,
+              color: ThemeColor.textfieldFill,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
@@ -216,11 +216,16 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                     decorationThickness: 0,
                     fontSize: 14,
                     color: Colors.black87,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w400,
                   ),
                   decoration: InputDecoration(
                     counterText: "",
                     hintText: controller.user!.description ?? "한줄 소개를 입력해주세요.",
+                    hintStyle: TextStyle(
+                      fontSize: 14,
+                      color: ThemeColor.textfieldText,
+                      fontWeight: FontWeight.w400,
+                    ),
                     border: InputBorder.none,
                     isDense: true,
                   ),
@@ -275,7 +280,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               height: 40,
               width: 280,
               decoration: BoxDecoration(
-                color: ThemeColor.inputColor,
+                color: ThemeColor.textfieldFill,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Padding(
@@ -287,8 +292,11 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                       child: Text(
                         controller.user!.address!,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                            fontSize: 14, color: Colors.black87),
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: ThemeColor.textfieldText,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     const Icon(Icons.search),
@@ -348,7 +356,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                 children: [
                   Text(
                     '${controller.user!.height!} cm',
-                    style: TextStyle(fontSize: 14, color: ThemeColor.fontColor),
+                    style: const TextStyle(fontSize: 14, color: Colors.black87),
                   ),
                 ],
               ),

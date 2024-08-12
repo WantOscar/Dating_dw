@@ -6,10 +6,15 @@ class IconShape {
   /// 사람 아이콘
   static const iconPerson = Icon(Icons.person, size: 20, color: Colors.white);
 
+  /// 사용자의 한 줄 소개를 보여주는
+  /// 메시지 아이콘
+  static const iconMessasge =
+      Icon(Icons.message, size: 17, color: Colors.white);
+
   /// 사용자의 거주지 or 현재 위치 앞에 보여주는
   /// 위치 아이콘
   static const iconLocationOn =
-      Icon(Icons.location_on, size: 20, color: Colors.white);
+      Icon(Icons.location_on, size: 18, color: Colors.white);
 
   /// 설정 아이콘
   static Icon get iconSettings =>

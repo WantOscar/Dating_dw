@@ -27,17 +27,18 @@ class ProfileScreen extends GetView<UserController> {
             title: "프로필",
             actions: [
               GestureDetector(
-                  onTap: () {
-                    Get.to(() => const SettingAccountScreen(),
-                        binding: BindingsBuilder(() {
-                      Get.put(SettingController());
-                    }));
-                  },
-                  child: Icon(
-                    Icons.settings,
-                    color: ThemeColor.fontColor,
-                    size: 30,
-                  ))
+                onTap: () {
+                  Get.to(() => const SettingAccountScreen(),
+                      binding: BindingsBuilder(() {
+                    Get.put(SettingController());
+                  }));
+                },
+                child: Icon(
+                  Icons.settings,
+                  color: ThemeColor.fontColor,
+                  size: 30,
+                ),
+              ),
             ],
           ),
         ),
@@ -62,7 +63,7 @@ class ProfileScreen extends GetView<UserController> {
     return GetX<UserController>(builder: (controller) {
       return (controller.myInfo?.images == [])
           ? CarouselSlider.builder(
-              itemCount: 6,
+              itemCount: controller.myInfo?.images?.length ?? 0,
               itemBuilder: (context, index, realIndex) {
                 return AspectRatio(
                     aspectRatio: 1.1,
@@ -127,16 +128,15 @@ class ProfileScreen extends GetView<UserController> {
             /// 내 프로필 사진들
             _profileImages(),
 
-            /// 이미지 슬라이더
+            /// 본인 인적사항 정보
             Positioned(
               left: 33,
-              bottom: 44,
+              bottom: 50,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _userName(),
-                  _age(),
-                  _height(),
+                  _ageAndHeight(),
                   _address(),
                   _introduce(),
                 ],
@@ -315,34 +315,27 @@ class ProfileScreen extends GetView<UserController> {
         ),
       );
 
-  Widget _age() => Row(
+  Widget _ageAndHeight() => Row(
         children: [
-          IconShape.iconPerson,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 6.0),
             child: Text(
               "${controller.myInfo!.age!.toString()}세",
               style: const TextStyle(
-                fontSize: 13,
+                fontSize: 15,
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),
-        ],
-      );
-
-  Widget _height() => Row(
-        children: [
-          const Icon(Icons.height, size: 20, color: Colors.white),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 6.0),
             child: Text(
               "${controller.myInfo!.height!}cm",
               style: const TextStyle(
-                fontSize: 13,
+                fontSize: 15,
                 color: Colors.white,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),
@@ -351,40 +344,35 @@ class ProfileScreen extends GetView<UserController> {
 
   Widget _address() => Row(
         children: [
-          IconShape.iconLocationOn,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              controller.myInfo!.address!,
-              style: const TextStyle(
-                fontSize: 13,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6.0),
+            child: IconShape.iconLocationOn,
+          ),
+          Text(
+            controller.myInfo!.address!,
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
             ),
           )
         ],
       );
 
-  Widget _introduce() => const Row(
+  Widget _introduce() => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.0),
-            child: Text(
-              "한줄 소개: ",
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: IconShape.iconMessasge,
           ),
           Text(
-            "안녕하세요",
-            style: TextStyle(
-              fontSize: 13,
+            controller.myInfo!.description!,
+            style: const TextStyle(
+              fontSize: 15,
               color: Colors.white,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ],
