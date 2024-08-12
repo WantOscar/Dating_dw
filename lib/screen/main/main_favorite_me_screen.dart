@@ -1,7 +1,6 @@
 import 'package:dating/Widget/common/icon_header.dart';
 import 'package:dating/controller/main_controller.dart';
 import 'package:dating/style/icon_shape.dart';
-import 'package:dating/widget/common/image_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

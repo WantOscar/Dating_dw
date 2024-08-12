@@ -46,21 +46,41 @@ class TodayFriendsProfile extends StatelessWidget {
         ),
       );
 
-  Widget _userName() => Text(
-        user.nickName!,
-        style: const TextStyle(
-            fontSize: 35, fontWeight: FontWeight.bold, color: Colors.white),
-      );
-
-  Widget _address() => Row(
+  Widget _userName() => Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          const Icon(Icons.location_on, color: Colors.white, size: 20),
           Text(
-            user.address!,
+            user.nickName!,
             style: const TextStyle(
-                fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                fontSize: 35, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 6.0),
+            child: Text(
+              user.age.toString(),
+              style: const TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
           ),
         ],
+      );
+
+  Widget _address() => Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: Row(
+          children: [
+            const Icon(Icons.location_on, color: Colors.white, size: 20),
+            Text(
+              user.address!,
+              style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            ),
+          ],
+        ),
       );
 
   Widget _options() => Row(

@@ -53,10 +53,14 @@ class MainScreen extends GetView<MainController> {
               );
             },
             options: CarouselOptions(
-                enlargeCenterPage: true,
-                aspectRatio: 1,
-                autoPlay: true,
-                viewportFraction: 0.8),
+              enlargeCenterPage: true,
+              aspectRatio: 1,
+              autoPlay: true,
+              viewportFraction: 0.8,
+              enableInfiniteScroll: false,
+              autoPlayInterval: const Duration(seconds: 5),
+              pauseAutoPlayOnTouch: true,
+            ),
           )
         : const SizedBox(
             height: 300,
