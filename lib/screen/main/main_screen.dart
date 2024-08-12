@@ -11,21 +11,25 @@ class MainScreen extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: AppBar().preferredSize,
-        child: const CammitAppBar(
-          title: '캠밋',
+    return Obx(
+      () => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize,
+          child: const CammitAppBar(
+            title: '캠밋',
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _todayIntroduce(),
-            _likeMeDetail(),
-            _likeMeList(),
-          ],
-        ),
+        body: (controller.isLoading)
+            ? _loading()
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _todayIntroduce(),
+                    _likeMeDetail(),
+                    _likeMeList(),
+                  ],
+                ),
+              ),
       ),
     );
   }
@@ -126,4 +130,8 @@ class MainScreen extends GetView<MainController> {
       },
     );
   }
+
+  Widget _loading() => const Center(
+        child: CircularProgressIndicator.adaptive(),
+      );
 }

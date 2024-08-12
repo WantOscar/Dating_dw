@@ -8,7 +8,7 @@ class HomeService {
     required this.homeRepository,
   });
 
-  Future<List<List<dynamic>>> getHomeDatas() async {
+  Future<List<List<User>>> getHomeDatas() async {
     final response = await homeRepository.getHomeDatas();
     List randomMemberList = response["randomMemberList"];
     List sendHeartList = response["sendHeartList"];
