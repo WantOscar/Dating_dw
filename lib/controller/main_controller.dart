@@ -1,6 +1,4 @@
-import 'package:dating/data/model/my_fan_member.dart';
-import 'package:dating/data/model/my_favorite_member.dart';
-import 'package:dating/data/model/recommend_member.dart';
+import 'package:dating/data/model/user.dart';
 import 'package:dating/data/service/home_service.dart';
 import 'package:dating/screen/main/main_favorite_me_screen.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
@@ -10,15 +8,13 @@ import 'package:get/get.dart';
 
 class MainController extends GetxController with UseToast {
   final HomeService homeService;
-  final Rx<List<RecommendMember>> _recommendMembers =
-      Rx<List<RecommendMember>>([]);
-  final Rx<List<MyFavoriteMember>> _myFavoriteMembers =
-      Rx<List<MyFavoriteMember>>([]);
-  final Rx<List<MyFanMember>> _myFanMembers = Rx<List<MyFanMember>>([]);
+  final Rx<List<User>> _recommendMembers = Rx<List<User>>([]);
+  final Rx<List<User>> _myFavoriteMembers = Rx<List<User>>([]);
+  final Rx<List<User>> _myFanMembers = Rx<List<User>>([]);
 
-  List<RecommendMember> get recommendMembers => _recommendMembers.value;
-  List<MyFavoriteMember> get myFavoriteMember => _myFavoriteMembers.value;
-  List<MyFanMember> get myFanMembers => _myFanMembers.value;
+  List<User> get recommendMembers => _recommendMembers.value;
+  List<User> get myFavoriteMember => _myFavoriteMembers.value;
+  List<User> get myFanMembers => _myFanMembers.value;
 
   MainController({required this.homeService});
 
@@ -31,17 +27,19 @@ class MainController extends GetxController with UseToast {
   void _fetchData() async {
     final data = await homeService.getHomeDatas();
 
-    _recommendMembers.value = List<RecommendMember>.from(data[0]);
-    _myFavoriteMembers.value = List<MyFavoriteMember>.from(data[1]);
-    _myFanMembers.value = List<MyFanMember>.from(data[2]);
+    _recommendMembers.value = List<User>.from(data[0]);
+    _myFanMembers.value = List<User>.from(data[1]);
+    _myFavoriteMembers.value = List<User>.from(data[2]);
   }
 
   void myFanDetailList() {
     Get.to(() => const MainFavoriteMeScreen());
   }
 
-  void otherProfile() {
-    Get.to(() => const SomeoneProfileScreen());
+  void otherProfile(User user) {
+    Get.to(() => SomeoneProfileScreen(
+          user: user,
+        ));
   }
 
   void requestChatAlarm() {

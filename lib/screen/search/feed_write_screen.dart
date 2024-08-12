@@ -24,7 +24,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
           child: Column(
             children: [
               _title(),
-              sub(),
+              _sub(),
               const SizedBox(height: 170),
               _completeButton(),
             ],
@@ -50,7 +50,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              controller: controller.title,
+              controller: controller.titleController,
               maxLength: 30,
               maxLines: 3,
               decoration: const InputDecoration(
@@ -58,6 +58,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
                 border: InputBorder.none,
                 counterText: '',
               ),
+              onChanged: controller.titleChange,
             ),
           ),
         ),
@@ -66,7 +67,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
   }
 
   /// 세부 글 작성 칸(sub)
-  Widget sub() {
+  Widget _sub() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: DottedBorder(
@@ -81,7 +82,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              controller: controller.content,
+              controller: controller.contentController,
               maxLength: 50,
               maxLines: 30,
               decoration: const InputDecoration(
@@ -89,6 +90,7 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
                 border: InputBorder.none,
                 counterText: '',
               ),
+              onChanged: controller.contentChange,
             ),
           ),
         ),

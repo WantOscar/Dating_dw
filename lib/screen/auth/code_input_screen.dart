@@ -5,8 +5,8 @@ import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class VerifyScreen extends GetView<EmailVerifyController> {
-  const VerifyScreen({super.key});
+class CodeInputScreen extends GetView<EmailVerifyController> {
+  const CodeInputScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

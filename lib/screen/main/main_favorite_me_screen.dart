@@ -55,14 +55,14 @@ class MainFavoriteMeScreen extends GetView<MainController> {
 
   /// 나에게 관심표현을 한 상대 프로필 사진을 보여줌
   Widget _miniProfile() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: GestureDetector(
-        onTap: controller.otherProfile,
-        child: const ImageAvatar(
-          size: 70,
-          imagePath:
-              "https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202301/19/SpoHankook/20230119052512141eivc.jpg",
+    return GestureDetector(
+      // onTap: () => controller.otherProfile(),
+      child: Container(
+        width: Get.size.width * 0.13,
+        height: Get.size.width * 0.13,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(45),
+          color: Colors.grey,
         ),
       ),
     );

@@ -100,7 +100,7 @@ class EmailVerifyController extends GetxController with UseToast {
     final response = await service.emailVerify(data);
     if (response != null) {
       _authCode = response;
-      Get.to(() => const VerifyScreen());
+      Get.to(() => const CodeInputScreen());
     }
   }
 

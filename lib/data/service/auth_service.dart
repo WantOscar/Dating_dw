@@ -1,12 +1,12 @@
 import 'package:dating/data/model/token_provider.dart';
-import 'package:dating/data/repository/auth_repository.dart';
+import 'package:dating/data/repository/auth_service_impl.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-class AuthService implements AuthRepository {
+class AuthService implements AuthServiceImpl {
   final TokenProvider tokenProvider = TokenProvider();
   late final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
     ..interceptors.add(BaseIntercepter());
@@ -93,15 +93,10 @@ class AuthService implements AuthRepository {
   /// 그 이메일을 통해 인증 번호를 전송해줌
   @override
   Future<String?> emailVerify(Map<String, dynamic> email) async {
-    try {
-      final response =
-          await dio.post(ApiUrl.emailVerify, queryParameters: email);
-      if (response.statusCode == 200) {
-        return response.data["code"];
-      } else {
-        return null;
-      }
-    } on Exception {
+    final response = await dio.post(ApiUrl.emailVerify, queryParameters: email);
+    if (response.statusCode == 200) {
+      return response.data["code"];
+    } else {
       return null;
     }
   }
