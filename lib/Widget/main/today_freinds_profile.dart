@@ -101,7 +101,7 @@ class TodayFriendsProfile extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    ChatController.to.makeChattingRoom(2);
+                    ChatController.to.makeChattingRoom(user);
                   },
                   child: Text(
                     '채팅하기',

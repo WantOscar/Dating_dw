@@ -1,7 +1,10 @@
 import 'package:dating/controller/user_controller.dart';
+import 'package:dating/data/model/user.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/image_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../data/model/message_model.dart';
 
@@ -10,11 +13,11 @@ import '../../data/model/message_model.dart';
 /// 채팅방에서 사용되는 버블위젯.
 class ChatBubble extends StatefulWidget {
   final MessageModel message;
-  final String notMyProfile;
+  final User user;
   const ChatBubble({
     super.key,
     required this.message,
-    required this.notMyProfile,
+    required this.user,
   });
 
   @override
@@ -44,9 +47,14 @@ class _ChatBubbleState extends State<ChatBubble> {
   Widget _profile() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ImageAvatar(
-        imagePath: widget.notMyProfile,
-        size: 40,
+      child: GestureDetector(
+        onTap: () {
+          Get.to(() => SomeoneProfileScreen(user: widget.user));
+        },
+        child: ImageAvatar(
+          imagePath: widget.user.image,
+          size: 40,
+        ),
       ),
     );
   }

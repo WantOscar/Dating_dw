@@ -1,6 +1,7 @@
 import 'package:dating/Widget/chat/chatting_box.dart';
 import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/chatting_room_controller.dart';
+import 'package:dating/data/model/user.dart';
 import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,10 +28,12 @@ class DmChatScreen extends StatelessWidget {
                         chat: controller.chattings[index],
                       ),
                       onTap: () {
+                        final chat = controller.chattings[index];
+                        final User user =
+                            User(nickName: chat.name, image: chat.image);
                         Get.to(
                             () => ChattingRoom(
-                                  notMyProfile:
-                                      controller.chattings[index].image,
+                                  target: user,
                                 ), binding: BindingsBuilder(() {
                           Get.put(ChattingRoomController(
                               chatRoomId: controller.chattings[index].id,
