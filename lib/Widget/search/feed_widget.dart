@@ -1,5 +1,4 @@
 import 'package:dating/data/model/feed.dart';
-import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';

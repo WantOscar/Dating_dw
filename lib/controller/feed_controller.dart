@@ -5,10 +5,13 @@ import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:get/get.dart';
 
 class FeedController extends GetxController {
+  final RxBool _isLoading = false.obs;
   final Rx<List<Feed>> _feeds = Rx<List<Feed>>([]);
   final FeedService feedService;
 
   static FeedController get to => Get.find();
+
+  bool get isLoading => _isLoading.value;
 
   List<Feed> get feeds => _feeds.value;
 
