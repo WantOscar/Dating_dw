@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating/Widget/profile/chat_send_button.dart';
 import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
@@ -85,34 +86,10 @@ class TodayFriendsProfile extends StatelessWidget {
 
   Widget _options() => Row(
         children: [
-          SizedBox(
-            height: 50,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  onPressed: () {
-                    ChatController.to.makeChattingRoom(2);
-                  },
-                  child: Text(
-                    '채팅하기',
-                    style: TextStyle(
-                        fontSize: 17,
-                        color: ThemeColor.fontColor,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            ),
+          ChatSendButtom(
+            onPressed: () {
+              ChatController.to.makeChattingRoom(2);
+            },
           ),
           GestureDetector(
             onTap: likeToast,

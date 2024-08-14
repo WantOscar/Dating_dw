@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile/user_profile_widget.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
@@ -9,7 +7,6 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SomeoneProfileScreen extends StatefulWidget {
   final User user;
@@ -20,13 +17,11 @@ class SomeoneProfileScreen extends StatefulWidget {
 }
 
 class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
-  final int _current = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+      body: SafeArea(
+        bottom: false,
         child: CustomScrollView(
           slivers: [
             _appbar(),
@@ -34,8 +29,8 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
             _personality(),
             _interesting(),
             _idealType(),
-            // _storyHeader(),
-            // _story(),
+            _storyHeader(),
+            _story(),
           ],
         ),
       ),
@@ -205,7 +200,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   Widget _appbar() {
     return SliverAppBar(
       elevation: 0.0,
-      pinned: true,
+      floating: true,
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: IconButton(
