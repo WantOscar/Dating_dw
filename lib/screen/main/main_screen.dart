@@ -26,8 +26,8 @@ class MainScreen extends GetView<MainController> {
                 child: Column(
                   children: [
                     _todayIntroduce(),
-                    _likeMeDetail(),
-                    _likeMeList(),
+                    _myFavoriteList(),
+                    _myFanList(),
                   ],
                 ),
               ),
@@ -76,70 +76,132 @@ class MainScreen extends GetView<MainController> {
           );
   }
 
-  /// 나한테 관심있는 상대 텍스트, 나한테 관심있는 상대방 목록 세부 페이지
-  Widget _likeMeDetail() {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            '나한테 관심 있는 친구',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+  /// 나한테 관심있는 상대방 목록
+  Widget _myFavoriteList() {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                '나한테 관심 있는 친구',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 30),
+              IconButton(
+                icon: const Icon(Icons.add),
+                onPressed: controller.myFanDetailList,
+              ),
+            ],
           ),
-          const SizedBox(height: 30),
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: controller.myFanDetailList,
-          ),
-        ],
-      ),
+        ),
+        Obx(
+          () {
+            return (controller.myFavoriteMember.isNotEmpty)
+                ? SizedBox(
+                    height: 200,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(
+                              controller.myFavoriteMember.length, (index) {
+                            final user = controller.myFavoriteMember[index];
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              child: Avatar(
+                                user: user,
+                                // onTap: controller.otherProfile,
+                              ),
+                            );
+                          }),
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox(
+                    height: 200,
+                    child: Text(
+                      '나에게 관심있는 사람이 아직 없습니다.',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  );
+          },
+        ),
+      ],
     );
   }
 
-  /// 나한테 관심있는 상대방 목록
-  Widget _likeMeList() {
-    return Obx(
-      () {
-        return (controller.myFanMembers.isNotEmpty)
-            ? SizedBox(
-                height: 200,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: List.generate(controller.myFanMembers.length,
-                          (index) {
-                        final user = controller.myFanMembers[index];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: Avatar(
-                            user: user,
-                            // onTap: controller.otherProfile,
+  Widget _myFanList() => Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  '나한테 관심 있는 친구',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 30),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: controller.myFanDetailList,
+                ),
+              ],
+            ),
+          ),
+          Obx(
+            () {
+              return (controller.myFanMembers.isNotEmpty)
+                  ? SizedBox(
+                      height: 200,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: List.generate(
+                                controller.myFanMembers.length, (index) {
+                              final user = controller.myFanMembers[index];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                child: Avatar(
+                                  user: user,
+                                  // onTap: controller.otherProfile,
+                                ),
+                              );
+                            }),
                           ),
-                        );
-                      }),
-                    ),
-                  ),
-                ),
-              )
-            : const SizedBox(
-                height: 200,
-                child: Text(
-                  '나에게 관심있는 사람이 아직 없습니다.',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              );
-      },
-    );
-  }
+                        ),
+                      ),
+                    )
+                  : const SizedBox(
+                      height: 200,
+                      child: Text(
+                        '나에게 관심있는 사람이 아직 없습니다.',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    );
+            },
+          ),
+        ],
+      );
 
   Widget _loading() => const Center(
         child: CircularProgressIndicator.adaptive(),

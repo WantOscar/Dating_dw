@@ -88,7 +88,7 @@ class TodayFriendsProfile extends StatelessWidget {
         children: [
           ChatSendButtom(
             onPressed: () {
-              ChatController.to.makeChattingRoom(2);
+              ChatController.to.makeChattingRoom(user);
             },
           ),
           GestureDetector(
