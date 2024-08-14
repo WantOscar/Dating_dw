@@ -2,16 +2,17 @@ import 'dart:ui';
 
 import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/data/model/message_model.dart';
+import 'package:dating/data/model/user.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/widget/chat/chat_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChattingRoom extends GetView<ChattingRoomController> {
-  final String notMyProfile;
+  final User target;
   const ChattingRoom({
     super.key,
-    required this.notMyProfile,
+    required this.target,
   });
 
   @override
@@ -73,7 +74,7 @@ class ChattingRoom extends GetView<ChattingRoomController> {
               padding: const EdgeInsets.all(4.0),
               child: ChatBubble(
                 message: message,
-                notMyProfile: notMyProfile,
+                user: target,
               ),
             );
           }),
@@ -85,7 +86,7 @@ class ChattingRoom extends GetView<ChattingRoomController> {
               padding: const EdgeInsets.all(4.0),
               child: ChatBubble(
                 message: message,
-                notMyProfile: notMyProfile,
+                user: target,
               ),
             );
           })

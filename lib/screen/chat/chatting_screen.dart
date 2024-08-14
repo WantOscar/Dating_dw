@@ -66,10 +66,10 @@ class _ChattingScreenState extends State<ChattingScreen>
                 controller: _tab,
                 tabs: const [
                   Tab(
-                    text: "미팅",
+                    text: "1:1",
                   ),
                   Tab(
-                    text: "1:1",
+                    text: "미팅",
                   ),
                 ],
               ),

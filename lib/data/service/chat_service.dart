@@ -10,14 +10,13 @@ class ChatService {
     ..interceptors.add(AuthInterceptor())
     ..interceptors.add(BaseIntercepter());
 
-  Future<String> makeChattingRoom(int memberId) async {
+  Future<int> makeChattingRoom(int memberId) async {
     final response = await dio
         .post("/chat/create/$memberId", queryParameters: {"type": "dm"});
     if (response.statusCode == 200) {
       return response.data["chatRoomId"];
     } else {
-      print("Error");
-      return "Error";
+      throw Exception();
     }
   }
 

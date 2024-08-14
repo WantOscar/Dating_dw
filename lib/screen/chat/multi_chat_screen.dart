@@ -28,17 +28,17 @@ class MultiChatScreen extends StatelessWidget {
                       child: ChattingBox(
                         chat: controller.chattings[index],
                       ),
-                      onTap: () {
-                        Get.to(
-                            () => ChattingRoom(
-                                  notMyProfile:
-                                      controller.chattings[index].image,
-                                ), binding: BindingsBuilder(() {
-                          Get.put(ChattingRoomController(
-                              chatRoomId: controller.chattings[index].id,
-                              targetName: controller.chattings[index].name));
-                        }));
-                      },
+                      // onTap: () {
+                      //   Get.to(
+                      //       () => ChattingRoom(
+                      //             target:
+                      //                 controller.chattings[index].,
+                      //           ), binding: BindingsBuilder(() {
+                      //     Get.put(ChattingRoomController(
+                      //         chatRoomId: controller.chattings[index].id,
+                      //         targetName: controller.chattings[index].name));
+                      //   }));
+                      // },
                     ),
                   ),
                 ),
