@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/controller/chat_controller.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
@@ -115,7 +115,7 @@ class TodayFriendsProfile extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: likeToast,
+            onTap: () => UserController.to.postHeartAdd(user.id!),
             child: SizedBox(
               height: 50,
               width: 50,
