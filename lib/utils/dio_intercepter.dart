@@ -86,7 +86,7 @@ class AuthInterceptor extends Interceptor {
         /// 실패하면 로그아웃됨
         ///
         final newAccessToken = await issueNewAccessToken(refreshToken);
-        err.requestOptions.headers["Authorization"] = newAccessToken;
+        err.requestOptions.headers["Authorization"] = "Bearer $newAccessToken";
         handler.resolve(await dio.fetch(err.requestOptions));
       } on DioException {
         tokenProvider.deleteTokenInfo();

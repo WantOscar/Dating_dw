@@ -13,8 +13,7 @@ class ProfileEditController extends GetxController {
   static ProfileEditController get to => Get.find();
   final UserFetch userService;
   final Rx<User?> _user = UserController.to.myInfo.obs;
-  final Rx<List<File?>> _files =
-      Rx<List<File?>>(List.generate(6, (index) => null));
+  final List<File> _files = List<File>.empty(growable: true);
   final List<List<int>> _imageIndex = [
     [0, 1, 2],
     [3, 4, 5],
@@ -25,7 +24,15 @@ class ProfileEditController extends GetxController {
 
   final RxString _address = "".obs;
 
-  List<File?> get files => _files.value;
+  // List<dynamic> get images => List.generate(6, (index) => null);
+
+  List<dynamic> get images {
+    List<dynamic> images = List.generate(6, (_) => null);
+    for (var i = 0; i < _user.value!.images!.length; i++) {
+      images[i] = _user.value!.images![i];
+    }
+    return images;
+  }
 
   /// 뒤로 이동하는 함수
   void back() {
@@ -61,47 +68,36 @@ class ProfileEditController extends GetxController {
   User? get user => _user.value;
 
   void addNewProfileImage(File image) {
-    for (var i = 0; i < _files.value.length; i++) {
-      if (_files.value[i] == null) {
-        _files.value[i] = image;
-        break;
-      }
-    }
-    _files.refresh();
-    print(_files.value);
+    _files.add(image);
+    _user.value!.images!.add(image);
+    _user.refresh();
   }
 
   void updateUserInfo() async {
     const Uuid uuid = Uuid();
-    final images = [];
+    final uploadImages = [];
     List<String> imageUrls = [];
-    for (var file in _files.value) {
-      if (file != null) {
-        images.add(dio.MultipartFile.fromFileSync(file.path,
+    for (var image in _user.value!.images!) {
+      if (image is! String) {
+        uploadImages.add(dio.MultipartFile.fromFileSync(image.path,
             filename: "${uuid.v1()}.jpeg"));
+      } else {
+        imageUrls.add(image);
       }
     }
-    if (images.isNotEmpty) {
+    if (uploadImages.isNotEmpty) {
       print(images);
-      dio.FormData data = dio.FormData.fromMap({"file": images});
+      dio.FormData data = dio.FormData.fromMap({"file": uploadImages});
       print(data.files);
-      imageUrls = await userService.uploadImage(data);
+      final newImageUrls = await userService.uploadImage(data);
+      imageUrls.addAll(newImageUrls);
       print(imageUrls);
+      _user.value!.images = imageUrls;
     }
 
     if (_user.value != null) {
-      final User user = User(
-          nickName: _user.value!.nickName,
-          description: _user.value!.description,
-          birthDay: _user.value!.birthDay,
-          address: _user.value!.address,
-          gender: _user.value!.gender,
-          age: _user.value!.age,
-          height: _user.value!.height,
-          images: imageUrls,
-          image: imageUrls.firstOrNull);
-      print(user.toJson());
-      final response = await userService.updateUserInfo(user.toJson());
+      print(user!.toJson());
+      final response = await userService.updateUserInfo(user!.toJson());
       print(response);
       Get.back();
     }
