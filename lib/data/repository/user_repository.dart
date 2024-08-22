@@ -54,10 +54,11 @@ class UserRepository {
     }
   }
 
-  Future<User> getUser(int id, {Dio? d}) async {
+  Future<User> getUser(Map<String, dynamic> nickName, {Dio? d}) async {
     d ??= dio;
 
-    final response = await d.get("/member/profile/$id");
+    final response = await d.get("/member/profile/another/nick-name",
+        queryParameters: nickName);
     if (response.statusCode == 200) {
       return User.fromJson(response.data);
     } else {

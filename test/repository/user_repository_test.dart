@@ -12,6 +12,8 @@ void main() {
   final UserRepository userRepository = UserRepository();
   group("User Repsitory Unit Test", () {
     test("특정 유저 정보를 조회테스트", () async {
+      final query = {"nickName": "string"};
+
       final json = {
         "nickName": "string",
         "description": "string",
@@ -28,12 +30,11 @@ void main() {
         "likePersonality": "string"
       };
 
-      when(dio.get(
-        "/member/profile/1",
-      )).thenAnswer((_) async => Response(
-          statusCode: 200, data: json, requestOptions: RequestOptions()));
+      when(dio.get("/member/profile/another/nick-name", queryParameters: query))
+          .thenAnswer((_) async => Response(
+              statusCode: 200, data: json, requestOptions: RequestOptions()));
 
-      final result = await userRepository.getUser(1, d: dio);
+      final result = await userRepository.getUser(query, d: dio);
 
       verify(dio.get("/member/profile/1"));
       expect(result.nickName, "string");

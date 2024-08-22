@@ -49,8 +49,8 @@ class _ChatBubbleState extends State<ChatBubble> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () =>
-            ChattingRoomController.to.moveToProfileScreen(widget.user.id!),
+        onTap: () => ChattingRoomController.to
+            .moveToProfileScreen(widget.user.nickName!),
         child: ImageAvatar(
           imagePath: widget.user.image,
           size: 40,

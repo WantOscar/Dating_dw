@@ -108,9 +108,10 @@ class ChattingRoomController extends GetxController {
     Get.back();
   }
 
-  void moveToProfileScreen(int userId) async {
+  void moveToProfileScreen(String nickName) async {
     try {
-      final user = await userRepository.getUser(userId);
+      final query = {"nickName": nickName};
+      final user = await userRepository.getUser(query);
       Get.to(() => SomeoneProfileScreen(user: user));
     } on Exception catch (err) {
       print(err);
