@@ -1,6 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
+import 'package:dating/Widget/profile/user_profile_widget.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/style/constant.dart';
@@ -8,7 +7,6 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SomeoneProfileScreen extends StatefulWidget {
   final User user;
@@ -19,23 +17,20 @@ class SomeoneProfileScreen extends StatefulWidget {
 }
 
 class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
-  int _current = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+      body: SafeArea(
+        bottom: false,
         child: CustomScrollView(
           slivers: [
-            _appbar(context),
+            _appbar(),
             _profile(),
-            _info(),
             _personality(),
             _interesting(),
             _idealType(),
-            // _storyHeader(),
-            // _story(),
+            _storyHeader(),
+            _story(),
           ],
         ),
       ),
@@ -44,200 +39,9 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
 
   /// 상대방의 프로필을 보여주는 위젯
   Widget _profile() => SliverToBoxAdapter(
-        child: Stack(
-          children: [
-            /// 상대방의 프로필 이미지를 보여주는 슬라이더 위젯
-            CarouselSlider.builder(
-              itemCount: widget.user.images?.length,
-              itemBuilder: (context, index, realIndex) {
-                return AspectRatio(
-                  aspectRatio: 1.1,
-                  child: Container(
-                    color: Colors.black,
-                    child: ClipRRect(
-                      child: CachedNetworkImage(
-                        imageUrl: widget.user.images![index],
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                );
-              },
-              options: CarouselOptions(
-                enableInfiniteScroll: false,
-                aspectRatio: 1,
-                viewportFraction: 1,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                },
-              ),
-            ),
-
-            /// 이미지 슬라이더
-            Positioned(
-              right: 10,
-              left: 10,
-              bottom: 10,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  (widget.user.images?.length == 1)
-                      ? Container()
-                      : AnimatedSmoothIndicator(
-                          activeIndex: _current,
-                          count: widget.user.images!.length,
-                          effect: ScrollingDotsEffect(
-                            dotColor: Colors.grey,
-                            activeDotColor: ThemeColor.fontColor,
-                            activeDotScale: 1,
-                            spacing: 4.0,
-                            dotWidth: 10.0,
-                            dotHeight: 10.0,
-                          ),
-                        ),
-                ],
-              ),
-            ),
-
-            /// 상대방 닉네임을 보여줌
-            Positioned(
-              top: 240,
-              left: 20,
-              child: TextButton(
-                onPressed: () {},
-                child: const Text(
-                  '강해린',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-
-            /// 상대방 나이와 키를 보여줌
-            Positioned(
-              top: 300,
-              left: 20,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: IconShape.iconPerson,
-                  ),
-                  const Text(
-                    '17세',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  const Text(
-                    '164.5cm',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              ),
-            ),
-
-            /// 상대방 위치를 나타냄
-            Positioned(
-              top: 320,
-              left: 20,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: IconShape.iconLocationOn,
-                  ),
-                  const Text(
-                    '서울 강북구',
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              ),
-            ),
-
-            /// 채팅하기 신청 버튼
-            Positioned(
-              top: 340,
-              right: 80,
-              child: SizedBox(
-                height: 50,
-                child: Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      onPressed: () {
-                        chatToast();
-                      },
-                      child: Text(
-                        '채팅하기',
-                        style: TextStyle(
-                            fontSize: 17,
-                            color: ThemeColor.fontColor,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-
-            /// 좋아요 누르기 버튼
-            Positioned(
-              top: 340,
-              right: 20,
-              child: GestureDetector(
-                onTap: () {
-                  likeToast();
-                },
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Card(
-                    elevation: 5.0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100)),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                            color: ThemeColor.fontColor,
-                            shape: BoxShape.circle),
-                        child: IconShape.iconFavorite,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
+          child: UserProfileWidget(
+        user: widget.user,
+      ));
 
   /// 상대방의 인적사항을 보여줌
   Widget _info() => const SliverToBoxAdapter(
@@ -393,10 +197,10 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   /// 커스텀 앱바를 제작
   /// 앱바 우측 아이콘을 누르면
   /// 사용자는 상대방을 차단/취소 가능.
-  Widget _appbar(BuildContext context) {
+  Widget _appbar() {
     return SliverAppBar(
       elevation: 0.0,
-      pinned: true,
+      floating: true,
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
         child: IconButton(

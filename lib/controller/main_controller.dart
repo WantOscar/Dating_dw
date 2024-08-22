@@ -31,8 +31,9 @@ class MainController extends GetxController with UseToast {
     final data = await homeService.getHomeDatas();
 
     _recommendMembers.value = data[0];
-    _myFanMembers.value = data[1];
-    _myFavoriteMembers.value = data[2];
+    _myFavoriteMembers.value = data[1];
+    _myFanMembers.value = data[2];
+    print("${data[0].length} ${data[1].length} ${data[2].length}");
   }
 
   void myFanDetailList() {
