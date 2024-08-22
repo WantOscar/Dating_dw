@@ -1,6 +1,7 @@
 import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/data/model/chatting_room_model.dart';
 import 'package:dating/data/model/user.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/data/service/chat_service.dart';
 import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:dating/utils/show_toast.dart';
@@ -35,7 +36,9 @@ class ChatController extends GetxController
       final chatRoomId = await service.makeChattingRoom(target.id!);
       Get.to(() => ChattingRoom(target: target), binding: BindingsBuilder(() {
         Get.put(ChattingRoomController(
-            chatRoomId: chatRoomId, targetName: target.nickName!));
+            userRepository: UserRepository(),
+            chatRoomId: chatRoomId,
+            targetName: target.nickName!));
       }));
     } catch (err) {
       showToast(err.toString());

@@ -4,8 +4,10 @@ import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/fcm_send.dart';
 import 'package:dating/data/model/message_model.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/data/service/chat_service.dart';
 import 'package:dating/data/service/message_service.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -22,7 +24,11 @@ class ChattingRoomController extends GetxController {
   final Rx<List<MessageModel>> _previous = Rx<List<MessageModel>>([]);
   final Rx<List<MessageModel>> _messages = Rx<List<MessageModel>>([]);
   final _service = MessageService(storage: const FlutterSecureStorage());
-  ChattingRoomController({required this.chatRoomId, required this.targetName});
+  final UserRepository userRepository;
+  ChattingRoomController(
+      {required this.chatRoomId,
+      required this.targetName,
+      required this.userRepository});
   final _messageController = TextEditingController();
 
   TextEditingController get message => _messageController;
@@ -100,5 +106,14 @@ class ChattingRoomController extends GetxController {
   void back() {
     ChatController.to.getMyChattingList();
     Get.back();
+  }
+
+  void moveToProfileScreen(int userId) async {
+    try {
+      final user = await userRepository.getUser(userId);
+      Get.to(() => SomeoneProfileScreen(user: user));
+    } on Exception catch (err) {
+      print(err);
+    }
   }
 }

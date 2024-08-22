@@ -1,37 +1,67 @@
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/service/user_fetch.dart';
+import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
+import 'package:dio/dio.dart';
 
 class UserRepository {
-  UserFetch service;
-  UserRepository({required this.service});
+  final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
+    ..interceptors.add(AuthInterceptor())
+    ..interceptors.add(BaseIntercepter());
 
-  Future<User?> searchMyInfo() => service.searchMyInfo();
+  Future<User?> searchMyInfo() async {
+    try {
+      final response = await dio.get(
+        ApiUrl.profile,
+      );
 
-  Future<List<User>> getAllUserData() async {
-    await Future.delayed(const Duration(seconds: 2));
+      if (response.statusCode == 200) {
+        return User.fromJson(response.data);
+      }
+    } on Exception {
+      return null;
+    }
+    return null;
+  }
 
-    final users = [
-      {
-        "nickName": "karina",
-        "description": "",
-        "birthDay": "1999 - 01 - 01",
-        "address": "서울 노원구 공릉로",
-        "gender": "man",
-        "age": 26,
-        "height": 164,
-        "images": [
-          "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qlsod9570@naver.com/8abc21d0-69e8-1fe3-9f1e-b5b1a6dab524.jpeg",
-          "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qlsod9570@naver.com/8af0c660-69e8-1fe3-9f1e-b5b1a6dab524.jpeg",
-          "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qlsod9570@naver.com/8af978f0-69e8-1fe3-9f1e-b5b1a6dab524.jpeg"
-        ],
-        "image":
-            "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qlsod9570@naver.com/8abc21d0-69e8-1fe3-9f1e-b5b1a6dab524.jpeg",
-        "personalInfo": null,
-        "personality": null,
-        "interest": null,
-        "likePersonality": null
-      },
-    ];
-    return users.map((user) => User.fromJson(user)).toList();
+  Future<List<String>> uploadImage(FormData data) async {
+    try {
+      final response =
+          await dio.post("/images/s3-upload", data: data, queryParameters: {
+        "type": "profile",
+      });
+
+      if (response.statusCode == 201) {
+        print(response.data);
+        return List<String>.from(response.data["imageList"]);
+      } else {
+        return [];
+      }
+    } on Exception catch (e) {
+      print(e.toString());
+    }
+    return [];
+  }
+
+  updateUserInfo(Map<String, dynamic> data) async {
+    try {
+      final response = await dio.post("/member/profile/save", data: data);
+
+      if (response.statusCode == 200) {
+        print(response.data);
+      }
+    } on Exception {
+      print("error");
+    }
+  }
+
+  Future<User> getUser(int id, {Dio? d}) async {
+    d ??= dio;
+
+    final response = await d.get("/member/profile/$id");
+    if (response.statusCode == 200) {
+      return User.fromJson(response.data);
+    } else {
+      throw Exception();
+    }
   }
 }

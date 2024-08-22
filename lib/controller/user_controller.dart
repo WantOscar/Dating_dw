@@ -30,22 +30,10 @@ class UserController extends GetxController with UseToast {
     _myInfo.refresh();
   }
 
-  @override
-  void onInit() {
-    getAllUsers();
-    super.onInit();
-  }
-
   bool get isLoading => (_status.value.name == "loading") ? true : false;
 
   void changeImageIndex(int index, CarouselPageChangedReason reason) {
     _imageIndex(index);
-  }
-
-  void getAllUsers() async {
-    final List<User> result = await userRepository.getAllUserData();
-    print(result);
-    _users(result);
   }
 
   void postHeartAdd(int id) async {

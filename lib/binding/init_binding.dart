@@ -13,7 +13,7 @@ class InitBinding implements Bindings {
     Get.put(LoginController(authService: AuthService()));
     Get.put(
         UserController(
-          userRepository: UserRepository(service: UserFetch()),
+          userRepository: UserRepository(),
           heartService: HeartService(heartRepository: HeartRepository()),
         ),
         permanent: true);
