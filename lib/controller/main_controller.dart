@@ -1,6 +1,7 @@
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/service/home_service.dart';
-import 'package:dating/screen/main/main_favorite_me_screen.dart';
+import 'package:dating/screen/main/my_fan_detail_screen.dart';
+import 'package:dating/screen/main/my_favorite_detail_screen.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/utils/show_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -36,8 +37,12 @@ class MainController extends GetxController with UseToast {
     print("${data[0].length} ${data[1].length} ${data[2].length}");
   }
 
+  void myFavoriteDetailList() {
+    Get.to(() => const MyFavoriteDetailScreen());
+  }
+
   void myFanDetailList() {
-    Get.to(() => const MainFavoriteMeScreen());
+    Get.to(() => const MyFanDetailScreen());
   }
 
   void otherProfile(User user) {

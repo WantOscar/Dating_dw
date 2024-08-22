@@ -4,8 +4,8 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MainFavoriteMeScreen extends GetView<MainController> {
-  const MainFavoriteMeScreen({super.key});
+class MyFavoriteDetailScreen extends GetView<MainController> {
+  const MyFavoriteDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class MainFavoriteMeScreen extends GetView<MainController> {
       () {
         return (controller.myFanMembers.isNotEmpty)
             ? Scaffold(
-                appBar: const IconHeader(text: '나한테 관심 있는 친구'),
+                appBar: const IconHeader(text: '내가 관심 있는 친구'),
                 body: SingleChildScrollView(
                   child: Column(
                     children: List.generate(
@@ -38,21 +38,23 @@ class MainFavoriteMeScreen extends GetView<MainController> {
                   ),
                 ),
               )
-            : const SizedBox(
-                height: 200,
-                child: Text(
-                  '나에게 관심있는 사람이 아직 없습니다.',
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w600),
+            : const Center(
+                child: SizedBox(
+                  height: 200,
+                  child: Text(
+                    '내가 관심있는 사람이 아직 없습니다.',
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               );
       },
     );
   }
 
-  /// 나에게 관심표현을 한 상대 프로필 사진을 보여줌
+  /// 내가 관심표현을 한 상대 프로필 사진을 보여줌
   Widget _miniProfile() {
     return GestureDetector(
       // onTap: () => controller.otherProfile(),
@@ -67,7 +69,7 @@ class MainFavoriteMeScreen extends GetView<MainController> {
     );
   }
 
-  /// 나에게 관심표현을 한 상대 이름, 나이를 보여줌
+  /// 내가 관심표현을 한 상대 이름, 나이를 보여줌
   Widget _otherInformation() {
     return const Expanded(
       child: Column(
@@ -98,7 +100,7 @@ class MainFavoriteMeScreen extends GetView<MainController> {
     );
   }
 
-  /// 나에게 관심표현을 한 상대에게 채팅 신청 가능한 버튼
+  /// 내가 관심표현을 한 상대에게 채팅 신청 가능한 버튼
   Widget _sendChatRequest() {
     return GestureDetector(
       onTap: controller.requestChatAlarm,

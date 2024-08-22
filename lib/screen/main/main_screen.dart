@@ -76,7 +76,7 @@ class MainScreen extends GetView<MainController> {
           );
   }
 
-  /// 나한테 관심있는 상대방 목록
+  /// 내가 좋아요를 보낸 상대방 목록(상대 대표 이미지를 보여줌)
   Widget _myFavoriteList() {
     return Column(
       children: [
@@ -86,13 +86,13 @@ class MainScreen extends GetView<MainController> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                '나한테 관심 있는 친구',
+                '내가 관심 있는 친구',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 30),
               IconButton(
                 icon: const Icon(Icons.add),
-                onPressed: controller.myFanDetailList,
+                onPressed: controller.myFavoriteDetailList,
               ),
             ],
           ),
@@ -116,7 +116,6 @@ class MainScreen extends GetView<MainController> {
                                   vertical: 10, horizontal: 10),
                               child: Avatar(
                                 user: user,
-                                // onTap: controller.otherProfile,
                               ),
                             );
                           }),
@@ -127,7 +126,7 @@ class MainScreen extends GetView<MainController> {
                 : const SizedBox(
                     height: 200,
                     child: Text(
-                      '나에게 관심있는 사람이 아직 없습니다.',
+                      '내가 관심있는 사람이 아직 없습니다.',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.grey,
@@ -141,6 +140,7 @@ class MainScreen extends GetView<MainController> {
     );
   }
 
+  /// 나한테 좋아요를 보낸 상대방 목록(상대 대표 이미지를 보여줌)
   Widget _myFanList() => Column(
         children: [
           Padding(
@@ -203,6 +203,7 @@ class MainScreen extends GetView<MainController> {
         ],
       );
 
+  /// 새로고침
   Widget _loading() => const Center(
         child: CircularProgressIndicator.adaptive(),
       );
