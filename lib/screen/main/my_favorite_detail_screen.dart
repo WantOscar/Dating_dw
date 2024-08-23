@@ -1,6 +1,7 @@
 import 'package:dating/Widget/common/icon_header.dart';
 import 'package:dating/Widget/main/my_favorite_avatar.dart';
 import 'package:dating/controller/main_controller.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +23,12 @@ class MyFavoriteDetailScreen extends GetView<MainController> {
                         final user = controller.myFavoriteMember[index];
                         return Padding(
                           padding: const EdgeInsets.all(12),
-                          child: MyFavoriteAvatar(user: user),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(() => SomeoneProfileScreen(user: user));
+                            },
+                            child: ListAvatar(user: user),
+                          ),
                         );
                       },
                     ),

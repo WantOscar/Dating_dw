@@ -114,8 +114,14 @@ class MainScreen extends GetView<MainController> {
                             return Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
-                              child: Avatar(
-                                user: user,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.to(
+                                      () => SomeoneProfileScreen(user: user));
+                                },
+                                child: Avatar(
+                                  user: user,
+                                ),
                               ),
                             );
                           }),
@@ -177,8 +183,14 @@ class MainScreen extends GetView<MainController> {
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10),
-                                child: Avatar(
-                                  user: user,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.to(
+                                        () => SomeoneProfileScreen(user: user));
+                                  },
+                                  child: Avatar(
+                                    user: user,
+                                  ),
                                 ),
                               );
                             }),

@@ -4,10 +4,10 @@ import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:flutter/material.dart';
 
-class MyFavoriteAvatar extends StatelessWidget {
+class ListAvatar extends StatelessWidget {
   final void Function()? onTap;
   final User user;
-  const MyFavoriteAvatar({super.key, this.onTap, required this.user});
+  const ListAvatar({super.key, this.onTap, required this.user});
 
   @override
   Widget build(BuildContext context) {
