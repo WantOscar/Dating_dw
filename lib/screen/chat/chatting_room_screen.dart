@@ -36,7 +36,7 @@ class ChattingRoom extends GetView<ChattingRoomController> {
                 backgroundColor: Colors.white.withOpacity(0.7),
                 elevation: 0.0,
                 title: Text(
-                  "홍길동",
+                  target.nickName!,
                   style: TextStyle(
                       color: ThemeColor.fontColor,
                       fontSize: 24,

@@ -1,5 +1,6 @@
 import 'package:dating/Widget/common/cammit_app_bar.dart';
 import 'package:dating/Widget/profile/hobby_container.dart';
+import 'package:dating/Widget/profile/profile_image.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';
@@ -124,35 +125,33 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
-          controller.imageIndex.length,
+          2,
           (index) => Row(
             children: List.generate(
-              controller.imageIndex[index].length,
+              3,
               (jndex) => Expanded(
                 child: AspectRatio(
                   aspectRatio: 1,
                   child: Padding(
                     padding: const EdgeInsets.all(1.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.to(() => const UploadScreen(),
-                            binding: BindingsBuilder(() {
-                          Get.put(ProfileImageController());
-                        }));
-                      },
-                      child: Container(
-                        color: Colors.grey,
-                        child: (controller.files[controller.imageIndex[index]
-                                    [jndex]] !=
-                                null)
-                            ? Image.file(
-                                controller.files[controller.imageIndex[index]
-                                    [jndex]]!,
-                                fit: BoxFit.cover,
-                              )
-                            : IconShape.iconNoImage,
-                      ),
-                    ),
+                    child: (controller
+                                .images[controller.imageIndex[index][jndex]] !=
+                            null)
+                        ? ProfileImage(
+                            src: controller
+                                .images[controller.imageIndex[index][jndex]])
+                        : GestureDetector(
+                            onTap: () {
+                              Get.to(() => const UploadScreen(),
+                                  binding: BindingsBuilder(() {
+                                Get.put(ProfileImageController());
+                              }));
+                            },
+                            child: Container(
+                              color: Colors.grey,
+                              child: IconShape.iconNoImage,
+                            ),
+                          ),
                   ),
                 ),
               ),

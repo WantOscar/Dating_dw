@@ -7,7 +7,7 @@ class User {
   String? gender;
   int? age;
   int? height;
-  List<String>? images;
+  List<dynamic>? images;
   String? image;
   String? personalInfo;
   String? personality;
@@ -40,7 +40,7 @@ class User {
         gender: json["gender"],
         age: json["age"],
         height: json["height"],
-        images: List<String>.from(json["images"] ?? []),
+        images: List<dynamic>.from(json["images"] ?? []),
         image: json["image"],
         personalInfo: json["personalInfo"],
         personality: json["personality"],

@@ -1,7 +1,5 @@
-import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AlarmScreen extends StatelessWidget {
   const AlarmScreen({super.key});
@@ -17,8 +15,8 @@ class AlarmScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 70),
-          child: Column(
-            children: List.generate(
+          child: Column(children: [
+            ...List.generate(
               10,
               (index) => Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -67,7 +65,10 @@ class AlarmScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+            const SizedBox(
+              height: 100,
+            ),
+          ]),
         ),
       ),
     );

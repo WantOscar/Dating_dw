@@ -1,3 +1,4 @@
+import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
@@ -48,9 +49,8 @@ class _ChatBubbleState extends State<ChatBubble> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {
-          Get.to(() => SomeoneProfileScreen(user: widget.user));
-        },
+        onTap: () => ChattingRoomController.to
+            .moveToProfileScreen(widget.user.nickName!),
         child: ImageAvatar(
           imagePath: widget.user.image,
           size: 40,
