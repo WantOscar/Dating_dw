@@ -1,6 +1,5 @@
 import 'package:dating/data/model/member_join.dart';
 import 'package:dating/data/service/auth_service.dart';
-import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dating/widget/common/notification_window.dart';
