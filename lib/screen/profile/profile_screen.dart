@@ -60,9 +60,13 @@ class ProfileScreen extends GetView<UserController> {
   }
 
   Widget _profile() => SliverToBoxAdapter(
-          child: Stack(
-        children: [UserProfileWidget(user: controller.myInfo!), _editProfile()],
-      ));
+        child: Stack(
+          children: [
+            UserProfileWidget(user: controller.myInfo!),
+            _editProfile(),
+          ],
+        ),
+      );
 
   Widget _editProfile() => Positioned(
         right: 20,
