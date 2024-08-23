@@ -28,6 +28,9 @@ class MainScreen extends GetView<MainController> {
                     _todayIntroduce(),
                     _myFavoriteList(),
                     _myFanList(),
+                    const SizedBox(
+                      height: 100,
+                    ),
                   ],
                 ),
               ),

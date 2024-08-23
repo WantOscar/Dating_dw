@@ -44,7 +44,7 @@ class MultiChatScreen extends StatelessWidget {
                 ),
               );
             }),
-            const SizedBox(height: 80),
+            const SizedBox(height: 100),
           ],
         ),
       ),

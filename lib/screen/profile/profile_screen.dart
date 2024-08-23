@@ -47,6 +47,11 @@ class ProfileScreen extends GetView<UserController> {
               _personality(),
               _interesting(),
               _idealType(),
+              const SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 100,
+                ),
+              )
             ],
           ),
         ),

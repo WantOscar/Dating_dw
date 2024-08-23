@@ -40,17 +40,22 @@ class SearchScreen extends GetView<FeedController> {
             padding: const EdgeInsets.only(bottom: 70),
             child: Column(
               /// 글 목록 10개 지정
-              children: List.generate(
-                controller.feeds.length,
-                (index) {
-                  final feed = controller.feeds[index];
+              children: [
+                ...List.generate(
+                  controller.feeds.length,
+                  (index) {
+                    final feed = controller.feeds[index];
 
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FeedWidget(feed: feed),
-                  );
-                },
-              ),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FeedWidget(feed: feed),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
             ),
           ),
         );
