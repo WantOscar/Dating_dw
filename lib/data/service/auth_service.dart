@@ -54,7 +54,8 @@ class AuthService extends GetxService implements AuthServiceImpl {
         options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}));
     if (response.statusCode == 200) {
       tokenProvider.deleteTokenInfo();
-      Get.offAll(() => const LoginScreen());
+      Get.offAll(() => const LoginScreen(),
+          transition: Transition.noTransition);
     } else {
       print('로그아웃');
     }

@@ -3,7 +3,7 @@ import 'package:dating/Widget/profile/user_profile_widget.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/user_controller.dart';
-import 'package:dating/data/service/user_fetch.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
@@ -82,7 +82,7 @@ class ProfileScreen extends GetView<UserController> {
             Get.to(() => const ProfileEditScreen(),
                 binding: BindingsBuilder(() {
               // ProfileImageController();
-              Get.put(ProfileEditController(userService: UserFetch()));
+              Get.put(ProfileEditController(userRepository: UserRepository()));
             }));
           },
           child: const Text(

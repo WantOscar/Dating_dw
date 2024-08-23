@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:dating/binding/home_binding.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/service/user_fetch.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dating/widget/profile/item_select_bottom_sheet.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -16,9 +17,9 @@ import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:uuid/uuid.dart';
 
 class OnboardingController extends GetxController with ToastMessage {
-  final UserFetch userService;
+  final UserRepository userRepository;
   static OnboardingController get to => Get.find();
-  OnboardingController({required this.userService});
+  OnboardingController({required this.userRepository});
   final Rx<List<List<File?>>> _selectProfileImages = Rx<List<List<File?>>>(
       List.generate(2, (index) => List.generate(3, (index) => null)));
 
@@ -93,11 +94,13 @@ class OnboardingController extends GetxController with ToastMessage {
   /// 사용자 정보가 있다면 바로 홈 페이지로 라이팅함.
   void _getUserData() async {
     await Future.delayed(const Duration(seconds: 3));
-    final memberInfo = await userService.searchMyInfo();
-    if (memberInfo != null) {
+    try {
+      final memberInfo = await userRepository.searchMyInfo();
       Get.off(() => const HomeScreen(), binding: HomeBinding());
       UserController.to.setMyInfo(memberInfo);
-    } else {
+    } catch (err) {
+      showToast("프로필을 등록해야만 합니다!");
+    } finally {
       _isLoading(false);
     }
   }
@@ -247,7 +250,7 @@ class OnboardingController extends GetxController with ToastMessage {
 
     // final data = dio.FormData.fromMap({"file": multiPartFiles});
     print(data.files);
-    final urls = await userService.uploadImage(data);
+    final urls = await userRepository.uploadImage(data);
     if (urls.isNotEmpty) {
       NumberFormat format = NumberFormat("00");
       User user = User(
@@ -263,7 +266,7 @@ class OnboardingController extends GetxController with ToastMessage {
           image: urls.first);
 
       final data = user.toJson();
-      final response = userService.updateUserInfo(data);
+      final response = userRepository.updateUserInfo(data);
 
       UserController.to.setMyInfo(user);
       Get.off(() => const HomeScreen(), binding: HomeBinding());

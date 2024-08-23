@@ -39,5 +39,11 @@ void main() {
       verify(dio.get("/member/profile/1"));
       expect(result.nickName, "string");
     });
+
+    test("내 정보 조회 최초 프로필 등록 테스트", () async {
+      const testToken =
+          "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJxYXp3czc4OTQxQGdtYWlsLmNvbSIsImF1dGgiOiJVc2VyIiwiZXhwIjoxNzI0NDA2NDg1fQ.MsMxL6GAI8rms8ms03Lyq6EY9jFCiuiChv_lJlKsoOQ";
+      final result = await userRepository.searchMyInfo();
+    });
   });
 }
