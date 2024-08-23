@@ -23,13 +23,10 @@ class ResisterController extends GetxController {
   late String _password;
   late String _passwordAgain;
 
-  void initTextEditingController() {
+  void init(String email) {
+    _email = email;
     _passwordController = TextEditingController();
     _passwordAgainController = TextEditingController();
-  }
-
-  void updateEmail(String email) {
-    _email = email;
   }
 
   ///회원가입 메소드
@@ -57,7 +54,7 @@ class ResisterController extends GetxController {
       title: "회원가입 완료",
       confirmLabel: "확인",
       onConfirm: () {
-        Get.offAll(const LoginScreen());
+        Get.until((route) => route.isFirst);
       },
     ));
   }

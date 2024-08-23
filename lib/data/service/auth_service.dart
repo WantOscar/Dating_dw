@@ -18,18 +18,9 @@ class AuthService extends GetxService implements AuthServiceImpl {
   /// 에러메시지 반환
   @override
   Future<String?> signUp(Map<String, dynamic> json) async {
-    try {
-      final response = await dio.post(
-        ApiUrl.signUp,
-        data: json,
-      );
-      if (response.statusCode == 200) {
-        return "회원가입에 성공했습니다!";
-      }
-    } on Exception {
-      return null;
-    }
-    return null;
+    return dio
+        .post(ApiUrl.signUp, data: json)
+        .then((response) => "회원가입에 성공했습니다!");
   }
 
   /// 로그인 메소드

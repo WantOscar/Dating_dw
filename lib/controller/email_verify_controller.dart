@@ -72,7 +72,7 @@ class EmailVerifyController extends GetxController with ToastMessage {
   void validateAuthCode() async {
     if (authCode == _inputCode.join()) {
       showToast("인증에 성공했습니다 !");
-      ResisterController.to.initTextEditingController();
+      ResisterController.to.init(_email);
       Get.to(() => const ResisterScreen());
     } else {
       showToast("인증코드가 다릅니다 !");
