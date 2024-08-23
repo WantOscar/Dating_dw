@@ -10,29 +10,20 @@ import 'package:get/get.dart' as g;
 class BaseIntercepter extends Interceptor with ToastMessage {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    final errorMessage = err.response?.data;
+    final errorMessage = err.response?.data["ErrorMessage"];
     debugPrint("[ERROR OCCURED][${err.response?.statusCode}]");
     debugPrint("[ERROR OCCURED][${err.type}][${err.requestOptions.uri}]");
     debugPrint("[ERROR OCCURED][$errorMessage]");
-    // showToast("${errorMessage["errorMessage"]}");
     switch (err.type) {
       case DioExceptionType.badResponse:
-        debugPrint("올바르지 못한 요청입니다. url, 파라미터가 정확한지 확인하세요.");
-        break;
+        throw errorMessage;
       case DioExceptionType.cancel:
-        showToast("요청이 취소되었습니다.");
-        debugPrint("요청이 취소되었습니다.");
-        break;
+        throw "요청이 취소되었습니다.";
       case DioExceptionType.connectionError:
-        showToast("네트워크 연결이 원할하지 않습니다.");
-        debugPrint("네트워크 연결이 원할하지 않습니다.");
-        break;
+        throw "네트워크 연결이 원할하지 않습니다.";
       default:
-        showToast("알 수 없는 에러가 발생했습니다.");
-        debugPrint("알 수 없는 에러가 발생했습니다.");
-        break;
+        throw "알 수 없는 에러가 발생했습니다.";
     }
-    throw Exception(errorMessage);
   }
 
   @override
