@@ -2,25 +2,17 @@ import 'package:dating/data/model/user.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart' as g;
 
-class UserRepository {
+class UserRepository extends g.GetxService {
   final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
     ..interceptors.add(AuthInterceptor())
     ..interceptors.add(BaseIntercepter());
 
-  Future<User?> searchMyInfo() async {
-    try {
-      final response = await dio.get(
-        ApiUrl.profile,
-      );
-
-      if (response.statusCode == 200) {
-        return User.fromJson(response.data);
-      }
-    } on Exception {
-      return null;
-    }
-    return null;
+  Future<User> searchMyInfo() async {
+    return dio
+        .get(ApiUrl.profile)
+        .then((response) => User.fromJson(response.data));
   }
 
   Future<List<String>> uploadImage(FormData data) async {

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/service/user_fetch.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/widget/common/warning_window.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:get/get.dart';
@@ -11,7 +11,7 @@ import 'package:uuid/uuid.dart';
 
 class ProfileEditController extends GetxController {
   static ProfileEditController get to => Get.find();
-  final UserFetch userService;
+  final UserRepository userRepository;
   final Rx<User?> _user = UserController.to.myInfo.obs;
   final List<File> _files = List<File>.empty(growable: true);
   final List<List<int>> _imageIndex = [
@@ -19,7 +19,7 @@ class ProfileEditController extends GetxController {
     [3, 4, 5],
   ];
   ProfileEditController({
-    required this.userService,
+    required this.userRepository,
   });
 
   final RxString _address = "".obs;
@@ -89,7 +89,7 @@ class ProfileEditController extends GetxController {
       print(images);
       dio.FormData data = dio.FormData.fromMap({"file": uploadImages});
       print(data.files);
-      final newImageUrls = await userService.uploadImage(data);
+      final newImageUrls = await userRepository.uploadImage(data);
       imageUrls.addAll(newImageUrls);
       print(imageUrls);
       _user.value!.images = imageUrls;
@@ -97,7 +97,7 @@ class ProfileEditController extends GetxController {
 
     if (_user.value != null) {
       print(user!.toJson());
-      final response = await userService.updateUserInfo(user!.toJson());
+      final response = await userRepository.updateUserInfo(user!.toJson());
       print(response);
       Get.back();
     }
