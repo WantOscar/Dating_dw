@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dating/Widget/main/circle_avatar.dart';
+import 'package:dating/Widget/main/avatar.dart';
 import 'package:dating/controller/main_controller.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
