@@ -12,19 +12,7 @@ class CodeInputScreen extends GetView<EmailVerifyController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: ThemeColor.fontColor,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-        ),
+        appBar: _appBar(),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -102,4 +90,18 @@ class CodeInputScreen extends GetView<EmailVerifyController> {
       ),
     );
   }
+
+  AppBar _appBar() => AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.until((route) => route.isFirst);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: ThemeColor.fontColor,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      );
 }

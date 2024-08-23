@@ -6,7 +6,7 @@ import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-class AuthService implements AuthServiceImpl {
+class AuthService extends GetxService implements AuthServiceImpl {
   final TokenProvider tokenProvider = TokenProvider();
   late final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
     ..interceptors.add(BaseIntercepter());
@@ -92,13 +92,10 @@ class AuthService implements AuthServiceImpl {
   /// 초기 가입하는 사용자는 본인의 가입 이메일을 입력함
   /// 그 이메일을 통해 인증 번호를 전송해줌
   @override
-  Future<String?> emailVerify(Map<String, dynamic> email) async {
-    final response = await dio.post(ApiUrl.emailVerify, data: email);
-    if (response.statusCode == 200) {
-      return response.data["code"];
-    } else {
-      return null;
-    }
+  Future<String> emailVerify(Map<String, dynamic> email) async {
+    return dio
+        .post(ApiUrl.emailVerify, data: email)
+        .then((response) => response.data["code"] ?? "error");
   }
 
   @override

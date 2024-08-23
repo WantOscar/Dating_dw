@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 abstract class AuthServiceImpl {
   /// 사용자 로그인 인터페이스
   Future<void> login(Map<String, dynamic> data);

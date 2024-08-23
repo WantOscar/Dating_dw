@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 
 class CammitTextField extends StatelessWidget {
   final TextEditingController controller;
-  bool obscureText;
-  String? hintText;
-  CammitTextField({
-    Key? key,
-    required this.controller,
+  final ValueSetter<String> onChanged;
+  final bool obscureText;
+  final String? hintText;
+  const CammitTextField({
+    super.key,
     this.obscureText = false,
-    this.hintText,
-  }) : super(key: key);
+    required this.controller,
+    required this.hintText,
+    required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class CammitTextField extends StatelessWidget {
         child: TextField(
           cursorColor: Colors.black,
           controller: controller,
+          onChanged: onChanged,
           decoration: InputDecoration(
             hintText: (hintText != null) ? hintText : null,
             border: InputBorder.none,
