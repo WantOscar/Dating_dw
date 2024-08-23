@@ -179,7 +179,6 @@ class MainScreen extends GetView<MainController> {
                                     vertical: 10, horizontal: 10),
                                 child: Avatar(
                                   user: user,
-                                  // onTap: controller.otherProfile,
                                 ),
                               );
                             }),

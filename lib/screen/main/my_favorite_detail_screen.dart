@@ -28,81 +28,18 @@ class MyFavoriteDetailScreen extends GetView<MainController> {
                     ),
                   ),
                 )
-              : const Column(
-                  children: [
-                    Text(
-                      '내가 관심있는 사람이 아직 없습니다.',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w600,
-                      ),
+              : const Center(
+                  child: Text(
+                    '내가 관심있는 사람이 아직 없습니다.',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ],
+                  ),
                 );
         },
       ),
     );
   }
-
-  // /// 내가 관심표현을 한 상대 프로필 사진을 보여줌
-  // Widget _miniProfile(int index) {
-  //   final user = controller.myFavoriteMember[index];
-  //   return GestureDetector(
-  //     onTap: () {},
-  //     child: Avatar(user: user),
-  //   );
-  // }
-
-  // /// 내가 관심표현을 한 상대 이름, 나이를 보여줌
-  // Widget _otherInformation() {
-  //   return const Expanded(
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Text(
-  //           '홍길동',
-  //           style: TextStyle(
-  //             fontSize: 15,
-  //             color: Colors.black,
-  //           ),
-  //         ),
-  //         SizedBox(height: 4),
-  //         Row(
-  //           children: [
-  //             IconShape.iconFemale,
-  //             Text(
-  //               '20세',
-  //               style: TextStyle(
-  //                 fontSize: 12,
-  //                 color: Colors.grey,
-  //               ),
-  //             ),
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // /// 내가 관심표현을 한 상대에게 채팅 신청 가능한 버튼
-  // Widget _sendChatRequest() {
-  //   return GestureDetector(
-  //     onTap: controller.requestChatAlarm,
-  //     child: Container(
-  //       padding: const EdgeInsets.all(8.0),
-  //       decoration: BoxDecoration(
-  //         color: const Color(0xFFFF006B),
-  //         borderRadius: BorderRadius.circular(50),
-  //       ),
-  //       child: const Text(
-  //         '채팅하기',
-  //         style: TextStyle(
-  //           color: Colors.white,
-  //           fontSize: 12,
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
