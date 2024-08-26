@@ -1,3 +1,4 @@
+import 'package:dating/Widget/common/offset_loading_widget.dart';
 import 'package:dating/Widget/common/property_text_field.dart';
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
 import 'package:dating/controller/onboard_controller.dart';
@@ -15,30 +16,35 @@ class OnboardScreen extends GetView<OnboardingController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => (controller.isLoading)
+      () => (controller.isLoading == Status.loading)
           ? _loading()
-          : GestureDetector(
-              onTap: FocusScope.of(context).unfocus,
-              child: Scaffold(
-                  appBar: AppBar(
-                    title: const Text("프로필 생성"),
-                    titleTextStyle: TextStyle(
-                        color: ThemeColor.fontColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600),
-                    backgroundColor: Colors.white,
-                    elevation: 0.0,
-                  ),
-                  body: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        _thumNails(),
-                        _basicProfiles(),
-                        _optionalProfiles(),
-                        _createProfileButton(),
-                      ],
-                    ),
-                  )),
+          : Stack(
+              children: [
+                GestureDetector(
+                  onTap: FocusScope.of(context).unfocus,
+                  child: Scaffold(
+                      appBar: AppBar(
+                        title: const Text("프로필 생성"),
+                        titleTextStyle: TextStyle(
+                            color: ThemeColor.fontColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600),
+                        backgroundColor: Colors.white,
+                        elevation: 0.0,
+                      ),
+                      body: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            _thumNails(),
+                            _basicProfiles(),
+                            _optionalProfiles(),
+                            _createProfileButton(),
+                          ],
+                        ),
+                      )),
+                ),
+                _resisterLoading(),
+              ],
             ),
     );
   }
@@ -508,6 +514,13 @@ class OnboardScreen extends GetView<OnboardingController> {
             child: LoadingAnimationWidget.fourRotatingDots(
                 color: ThemeColor.fontColor, size: 40),
           ),
+        ),
+      );
+
+  Widget _resisterLoading() => Obx(
+        () => Offstage(
+          offstage: (controller.isLoading == Status.loading) ? false : true,
+          child: const OffsetLoadingWidget(),
         ),
       );
 }

@@ -23,15 +23,15 @@ class OnboardingController extends GetxController with ToastMessage {
   final Rx<List<List<File?>>> _selectProfileImages = Rx<List<List<File?>>>(
       List.generate(2, (index) => List.generate(3, (index) => null)));
 
-  final RxBool _isLoading = true.obs;
+  final Rx<Status> _isLoading = Rx<Status>(Status.loaded);
 
-  bool get isLoading => _isLoading.value;
+  Status get isLoading => _isLoading.value;
 
   final Rxn<Gender> _gender = Rxn<Gender>();
 
   /// 생년 인덱스
   final List<String> _yearsList =
-      List.generate(DateTime.now().year - 1900, (index) => "${index + 1901}년");
+      List.generate(DateTime.now().year - 1980, (index) => "${index + 1981}년");
   int _yearIndex = 0;
 
   /// 월 인덱스
@@ -93,7 +93,7 @@ class OnboardingController extends GetxController with ToastMessage {
   /// 확인하는 메소드
   /// 사용자 정보가 있다면 바로 홈 페이지로 라이팅함.
   void _getUserData() async {
-    await Future.delayed(const Duration(seconds: 3));
+    _isLoading(Status.loading);
     try {
       final memberInfo = await userRepository.searchMyInfo();
       Get.off(() => const HomeScreen(), binding: HomeBinding());
@@ -101,7 +101,7 @@ class OnboardingController extends GetxController with ToastMessage {
     } catch (err) {
       showToast("프로필을 등록해야만 합니다!");
     } finally {
-      _isLoading(false);
+      _isLoading(Status.loaded);
     }
   }
 
@@ -130,7 +130,7 @@ class OnboardingController extends GetxController with ToastMessage {
   /// 생년월일 중 연도를 고르는 함수
   void pickBirthdayYear() {
     Get.bottomSheet(ItemSelectBottomSheet(
-      items: _yearsList,
+      items: _yearsList.reversed.toList(),
       onSelectedItemChanged: (value) {
         _yearIndex = value;
       },
@@ -138,7 +138,7 @@ class OnboardingController extends GetxController with ToastMessage {
         if (_year.value != "" || _month.value != "" || _day.value != "") {
           _initBirthDay();
         }
-        _year(_yearIndex + 1901);
+        _year(DateTime.now().year - _yearIndex);
 
         _monthList = List.generate(12, (index) => "${index + 1}월");
         Get.back();
@@ -191,12 +191,12 @@ class OnboardingController extends GetxController with ToastMessage {
   /// 사용자의 키를 설정하는 함수
   void pickMyHeight() {
     Get.bottomSheet(ItemSelectBottomSheet(
-      items: List.generate(100, (index) => "${index + 150}cm"),
+      items: List.generate(60, (index) => "${index + 140}cm"),
       onSelectedItemChanged: (value) {
         _heightIndex = value;
       },
       onDone: () {
-        _height((_heightIndex + 150).toString());
+        _height((_heightIndex + 140).toString());
         Get.back();
       },
     ));
@@ -245,7 +245,7 @@ class OnboardingController extends GetxController with ToastMessage {
       showToast("최소 3개 이상 프로필을 등록해주세요!");
       return;
     }
-
+    _isLoading(Status.loading);
     dio.FormData data = dio.FormData.fromMap({"file": images});
 
     // final data = dio.FormData.fromMap({"file": multiPartFiles});
@@ -266,10 +266,15 @@ class OnboardingController extends GetxController with ToastMessage {
           image: urls.first);
 
       final data = user.toJson();
-      final response = userRepository.updateUserInfo(data);
-
-      UserController.to.setMyInfo(user);
-      Get.off(() => const HomeScreen(), binding: HomeBinding());
+      try {
+        final response = await userRepository.updateUserInfo(data);
+        UserController.to.setMyInfo(response);
+        Get.off(() => const HomeScreen(), binding: HomeBinding());
+      } catch (e) {
+        showToast("에러가 발생했습니다. 잠시후에 다시 시도해주세요!");
+      } finally {
+        _isLoading(Status.loaded);
+      }
     }
   }
 }
