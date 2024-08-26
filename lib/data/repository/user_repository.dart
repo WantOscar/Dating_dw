@@ -16,22 +16,9 @@ class UserRepository extends g.GetxService {
   }
 
   Future<List<String>> uploadImage(FormData data) async {
-    try {
-      final response =
-          await dio.post("/images/s3-upload", data: data, queryParameters: {
-        "type": "profile",
-      });
-
-      if (response.statusCode == 201) {
-        print(response.data);
-        return List<String>.from(response.data["imageList"]);
-      } else {
-        return [];
-      }
-    } on Exception catch (e) {
-      print(e.toString());
-    }
-    return [];
+    return dio.post("/images/s3-upload", data: data, queryParameters: {
+      "type": "profile",
+    }).then((response) => List<String>.from(response.data["imageList"]));
   }
 
   Future<User> updateUserInfo(Map<String, dynamic> data) async {
@@ -43,12 +30,8 @@ class UserRepository extends g.GetxService {
   Future<User> getUser(Map<String, dynamic> nickName, {Dio? d}) async {
     d ??= dio;
 
-    final response = await d.get("/member/profile/another/nick-name",
-        queryParameters: nickName);
-    if (response.statusCode == 200) {
-      return User.fromJson(response.data);
-    } else {
-      throw Exception();
-    }
+    return d
+        .get("/member/profile/another/nick-name", queryParameters: nickName)
+        .then((response) => User.fromJson(response.data));
   }
 }
