@@ -20,32 +20,7 @@ class ChattingRoom extends GetView<ChattingRoomController> {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize,
-          child: ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaY: 10.0, sigmaX: 10.0),
-              child: AppBar(
-                leading: GestureDetector(
-                  onTap: controller.back,
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: ThemeColor.fontColor,
-                  ),
-                ),
-                backgroundColor: Colors.white.withOpacity(0.7),
-                elevation: 0.0,
-                title: Text(
-                  target.nickName!,
-                  style: TextStyle(
-                      color: ThemeColor.fontColor,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-        ),
+        appBar: _appBar(),
         body: Column(
           children: [
             _chatBody(),
@@ -134,6 +109,33 @@ class ChattingRoom extends GetView<ChattingRoomController> {
                 ),
                 filled: true,
                 fillColor: const Color(0xffdfdfdf)),
+          ),
+        ),
+      );
+
+  PreferredSizeWidget _appBar() => PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaY: 10.0, sigmaX: 10.0),
+            child: AppBar(
+              leading: GestureDetector(
+                onTap: controller.back,
+                child: Icon(
+                  Icons.arrow_back,
+                  color: ThemeColor.fontColor,
+                ),
+              ),
+              backgroundColor: Colors.white.withOpacity(0.7),
+              elevation: 0.0,
+              title: Text(
+                target.nickName!,
+                style: TextStyle(
+                    color: ThemeColor.fontColor,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ),
       );

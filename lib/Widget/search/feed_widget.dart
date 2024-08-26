@@ -11,34 +11,27 @@ class FeedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            _showApply(context, feed);
-          },
-          child: Container(
-            height: 200,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 252, 207, 222),
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Column(
-              children: [
-                _profile(context, feed),
-                _title(feed),
-              ],
-            ),
+    return GestureDetector(
+      onTap: () {
+        _showApply(context, feed);
+      },
+      child: Card(
+        elevation: 1.0,
+        shadowColor: const Color(0xffdfdfdf),
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
+        color: Colors.white,
+        child: SizedBox(
+          height: 200,
+          width: double.infinity,
+          child: Column(
+            children: [
+              _profile(context, feed),
+              _title(feed),
+            ],
           ),
         ),
-        const SizedBox(height: 10),
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Divider(color: Color.fromARGB(255, 252, 207, 222)),
-        ),
-        const SizedBox(height: 10),
-      ],
+      ),
     );
   }
 
