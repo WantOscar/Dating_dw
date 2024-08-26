@@ -29,17 +29,10 @@ class AuthService extends GetxService implements AuthServiceImpl {
   /// 실패할 경우 에러메시지를 반환함.
   @override
   Future<String?> login(Map<String, dynamic> data) async {
-    try {
-      final response = await dio.post(ApiUrl.login, data: data);
-      if (response.statusCode == 200) {
-        await tokenProvider.saveTokenInfo(response.data);
-        return response.data["accessToken"];
-      } else {
-        return null;
-      }
-    } on Exception {
-      return null;
-    }
+    return dio.post(ApiUrl.login, data: data).then((response) {
+      tokenProvider.saveTokenInfo(response.data);
+      return response.data["accessToken"];
+    });
   }
 
   /// 로그아웃 메소드
@@ -50,15 +43,15 @@ class AuthService extends GetxService implements AuthServiceImpl {
   @override
   Future<void> logOut() async {
     final refreshToken = await tokenProvider.getRefreshToken();
-    final response = await dio.delete(ApiUrl.logout,
-        options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}));
-    if (response.statusCode == 200) {
+    return dio
+        .delete(ApiUrl.logout,
+            options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}))
+        .then((response) {
       tokenProvider.deleteTokenInfo();
+
       Get.offAll(() => const LoginScreen(),
           transition: Transition.noTransition);
-    } else {
-      print('로그아웃');
-    }
+    });
   }
 
   /// 회원탈퇴 메소드
@@ -70,14 +63,14 @@ class AuthService extends GetxService implements AuthServiceImpl {
   Future<void> delete() async {
     final refreshToken = await tokenProvider.getRefreshToken();
 
-    final response = await dio.delete(ApiUrl.delete,
-        options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}));
-    if (response.statusCode == 200) {
+    return dio
+        .delete(ApiUrl.delete,
+            options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}))
+        .then((_) {
       tokenProvider.deleteTokenInfo();
+
       Get.offAll(() => const LoginScreen());
-    } else {
-      print('회원탈퇴');
-    }
+    });
   }
 
   /// 이메일 인증 메소드
@@ -92,13 +85,8 @@ class AuthService extends GetxService implements AuthServiceImpl {
 
   @override
   Future<void> updateFCMtoken(String fcmToken, String accessToken) async {
-    final response = await dio.post("/member/deviceToken",
+    dio.post("/member/deviceToken",
         queryParameters: {"deviceToken": fcmToken},
         options: Options(headers: {"Authorization": "Bearer $accessToken"}));
-    if (response.statusCode == 201) {
-      return;
-    } else {
-      throw Exception("디바이스 토큰 갱신 에러");
-    }
   }
 }

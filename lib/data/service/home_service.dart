@@ -11,8 +11,8 @@ class HomeService {
   Future<List<List<User>>> getHomeDatas() async {
     final response = await homeRepository.getHomeDatas();
     List randomMemberList = response["randomMemberList"];
-    List sendHeartList = response["sendHeartList"];
-    List receiverHeartList = response["receiverHeartList"];
+    List sendHeartList = response["favoriteMemberList"];
+    List receiverHeartList = response["fanMemberList"];
     return [
       randomMemberList.map((json) => User.fromJson(json)).toList(),
       sendHeartList.map((json) => User.fromJson(json)).toList(),

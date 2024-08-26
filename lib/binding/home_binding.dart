@@ -12,15 +12,15 @@ import 'package:get/get.dart';
 class HomeBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put(BottomNavController(), permanent: true);
-    Get.put(ChatController(service: ChatService()), permanent: true);
+    Get.put(BottomNavController());
+    Get.put(ChatController(service: ChatService()));
     Get.put(
-        FeedController(
-            feedService: FeedService(feedRepository: FeedRepository())),
-        permanent: true);
+      FeedController(
+          feedService: FeedService(feedRepository: FeedRepository())),
+    );
     Get.put(
-        MainController(
-            homeService: HomeService(homeRepository: HomeRepository())),
-        permanent: true);
+      MainController(
+          homeService: HomeService(homeRepository: HomeRepository())),
+    );
   }
 }
