@@ -10,12 +10,17 @@ import 'package:get/get.dart';
 class ChatController extends GetxController
     with GetSingleTickerProviderStateMixin, UseToast {
   final ChatService service;
-  final Rx<List<ChattingRoomModel>> _chattings =
+  final Rx<List<ChattingRoomModel>> _personalChattings =
+      Rx<List<ChattingRoomModel>>([]);
+
+  final Rx<List<ChattingRoomModel>> _meetingChattings =
       Rx<List<ChattingRoomModel>>([]);
   static ChatController get to => Get.find();
   ChatController({required this.service});
 
-  List<ChattingRoomModel> get chattings => _chattings.value;
+  List<ChattingRoomModel> get personalChattings => _personalChattings.value;
+
+  List<ChattingRoomModel> get meetingChattings => _meetingChattings.value;
 
   @override
   void onInit() {
@@ -26,8 +31,8 @@ class ChatController extends GetxController
   void getMyChattingList() async {
     final result = await service.getMyChattingList();
     if (result != null) {
-      _chattings.value.clear();
-      _chattings(result);
+      _personalChattings.value.clear();
+      _personalChattings(result);
     }
   }
 
