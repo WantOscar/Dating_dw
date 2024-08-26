@@ -34,16 +34,10 @@ class UserRepository extends g.GetxService {
     return [];
   }
 
-  updateUserInfo(Map<String, dynamic> data) async {
-    try {
-      final response = await dio.post("/member/profile/save", data: data);
-
-      if (response.statusCode == 200) {
-        print(response.data);
-      }
-    } on Exception {
-      print("error");
-    }
+  Future<User> updateUserInfo(Map<String, dynamic> data) async {
+    return dio
+        .post("/member/profile/save", data: data)
+        .then((response) => response.data);
   }
 
   Future<User> getUser(Map<String, dynamic> nickName, {Dio? d}) async {

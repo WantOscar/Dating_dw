@@ -7,11 +7,12 @@ class ItemSelectBottomSheet extends StatelessWidget {
   final void Function(int value)? onSelectedItemChanged;
   final void Function()? onDone;
   final List<String> items;
-  const ItemSelectBottomSheet(
-      {super.key,
-      this.onSelectedItemChanged,
-      required this.items,
-      this.onDone});
+  const ItemSelectBottomSheet({
+    super.key,
+    this.onSelectedItemChanged,
+    required this.items,
+    this.onDone,
+  });
 
   @override
   Widget build(BuildContext context) {
