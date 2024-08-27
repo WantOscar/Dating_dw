@@ -4,7 +4,10 @@ import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/data/service/chat_service.dart';
 import 'package:dating/screen/chat/chatting_room_screen.dart';
+import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dating/utils/show_toast.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController
@@ -41,7 +44,10 @@ class ChatController extends GetxController
       final chatRoomId = await service.makeChattingRoom(target.id!);
       Get.to(() => ChattingRoom(target: target), binding: BindingsBuilder(() {
         Get.put(ChattingRoomController(
-            userRepository: UserRepository(),
+            userRepository: UserRepository(
+                dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
+                  ..interceptors.add(AuthInterceptor())
+                  ..interceptors.add(BaseIntercepter())),
             chatRoomId: chatRoomId,
             targetName: target.nickName!));
       }));

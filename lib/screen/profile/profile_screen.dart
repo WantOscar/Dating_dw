@@ -7,7 +7,10 @@ import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_profile.screen.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -82,7 +85,11 @@ class ProfileScreen extends GetView<UserController> {
             Get.to(() => const ProfileEditScreen(),
                 binding: BindingsBuilder(() {
               // ProfileImageController();
-              Get.put(ProfileEditController(userRepository: UserRepository()));
+              Get.put(ProfileEditController(
+                  userRepository: UserRepository(
+                      dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
+                        ..interceptors.add(AuthInterceptor())
+                        ..interceptors.add(BaseIntercepter()))));
             }));
           },
           child: const Text(
