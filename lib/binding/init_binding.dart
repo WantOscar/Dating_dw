@@ -1,6 +1,9 @@
+import 'package:dating/controller/bottom_nav_controller.dart';
 import 'package:dating/controller/login_controller.dart';
+import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/repository/heart_repository.dart';
+import 'package:dating/data/repository/member_block_respository.dart';
 import 'package:dating/data/service/heart_service.dart';
 import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/data/repository/user_repository.dart';
@@ -16,5 +19,8 @@ class InitBinding implements Bindings {
           heartService: HeartService(heartRepository: HeartRepository()),
         ),
         permanent: true);
+    Get.put(MemberBlockController(
+        memberBlockRespository: MemberBlockRespository()));
+    Get.put(BottomNavController());
   }
 }
