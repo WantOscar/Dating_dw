@@ -8,10 +8,11 @@ import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dating/widget/profile/item_select_bottom_sheet.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/state_manager.dart';
+import 'package:get/instance_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:uuid/uuid.dart';
@@ -171,7 +172,7 @@ class OnboardingController extends GetxController with ToastMessage {
 
   /// 생년월일 중 일을 고르는 함수
   void pickBirthdayDay() {
-    if (_month.value == "" || _year.value == "") {
+    if (_month.value == 0 || _year.value == 0) {
       return;
     }
 
@@ -231,11 +232,11 @@ class OnboardingController extends GetxController with ToastMessage {
     /// 회원 정보 갱신 로직
 
     const uuid = Uuid();
-    List<dio.MultipartFile> images = [];
+    List<MultipartFile> images = [];
     for (List<File?> rows in _selectProfileImages.value) {
       for (File? image in rows) {
         if (image != null) {
-          images.add(dio.MultipartFile.fromFileSync(image.path,
+          images.add(MultipartFile.fromFileSync(image.path,
               filename: "${uuid.v1()}.jpeg"));
         }
       }
@@ -246,10 +247,7 @@ class OnboardingController extends GetxController with ToastMessage {
       return;
     }
     _isLoading(Status.loading);
-    dio.FormData data = dio.FormData.fromMap({"file": images});
-
-    // final data = dio.FormData.fromMap({"file": multiPartFiles});
-    print(data.files);
+    FormData data = FormData.fromMap({"file": images});
     final urls = await userRepository.uploadImage(data);
     if (urls.isNotEmpty) {
       NumberFormat format = NumberFormat("00");
@@ -265,9 +263,8 @@ class OnboardingController extends GetxController with ToastMessage {
           images: urls,
           image: urls.first);
 
-      final data = user.toJson();
       try {
-        final response = await userRepository.updateUserInfo(data);
+        final response = await userRepository.updateUserInfo(user);
         UserController.to.setMyInfo(response);
         Get.off(() => const HomeScreen(), binding: HomeBinding());
       } catch (e) {

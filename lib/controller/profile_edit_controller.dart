@@ -86,19 +86,16 @@ class ProfileEditController extends GetxController {
       }
     }
     if (uploadImages.isNotEmpty) {
-      print(images);
       dio.FormData data = dio.FormData.fromMap({"file": uploadImages});
-      print(data.files);
+
       final newImageUrls = await userRepository.uploadImage(data);
       imageUrls.addAll(newImageUrls);
-      print(imageUrls);
+
       _user.value!.images = imageUrls;
     }
 
     if (_user.value != null) {
-      print(user!.toJson());
-      final response = await userRepository.updateUserInfo(user!.toJson());
-      print(response);
+      final response = await userRepository.updateUserInfo(user!);
       Get.back();
     }
   }

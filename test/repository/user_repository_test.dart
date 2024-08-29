@@ -1,3 +1,4 @@
+import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,11 +10,11 @@ import "user_repository_test.mocks.dart";
 
 void main() {
   late Dio dio;
-  late UserRepository repository;
+  late UserRepositoryImpl repository;
 
   setUp(() {
     dio = MockDio();
-    repository = UserRepository(dio: dio);
+    repository = UserRepositoryImpl(dio: dio);
   });
   group("User Repository Unit Test", () {
     test("특정 유저 정보를 조회테스트", () async {
@@ -159,7 +160,7 @@ void main() {
               data: json,
               statusCode: 201));
 
-      final result = await repository.updateUserInfo(json);
+      final result = await repository.updateUserInfo(User.fromJson(json));
       verify(dio.post("/member/profile/save", data: json)).called(1);
       expect(result.nickName, "string");
     });
@@ -189,7 +190,7 @@ void main() {
               data: {})));
 
       expect(
-          repository.updateUserInfo(json),
+          repository.updateUserInfo(User.fromJson(json)),
           throwsA(predicate((err) =>
               err is DioException && err.response?.statusCode == 400)));
     });

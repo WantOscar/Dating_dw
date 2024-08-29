@@ -86,7 +86,7 @@ class ProfileScreen extends GetView<UserController> {
                 binding: BindingsBuilder(() {
               // ProfileImageController();
               Get.put(ProfileEditController(
-                  userRepository: UserRepository(
+                  userRepository: UserRepositoryImpl(
                       dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
                         ..interceptors.add(AuthInterceptor())
                         ..interceptors.add(BaseIntercepter()))));

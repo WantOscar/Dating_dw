@@ -79,7 +79,7 @@ class LoginController extends GetxController with UseToast {
   void _moveToOnboard() {
     Get.off(() => const OnboardScreen(), binding: BindingsBuilder(() {
       Get.put(OnboardingController(
-          userRepository: UserRepository(
+          userRepository: UserRepositoryImpl(
               dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
                 ..interceptors.add(AuthInterceptor())
                 ..interceptors.add(BaseIntercepter()))));

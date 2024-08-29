@@ -15,7 +15,7 @@ class InitBinding implements Bindings {
     Get.put(LoginController(authService: AuthService()));
     Get.put(
         UserController(
-          userRepository: UserRepository(
+          userRepository: UserRepositoryImpl(
               dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
                 ..interceptors.add(AuthInterceptor())
                 ..interceptors.add(BaseIntercepter())),
