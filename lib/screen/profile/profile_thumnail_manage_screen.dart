@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dating/Widget/common/icon_header.dart';
+import 'package:dating/widget/common/icon_header.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 

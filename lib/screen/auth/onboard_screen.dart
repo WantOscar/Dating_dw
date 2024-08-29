@@ -1,5 +1,5 @@
-import 'package:dating/Widget/common/offset_loading_widget.dart';
-import 'package:dating/Widget/common/property_text_field.dart';
+import 'package:dating/widget/common/offset_loading_widget.dart';
+import 'package:dating/widget/common/property_text_field.dart';
 import 'package:dating/controller/init_profile_upload_screen_controller.dart';
 import 'package:dating/controller/onboard_controller.dart';
 import 'package:dating/screen/profile/init_profile_upload_screen.dart';

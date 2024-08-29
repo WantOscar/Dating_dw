@@ -1,4 +1,4 @@
-import 'package:dating/Widget/common/warning_window.dart';
+import 'package:dating/widget/common/warning_window.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/screen/home_screen.dart';
@@ -21,14 +21,14 @@ class FeedWriteController extends GetxController {
       titleText: '피드 작성 취소',
       explainText: '현재 입력사항을 모두 취소하고 돌아가시겠습니까?',
       onTap: () {
-        Get.offAll(() => const HomeScreen());
+        Get.until((route) => route.isFirst);
       },
       btnText: "작성취소",
     ));
   }
 
   void writeFeed() {
-    final Feed feed = Feed(title: _title, content: _content);
+    final Feed feed = Feed(title: _title, description: _content);
 
     Get.dialog(WarningWindow(
       titleText: '피드 작성 완료',

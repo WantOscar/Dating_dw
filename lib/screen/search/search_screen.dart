@@ -1,4 +1,4 @@
-import 'package:dating/Widget/search/feed_widget.dart';
+import 'package:dating/widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -26,24 +26,27 @@ class SearchScreen extends GetView<FeedController> {
       ? const Center(
           child: Text("아직 피드가 없습니다."),
         )
-      : Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    final Feed feed = controller.feeds[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 4.0, horizontal: 12.0),
-                      child: FeedWidget(feed: feed),
-                    );
-                  },
-                  itemCount: controller.feeds.length),
-            ),
-            const SizedBox(
-              height: 100,
-            )
-          ],
+      : Padding(
+          padding: const EdgeInsets.only(top: 12.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      final Feed feed = controller.feeds[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 14.0, horizontal: 16.0),
+                        child: FeedWidget(feed: feed),
+                      );
+                    },
+                    itemCount: controller.feeds.length),
+              ),
+              const SizedBox(
+                height: 100,
+              )
+            ],
+          ),
         );
 
   PreferredSizeWidget _appBar() => PreferredSize(

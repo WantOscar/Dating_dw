@@ -1,4 +1,4 @@
-import 'package:dating/Widget/chat/chatting_box.dart';
+import 'package:dating/widget/chat/chatting_box.dart';
 import 'package:dating/controller/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

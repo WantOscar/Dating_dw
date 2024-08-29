@@ -1,5 +1,5 @@
-import 'package:dating/Widget/common/icon_header.dart';
-import 'package:dating/Widget/main/my_favorite_avatar.dart';
+import 'package:dating/widget/common/icon_header.dart';
+import 'package:dating/widget/main/my_favorite_avatar.dart';
 import 'package:dating/controller/main_controller.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:flutter/material.dart';

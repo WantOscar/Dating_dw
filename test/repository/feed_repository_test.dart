@@ -52,7 +52,7 @@ void main() {
       verify(dio.get("/search/1")).called(1);
 
       expect(result.title, "string");
-      expect(result.content, "string");
+      expect(result.description, "string");
     });
 
     test("피드 생성 테스트", () async {

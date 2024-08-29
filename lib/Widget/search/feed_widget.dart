@@ -5,31 +5,42 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class FeedWidget extends StatelessWidget {
+class FeedWidget extends StatefulWidget {
   final Feed feed;
   const FeedWidget({super.key, required this.feed});
 
   @override
+  State<FeedWidget> createState() => _FeedWidgetState();
+}
+
+class _FeedWidgetState extends State<FeedWidget> {
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      borderRadius: BorderRadius.circular(24.0),
+      highlightColor: const Color(0xffffe6f0),
       onTap: () {
-        _showApply(context, feed);
+        _showApply();
       },
-      child: Card(
-        elevation: 1.0,
-        shadowColor: const Color(0xffdfdfdf),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.0)),
-        color: Colors.white,
-        child: SizedBox(
-          height: 200,
-          width: double.infinity,
-          child: Column(
-            children: [
-              _profile(context, feed),
-              _title(feed),
-            ],
-          ),
+      child: Ink(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 6), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            _profile(),
+            _title(),
+          ],
         ),
       ),
     );
@@ -38,18 +49,18 @@ class FeedWidget extends StatelessWidget {
   /// 상대방의 피드를 누르면 팝업창이 뜸
   /// 세부 글 내용을 볼 수 있고,
   /// 참여 신청버튼을 통해 신청 가능.
-  Future<dynamic> _showApply(BuildContext context, Feed feed) {
+  Future<dynamic> _showApply() {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        title: _profile(context, feed),
+        title: _profile(),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _title(feed),
+            _title(),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -57,7 +68,7 @@ class FeedWidget extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      feed.content.toString(),
+                      widget.feed.description.toString(),
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black87,
@@ -78,7 +89,7 @@ class FeedWidget extends StatelessWidget {
 
   /// 글쓴이의 프로필을 보여줌
   /// 우측 아이콘은 글쓴이를 차단/취소 가능.
-  Widget _profile(BuildContext context, Feed feed) {
+  Widget _profile() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Row(
@@ -226,14 +237,14 @@ class FeedWidget extends StatelessWidget {
 
   /// 피드 타이틀을 보여줌
   /// ex) 3:3 과팅 구해요
-  Widget _title(Feed feed) {
+  Widget _title() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Row(
         children: [
           Flexible(
             child: Text(
-              feed.title.toString(),
+              widget.feed.title.toString(),
               style: const TextStyle(
                 fontSize: 17,
                 color: Colors.black87,

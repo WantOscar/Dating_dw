@@ -1,6 +1,6 @@
-import 'package:dating/Widget/common/cammit_app_bar.dart';
-import 'package:dating/Widget/profile/hobby_container.dart';
-import 'package:dating/Widget/profile/profile_image.dart';
+import 'package:dating/widget/common/cammit_app_bar.dart';
+import 'package:dating/widget/profile/hobby_container.dart';
+import 'package:dating/widget/profile/profile_image.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/profile_image_controller.dart';
 import 'package:dating/screen/profile/profile_thumnail_manage_screen.dart';

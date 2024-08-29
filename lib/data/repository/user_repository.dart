@@ -1,5 +1,4 @@
 import 'package:dating/data/model/user.dart';
-import 'package:dating/utils/api_urls.dart';
 import 'package:dio/dio.dart';
 import 'package:get/state_manager.dart';
 
