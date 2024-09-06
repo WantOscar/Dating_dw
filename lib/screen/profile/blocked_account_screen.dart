@@ -1,12 +1,9 @@
-<<<<<<< HEAD
-import 'package:dating/widget/common/icon_header.dart';
-=======
 import 'package:dating/Widget/common/icon_header.dart';
 import 'package:dating/Widget/setting_profile/member_block_avatar.dart';
 import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/utils/enums.dart';
->>>>>>> 843e625526ba218337929b556bb709f475ab9667
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BlockedAccountScreen extends GetView<MemberBlockController> {
   const BlockedAccountScreen({super.key});
