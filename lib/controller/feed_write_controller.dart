@@ -28,7 +28,7 @@ class FeedWriteController extends GetxController {
   }
 
   void writeFeed() {
-    final Feed feed = Feed(title: _title, description: _content);
+    final Feed feed = Feed(title: _title, content: _content);
 
     Get.dialog(WarningWindow(
       titleText: '피드 작성 완료',
