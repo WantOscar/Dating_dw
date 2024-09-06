@@ -64,6 +64,7 @@ dependencies:
   mockito: ^5.4.4
   flutter_launcher_icons: ^0.13.1
   permission_handler: ^11.3.1
+  badges: ^3.1.2
 
 dev_dependencies:
   flutter_test:
