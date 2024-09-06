@@ -4,8 +4,10 @@ import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/widget/common/warning_window.dart';
-import 'package:dio/dio.dart' as dio;
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/state_manager.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:uuid/uuid.dart';
 
@@ -79,14 +81,14 @@ class ProfileEditController extends GetxController {
     List<String> imageUrls = [];
     for (var image in _user.value!.images!) {
       if (image is! String) {
-        uploadImages.add(dio.MultipartFile.fromFileSync(image.path,
+        uploadImages.add(MultipartFile.fromFileSync(image.path,
             filename: "${uuid.v1()}.jpeg"));
       } else {
         imageUrls.add(image);
       }
     }
     if (uploadImages.isNotEmpty) {
-      dio.FormData data = dio.FormData.fromMap({"file": uploadImages});
+      FormData data = FormData.fromMap({"file": uploadImages});
 
       final newImageUrls = await userRepository.uploadImage(data);
       imageUrls.addAll(newImageUrls);
@@ -95,7 +97,7 @@ class ProfileEditController extends GetxController {
     }
 
     if (_user.value != null) {
-      await userRepository.updateUserInfo(user!);
+      await userRepository.updateUserInfo(_user.value!);
       Get.back();
     }
   }

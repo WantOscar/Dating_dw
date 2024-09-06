@@ -10,7 +10,7 @@ import 'package:get/route_manager.dart';
 class BaseIntercepter extends Interceptor with ToastMessage {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    final errorMessage = err.response?.data["ErrorMessage"];
+    final errorMessage = err.response?.data;
     debugPrint("[ERROR OCCURED][${err.response?.statusCode}]");
     debugPrint("[ERROR OCCURED][${err.type}][${err.requestOptions.uri}]");
     debugPrint("[ERROR OCCURED][$errorMessage]");
