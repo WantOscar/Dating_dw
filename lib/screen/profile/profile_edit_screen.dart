@@ -210,6 +210,8 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Center(
                 child: TextFormField(
+                  controller: controller.descriptionController,
+                  onChanged: controller.changeDescription,
                   maxLength: 30,
                   style: const TextStyle(
                     decorationThickness: 0,
@@ -289,7 +291,9 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                   children: [
                     Flexible(
                       child: Text(
-                        controller.user!.address!,
+                        (controller.address.isEmpty)
+                            ? controller.user!.address!
+                            : controller.address,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 14,

@@ -6,9 +6,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 @pragma('vm:entry-point')
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print(message.notification?.title);
-  print(message.notification?.body);
-  print(message.data);
+  debugPrint(message.notification?.title);
+  debugPrint(message.notification?.body);
+  debugPrint(message.data.toString());
 }
 
 class FirebaseApi {
@@ -21,7 +21,7 @@ class FirebaseApi {
     NotificationSettings settings =
         await _firebaseMessaging.requestPermission();
 
-    print('User granted permission: ${settings.authorizationStatus}');
+    debugPrint('User granted permission: ${settings.authorizationStatus}');
 
     final fcmToken = await _firebaseMessaging.getToken();
 
@@ -31,7 +31,7 @@ class FirebaseApi {
       // Error getting token.
     });
 
-    print("token : $fcmToken");
+    debugPrint("token : $fcmToken");
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -61,7 +61,7 @@ class FirebaseApi {
       RemoteNotification? notification = message.notification;
 
       if (notification != null) {
-        print(notification.body);
+        debugPrint(notification.body);
         showNotification(notification);
       }
     });

@@ -4,8 +4,11 @@ import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/widget/common/warning_window.dart';
-import 'package:dio/dio.dart' as dio;
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/state_manager.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:uuid/uuid.dart';
 
@@ -24,6 +27,8 @@ class ProfileEditController extends GetxController {
 
   final RxString _address = "".obs;
 
+  String get address => _address.value;
+
   // List<dynamic> get images => List.generate(6, (index) => null);
 
   List<dynamic> get images {
@@ -33,6 +38,14 @@ class ProfileEditController extends GetxController {
     }
     return images;
   }
+
+  final TextEditingController _descriptionController = TextEditingController();
+
+  TextEditingController get descriptionController => _descriptionController;
+
+  String _description = "";
+
+  String get desciption => _description;
 
   /// 뒤로 이동하는 함수
   void back() {
@@ -58,8 +71,6 @@ class ProfileEditController extends GetxController {
       /// 주소지 중 상세 주소는 사용하지 않음.
       var myAddress = result.address.toString().split(" ");
       _address(myAddress.getRange(0, 3).toList().join(" "));
-      _user.value!.address = _address.value;
-      _user.refresh();
     }
   }
 
@@ -79,24 +90,41 @@ class ProfileEditController extends GetxController {
     List<String> imageUrls = [];
     for (var image in _user.value!.images!) {
       if (image is! String) {
-        uploadImages.add(dio.MultipartFile.fromFileSync(image.path,
+        uploadImages.add(MultipartFile.fromFileSync(image.path,
             filename: "${uuid.v1()}.jpeg"));
       } else {
         imageUrls.add(image);
       }
     }
     if (uploadImages.isNotEmpty) {
-      dio.FormData data = dio.FormData.fromMap({"file": uploadImages});
+      FormData data = FormData.fromMap({"file": uploadImages});
 
       final newImageUrls = await userRepository.uploadImage(data);
       imageUrls.addAll(newImageUrls);
-
-      _user.value!.images = imageUrls;
     }
-
-    if (_user.value != null) {
-      final response = await userRepository.updateUserInfo(user!);
+    if (user != null) {
+      final newUser = User(
+        id: user?.id,
+        nickName: user?.nickName,
+        description: (_description.isEmpty) ? user?.description : _description,
+        birthDay: user?.birthDay,
+        address: (_address.value.isEmpty) ? user?.address : _address.value,
+        gender: user?.gender,
+        age: user?.age,
+        height: user?.height,
+        images: imageUrls,
+        image: imageUrls.first,
+        personalInfo: user?.personalInfo,
+        personality: user?.personality,
+        likePersonality: user?.likePersonality,
+      );
+      final result = await userRepository.updateUserInfo(newUser);
+      UserController.to.updateUserInfo(result);
       Get.back();
     }
+  }
+
+  void changeDescription(String value) {
+    _description = value;
   }
 }

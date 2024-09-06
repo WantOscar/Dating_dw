@@ -136,7 +136,7 @@ class OnboardingController extends GetxController with ToastMessage {
         _yearIndex = value;
       },
       onDone: () {
-        if (_year.value != "" || _month.value != "" || _day.value != "") {
+        if (_year.value != 0 || _month.value != 0 || _day.value != 0) {
           _initBirthDay();
         }
         _year(DateTime.now().year - _yearIndex);
@@ -149,7 +149,7 @@ class OnboardingController extends GetxController with ToastMessage {
 
   /// 생년월일 중 월을 고르는 함수
   void pickBirthdayMonth() {
-    if (_year.value == "") {
+    if (_year.value != 0) {
       return;
     }
 

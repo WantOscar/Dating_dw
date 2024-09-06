@@ -7,7 +7,6 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class CameraScreenController extends GetxController {
   late CameraController _controller;
-  late Rx<Future<void>> _initializedCameraController;
   final RxDouble _currentZoomLevel = 1.0.obs;
   final RxDouble _minZoomLevel = 1.0.obs;
   final RxDouble _maxZoomLevel = 1.0.obs;
@@ -51,12 +50,12 @@ class CameraScreenController extends GetxController {
       _minZoomLevel.value = await _controller.getMinZoomLevel();
 
       _maxZoomLevel.value = await _controller.getMaxZoomLevel();
-      print(_minZoomLevel.value);
-      print(_maxZoomLevel.value);
+      debugPrint(_minZoomLevel.value.toString());
+      debugPrint(_maxZoomLevel.value.toString());
     });
 
     _isLoaded(true);
-    print(_isLoaded.value);
+    debugPrint(_isLoaded.value.toString());
   }
 
   /// 카메라 확대 및 축소 메소드
@@ -79,11 +78,11 @@ class CameraScreenController extends GetxController {
     try {
       await _controller.initialize();
       XFile picture = await _controller.takePicture();
-      print(picture.path);
+      debugPrint(picture.path);
       cropImage(picture);
     } on Exception catch (error) {
-      print("hello");
-      print(error);
+      debugPrint("hello");
+      debugPrint(error.toString());
     }
   }
 

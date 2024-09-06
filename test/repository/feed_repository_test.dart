@@ -1,7 +1,6 @@
 import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'feed_repository_test.mocks.dart';

@@ -10,10 +10,6 @@ class CameraScreen extends GetView<CameraScreenController> {
     return Obx(() => Scaffold(backgroundColor: Colors.black, body: _camera()));
   }
 
-  Widget _loading() => Container(
-        color: Colors.black,
-      );
-
   Widget _camera() => Stack(
         children: [
           _preview(),
