@@ -1,5 +1,7 @@
+import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/setting_password_controller.dart';
+import 'package:dating/data/repository/member_block_respository.dart';
 import 'package:dating/data/repository/setting_password.repository.dart';
 import 'package:dating/data/service/setting_password_service.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
@@ -113,7 +115,11 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
           ),
           IconButton(
               onPressed: () {
-                Get.to(const BlockedAccountScreen());
+                Get.to(() => const BlockedAccountScreen(),
+                    binding: BindingsBuilder(() {
+                  Get.put(MemberBlockController(
+                      memberBlockRespository: MemberBlockRespository()));
+                }));
               },
               icon: IconShape.iconArrowForward),
         ],
