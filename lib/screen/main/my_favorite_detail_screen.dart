@@ -1,3 +1,4 @@
+import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/icon_header.dart';
 import 'package:dating/widget/main/my_favorite_avatar.dart';
 import 'package:dating/controller/main_controller.dart';
@@ -11,13 +12,17 @@ class MyFavoriteDetailScreen extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const IconHeader(text: '내가 관심 있는 친구'),
+      appBar: IconHeader(
+        text: '내가 관심 있는 친구',
+        backAction: () => controller.quitFavoriteDetail,
+      ),
       body: Obx(
         () {
           return (controller.myFavoriteMember.isNotEmpty)
               ? SingleChildScrollView(
-                  child: Column(
-                    children: List.generate(
+                  controller: controller.scrollController,
+                  child: Column(children: [
+                    ...List.generate(
                       controller.myFavoriteMember.length,
                       (index) {
                         final user = controller.myFavoriteMember[index];
@@ -32,7 +37,18 @@ class MyFavoriteDetailScreen extends GetView<MainController> {
                         );
                       },
                     ),
-                  ),
+                    if (controller.isFavoriteLoading == Status.loading)
+                      const Padding(
+                        padding: EdgeInsets.all(30),
+                        child: Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                      ),
+                    if (controller.isFavoriteLimit)
+                      Container(
+                        height: 30,
+                      ),
+                  ]),
                 )
               : const Center(
                   child: Text(

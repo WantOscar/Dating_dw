@@ -1,7 +1,7 @@
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/setting_password_controller.dart';
 import 'package:dating/data/repository/user_repository.dart';
-import 'package:dating/screen/profile/account_information_screen.dart';
+import 'package:dating/screen/profile/change_password_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/screen/profile/setting_profile_row.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -10,8 +10,6 @@ import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -56,7 +54,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
         child: SettingProfileRow(
           label: "계정 확인 및 비밀번호 변경",
           onTap: () {
-            Get.to(() => const AccountInformationScreen(),
+            Get.to(() => const ChangePasswordScreen(),
                 binding: BindingsBuilder(() {
               Get.put(SettingPasswordController(
                   userRepository: UserRepositoryImpl(
