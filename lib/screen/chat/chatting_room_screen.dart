@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:dating/Widget/chat/chat_bubble.dart';
+import 'package:dating/widget/chat/chat_bubble.dart';
 import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/data/model/message_model.dart';
 import 'package:dating/data/model/user.dart';

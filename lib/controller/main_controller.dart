@@ -3,18 +3,20 @@ import 'package:dating/data/service/home_service.dart';
 import 'package:dating/screen/main/my_fan_detail_screen.dart';
 import 'package:dating/screen/main/my_favorite_detail_screen.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
+import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/show_toast.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController with UseToast {
-  final RxBool _isLoading = false.obs;
   final HomeService homeService;
+
+  final Rx<Status> _isLoading = Rx<Status>(Status.loaded);
+  Status get isLoading => _isLoading.value;
+
   final Rx<List<User>> _recommendMembers = Rx<List<User>>([]);
   final Rx<List<User>> _myFavoriteMembers = Rx<List<User>>([]);
   final Rx<List<User>> _myFanMembers = Rx<List<User>>([]);
-
-  bool get isLoading => _isLoading.value;
 
   List<User> get recommendMembers => _recommendMembers.value;
   List<User> get myFavoriteMember => _myFavoriteMembers.value;
@@ -29,12 +31,17 @@ class MainController extends GetxController with UseToast {
   }
 
   void _fetchData() async {
-    final data = await homeService.getHomeDatas();
-
-    _recommendMembers.value = data[0];
-    _myFavoriteMembers.value = data[1];
-    _myFanMembers.value = data[2];
-    print("${data[0].length} ${data[1].length} ${data[2].length}");
+    _isLoading(Status.loading);
+    try {
+      final data = await homeService.getHomeDatas();
+      _recommendMembers.value = data[0];
+      _myFavoriteMembers.value = data[1];
+      _myFanMembers.value = data[2];
+    } on Exception catch (_) {
+      showToast("서버와의 연결이 원할하지 않습니다.");
+    } finally {
+      _isLoading(Status.loaded);
+    }
   }
 
   void myFavoriteDetailList() {

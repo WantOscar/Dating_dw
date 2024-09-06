@@ -1,4 +1,4 @@
-import 'package:dating/Widget/common/offset_loading_widget.dart';
+import 'package:dating/widget/common/offset_loading_widget.dart';
 import 'package:dating/binding/reset_password_binding.dart';
 import 'package:dating/binding/resister_binding.dart';
 import 'package:dating/controller/login_controller.dart';

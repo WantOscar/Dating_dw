@@ -3,7 +3,10 @@ import 'package:dating/data/model/token_provider.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/screen/auth/onboard_screen.dart';
+import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dating/utils/enums.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -75,7 +78,11 @@ class LoginController extends GetxController with UseToast {
 
   void _moveToOnboard() {
     Get.off(() => const OnboardScreen(), binding: BindingsBuilder(() {
-      Get.put(OnboardingController(userRepository: UserRepository()));
+      Get.put(OnboardingController(
+          userRepository: UserRepositoryImpl(
+              dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
+                ..interceptors.add(AuthInterceptor())
+                ..interceptors.add(BaseIntercepter()))));
     }));
   }
 }

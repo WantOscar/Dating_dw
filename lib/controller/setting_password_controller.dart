@@ -1,11 +1,11 @@
-import 'package:dating/data/service/setting_password_service.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SettingPasswordController extends GetxController {
-  final SettingPasswordService settingPasswordService;
-  SettingPasswordController({required this.settingPasswordService});
+  final UserRepository userRepository;
+  SettingPasswordController({required this.userRepository});
 
   static SettingPasswordController get to => Get.find();
 
@@ -92,7 +92,7 @@ class SettingPasswordController extends GetxController {
       "checkNewPassword": _checkNewPw.value,
     };
     try {
-      final result = await settingPasswordService.postSettingPassword(data);
+      final result = await userRepository.postSettingPassword(data);
       Get.snackbar("성공", result, snackPosition: SnackPosition.BOTTOM);
       Get.off(() => const ProfileScreen());
     } catch (e) {

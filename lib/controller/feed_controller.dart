@@ -1,13 +1,13 @@
 import 'package:dating/controller/feed_write_controller.dart';
 import 'package:dating/data/model/feed.dart';
-import 'package:dating/data/service/feed_service.dart';
+import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:get/get.dart';
 
 class FeedController extends GetxController {
   final RxBool _isLoading = false.obs;
   final Rx<List<Feed>> _feeds = Rx<List<Feed>>([]);
-  final FeedService feedService;
+  final FeedRepositoryImpl feedRepository;
 
   static FeedController get to => Get.find();
 
@@ -16,7 +16,7 @@ class FeedController extends GetxController {
   List<Feed> get feeds => _feeds.value;
 
   FeedController({
-    required this.feedService,
+    required this.feedRepository,
   });
 
   @override
@@ -26,18 +26,14 @@ class FeedController extends GetxController {
   }
 
   void fetchFeeds() async {
-    final result = await feedService.getAllFeeds();
-    if (result != null) {
-      _feeds(result);
-    }
+    final result = await feedRepository.getAllFeeds();
+    _feeds(result);
   }
 
   void writeFeed(Feed feed) async {
-    final result = await feedService.postFeed(feed.toJson());
-    if (result != null) {
-      _feeds.value.add(result);
-      _feeds.refresh();
-    }
+    final result = await feedRepository.postFeed(feed.toJson());
+    _feeds.value.add(result);
+    _feeds.refresh();
   }
 
   void moveToWriteScreen() {

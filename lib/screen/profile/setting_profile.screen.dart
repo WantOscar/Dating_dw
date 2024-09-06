@@ -2,13 +2,14 @@ import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/setting_password_controller.dart';
 import 'package:dating/data/repository/member_block_respository.dart';
-import 'package:dating/data/repository/setting_password.repository.dart';
-import 'package:dating/data/service/setting_password_service.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,12 +62,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
           IconButton(
             onPressed: () {
               Get.to(() => const AccountInformationScreen(),
-                  binding: BindingsBuilder(() {
-                Get.put(SettingPasswordController(
-                    settingPasswordService: SettingPasswordService(
-                        settingPasswordRepository:
-                            SettingPasswordRepository())));
-              }));
+                  binding: BindingsBuilder(() {}));
             },
             icon: IconShape.iconArrowForward,
           ),

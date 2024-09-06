@@ -1,5 +1,5 @@
 import 'package:dating/screen/chat/dm_chat_screen.dart';
-import 'package:dating/screen/chat/multi_chat_screen.dart';
+import 'package:dating/screen/chat/meeting_chat_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +42,7 @@ class _ChattingScreenState extends State<ChattingScreen>
   }
 
   /// 단체 채팅방 목록을 보여주는 위젯
-  Widget _multiChat() => const MultiChatScreen();
+  Widget _multiChat() => const MeetingChatScreen();
 
   /// 개인 채팅방 목록을 보여주는 위젯.
   Widget _personalChat() => const DmChatScreen();

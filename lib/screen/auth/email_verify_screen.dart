@@ -1,5 +1,5 @@
-import 'package:dating/Widget/common/cammit_text_field.dart';
-import 'package:dating/Widget/common/offset_loading_widget.dart';
+import 'package:dating/widget/common/cammit_text_field.dart';
+import 'package:dating/widget/common/offset_loading_widget.dart';
 import 'package:dating/controller/email_verify_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';

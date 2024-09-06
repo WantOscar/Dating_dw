@@ -1,5 +1,5 @@
-import 'package:dating/Widget/common/code_box.dart';
-import 'package:dating/Widget/common/keyboard_key.dart';
+import 'package:dating/widget/common/code_box.dart';
+import 'package:dating/widget/common/keyboard_key.dart';
 import 'package:dating/controller/email_verify_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';

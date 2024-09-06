@@ -1,4 +1,4 @@
-import 'package:dating/Widget/common/cammit_text_field.dart';
+import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';

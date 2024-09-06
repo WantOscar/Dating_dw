@@ -1,5 +1,5 @@
-import 'package:dating/Widget/common/bottom_button.dart';
-import 'package:dating/Widget/common/cammit_app_bar.dart';
+import 'package:dating/widget/common/bottom_button.dart';
+import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/controller/feed_write_controller.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';

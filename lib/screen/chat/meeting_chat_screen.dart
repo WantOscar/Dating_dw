@@ -1,10 +1,10 @@
-import 'package:dating/Widget/chat/chatting_box.dart';
+import 'package:dating/widget/chat/chatting_box.dart';
 import 'package:dating/controller/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MultiChatScreen extends StatelessWidget {
-  const MultiChatScreen({super.key});
+class MeetingChatScreen extends StatelessWidget {
+  const MeetingChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +19,12 @@ class MultiChatScreen extends StatelessWidget {
             GetX<ChatController>(builder: (controller) {
               return Column(
                 children: List.generate(
-                  controller.chattings.length,
+                  controller.meetingChattings.length,
                   (index) => Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: GestureDetector(
                       child: ChattingBox(
-                        chat: controller.chattings[index],
+                        chat: controller.meetingChattings[index],
                       ),
                       // onTap: () {
                       //   Get.to(
