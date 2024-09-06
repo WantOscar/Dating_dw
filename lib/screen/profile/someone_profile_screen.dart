@@ -1,11 +1,11 @@
 import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile/user_profile_widget.dart';
 import 'package:dating/Widget/profile_edit/my_photos.dart';
+import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class SomeoneProfileScreen extends StatefulWidget {
@@ -37,11 +37,114 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
     );
   }
 
+  /// 커스텀 앱바를 제작
+  /// 앱바 우측 아이콘을 누르면
+  /// 사용자는 상대방을 차단/취소 가능.
+  Widget _appbar() {
+    return SliverAppBar(
+      elevation: 0.0,
+      floating: true,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: IconButton(
+          icon: IconShape.iconClose,
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ),
+      backgroundColor: Colors.white,
+      centerTitle: true,
+      title: Text(
+        "상대 프로필",
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+          color: ThemeColor.fontColor,
+        ),
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {
+            /// 우측 상단 ... 아이콘 누르면 바텀에서 차단/취소 여부 시트가 나옴
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Wrap(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(3.0),
+                      margin: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                await MemberBlockController.to
+                                    .memberBlock(widget.user.id!);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.all(10.0),
+                                width: double.infinity,
+                                child: Text(
+                                  '차단',
+                                  style: TextStyle(
+                                    color: ThemeColor.fontColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              child: Divider(),
+                            ),
+                            InkWell(
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.all(10.0),
+                                child: const Text(
+                                  '취소',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              onTap: () {
+                                Get.back();
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+              backgroundColor: Colors.transparent,
+            );
+          },
+          icon: IconShape.iconMore,
+        ),
+      ],
+    );
+  }
+
   /// 상대방의 프로필을 보여주는 위젯
   Widget _profile() => SliverToBoxAdapter(
-          child: UserProfileWidget(
-        user: widget.user,
-      ));
+        child: UserProfileWidget(
+          user: widget.user,
+        ),
+      );
 
   /// 상대방의 인적사항을 보여줌
   Widget _info() => const SliverToBoxAdapter(
@@ -194,104 +297,6 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
         ),
       );
 
-  /// 커스텀 앱바를 제작
-  /// 앱바 우측 아이콘을 누르면
-  /// 사용자는 상대방을 차단/취소 가능.
-  Widget _appbar() {
-    return SliverAppBar(
-      elevation: 0.0,
-      floating: true,
-      leading: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: IconButton(
-          icon: IconShape.iconClose,
-          onPressed: () {
-            Get.back();
-          },
-        ),
-      ),
-      backgroundColor: Colors.white,
-      centerTitle: true,
-      title: Text(
-        "상대 프로필",
-        style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: ThemeColor.fontColor),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            /// 우측 상단 ... 아이콘 누르면 바텀에서 차단/취소 여부 시트가 나옴
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return Wrap(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(3.0),
-                      margin: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.all(10.0),
-                                width: double.infinity,
-                                child: Text(
-                                  '차단',
-                                  style: TextStyle(
-                                    color: ThemeColor.fontColor,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              onTap: () {},
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Divider(),
-                            ),
-                            InkWell(
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.all(10.0),
-                                child: const Text(
-                                  '취소',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              onTap: () {
-                                Get.back();
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-              backgroundColor: Colors.transparent,
-            );
-          },
-          icon: IconShape.iconMore,
-        ),
-      ],
-    );
-  }
-
   /// 상대방 스토리 텍스트
   Widget _storyHeader() {
     return SliverToBoxAdapter(
@@ -319,30 +324,4 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
       },
     );
   }
-}
-
-/// 채팅신청이 되었다는 것을 알려주는 알림 함수
-void chatToast() {
-  Fluttertoast.showToast(
-    msg: '채팅을 신청하였습니다',
-    backgroundColor: Colors.white,
-    gravity: ToastGravity.CENTER,
-    fontSize: 17,
-    textColor: Colors.black,
-    toastLength: Toast.LENGTH_SHORT,
-    timeInSecForIosWeb: 1,
-  );
-}
-
-/// 좋아요를 보냈다는 것을 알려주는 알림 함수
-void likeToast() {
-  Fluttertoast.showToast(
-    msg: '좋아요를 보냈습니다.',
-    backgroundColor: Colors.white,
-    gravity: ToastGravity.CENTER,
-    fontSize: 17,
-    textColor: Colors.black,
-    toastLength: Toast.LENGTH_SHORT,
-    timeInSecForIosWeb: 1,
-  );
 }

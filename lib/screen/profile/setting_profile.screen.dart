@@ -1,6 +1,7 @@
+import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/setting_password_controller.dart';
-import 'package:dating/data/repository/user_repository.dart';
+import 'package:dating/data/repository/member_block_respository.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -61,13 +62,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
           IconButton(
             onPressed: () {
               Get.to(() => const AccountInformationScreen(),
-                  binding: BindingsBuilder(() {
-                Get.put(SettingPasswordController(
-                    userRepository: UserRepositoryImpl(
-                        dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
-                          ..interceptors.add(AuthInterceptor())
-                          ..interceptors.add(BaseIntercepter()))));
-              }));
+                  binding: BindingsBuilder(() {}));
             },
             icon: IconShape.iconArrowForward,
           ),
@@ -116,7 +111,11 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
           ),
           IconButton(
               onPressed: () {
-                Get.to(const BlockedAccountScreen());
+                Get.to(() => const BlockedAccountScreen(),
+                    binding: BindingsBuilder(() {
+                  Get.put(MemberBlockController(
+                      memberBlockRespository: MemberBlockRespository()));
+                }));
               },
               icon: IconShape.iconArrowForward),
         ],

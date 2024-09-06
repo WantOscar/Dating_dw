@@ -6,7 +6,6 @@ import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class EmailVerifyController extends GetxController with ToastMessage {
