@@ -4,9 +4,11 @@ import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
 
 class MemberBlockRespository {
-  final Dio dio = Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
-    ..interceptors.add(AuthInterceptor())
-    ..interceptors.add(BaseIntercepter());
+  final Dio dio;
+
+  MemberBlockRespository({
+    required this.dio,
+  });
 
   Future<void> postMemberBlock(int id) async {
     return dio.post("/member/block/$id").then((response) => response.data);
