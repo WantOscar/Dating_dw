@@ -20,17 +20,16 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              _title(),
-              _sub(),
-              const SizedBox(height: 170),
-              _completeButton(),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _title(),
+            _sub(),
+          ],
         ),
       ),
+      bottomSheet: _completeButton(),
     );
   }
 
