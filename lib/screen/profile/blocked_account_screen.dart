@@ -1,7 +1,5 @@
 import 'package:dating/widget/common/icon_header.dart';
-import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class BlockedAccountScreen extends StatelessWidget {
   const BlockedAccountScreen({super.key});

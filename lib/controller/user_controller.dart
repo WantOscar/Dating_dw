@@ -4,6 +4,7 @@ import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/data/service/heart_service.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/show_toast.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController with UseToast {
@@ -25,7 +26,7 @@ class UserController extends GetxController with UseToast {
   int get imageIndex => _imageIndex.value;
 
   void setMyInfo(User user) {
-    print(user.image);
+    debugPrint(user.image);
     _myInfo(user);
     _myInfo.refresh();
   }

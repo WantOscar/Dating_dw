@@ -95,7 +95,7 @@ class ProfileEditController extends GetxController {
     }
 
     if (_user.value != null) {
-      final response = await userRepository.updateUserInfo(user!);
+      await userRepository.updateUserInfo(user!);
       Get.back();
     }
   }

@@ -62,7 +62,7 @@ class ChattingRoomController extends GetxController with UseToast {
         showToast("서버와의 통신이 원할하지 않습니다.");
       },
       onDone: () {
-        print("연결 종료");
+        debugPrint("연결 종료");
       },
     );
   }
@@ -123,7 +123,7 @@ class ChattingRoomController extends GetxController with UseToast {
       final user = await userRepository.getUser(query);
       Get.to(() => SomeoneProfileScreen(user: user));
     } on Exception catch (err) {
-      print(err);
+      debugPrint(err.toString());
     }
   }
 }

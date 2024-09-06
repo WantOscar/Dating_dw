@@ -1,6 +1,5 @@
 import 'package:dating/data/service/auth_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:get/get_connect/http/src/request/request.dart';
 
 void main() {
   final service = AuthService();

@@ -5,7 +5,7 @@ import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as g;
+import 'package:get/route_manager.dart';
 
 class BaseIntercepter extends Interceptor with ToastMessage {
   @override
@@ -70,7 +70,7 @@ class AuthInterceptor extends Interceptor {
 
       // 리프레시 토큰 가져오기
       final refreshToken = await tokenProvider.getRefreshToken();
-      print(refreshToken);
+      debugPrint(refreshToken);
       // 액세스 토큰 갱신
       try {
         /// 성공하면 새롭게 요청을 수행함
@@ -81,7 +81,7 @@ class AuthInterceptor extends Interceptor {
         handler.resolve(await dio.fetch(err.requestOptions));
       } on DioException {
         tokenProvider.deleteTokenInfo();
-        g.Get.off(() => const LoginScreen());
+        Get.off(() => const LoginScreen());
       }
     } else {
       handler.next(err);
