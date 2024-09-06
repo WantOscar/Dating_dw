@@ -1,38 +1,28 @@
+import 'package:dating/data/model/user.dart';
+
 class Feed {
-  String? nickName;
-  String? address;
-  String? title;
-  String? description;
-  int? age;
-  int? height;
-  int? memberId;
   int? id;
+  String? title;
+  String? content;
+  User? user;
 
   Feed({
-    this.nickName,
-    this.address,
-    this.title,
-    this.description,
-    this.age,
-    this.height,
-    this.memberId,
     this.id,
+    this.title,
+    this.content,
+    this.user,
   });
 
   factory Feed.fromJson(Map<String, dynamic> json) {
     return Feed(
-      nickName: json['nickname'],
-      address: json['address'],
-      title: json['title'],
-      description: json['discription'],
-      age: json['age'],
-      height: json['height'],
-      memberId: json['memberId'],
-      id: json['id'],
-    );
+        id: json['id'],
+        title: json['title'],
+        content: json['content'],
+        user: User.fromJson(json['user']));
   }
 
-  Map<String, dynamic> toJson() {
-    return {'title': title, 'description': description};
-  }
+  Map<String, dynamic> toJson() => {
+        "title": title,
+        "content": content,
+      };
 }

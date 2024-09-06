@@ -1,4 +1,5 @@
 import 'package:dating/data/model/feed.dart';
+import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                 children: [
                   Flexible(
                     child: Text(
-                      widget.feed.description.toString(),
+                      widget.feed.content.toString(),
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black87,
@@ -105,48 +106,51 @@ class _FeedWidgetState extends State<FeedWidget> {
             ),
             child: GestureDetector(
               onTap: () {
-                // Get.to(() => const SomeoneProfileScreen());
+                Get.to(() => SomeoneProfileScreen(
+                      user: widget.feed.user!,
+                    ));
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: Image.network(
-                    'https://postfiles.pstatic.net/MjAyMjA4MDNfMTA5/MDAxNjU5NDk2ODM5ODg3.uC0PshEiib8q26jwPjQ6GoHdP_h3BIp-0kMw9lOxwdYg.fidwJGXN_KjzDVGvtkJz-212ExplHUOz_3y69_cWz6gg.PNG.duswnekd0/Image_015.png?type=w966',
-                    fit: BoxFit.cover),
+                child:
+                    Image.network(widget.feed.user!.image!, fit: BoxFit.cover),
               ),
             ),
           ),
           const SizedBox(width: 10),
 
           /// 글쓴이 정보
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Text(
-                      '홍길동',
-                      style: TextStyle(
+                      widget.feed.user!.nickName!,
+                      style: const TextStyle(
                           fontSize: 15,
                           color: Colors.black,
                           fontWeight: FontWeight.w600),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
-                        '20세',
-                        style: TextStyle(fontSize: 12, color: Colors.black),
+                        '${widget.feed.user!.age}세',
+                        style:
+                            const TextStyle(fontSize: 12, color: Colors.black),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(Icons.location_on, size: 20, color: Colors.black),
+                    const Icon(Icons.location_on,
+                        size: 20, color: Colors.black),
                     Text(
-                      '성북구',
-                      style: TextStyle(
+                      widget.feed.user!.address!,
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Colors.black,
                       ),
