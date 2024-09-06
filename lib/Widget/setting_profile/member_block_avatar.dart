@@ -86,10 +86,8 @@ class MemberBlockAvatar extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  MemberBlockController.to.fetchBlockedUsers;
+                  MemberBlockController.to.memberNonBlock(user.id!);
                 },
-
-                /// 차단 해제 버튼을 누르면 상대방이 차단해제 되고 오늘의 추천에서 다시 뜰 수 있도록 함.
                 child: Text(
                   '차단 해제',
                   style: TextStyle(

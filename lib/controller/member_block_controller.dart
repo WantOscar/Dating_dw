@@ -51,6 +51,7 @@ class MemberBlockController extends GetxController {
     try {
       await memberBlockRespository.postMemberNonBlock(id);
       fetchBlockedUsers();
+      refresh();
     } catch (e) {
       Get.snackbar('Error', 'Failed to unblock users: $e');
     }

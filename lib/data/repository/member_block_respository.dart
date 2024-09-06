@@ -18,8 +18,6 @@ class MemberBlockRespository {
 
   Future<List<User>> getMemberBlockList() async {
     return dio.get("/member/block").then((response) =>
-        List.from(response.data["blockMemberList"])
-            .map((json) => User.fromJson(json))
-            .toList());
+        List.from(response.data).map((json) => User.fromJson(json)).toList());
   }
 }
