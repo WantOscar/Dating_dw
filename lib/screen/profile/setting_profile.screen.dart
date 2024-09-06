@@ -37,9 +37,9 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
       body: Column(
         children: [
           _changePassword(),
-          _popUpNotification(),
+          // _popUpNotification(),
           _blockedAccount(),
-          _dormantAccount(),
+          // _dormantAccount(),
           _logout(),
           _deleteMember(context),
         ],
@@ -72,30 +72,30 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
   }
 
   /// 팝업 알림 설정 on/off
-  Padding _popUpNotification() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            '알림 설정',
-            style: TextStyle(fontSize: 16, color: Colors.black),
-          ),
-          CupertinoSwitch(
-            value: switchValue,
-            activeColor: CupertinoColors.activeBlue,
-            onChanged: (bool value) {
-              setState(() {
-                switchValue = value;
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
+  // Padding _popUpNotification() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         const Text(
+  //           '알림 설정',
+  //           style: TextStyle(fontSize: 16, color: Colors.black),
+  //         ),
+  //         CupertinoSwitch(
+  //           value: switchValue,
+  //           activeColor: CupertinoColors.activeBlue,
+  //           onChanged: (bool value) {
+  //             setState(() {
+  //               switchValue = value;
+  //             });
+  //           },
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   /// 차단된 계정 확인
   Padding _blockedAccount() {
@@ -124,22 +124,22 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
   }
 
   /// 휴먼 계정으로 전환하기
-  Padding _dormantAccount() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            '휴먼계정 전환',
-            style: TextStyle(fontSize: 16, color: Colors.black),
-          ),
-          HumanAccountSwitchBtn(),
-        ],
-      ),
-    );
-  }
+  // Padding _dormantAccount() {
+  //   return const Padding(
+  //     padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         Text(
+  //           '휴먼계정 전환',
+  //           style: TextStyle(fontSize: 16, color: Colors.black),
+  //         ),
+  //         HumanAccountSwitchBtn(),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   /// 로그아웃 알림창
   Widget _logout() {

@@ -1,4 +1,5 @@
 import 'package:dating/controller/login_controller.dart';
+import 'package:dating/controller/setting_password_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/repository/heart_repository.dart';
 import 'package:dating/data/service/heart_service.dart';

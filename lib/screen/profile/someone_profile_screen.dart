@@ -1,6 +1,4 @@
-import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile/user_profile_widget.dart';
-import 'package:dating/Widget/profile_edit/my_photos.dart';
 import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/style/constant.dart';
@@ -26,11 +24,11 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
           slivers: [
             _appbar(),
             _profile(),
-            _personality(),
-            _interesting(),
-            _idealType(),
-            _storyHeader(),
-            _story(),
+            // _personality(),
+            // _interesting(),
+            // _idealType(),
+            // _storyHeader(),
+            // _story(),
           ],
         ),
       ),
@@ -147,181 +145,181 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
       );
 
   /// 상대방의 인적사항을 보여줌
-  Widget _info() => const SliverToBoxAdapter(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-              child: Text('인적사항'),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Wrap(
-                direction: Axis.horizontal,
-                alignment: WrapAlignment.start,
-                spacing: 5,
-                runSpacing: 5,
-                children: [
-                  HobbyContainer(
-                    text: '일반대',
-                  ),
-                  HobbyContainer(
-                    text: '학생',
-                  ),
-                  HobbyContainer(
-                    text: 'ESTP',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+  // Widget _info() => const SliverToBoxAdapter(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
+  //             child: Text('인적사항'),
+  //           ),
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
+  //             child: Wrap(
+  //               direction: Axis.horizontal,
+  //               alignment: WrapAlignment.start,
+  //               spacing: 5,
+  //               runSpacing: 5,
+  //               children: [
+  //                 HobbyContainer(
+  //                   text: '일반대',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '학생',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: 'ESTP',
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
 
   /// 상대방의 성격을 보여줌
-  Widget _personality() => const SliverToBoxAdapter(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-              child: Text('성격'),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Wrap(
-                direction: Axis.horizontal,
-                alignment: WrapAlignment.start,
-                spacing: 5,
-                runSpacing: 5,
-                children: [
-                  HobbyContainer(
-                    text: '털털한',
-                  ),
-                  HobbyContainer(
-                    text: '기모띠',
-                  ),
-                  HobbyContainer(
-                    text: '자유로운',
-                  ),
-                  HobbyContainer(
-                    text: '유쾌한',
-                  ),
-                  HobbyContainer(
-                    text: '대담한',
-                  ),
-                  HobbyContainer(
-                    text: '보수적인',
-                  ),
-                  HobbyContainer(
-                    text: '재밌는',
-                  ),
-                  HobbyContainer(
-                    text: '호전적인',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+  // Widget _personality() => const SliverToBoxAdapter(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
+  //             child: Text('성격'),
+  //           ),
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
+  //             child: Wrap(
+  //               direction: Axis.horizontal,
+  //               alignment: WrapAlignment.start,
+  //               spacing: 5,
+  //               runSpacing: 5,
+  //               children: [
+  //                 HobbyContainer(
+  //                   text: '털털한',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '기모띠',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '자유로운',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '유쾌한',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '대담한',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '보수적인',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '재밌는',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '호전적인',
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
 
   /// 상대방의 관심사를 보여줌
-  Widget _interesting() => const SliverToBoxAdapter(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-              child: Text('관심사'),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Wrap(
-                direction: Axis.horizontal,
-                alignment: WrapAlignment.start,
-                spacing: 5,
-                runSpacing: 5,
-                children: [
-                  HobbyContainer(
-                    text: '게임',
-                  ),
-                  HobbyContainer(
-                    text: 'IT',
-                  ),
-                  HobbyContainer(
-                    text: '운동',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+  // Widget _interesting() => const SliverToBoxAdapter(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
+  //             child: Text('관심사'),
+  //           ),
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
+  //             child: Wrap(
+  //               direction: Axis.horizontal,
+  //               alignment: WrapAlignment.start,
+  //               spacing: 5,
+  //               runSpacing: 5,
+  //               children: [
+  //                 HobbyContainer(
+  //                   text: '게임',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: 'IT',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '운동',
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
 
   /// 상대방의 이상형을 보여줌
-  Widget _idealType() => const SliverToBoxAdapter(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-              child: Text('이상형'),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Wrap(
-                direction: Axis.horizontal,
-                alignment: WrapAlignment.start,
-                spacing: 5,
-                runSpacing: 5,
-                children: [
-                  HobbyContainer(
-                    text: '예쁜',
-                  ),
-                  HobbyContainer(
-                    text: '귀여운',
-                  ),
-                  HobbyContainer(
-                    text: '섹시한',
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
+  // Widget _idealType() => const SliverToBoxAdapter(
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
+  //             child: Text('이상형'),
+  //           ),
+  //           Padding(
+  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
+  //             child: Wrap(
+  //               direction: Axis.horizontal,
+  //               alignment: WrapAlignment.start,
+  //               spacing: 5,
+  //               runSpacing: 5,
+  //               children: [
+  //                 HobbyContainer(
+  //                   text: '예쁜',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '귀여운',
+  //                 ),
+  //                 HobbyContainer(
+  //                   text: '섹시한',
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
 
   /// 상대방 스토리 텍스트
-  Widget _storyHeader() {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '스토리',
-          style: TextStyle(
-              color: ThemeColor.fontColor,
-              fontSize: 30,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
+  // Widget _storyHeader() {
+  //   return SliverToBoxAdapter(
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: Text(
+  //         '스토리',
+  //         style: TextStyle(
+  //             color: ThemeColor.fontColor,
+  //             fontSize: 30,
+  //             fontWeight: FontWeight.bold),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   /// 상대방 스토리를 보여줌
-  Widget _story() {
-    return SliverGrid.builder(
-      itemCount: 10,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisSpacing: 2.0, crossAxisSpacing: 2.0, crossAxisCount: 3),
-      itemBuilder: (contex, index) {
-        return const MyPhotos();
-      },
-    );
-  }
+  // Widget _story() {
+  //   return SliverGrid.builder(
+  //     itemCount: 10,
+  //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+  //         mainAxisSpacing: 2.0, crossAxisSpacing: 2.0, crossAxisCount: 3),
+  //     itemBuilder: (contex, index) {
+  //       return const MyPhotos();
+  //     },
+  //   );
+  // }
 }

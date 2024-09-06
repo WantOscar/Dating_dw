@@ -34,7 +34,7 @@ class ChatServiceImpl extends GetxService implements ChatService {
   @override
   Future<List<MessageModel>> getMessages(int chatRoomId) async {
     return dio.get("/chat/$chatRoomId").then((response) =>
-        List<MessageModel>.from(response.data["chatOneDtoList"]
+        List<MessageModel>.from(response.data["messages"]
             .map((json) => MessageModel.fromJson(json))).toList());
   }
 
