@@ -5,7 +5,7 @@ import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
-import 'package:dating/screen/profile/setting_profile.screen.dart';
+import 'package:dating/screen/profile/setting_profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/dio_intercepter.dart';
