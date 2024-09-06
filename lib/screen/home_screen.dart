@@ -1,6 +1,5 @@
 import 'package:dating/controller/bottom_nav_controller.dart';
 import 'package:dating/controller/user_controller.dart';
-import 'package:dating/screen/alarm/alarm_screen.dart';
 import 'package:dating/screen/chat/chatting_screen.dart';
 import 'package:dating/screen/main/main_screen.dart';
 import 'package:dating/screen/profile/profile_screen.dart';
@@ -33,8 +32,8 @@ class HomeScreen extends GetView<BottomNavController> {
                     icon: Icon(Icons.favorite), label: '탐색'),
                 const BottomNavigationBarItem(
                     icon: Icon(Icons.chat_outlined), label: '채팅'),
-                const BottomNavigationBarItem(
-                    icon: Icon(Icons.notifications), label: '알림'),
+                // const BottomNavigationBarItem(
+                //     icon: Icon(Icons.notifications), label: '알림'),
                 BottomNavigationBarItem(
                     icon:
                         ImageAvatar(imagePath: UserController.to.myInfo?.image),
@@ -54,7 +53,7 @@ class HomeScreen extends GetView<BottomNavController> {
               MainScreen(),
               SearchScreen(),
               ChattingScreen(),
-              AlarmScreen(),
+              // AlarmScreen(),
               ProfileScreen(),
             ],
           ),

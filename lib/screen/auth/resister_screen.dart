@@ -1,8 +1,8 @@
+import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/bottom_button.dart';
-import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,40 +14,22 @@ class ResisterScreen extends GetView<ResisterController> {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: ThemeColor.fontColor,
+        appBar: _appBar(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _header(),
+              const SizedBox(
+                height: 30,
               ),
-            ),
-            backgroundColor: Colors.white,
-            elevation: 0,
+              _passwordInput(),
+              const Spacer(),
+              _signUpButton(),
+            ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _header(),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      _passwordInput(),
-                    ],
-                  ),
-                ),
-                _signUpButton(),
-              ],
-            ),
-          ),
+        ),
       ),
     );
   }
@@ -93,9 +75,10 @@ class ResisterScreen extends GetView<ResisterController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: CammitTextField(
-                    controller: ResisterController.to.password,
+                    controller: controller.password,
                     hintText: "비밀번호를 입력해주세요!",
                     obscureText: true,
+                    onChanged: controller.changePassword,
                   ),
                 ),
               ],
@@ -116,9 +99,10 @@ class ResisterScreen extends GetView<ResisterController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: CammitTextField(
-                    controller: ResisterController.to.passwordAgain,
+                    controller: controller.passwordAgain,
                     hintText: "비밀번호를 다시 입력해주세요!",
                     obscureText: true,
+                    onChanged: controller.changePasswordAgain,
                   ),
                 ),
               ],
@@ -127,20 +111,39 @@ class ResisterScreen extends GetView<ResisterController> {
         ],
       );
 
-  Widget _signUpButton() => Obx(
-        () => SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: BottomButton(onTap: () {
-                (controller.loading == Status.loading) ? null : controller.signUp();
-              }, child: (controller.loading == Status.loading)?  const Center(child: CircularProgressIndicator(
-                
-              ),) : const Text(
-                "회원가입",
-                style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600),),)
-            ))
+  Widget _signUpButton() => Obx(() => SafeArea(
+      child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BottomButton(
+            onTap: () {
+              (controller.isLoading == Status.loading)
+                  ? null
+                  : controller.signUp();
+            },
+            child: (controller.isLoading == Status.loading)
+                ? const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : const Text(
+                    "회원가입",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
+                  ),
+          ))));
+
+  AppBar _appBar() => AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.until((route) => route.isFirst);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: ThemeColor.fontColor,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
       );
 }

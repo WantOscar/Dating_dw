@@ -5,33 +5,25 @@ import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as g;
+import 'package:get/route_manager.dart';
 
 class BaseIntercepter extends Interceptor with ToastMessage {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     final errorMessage = err.response?.data;
+    debugPrint("[ERROR OCCURED][${err.response?.statusCode}]");
     debugPrint("[ERROR OCCURED][${err.type}][${err.requestOptions.uri}]");
     debugPrint("[ERROR OCCURED][$errorMessage]");
-    // showToast("${errorMessage["errorMessage"]}");
     switch (err.type) {
       case DioExceptionType.badResponse:
-        debugPrint("올바르지 못한 요청입니다. url, 파라미터가 정확한지 확인하세요.");
-        break;
+        throw errorMessage ?? "에러가 발생했습니다!";
       case DioExceptionType.cancel:
-        showToast("요청이 취소되었습니다.");
-        debugPrint("요청이 취소되었습니다.");
-        break;
+        throw "요청이 취소되었습니다.";
       case DioExceptionType.connectionError:
-        showToast("네트워크 연결이 원할하지 않습니다.");
-        debugPrint("네트워크 연결이 원할하지 않습니다.");
-        break;
+        throw "네트워크 연결이 원할하지 않습니다.";
       default:
-        showToast("알 수 없는 에러가 발생했습니다.");
-        debugPrint("알 수 없는 에러가 발생했습니다.");
-        break;
+        throw "알 수 없는 에러가 발생했습니다.";
     }
-    throw Exception(errorMessage);
   }
 
   @override
@@ -77,21 +69,22 @@ class AuthInterceptor extends Interceptor {
       debugPrint("[ERROR OCCURED][Access Token 토큰 만료]");
 
       // 리프레시 토큰 가져오기
-      final token = await tokenProvider.getRefreshToken();
-      print(token);
+      final refreshToken = await tokenProvider.getRefreshToken();
+      debugPrint(refreshToken);
       // 액세스 토큰 갱신
       try {
-        final authorization = await refreshToken(token);
-
         /// 성공하면 새롭게 요청을 수행함
         /// 실패하면 로그아웃됨
-        err.requestOptions.headers["accessToken"] =
-            await tokenProvider.getAccessToken();
+        ///
+        final newAccessToken = await issueNewAccessToken(refreshToken);
+        err.requestOptions.headers["Authorization"] = "Bearer $newAccessToken";
         handler.resolve(await dio.fetch(err.requestOptions));
       } on DioException {
         tokenProvider.deleteTokenInfo();
-        g.Get.off(() => const LoginScreen());
+        Get.off(() => const LoginScreen());
       }
+    } else {
+      handler.next(err);
     }
   }
 
@@ -99,14 +92,15 @@ class AuthInterceptor extends Interceptor {
   /// 사용자의 리프레시 토큰이 만료된 경우
   /// 강제로 로그아웃됨.
   /// 리프레시 토큰이 유효한 경우 새 엑세스 토큰을 발급 후 저장.
-  Future<bool> refreshToken(String refreshToken) async {
+  Future<String?> issueNewAccessToken(String refreshToken) async {
     final response = await dio.post("/refresh",
         options: Options(headers: {"refreshToken": "Bearer $refreshToken"}));
     if (response.statusCode == 200) {
       await tokenProvider.saveAccessToken(response.data["accessToken"]);
-      return true;
+      return response.data["accessToken"];
+    } else {
+      return null;
     }
-    return false;
   }
 }
 

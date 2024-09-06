@@ -1,9 +1,15 @@
+import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
+import 'package:dating/controller/setting_password_controller.dart';
+import 'package:dating/data/repository/member_block_respository.dart';
 import 'package:dating/screen/profile/account_information_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dating/utils/api_urls.dart';
+import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/setting_profile/human_account_switch_btn.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,26 +29,17 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: AppBar().preferredSize,
-        child: CammitAppBar(
+        child: const CammitAppBar(
           title: "계정 설정",
           showCloseButton: true,
-          actions: [
-            GestureDetector(
-                onTap: () {},
-                child: const Icon(
-                  Icons.more_horiz,
-                  color: Colors.black,
-                  size: 30,
-                ))
-          ],
         ),
       ),
       body: Column(
         children: [
           _changePassword(),
-          _popUpNotification(),
+          // _popUpNotification(),
           _blockedAccount(),
-          _dormantAccount(),
+          // _dormantAccount(),
           _logout(),
           _deleteMember(context),
         ],
@@ -64,7 +61,8 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
           ),
           IconButton(
             onPressed: () {
-              Get.to(() => const AccountInformationScreen());
+              Get.to(() => const AccountInformationScreen(),
+                  binding: BindingsBuilder(() {}));
             },
             icon: IconShape.iconArrowForward,
           ),
@@ -74,30 +72,30 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
   }
 
   /// 팝업 알림 설정 on/off
-  Padding _popUpNotification() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            '알림 설정',
-            style: TextStyle(fontSize: 16, color: Colors.black),
-          ),
-          CupertinoSwitch(
-            value: switchValue,
-            activeColor: CupertinoColors.activeBlue,
-            onChanged: (bool value) {
-              setState(() {
-                switchValue = value;
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
+  // Padding _popUpNotification() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         const Text(
+  //           '알림 설정',
+  //           style: TextStyle(fontSize: 16, color: Colors.black),
+  //         ),
+  //         CupertinoSwitch(
+  //           value: switchValue,
+  //           activeColor: CupertinoColors.activeBlue,
+  //           onChanged: (bool value) {
+  //             setState(() {
+  //               switchValue = value;
+  //             });
+  //           },
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   /// 차단된 계정 확인
   Padding _blockedAccount() {
@@ -113,7 +111,11 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
           ),
           IconButton(
               onPressed: () {
-                Get.to(const BlockedAccountScreen());
+                Get.to(() => const BlockedAccountScreen(),
+                    binding: BindingsBuilder(() {
+                  Get.put(MemberBlockController(
+                      memberBlockRespository: MemberBlockRespository()));
+                }));
               },
               icon: IconShape.iconArrowForward),
         ],
@@ -122,22 +124,22 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
   }
 
   /// 휴먼 계정으로 전환하기
-  Padding _dormantAccount() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            '휴먼계정 전환',
-            style: TextStyle(fontSize: 16, color: Colors.black),
-          ),
-          HumanAccountSwitchBtn(),
-        ],
-      ),
-    );
-  }
+  // Padding _dormantAccount() {
+  //   return const Padding(
+  //     padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       children: [
+  //         Text(
+  //           '휴먼계정 전환',
+  //           style: TextStyle(fontSize: 16, color: Colors.black),
+  //         ),
+  //         HumanAccountSwitchBtn(),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   /// 로그아웃 알림창
   Widget _logout() {

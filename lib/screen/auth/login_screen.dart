@@ -1,12 +1,13 @@
+import 'package:dating/widget/common/offset_loading_widget.dart';
 import 'package:dating/binding/reset_password_binding.dart';
 import 'package:dating/binding/resister_binding.dart';
 import 'package:dating/controller/login_controller.dart';
 import 'package:dating/screen/auth/auth_forgot_screen.dart';
 import 'package:dating/screen/auth/email_verify_screen.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/utils/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
@@ -219,22 +220,6 @@ class LoginScreen extends GetView<LoginController> {
   }
 
   Widget _loading() => Offstage(
-        offstage: (controller.isLoading) ? false : true,
-        child: Stack(
-          children: [
-            ModalBarrier(
-              color: Colors.black.withOpacity(0.4),
-            ),
-            Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  LoadingAnimationWidget.dotsTriangle(
-                      color: ThemeColor.fontColor, size: 50)
-                ],
-              ),
-            )
-          ],
-        ),
-      );
+      offstage: (controller.isLoading == Status.loading) ? false : true,
+      child: const OffsetLoadingWidget());
 }

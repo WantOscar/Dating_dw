@@ -71,13 +71,13 @@ class ProfileImageController extends GetxController {
               asset.id,
               images,
             );
-            print(album);
+            debugPrint(album.toString());
             _albums.value.add(album);
             _albums.refresh();
           }
         });
       }
-      print(_albums.value);
+      debugPrint(_albums.value.toString());
     });
     _isReady(true);
   }
@@ -89,7 +89,7 @@ class ProfileImageController extends GetxController {
       return;
     }
 
-    if (_selectImageIndex.value != null && _selectImage.value != index) {
+    if (_selectImageIndex.value != null && _selectImageIndex.value != index) {
       Get.dialog(WarningWindow(
         onTap: () {
           Get.back();
@@ -113,7 +113,7 @@ class ProfileImageController extends GetxController {
       /// 선택한 이미지가 존재한다면
       /// 이미지 편집기를 실행시킴.
       if (file != null) {
-        print(file.path);
+        debugPrint(file.path);
         final cropImage = await ImageCropper().cropImage(
           sourcePath: file.path,
           compressFormat: ImageCompressFormat.png,

@@ -2,7 +2,7 @@ class Feed {
   String? nickName;
   String? address;
   String? title;
-  String? content;
+  String? description;
   int? age;
   int? height;
   int? memberId;
@@ -12,7 +12,7 @@ class Feed {
     this.nickName,
     this.address,
     this.title,
-    this.content,
+    this.description,
     this.age,
     this.height,
     this.memberId,
@@ -24,7 +24,7 @@ class Feed {
       nickName: json['nickname'],
       address: json['address'],
       title: json['title'],
-      content: json['content'],
+      description: json['discription'],
       age: json['age'],
       height: json['height'],
       memberId: json['memberId'],
@@ -33,9 +33,6 @@ class Feed {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'content': content,
-    };
+    return {'title': title, 'description': description};
   }
 }

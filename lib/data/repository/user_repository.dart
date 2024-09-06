@@ -1,37 +1,72 @@
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/service/user_fetch.dart';
+import 'package:dio/dio.dart';
+import 'package:get/state_manager.dart';
 
-class UserRepository {
-  UserFetch service;
-  UserRepository({required this.service});
+class UserRepositoryImpl extends GetxService implements UserRepository {
+  final Dio dio;
 
-  Future<User?> searchMyInfo() => service.searchMyInfo();
+  UserRepositoryImpl({required this.dio});
 
-  Future<List<User>> getAllUserData() async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    final users = [
-      {
-        "nickName": "karina",
-        "description": "",
-        "birthDay": "1999 - 01 - 01",
-        "address": "서울 노원구 공릉로",
-        "gender": "man",
-        "age": 26,
-        "height": 164,
-        "images": [
-          "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qlsod9570@naver.com/8abc21d0-69e8-1fe3-9f1e-b5b1a6dab524.jpeg",
-          "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qlsod9570@naver.com/8af0c660-69e8-1fe3-9f1e-b5b1a6dab524.jpeg",
-          "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qlsod9570@naver.com/8af978f0-69e8-1fe3-9f1e-b5b1a6dab524.jpeg"
-        ],
-        "image":
-            "https://nc-bucket123.s3.ap-northeast-2.amazonaws.com/cammet/profile/qlsod9570@naver.com/8abc21d0-69e8-1fe3-9f1e-b5b1a6dab524.jpeg",
-        "personalInfo": null,
-        "personality": null,
-        "interest": null,
-        "likePersonality": null
-      },
-    ];
-    return users.map((user) => User.fromJson(user)).toList();
+  /// 내 정보 조회 API
+  /// 로그인된 사용자의 정보를 User로 반환함.
+  @override
+  Future<User> searchMyInfo() async {
+    return dio
+        .get("/member/profile")
+        .then((response) => User.fromJson(response.data));
   }
+
+  /// 이미지 업로드 API
+  /// 이미지를 S3에 업로드 후 URL을 반환함.
+  @override
+  Future<List<String>> uploadImage(FormData data) async {
+    return dio.post("/images/s3-upload", data: data, queryParameters: {
+      "type": "profile",
+    }).then((response) => List<String>.from(response.data["imageList"]));
+  }
+
+  /// 사용자 정보 갱신 API
+  /// 로그인한 사용자의 정보를 수정한 후,
+  /// 갱신된 USER를 반환함.
+  @override
+  Future<User> updateUserInfo(User user) async {
+    return dio
+        .post("/member/profile/update", data: user.toJson())
+        .then((response) => User.fromJson(response.data));
+  }
+
+  /// 사용자 정보 조회 API
+  /// 닉네임을 통해 사용자를 조회하여
+  /// 조회된 USER를 반환함.
+  @override
+  Future<User> getUser(Map<String, dynamic> nickName) async {
+    return dio
+        .get("/member/profile/another/nick-name", queryParameters: nickName)
+        .then((response) => User.fromJson(response.data));
+  }
+
+  /// 사용자 비밀번호 변경 API
+  /// 로그인한 사용자의 비밀번호를 변경한 후
+  /// 결과 메시지를 반환함.
+  @override
+  Future<String> postSettingPassword(Map<String, dynamic> data) async {
+    return dio
+        .post(
+          "/setting/password",
+          data: data,
+        )
+        .then((response) => response.data["successMessage"]);
+  }
+}
+
+abstract class UserRepository {
+  Future<User> searchMyInfo();
+
+  Future<List<String>> uploadImage(FormData data);
+
+  Future<User> updateUserInfo(User user);
+
+  Future<User> getUser(Map<String, dynamic> nickName);
+
+  Future<String> postSettingPassword(Map<String, dynamic> data);
 }

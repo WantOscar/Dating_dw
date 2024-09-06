@@ -1,20 +1,23 @@
 import 'package:dating/utils/api_urls.dart';
-import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
 
-class HomeRepository {
-  final Dio dio = Dio(BaseOptions(
-    baseUrl: ApiUrl.baseUrl,
-  ))
-    ..interceptors.add(AuthInterceptor())
-    ..interceptors.add(BaseIntercepter());
+class HomeRepositoryImpl implements HomeRepository {
+  final Dio dio;
 
+  HomeRepositoryImpl({required this.dio});
+
+  /// 홈 화면 정보를 조회하는 API
+  /// 랜덤 이성 리스트 20명,
+  /// 내가 좋아요를 누른 사용자,
+  /// 나에게 좋아요를 누른 사용자를
+  /// 각각 USER 배열로 반환함.
+
+  @override
   Future<Map<String, dynamic>> getHomeDatas() async {
-    final response = await dio.get(ApiUrl.main);
-    if (response.statusCode == 200) {
-      return response.data;
-    } else {
-      throw Exception();
-    }
+    return dio.get(ApiUrl.main).then((response) => response.data);
   }
+}
+
+abstract class HomeRepository {
+  Future<Map<String, dynamic>> getHomeDatas();
 }

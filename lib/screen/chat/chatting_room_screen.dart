@@ -1,17 +1,18 @@
 import 'dart:ui';
 
+import 'package:dating/widget/chat/chat_bubble.dart';
 import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/data/model/message_model.dart';
+import 'package:dating/data/model/user.dart';
 import 'package:dating/style/constant.dart';
-import 'package:dating/widget/chat/chat_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ChattingRoom extends GetView<ChattingRoomController> {
-  final String notMyProfile;
+  final User target;
   const ChattingRoom({
     super.key,
-    required this.notMyProfile,
+    required this.target,
   });
 
   @override
@@ -19,38 +20,13 @@ class ChattingRoom extends GetView<ChattingRoomController> {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: AppBar().preferredSize,
-          child: ClipRRect(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaY: 10.0, sigmaX: 10.0),
-              child: AppBar(
-                leading: GestureDetector(
-                  onTap: controller.back,
-                  child: Icon(
-                    Icons.arrow_back,
-                    color: ThemeColor.fontColor,
-                  ),
-                ),
-                backgroundColor: Colors.white.withOpacity(0.7),
-                elevation: 0.0,
-                title: Text(
-                  "홍길동",
-                  style: TextStyle(
-                      color: ThemeColor.fontColor,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-        ),
+        appBar: _appBar(),
         body: Column(
           children: [
             _chatBody(),
+            _messageInput(),
           ],
         ),
-        bottomNavigationBar: _messageInput(),
         extendBodyBehindAppBar: true,
       ),
     );
@@ -73,7 +49,7 @@ class ChattingRoom extends GetView<ChattingRoomController> {
               padding: const EdgeInsets.all(4.0),
               child: ChatBubble(
                 message: message,
-                notMyProfile: notMyProfile,
+                user: target,
               ),
             );
           }),
@@ -85,7 +61,7 @@ class ChattingRoom extends GetView<ChattingRoomController> {
               padding: const EdgeInsets.all(4.0),
               child: ChatBubble(
                 message: message,
-                notMyProfile: notMyProfile,
+                user: target,
               ),
             );
           })
@@ -99,6 +75,9 @@ class ChattingRoom extends GetView<ChattingRoomController> {
   /// 메시지가 입력되고 전송되면
   /// 사용자의 메시지 박스의 내용을 모두 지움.
   Widget _messageInput() => SafeArea(
+        top: false,
+        left: false,
+        right: false,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
           child: TextField(
@@ -130,6 +109,33 @@ class ChattingRoom extends GetView<ChattingRoomController> {
                 ),
                 filled: true,
                 fillColor: const Color(0xffdfdfdf)),
+          ),
+        ),
+      );
+
+  PreferredSizeWidget _appBar() => PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaY: 10.0, sigmaX: 10.0),
+            child: AppBar(
+              leading: GestureDetector(
+                onTap: controller.back,
+                child: Icon(
+                  Icons.arrow_back,
+                  color: ThemeColor.fontColor,
+                ),
+              ),
+              backgroundColor: Colors.white.withOpacity(0.7),
+              elevation: 0.0,
+              title: Text(
+                target.nickName!,
+                style: TextStyle(
+                    color: ThemeColor.fontColor,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ),
       );

@@ -40,12 +40,12 @@ class InitProfileUploadScreenController extends GetxController {
     final assets = await PhotoManager.getAssetPathList(type: RequestType.image);
     if (assets.isNotEmpty) {
       final List<Album> albums = [];
-      for (AssetPathEntity _asset in assets) {
+      for (AssetPathEntity asset in assets) {
         final assetEntities =
-            await _asset.getAssetListRange(start: 0, end: 10000);
+            await asset.getAssetListRange(start: 0, end: 10000);
 
         final Album album =
-            Album.fromGallery(_asset.name, _asset.id, assetEntities);
+            Album.fromGallery(asset.name, asset.id, assetEntities);
         albums.add(album);
       }
 
@@ -64,7 +64,7 @@ class InitProfileUploadScreenController extends GetxController {
 
   void selectImage(AssetEntity image, int index) async {
     if (_selectImagesIndex.value.contains(index)) {
-      print("이미 선택한 이미지");
+      debugPrint("이미 선택한 이미지");
       final deleteIndex = _selectImagesIndex.value.indexOf(index);
       _selectImagesIndex.value.removeAt(deleteIndex);
       _selectImages.value.removeAt(deleteIndex);
@@ -78,7 +78,7 @@ class InitProfileUploadScreenController extends GetxController {
       _selectImagesIndex.value.add(index);
       _selectImages.refresh();
       _selectImagesIndex.refresh();
-      print(_selectImagesIndex);
+      debugPrint(_selectImagesIndex.toString());
     }
   }
 
@@ -88,7 +88,7 @@ class InitProfileUploadScreenController extends GetxController {
     /// 선택한 이미지가 존재한다면
     /// 이미지 편집기를 실행시킴.
     if (file != null) {
-      print(file.path);
+      debugPrint(file.path);
       final cropImage = await ImageCropper().cropImage(
         sourcePath: file.path,
         compressFormat: ImageCompressFormat.png,

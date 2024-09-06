@@ -1,4 +1,5 @@
 class User {
+  int? id;
   String? nickName;
   String? description;
   String? birthDay;
@@ -6,13 +7,14 @@ class User {
   String? gender;
   int? age;
   int? height;
-  List? images;
+  List<dynamic>? images;
   String? image;
   String? personalInfo;
   String? personality;
   String? interest;
   String? likePersonality;
   User({
+    this.id,
     this.nickName,
     this.description,
     this.birthDay,
@@ -30,6 +32,7 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
+        id: json["id"],
         nickName: json["nickName"],
         description: json["description"],
         birthDay: json["birthDay"],
@@ -37,7 +40,7 @@ class User {
         gender: json["gender"],
         age: json["age"],
         height: json["height"],
-        images: json["images"],
+        images: List<dynamic>.from(json["images"] ?? []),
         image: json["image"],
         personalInfo: json["personalInfo"],
         personality: json["personality"],
@@ -46,6 +49,7 @@ class User {
   }
 
   Map<String, dynamic> toJson() => {
+        "id": id,
         "nickName": nickName,
         "description": description,
         "birthDay": birthDay,

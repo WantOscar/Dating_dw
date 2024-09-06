@@ -1,30 +1,18 @@
-import 'package:dating/Widget/common/code_box.dart';
-import 'package:dating/Widget/common/keyboard_key.dart';
+import 'package:dating/widget/common/code_box.dart';
+import 'package:dating/widget/common/keyboard_key.dart';
 import 'package:dating/controller/email_verify_controller.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class VerifyScreen extends GetView<EmailVerifyController> {
-  const VerifyScreen({super.key});
+class CodeInputScreen extends GetView<EmailVerifyController> {
+  const CodeInputScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: ThemeColor.fontColor,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-        ),
+        appBar: _appBar(),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -102,4 +90,18 @@ class VerifyScreen extends GetView<EmailVerifyController> {
       ),
     );
   }
+
+  AppBar _appBar() => AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.until((route) => route.isFirst);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: ThemeColor.fontColor,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      );
 }

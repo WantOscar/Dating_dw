@@ -1,18 +1,19 @@
-import 'package:dating/Widget/common/warning_window.dart';
+import 'package:dating/widget/common/warning_window.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/screen/home_screen.dart';
-import 'package:dating/screen/main/main_screen.dart';
-import 'package:dating/screen/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FeedWriteController extends GetxController {
-  final TextEditingController _title = TextEditingController();
-  final TextEditingController _content = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _contentController = TextEditingController();
 
-  TextEditingController get title => _title;
-  TextEditingController get content => _content;
+  TextEditingController get titleController => _titleController;
+  TextEditingController get contentController => _contentController;
+
+  String _title = "";
+  String _content = "";
 
   /// 피드 작성을 취소할건지 물어보고 뒤로 돌아가는 함수
   void cancel() {
@@ -20,14 +21,14 @@ class FeedWriteController extends GetxController {
       titleText: '피드 작성 취소',
       explainText: '현재 입력사항을 모두 취소하고 돌아가시겠습니까?',
       onTap: () {
-        Get.offAll(() => const HomeScreen());
+        Get.until((route) => route.isFirst);
       },
       btnText: "작성취소",
     ));
   }
 
   void writeFeed() {
-    final Feed feed = Feed(title: _title.text, content: _content.text);
+    final Feed feed = Feed(title: _title, description: _content);
 
     Get.dialog(WarningWindow(
       titleText: '피드 작성 완료',
@@ -41,5 +42,13 @@ class FeedWriteController extends GetxController {
       },
       btnText: "피드 생성",
     ));
+  }
+
+  void titleChange(String value) {
+    _title = value;
+  }
+
+  void contentChange(String value) {
+    _content = value;
   }
 }

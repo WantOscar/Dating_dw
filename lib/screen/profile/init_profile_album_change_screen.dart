@@ -34,44 +34,42 @@ class InitProfileAlbumChangeScreen
           itemBuilder: (context, index) {
             final Album album = controller.albums[index];
             // return Text(album.toString());
-            return Container(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: GestureDetector(
-                  onTap: () {
-                    controller.changeIndex(index);
-                  },
-                  child: Row(
-                    children: [
-                      // Text(album.images!.first.toString()),
-                      SizedBox(
-                        width: 100,
-                        height: 100,
-                        child: AssetEntityImage(
-                          album.images!.first,
-                          fit: BoxFit.cover,
-                        ),
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: GestureDetector(
+                onTap: () {
+                  controller.changeIndex(index);
+                },
+                child: Row(
+                  children: [
+                    // Text(album.images!.first.toString()),
+                    SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: AssetEntityImage(
+                        album.images!.first,
+                        fit: BoxFit.cover,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              album.name.toString(),
-                              style: const TextStyle(
-                                  fontSize: 15, color: Colors.black),
-                            ),
-                            Text(
-                              album.images!.length.toString(),
-                              style: const TextStyle(
-                                  fontSize: 15, color: Colors.black),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            album.name.toString(),
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.black),
+                          ),
+                          Text(
+                            album.images!.length.toString(),
+                            style: const TextStyle(
+                                fontSize: 15, color: Colors.black),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             );

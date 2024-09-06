@@ -1,10 +1,14 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
+import 'package:dating/data/service/heart_service.dart';
 import 'package:dating/utils/enums.dart';
+import 'package:dating/utils/show_toast.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UserController extends GetxController {
+class UserController extends GetxController with UseToast {
+  final HeartService heartService;
   final Rxn<List<User>> _users = Rxn<List<User>>([]);
   final Rx<Status> _status = Rx<Status>(Status.loading);
   final UserRepository userRepository;
@@ -12,22 +16,19 @@ class UserController extends GetxController {
   final RxInt _imageIndex = 0.obs;
   static UserController get to => Get.find();
 
-  UserController({required this.userRepository});
+  UserController({
+    required this.userRepository,
+    required this.heartService,
+  });
 
   List<User>? get users => _users.value;
   User? get myInfo => _myInfo.value;
   int get imageIndex => _imageIndex.value;
 
   void setMyInfo(User user) {
-    print(user.image);
+    debugPrint(user.image);
     _myInfo(user);
     _myInfo.refresh();
-  }
-
-  @override
-  void onInit() {
-    getAllUsers();
-    super.onInit();
   }
 
   bool get isLoading => (_status.value.name == "loading") ? true : false;
@@ -36,9 +37,12 @@ class UserController extends GetxController {
     _imageIndex(index);
   }
 
-  void getAllUsers() async {
-    final List<User> result = await userRepository.getAllUserData();
-    print(result);
-    _users(result);
+  void postHeartAdd(int id) async {
+    await heartService.postHeart(id);
+    showToast('상대방에게 좋아요를 보냈습니다.');
+  }
+
+  void updateUserInfo(User user) {
+    _myInfo(user);
   }
 }

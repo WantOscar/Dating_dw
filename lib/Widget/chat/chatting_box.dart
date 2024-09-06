@@ -1,6 +1,7 @@
 import 'package:dating/data/model/chatting_room_model.dart';
 import 'package:dating/widget/common/image_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../style/constant.dart';
 
@@ -66,8 +67,8 @@ class ChattingBox extends StatelessWidget {
             ),
             Flexible(
               child: Text(
+                DateFormat.jms().format(DateTime.parse(chat.time)).toString(),
                 style: TextStyle(fontSize: 12, color: ThemeColor.font2Color),
-                chat.time,
               ),
             )
           ],

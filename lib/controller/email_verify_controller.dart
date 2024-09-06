@@ -1,25 +1,31 @@
+import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/screen/auth/code_input_screen.dart';
 import 'package:dating/screen/auth/resister_screen.dart';
-import 'package:dating/utils/show_toast.dart';
+import 'package:dating/utils/enums.dart';
+import 'package:dating/utils/toast_message.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class EmailVerifyController extends GetxController with UseToast {
+class EmailVerifyController extends GetxController with ToastMessage {
+  final Rx<Status> _isLoading = Rx<Status>(Status.loaded);
   final RxList<String> _inputCode = ["", "", "", "", "", ""].obs;
   final RxInt _cnt = 0.obs;
   static EmailVerifyController get to => Get.find();
-  final TextEditingController _email = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final AuthService service;
-  final String authCode;
-  String _authCode = "";
+  late String authCode;
 
-  EmailVerifyController({required this.service, required this.authCode});
+  EmailVerifyController({required this.service});
 
-  TextEditingController get email => _email;
+  TextEditingController get email => _emailController;
   List get code => _inputCode;
   int get cnt => _cnt.value;
+
+  Status get isLoading => _isLoading.value;
+
+  String _email = "";
 
   /// 인증코드 입력 전달 함수
   /// 인증코드 자리수를 모두 입력한 경우
@@ -27,18 +33,7 @@ class EmailVerifyController extends GetxController with UseToast {
   /// 그렇지 않는 경우
   /// 입력코드를 전달함.
   void inputValue(String value) {
-    switch (_cnt.value) {
-      case 0:
-      case 1:
-      case 2:
-      case 3:
-      case 4:
-      case 5:
-        _inputCode[_cnt.value++] = value;
-      default:
-        break;
-    }
-
+    _inputCode[_cnt.value++] = value;
     if (_cnt.value == 6) validateAuthCode();
   }
 
@@ -74,20 +69,12 @@ class EmailVerifyController extends GetxController with UseToast {
   /// 일치하는지 확인하는 메소드
   /// 일치한다면 다음단계로 넘어감
   void validateAuthCode() async {
-    print(authCode);
-    print(_inputCode.join());
-    Get.dialog(
-        const Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
-        barrierDismissible: false);
-    await Future.delayed(const Duration(seconds: 1));
-    Get.back();
-    if (authCode == _inputCode.value.join()) {
-      showToast("인증에 성공했습니다 !", gravity: ToastGravity.CENTER);
+    if (authCode == _inputCode.join()) {
+      showToast("인증에 성공했습니다 !");
+      ResisterController.to.init(_email);
       Get.to(() => const ResisterScreen());
     } else {
-      showToast("인증코드가 다릅니다 !", gravity: ToastGravity.CENTER);
+      showToast("인증코드가 다릅니다 !");
     }
     resetCode();
   }
@@ -95,12 +82,22 @@ class EmailVerifyController extends GetxController with UseToast {
   /// 서버로 부터 입력받은 이메일을 통해
   /// 인증코드 전송 api를 요청하는 메소드
   void sendAuthCode() async {
-    final email = _email.value.text.toString();
-    final data = {"email": email};
-    final response = await service.emailVerify(data);
-    if (response != null) {
-      _authCode = response;
-      Get.to(() => const VerifyScreen());
+    if (_email.isEmpty) {
+      showToast("이메일을 입력해주세요!");
+      return;
+    }
+
+    try {
+      final data = {"email": _email};
+      _isLoading(Status.loading);
+      authCode = await service.emailVerify(data);
+      Get.to(() => const CodeInputScreen());
+    } on DioException catch (err) {
+      final error = err.error as List;
+      final message = error[0]["email"];
+      showToast(message);
+    } finally {
+      _isLoading(Status.loaded);
     }
   }
 
@@ -108,5 +105,9 @@ class EmailVerifyController extends GetxController with UseToast {
   void resetCode() {
     _inputCode.value = ["", "", "", "", "", ""];
     _cnt.value = 0;
+  }
+
+  void changeEmail(String value) {
+    _email = value;
   }
 }

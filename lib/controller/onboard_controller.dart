@@ -3,34 +3,36 @@ import 'dart:io';
 import 'package:dating/binding/home_binding.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/service/user_fetch.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dating/widget/profile/item_select_bottom_sheet.dart';
-import 'package:dio/dio.dart' as dio;
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/state_manager.dart';
+import 'package:get/instance_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:remedi_kopo/remedi_kopo.dart';
 import 'package:uuid/uuid.dart';
 
 class OnboardingController extends GetxController with ToastMessage {
-  final UserFetch userService;
+  final UserRepository userRepository;
   static OnboardingController get to => Get.find();
-  OnboardingController({required this.userService});
+  OnboardingController({required this.userRepository});
   final Rx<List<List<File?>>> _selectProfileImages = Rx<List<List<File?>>>(
       List.generate(2, (index) => List.generate(3, (index) => null)));
 
-  final RxBool _isLoading = true.obs;
+  final Rx<Status> _isLoading = Rx<Status>(Status.loaded);
 
-  bool get isLoading => _isLoading.value;
+  Status get isLoading => _isLoading.value;
 
   final Rxn<Gender> _gender = Rxn<Gender>();
 
   /// 생년 인덱스
   final List<String> _yearsList =
-      List.generate(DateTime.now().year - 1900, (index) => "${index + 1901}년");
+      List.generate(DateTime.now().year - 1980, (index) => "${index + 1981}년");
   int _yearIndex = 0;
 
   /// 월 인덱스
@@ -92,13 +94,15 @@ class OnboardingController extends GetxController with ToastMessage {
   /// 확인하는 메소드
   /// 사용자 정보가 있다면 바로 홈 페이지로 라이팅함.
   void _getUserData() async {
-    await Future.delayed(const Duration(seconds: 3));
-    final memberInfo = await userService.searchMyInfo();
-    if (memberInfo != null) {
+    _isLoading(Status.loading);
+    try {
+      final memberInfo = await userRepository.searchMyInfo();
       Get.off(() => const HomeScreen(), binding: HomeBinding());
       UserController.to.setMyInfo(memberInfo);
-    } else {
-      _isLoading(false);
+    } catch (err) {
+      showToast("프로필을 등록해야만 합니다!");
+    } finally {
+      _isLoading(Status.loaded);
     }
   }
 
@@ -127,15 +131,15 @@ class OnboardingController extends GetxController with ToastMessage {
   /// 생년월일 중 연도를 고르는 함수
   void pickBirthdayYear() {
     Get.bottomSheet(ItemSelectBottomSheet(
-      items: _yearsList,
+      items: _yearsList.reversed.toList(),
       onSelectedItemChanged: (value) {
         _yearIndex = value;
       },
       onDone: () {
-        if (_year.value != "" || _month.value != "" || _day.value != "") {
+        if (_year.value != 0 || _month.value != 0 || _day.value != 0) {
           _initBirthDay();
         }
-        _year(_yearIndex + 1901);
+        _year(DateTime.now().year - _yearIndex);
 
         _monthList = List.generate(12, (index) => "${index + 1}월");
         Get.back();
@@ -145,7 +149,7 @@ class OnboardingController extends GetxController with ToastMessage {
 
   /// 생년월일 중 월을 고르는 함수
   void pickBirthdayMonth() {
-    if (_year.value == "") {
+    if (_year.value != 0) {
       return;
     }
 
@@ -168,7 +172,7 @@ class OnboardingController extends GetxController with ToastMessage {
 
   /// 생년월일 중 일을 고르는 함수
   void pickBirthdayDay() {
-    if (_month.value == "" || _year.value == "") {
+    if (_month.value == 0 || _year.value == 0) {
       return;
     }
 
@@ -188,12 +192,12 @@ class OnboardingController extends GetxController with ToastMessage {
   /// 사용자의 키를 설정하는 함수
   void pickMyHeight() {
     Get.bottomSheet(ItemSelectBottomSheet(
-      items: List.generate(100, (index) => "${index + 150}cm"),
+      items: List.generate(60, (index) => "${index + 140}cm"),
       onSelectedItemChanged: (value) {
         _heightIndex = value;
       },
       onDone: () {
-        _height((_heightIndex + 150).toString());
+        _height((_heightIndex + 140).toString());
         Get.back();
       },
     ));
@@ -228,11 +232,11 @@ class OnboardingController extends GetxController with ToastMessage {
     /// 회원 정보 갱신 로직
 
     const uuid = Uuid();
-    List<dio.MultipartFile> images = [];
+    List<MultipartFile> images = [];
     for (List<File?> rows in _selectProfileImages.value) {
       for (File? image in rows) {
         if (image != null) {
-          images.add(dio.MultipartFile.fromFileSync(image.path,
+          images.add(MultipartFile.fromFileSync(image.path,
               filename: "${uuid.v1()}.jpeg"));
         }
       }
@@ -242,12 +246,9 @@ class OnboardingController extends GetxController with ToastMessage {
       showToast("최소 3개 이상 프로필을 등록해주세요!");
       return;
     }
-
-    dio.FormData data = dio.FormData.fromMap({"file": images});
-
-    // final data = dio.FormData.fromMap({"file": multiPartFiles});
-    print(data.files);
-    final urls = await userService.uploadImage(data);
+    _isLoading(Status.loading);
+    FormData data = FormData.fromMap({"file": images});
+    final urls = await userRepository.uploadImage(data);
     if (urls.isNotEmpty) {
       NumberFormat format = NumberFormat("00");
       User user = User(
@@ -262,11 +263,15 @@ class OnboardingController extends GetxController with ToastMessage {
           images: urls,
           image: urls.first);
 
-      final data = user.toJson();
-      final response = userService.updateUserInfo(data);
-
-      UserController.to.setMyInfo(user);
-      Get.off(() => const HomeScreen(), binding: HomeBinding());
+      try {
+        final response = await userRepository.updateUserInfo(user);
+        UserController.to.setMyInfo(response);
+        Get.off(() => const HomeScreen(), binding: HomeBinding());
+      } catch (e) {
+        showToast("에러가 발생했습니다. 잠시후에 다시 시도해주세요!");
+      } finally {
+        _isLoading(Status.loaded);
+      }
     }
   }
 }

@@ -1,47 +1,54 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 @pragma('vm:entry-point')
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print(message.notification?.title);
-  print(message.notification?.body);
-  print(message.data);
+  debugPrint(message.notification?.title);
+  debugPrint(message.notification?.body);
+  debugPrint(message.data.toString());
 }
 
 class FirebaseApi {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-  @pragma('vm:entry-point')
-  void backgroundHandler(NotificationResponse details) {}
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   Future<void> initNotification() async {
     NotificationSettings settings =
         await _firebaseMessaging.requestPermission();
 
-    print('User granted permission: ${settings.authorizationStatus}');
+    debugPrint('User granted permission: ${settings.authorizationStatus}');
 
     final fcmToken = await _firebaseMessaging.getToken();
 
-    print("token : $fcmToken");
+    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
+      debugPrint(fcmToken);
+    }).onError((err) {
+      // Error getting token.
+    });
 
-    FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
+    debugPrint("token : $fcmToken");
 
-    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(const AndroidNotificationChannel(
-            "high_importance_channel", "high_importance_channel",
+            "high_importance_channel", "High Importance Notifications",
             importance: Importance.max));
 
     await flutterLocalNotificationsPlugin.initialize(
       const InitializationSettings(
         android: AndroidInitializationSettings("@mipmap/ic_launcher"),
-        iOS: DarwinInitializationSettings(),
+        iOS: DarwinInitializationSettings(
+          requestSoundPermission: false,
+          requestBadgePermission: false,
+          requestAlertPermission: false,
+        ),
       ),
-      onDidReceiveBackgroundNotificationResponse: backgroundHandler,
     );
 
     _firebaseMessaging.setForegroundNotificationPresentationOptions(
@@ -54,17 +61,23 @@ class FirebaseApi {
       RemoteNotification? notification = message.notification;
 
       if (notification != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            const NotificationDetails(
-                android: AndroidNotificationDetails(
-                    "high_importance_channel", "high_importance_notification",
-                    playSound: true, importance: Importance.max)));
-
-        print(notification.body);
+        debugPrint(notification.body);
+        showNotification(notification);
       }
     });
+  }
+
+  Future<void> showNotification(RemoteNotification notification) async {
+    flutterLocalNotificationsPlugin.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        const NotificationDetails(
+          android: AndroidNotificationDetails(
+              "high_importance_channel", "High Importance Notifications",
+              playSound: true,
+              importance: Importance.max,
+              sound: RawResourceAndroidNotificationSound('notification')),
+        ));
   }
 }
