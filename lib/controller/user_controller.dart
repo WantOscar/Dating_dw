@@ -41,4 +41,8 @@ class UserController extends GetxController with UseToast {
     await heartService.postHeart(id);
     showToast('상대방에게 좋아요를 보냈습니다.');
   }
+
+  void updateUserInfo(User user) {
+    _myInfo(user);
+  }
 }
