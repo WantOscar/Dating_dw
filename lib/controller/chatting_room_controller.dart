@@ -112,8 +112,8 @@ class ChattingRoomController extends GetxController with UseToast {
     _messages.refresh();
   }
 
-  void back() {
-    ChatController.to.getMyChattingList();
+  void back() async {
+    await ChatController.to.getMyChattingList();
     Get.back();
   }
 

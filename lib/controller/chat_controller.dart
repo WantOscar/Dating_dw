@@ -27,7 +27,7 @@ class ChatController extends GetxController
     super.onInit();
   }
 
-  void getMyChattingList() async {
+  Future<void> getMyChattingList() async {
     final result = await service.getMyChattingList();
     _personalChattings.value.clear();
     _personalChattings(result);
