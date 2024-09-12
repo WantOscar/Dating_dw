@@ -14,7 +14,7 @@ class MyFavoriteDetailScreen extends GetView<MainController> {
     return Scaffold(
       appBar: IconHeader(
         text: '내가 관심 있는 친구',
-        backAction: () => controller.quitFavoriteDetail,
+        backAction: () => controller.quitFavoriteDetail(),
       ),
       body: Obx(
         () {

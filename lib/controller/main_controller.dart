@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 class MainController extends GetxController with UseToast {
   final HomeService homeService;
 
-  late final ScrollController _scrollController;
+  final _scrollController = ScrollController();
 
   final Rx<Status> _isLoading = Rx<Status>(Status.loaded);
   Status get isLoading => _isLoading.value;
@@ -82,12 +82,12 @@ class MainController extends GetxController with UseToast {
   }
 
   void myFavoriteDetailList() {
-    _scrollController = ScrollController()..addListener(_nextFavoriteMember);
+    _scrollController.addListener(_nextFavoriteMember);
     Get.to(() => const MyFavoriteDetailScreen());
   }
 
   void quitFavoriteDetail() {
-    _scrollController.dispose();
+    _scrollController.removeListener(_nextFavoriteMember);
     Get.back();
   }
 

@@ -15,7 +15,7 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: IconButton(icon: IconShape.iconClose, onPressed: () {}),
+        child: IconButton(icon: IconShape.iconClose, onPressed: backAction!),
       ),
       title: Text(
         text,
