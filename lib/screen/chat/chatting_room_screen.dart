@@ -119,14 +119,8 @@ class ChattingRoom extends GetView<ChattingRoomController> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaY: 20.0, sigmaX: 20.0),
             child: AppBar(
-              leading: GestureDetector(
-                onTap: controller.back,
-                child: Icon(
-                  Icons.arrow_back,
-                  color: ThemeColor.fontColor,
-                ),
-              ),
               backgroundColor: Colors.white.withOpacity(0.7),
+              foregroundColor: ThemeColor.fontColor,
               elevation: 0.0,
               title: Text(
                 target.nickName!,

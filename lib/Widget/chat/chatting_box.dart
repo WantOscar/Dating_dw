@@ -66,9 +66,31 @@ class ChattingBox extends StatelessWidget {
               ],
             ),
             Flexible(
-              child: Text(
-                DateFormat.jms().format(DateTime.parse(chat.time)).toString(),
-                style: TextStyle(fontSize: 12, color: ThemeColor.font2Color),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  (!chat.isRead)
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Container(
+                            width: 10,
+                            height: 10,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.red,
+                            ),
+                          ),
+                        )
+                      : Container(),
+                  Text(
+                    DateFormat.jms()
+                        .format(DateTime.parse(chat.time))
+                        .toString(),
+                    style:
+                        TextStyle(fontSize: 12, color: ThemeColor.font2Color),
+                  ),
+                ],
               ),
             )
           ],

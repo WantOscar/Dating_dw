@@ -57,6 +57,8 @@ class ChattingRoomController extends GetxController with UseToast {
       (message) {
         _messages.value.add(MessageModel.fromJson(jsonDecode(message)));
         _messages.refresh();
+        ChatController.to.updateLastMessage(chatRoomId, message);
+        ChatController.to.updateRead(chatRoomId);
       },
       onError: (error) {
         showToast("서버와의 통신이 원할하지 않습니다.");
@@ -112,11 +114,6 @@ class ChattingRoomController extends GetxController with UseToast {
   void addChatLog(dynamic chat) {
     _messages.value.add(chat);
     _messages.refresh();
-  }
-
-  void back() async {
-    await ChatController.to.getMyChattingList();
-    Get.back();
   }
 
   void moveToProfileScreen(String nickName) async {
