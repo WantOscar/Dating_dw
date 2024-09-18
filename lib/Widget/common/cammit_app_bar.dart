@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class CammitAppBar extends StatelessWidget {
   final String title;
+  final bool? centerTitle;
   final List<Widget>? actions;
   final bool showCloseButton;
   final void Function()? backAction;
@@ -14,7 +15,8 @@ class CammitAppBar extends StatelessWidget {
       this.actions,
       this.showCloseButton = false,
       this.bottom,
-      this.backAction});
+      this.backAction,
+      this.centerTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class CammitAppBar extends StatelessWidget {
             fontWeight: FontWeight.w600,
             color: ThemeColor.fontColor),
       ),
-      centerTitle: (showCloseButton),
+      centerTitle: showCloseButton,
       actions: (actions != null)
           ? List.generate(
               actions!.length,

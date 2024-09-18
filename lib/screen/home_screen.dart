@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dating/controller/bottom_nav_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/screen/chat/chatting_screen.dart';
@@ -20,10 +22,27 @@ class HomeScreen extends GetView<BottomNavController> {
       child: Obx(
         () => Scaffold(
           extendBody: true,
-          bottomNavigationBar: ClipRRect(
+          bottomNavigationBar: _bottomNav(),
+          body: _body(),
+        ),
+      ),
+    );
+  }
+
+  Widget _bottomNav() => Container(
+        decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(24.0),
                 topRight: Radius.circular(24.0)),
+            border: Border.all(width: 2.0, color: Colors.white)),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 20.0,
+              sigmaY: 20.0,
+            ),
             child: BottomNavigationBar(
               items: [
                 const BottomNavigationBarItem(
@@ -39,6 +58,7 @@ class HomeScreen extends GetView<BottomNavController> {
                         ImageAvatar(imagePath: UserController.to.myInfo?.image),
                     label: '프로필'),
               ],
+              backgroundColor: const Color(0xffffffff).withOpacity(0.7),
               onTap: controller.changeIndex,
               selectedItemColor: ThemeColor.fontColor,
               unselectedItemColor: Colors.grey,
@@ -47,18 +67,17 @@ class HomeScreen extends GetView<BottomNavController> {
               type: BottomNavigationBarType.fixed,
             ),
           ),
-          body: IndexedStack(
-            index: controller.index,
-            children: const [
-              MainScreen(),
-              SearchScreen(),
-              ChattingScreen(),
-              // AlarmScreen(),
-              ProfileScreen(),
-            ],
-          ),
         ),
-      ),
-    );
-  }
+      );
+
+  Widget _body() => IndexedStack(
+        index: controller.index,
+        children: const [
+          MainScreen(),
+          SearchScreen(),
+          ChattingScreen(),
+          // AlarmScreen(),
+          ProfileScreen(),
+        ],
+      );
 }

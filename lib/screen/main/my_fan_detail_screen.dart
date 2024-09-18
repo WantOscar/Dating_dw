@@ -1,3 +1,4 @@
+import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/common/icon_header.dart';
 import 'package:dating/widget/main/my_favorite_avatar.dart';
 import 'package:dating/controller/main_controller.dart';
@@ -11,7 +12,7 @@ class MyFanDetailScreen extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const IconHeader(text: '내가 관심 있는 친구'),
+      appBar: _appBar(),
       body: Obx(
         () {
           return (controller.myFanMembers.isNotEmpty)
@@ -48,4 +49,12 @@ class MyFanDetailScreen extends GetView<MainController> {
       ),
     );
   }
+
+  PreferredSizeWidget _appBar() => PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: const CammitAppBar(
+          showCloseButton: true,
+          title: '나한테 관심 있는 친구',
+        ),
+      );
 }

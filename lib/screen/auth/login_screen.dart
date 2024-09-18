@@ -20,6 +20,7 @@ class LoginScreen extends GetView<LoginController> {
           GestureDetector(
             onTap: FocusScope.of(context).unfocus,
             child: Scaffold(
+              backgroundColor: Colors.white,
               body: Center(
                 child: SingleChildScrollView(
                   child: Column(

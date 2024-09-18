@@ -28,7 +28,7 @@ class AuthService extends GetxService implements AuthServiceImpl {
   /// 로컬 스토리지에 저장됨
   /// 실패할 경우 에러메시지를 반환함.
   @override
-  Future<String?> login(Map<String, dynamic> data) async {
+  Future<String> login(Map<String, dynamic> data) async {
     return dio.post(ApiUrl.login, data: data).then((response) {
       tokenProvider.saveTokenInfo(response.data);
       return response.data["accessToken"];
