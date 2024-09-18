@@ -55,10 +55,9 @@ class LoginController extends GetxController with UseToast {
       "password": _password.value.text.toString()
     };
 
-    final accessToken = await authService.login(data);
+    try {
+      final accessToken = await authService.login(data);
 
-    _isLoading(Status.loaded);
-    if (accessToken != null) {
       /// FCM Token 갱신
       final fcmToken = await FirebaseMessaging.instance.getToken();
       if (fcmToken != null) {
@@ -69,6 +68,10 @@ class LoginController extends GetxController with UseToast {
       _email.clear();
       _password.clear();
       _moveToOnboard();
+    } on Exception catch (err) {
+      showToast(err.toString());
+    } finally {
+      _isLoading(Status.loaded);
     }
   }
 

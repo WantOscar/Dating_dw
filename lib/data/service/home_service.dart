@@ -19,4 +19,10 @@ class HomeService {
       receiverHeartList.map((json) => User.fromJson(json)).toList()
     ];
   }
+
+  Future<List<User>> newFavoriteMembers(int id) {
+    return homeRepository
+        .newFavoriteMembers(id)
+        .then((users) => users.map((json) => User.fromJson(json)).toList());
+  }
 }

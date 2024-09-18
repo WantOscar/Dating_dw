@@ -117,7 +117,7 @@ class ChattingRoom extends GetView<ChattingRoomController> {
         preferredSize: AppBar().preferredSize,
         child: ClipRRect(
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaY: 10.0, sigmaX: 10.0),
+            filter: ImageFilter.blur(sigmaY: 20.0, sigmaX: 20.0),
             child: AppBar(
               leading: GestureDetector(
                 onTap: controller.back,

@@ -13,11 +13,20 @@ class HomeRepositoryImpl implements HomeRepository {
   /// 각각 USER 배열로 반환함.
 
   @override
-  Future<Map<String, dynamic>> getHomeDatas() async {
-    return dio.get(ApiUrl.main).then((response) => response.data);
+  Future<Map<String, dynamic>> getHomeDatas() {
+    return dio.get("/").then((response) => response.data);
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> newFavoriteMembers(int id) {
+    return dio
+        .get("/favorite-list/$id")
+        .then((response) => List<Map<String, dynamic>>.from(response.data));
   }
 }
 
 abstract class HomeRepository {
   Future<Map<String, dynamic>> getHomeDatas();
+
+  Future<List<Map<String, dynamic>>> newFavoriteMembers(int id);
 }

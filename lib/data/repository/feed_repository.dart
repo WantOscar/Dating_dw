@@ -20,7 +20,7 @@ class FeedRepositoryImpl extends GetxService implements FeedRepository {
   /// 서버에 등록된 모든 FEED를 조회한 후
   /// 결과를 FEED 배열로 반환함.
   Future<List<Feed>> getAllFeeds() async {
-    return dio.get('/search').then((response) =>
+    return dio.get('/search/list').then((response) =>
         List<Map<String, dynamic>>.from(response.data)
             .map((json) => Feed.fromJson(json))
             .toList());

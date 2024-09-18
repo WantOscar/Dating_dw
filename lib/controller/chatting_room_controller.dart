@@ -94,9 +94,11 @@ class ChattingRoomController extends GetxController with UseToast {
     );
 
     final fcmSend = FCMSend(
-        targetName: targetName,
-        title: UserController.to.myInfo!.nickName,
-        body: _messageController.text.toString());
+      targetName: targetName,
+      title: UserController.to.myInfo!.nickName!,
+      body: _messageController.text.toString(),
+      chatRoomNo: chatRoomId,
+    );
 
     channel.sink.add(jsonEncode(message.toJson()));
     try {

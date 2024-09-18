@@ -91,12 +91,12 @@ class _ChatBubbleState extends State<ChatBubble> {
       alignment: Alignment.center,
       height: MediaQuery.of(context).size.height * 0.055,
       decoration: BoxDecoration(
-        color: (isMe) ? ThemeColor.fontColor : const Color(0xFFF0F0F0),
+        color: (isMe) ? ThemeColor.fontColor : const Color(0xffdfdfdf),
         borderRadius: BorderRadius.only(
-          topLeft: (isMe) ? const Radius.circular(24) : Radius.zero,
-          topRight: (isMe) ? Radius.zero : const Radius.circular(24),
-          bottomLeft: const Radius.circular(24),
-          bottomRight: const Radius.circular(24),
+          bottomLeft: (isMe) ? const Radius.circular(12) : Radius.zero,
+          bottomRight: (isMe) ? Radius.zero : const Radius.circular(12),
+          topLeft: const Radius.circular(12),
+          topRight: const Radius.circular(12),
         ),
       ),
       child: Text(

@@ -24,7 +24,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xffefefef),
+          useMaterial3: false,
+          appBarTheme: const AppBarTheme(elevation: 0.0)),
       home: const LoginScreen(),
       initialBinding: InitBinding(),
       debugShowCheckedModeBanner: false,

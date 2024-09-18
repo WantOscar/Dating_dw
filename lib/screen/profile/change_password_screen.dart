@@ -1,12 +1,12 @@
-import 'package:dating/widget/common/bottom_apply_bar.dart';
+import 'package:dating/widget/common/bottom_button.dart';
 import 'package:dating/widget/common/icon_header.dart';
 import 'package:dating/widget/common/property_text_field.dart';
 import 'package:dating/controller/setting_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AccountInformationScreen extends GetView<SettingPasswordController> {
-  const AccountInformationScreen({super.key});
+class ChangePasswordScreen extends GetView<SettingPasswordController> {
+  const ChangePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,16 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomApplyBar(
-          text: '확인',
-          onTap: controller.completeChangePw,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+          child: BottomButton(
+            onTap: controller.completeChangePw,
+            child: const Text("확인",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600)),
+          ),
         ),
       ),
     );
