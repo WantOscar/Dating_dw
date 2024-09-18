@@ -29,6 +29,8 @@ class SearchScreen extends GetView<FeedController> {
           children: [
             Expanded(
               child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  controller: controller.scrollController,
                   padding: const EdgeInsets.only(top: 12.0),
                   itemBuilder: (context, index) {
                     final Feed feed = controller.feeds[index];
@@ -42,7 +44,12 @@ class SearchScreen extends GetView<FeedController> {
             ),
             const SizedBox(
               height: 100,
-            )
+            ),
+            if (controller.nextLoading)
+              Container(
+                padding: const EdgeInsets.all(30),
+                child: const CircularProgressIndicator.adaptive(),
+              )
           ],
         );
 
