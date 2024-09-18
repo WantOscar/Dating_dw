@@ -1,4 +1,3 @@
-import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile/user_profile_widget.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
@@ -45,6 +44,7 @@ class ProfileScreen extends GetView<UserController> {
         body: Padding(
           padding: const EdgeInsets.only(bottom: 70),
           child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             slivers: [
               _profile(),
               // _personality(),

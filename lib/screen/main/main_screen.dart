@@ -24,6 +24,7 @@ class MainScreen extends GetView<MainController> {
         body: (controller.isLoading == Status.loading)
             ? _loading()
             : SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     _todayIntroduce(),
