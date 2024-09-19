@@ -91,7 +91,9 @@ class _ChatBubbleState extends State<ChatBubble> {
       alignment: Alignment.center,
       height: MediaQuery.of(context).size.height * 0.055,
       decoration: BoxDecoration(
-        color: (isMe) ? ThemeColor.fontColor : const Color(0xffdfdfdf),
+        color: (isMe)
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.only(
           bottomLeft: (isMe) ? const Radius.circular(12) : Radius.zero,
           bottomRight: (isMe) ? Radius.zero : const Radius.circular(12),

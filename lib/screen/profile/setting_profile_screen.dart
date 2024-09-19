@@ -4,7 +4,6 @@ import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/profile/change_password_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/screen/profile/setting_profile_row.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:dating/utils/api_urls.dart';
 import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
@@ -84,7 +83,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: SettingProfileRow(
           label: "차단된 계정",
-          onTap: () => Get.to(const BlockedAccountScreen()),
+          onTap: () => Get.to(() => const BlockedAccountScreen()),
         ));
   }
 
@@ -98,7 +97,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
         children: [
           Text(
             '휴먼계정 전환',
-            style: TextStyle(fontSize: 16, color: Colors.black),
+            style: TextStyle(fontSize: 16),
           ),
           HumanAccountSwitchBtn(),
         ],

@@ -26,11 +26,11 @@ class _FeedWidgetState extends State<FeedWidget> {
       child: Ink(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(24.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
+              color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
               spreadRadius: 5,
               blurRadius: 7,
               offset: const Offset(0, 6), // changes position of shadow
@@ -72,7 +72,6 @@ class _FeedWidgetState extends State<FeedWidget> {
                       widget.feed.content.toString(),
                       style: const TextStyle(
                         fontSize: 14,
-                        color: Colors.black87,
                       ),
                     ),
                   ),
@@ -129,9 +128,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                     Text(
                       widget.feed.user!.nickName!,
                       style: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600),
+                          fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -146,13 +143,14 @@ class _FeedWidgetState extends State<FeedWidget> {
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    const Icon(Icons.location_on,
-                        size: 20, color: Colors.black),
+                    const Icon(
+                      Icons.location_on,
+                      size: 20,
+                    ),
                     Text(
                       widget.feed.user!.address!,
                       style: const TextStyle(
                         fontSize: 12,
-                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -251,7 +249,6 @@ class _FeedWidgetState extends State<FeedWidget> {
               widget.feed.title.toString(),
               style: const TextStyle(
                 fontSize: 17,
-                color: Colors.black87,
                 fontWeight: FontWeight.w600,
               ),
             ),

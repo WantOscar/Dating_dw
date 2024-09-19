@@ -46,9 +46,7 @@ class ChattingBox extends StatelessWidget {
                     children: [
                       Text(
                         chat.name,
-                        style: TextStyle(
-                            color: ThemeColor.font2Color,
-                            fontWeight: FontWeight.bold),
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 5,
@@ -56,9 +54,7 @@ class ChattingBox extends StatelessWidget {
                       Text(
                         chat.lastMessage,
                         style: const TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12),
+                            fontWeight: FontWeight.w400, fontSize: 12),
                       ),
                     ],
                   ),

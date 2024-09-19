@@ -51,7 +51,6 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
           },
         ),
       ),
-      backgroundColor: Colors.white,
       centerTitle: true,
       title: Text(
         "상대 프로필",

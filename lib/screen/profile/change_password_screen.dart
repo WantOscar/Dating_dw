@@ -13,7 +13,10 @@ class ChangePasswordScreen extends GetView<SettingPasswordController> {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-        appBar: const IconHeader(text: '비밀번호 변경'),
+        appBar: IconHeader(
+          text: '비밀번호 변경',
+          backAction: Get.back,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [

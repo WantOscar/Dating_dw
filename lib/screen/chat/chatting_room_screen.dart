@@ -20,11 +20,11 @@ class ChattingRoom extends GetView<ChattingRoomController> {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-        appBar: _appBar(),
+        appBar: _appBar(context),
         body: Column(
           children: [
             _chatBody(),
-            _messageInput(),
+            _messageInput(context),
           ],
         ),
         extendBodyBehindAppBar: true,
@@ -74,60 +74,59 @@ class ChattingRoom extends GetView<ChattingRoomController> {
   /// 상대방에게 보내고자하는 메시지를 입력할 수 있음.
   /// 메시지가 입력되고 전송되면
   /// 사용자의 메시지 박스의 내용을 모두 지움.
-  Widget _messageInput() => SafeArea(
+  Widget _messageInput(BuildContext context) => SafeArea(
         top: false,
         left: false,
         right: false,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
           child: TextField(
-            cursorColor: Colors.grey,
+            cursorColor: Theme.of(context).colorScheme.primary,
             textAlignVertical: TextAlignVertical.center,
             controller: controller.message,
             style: const TextStyle(color: Colors.black87, fontSize: 15),
             decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(24.0)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(24.0)),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.transparent),
-                    borderRadius: BorderRadius.circular(24.0)),
-                isDense: true,
-                isCollapsed: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 1.0),
-                suffixIcon: GestureDetector(
-                  onTap: controller.sendMessage,
-                  child: const Icon(
-                    Icons.send,
-                    color: Colors.grey,
-                    size: 25,
-                  ),
+              border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(24.0)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(24.0)),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(24.0)),
+              isDense: true,
+              isCollapsed: true,
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 1.0),
+              suffixIcon: GestureDetector(
+                onTap: controller.sendMessage,
+                child: Icon(
+                  Icons.send,
+                  color: Theme.of(context).colorScheme.primary,
+                  size: 25,
                 ),
-                filled: true,
-                fillColor: const Color(0xffdfdfdf)),
+              ),
+              filled: true,
+            ),
           ),
         ),
       );
 
-  PreferredSizeWidget _appBar() => PreferredSize(
+  PreferredSizeWidget _appBar(BuildContext context) => PreferredSize(
         preferredSize: AppBar().preferredSize,
         child: ClipRRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaY: 20.0, sigmaX: 20.0),
             child: AppBar(
-              backgroundColor: Colors.white.withOpacity(0.7),
+              backgroundColor:
+                  Theme.of(context).colorScheme.secondary.withOpacity(0.7),
               foregroundColor: ThemeColor.fontColor,
               elevation: 0.0,
               title: Text(
                 target.nickName!,
-                style: TextStyle(
-                    color: ThemeColor.fontColor,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
           ),

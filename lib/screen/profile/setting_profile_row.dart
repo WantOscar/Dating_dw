@@ -16,7 +16,7 @@ class SettingProfileRow extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(fontSize: 16, color: Colors.black),
+          style: const TextStyle(fontSize: 16),
         ),
         IconButton(
           onPressed: onTap,
