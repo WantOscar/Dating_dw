@@ -2,6 +2,8 @@ import 'package:dating/api/firebase_api.dart';
 import 'package:dating/binding/init_binding.dart';
 import 'package:dating/firebase_options.dart';
 import 'package:dating/screen/auth/login_screen.dart';
+import 'package:dating/style/app_theme.dart';
+import 'package:dating/style/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +26,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(
-          scaffoldBackgroundColor: const Color(0xffefefef),
-          useMaterial3: false,
-          appBarTheme: const AppBarTheme(elevation: 0.0)),
+      darkTheme: darkTheme,
+      theme: lightTheme,
       home: const LoginScreen(),
       initialBinding: InitBinding(),
       debugShowCheckedModeBanner: false,

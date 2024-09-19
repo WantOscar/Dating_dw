@@ -22,7 +22,7 @@ class CammitAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       leading: (showCloseButton)
           ? GestureDetector(
               onTap: backAction ?? Get.back,

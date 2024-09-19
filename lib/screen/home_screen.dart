@@ -22,14 +22,16 @@ class HomeScreen extends GetView<BottomNavController> {
       child: Obx(
         () => Scaffold(
           extendBody: true,
-          bottomNavigationBar: _bottomNav(),
+          bottomNavigationBar: Builder(builder: (context) {
+            return _bottomNav(context);
+          }),
           body: _body(),
         ),
       ),
     );
   }
 
-  Widget _bottomNav() => Container(
+  Widget _bottomNav(BuildContext context) => Container(
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(24.0),
@@ -58,7 +60,8 @@ class HomeScreen extends GetView<BottomNavController> {
                         ImageAvatar(imagePath: UserController.to.myInfo?.image),
                     label: '프로필'),
               ],
-              backgroundColor: const Color(0xffffffff).withOpacity(0.7),
+              backgroundColor:
+                  Theme.of(context).colorScheme.tertiary.withOpacity(0.7),
               onTap: controller.changeIndex,
               selectedItemColor: ThemeColor.fontColor,
               unselectedItemColor: Colors.grey,
