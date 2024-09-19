@@ -1,8 +1,10 @@
-import 'package:dating/Widget/profile/hobby_container.dart';
 import 'package:dating/Widget/profile/user_profile_widget.dart';
+import 'package:dating/Widget/search/feed_widget.dart';
+import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/user_controller.dart';
+import 'package:dating/data/model/feed.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
 import 'package:dating/screen/profile/setting_account_screen.dart';
@@ -54,7 +56,8 @@ class ProfileScreen extends GetView<UserController> {
                 child: SizedBox(
                   height: 100,
                 ),
-              )
+              ),
+              Obx(() => (controller.isLoading) ? _loading() : _myFeed()),
             ],
           ),
         ),
@@ -84,7 +87,6 @@ class ProfileScreen extends GetView<UserController> {
           onPressed: () {
             Get.to(() => const ProfileEditScreen(),
                 binding: BindingsBuilder(() {
-              // ProfileImageController();
               Get.put(ProfileEditController(
                   userRepository: UserRepositoryImpl(
                       dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
@@ -102,6 +104,30 @@ class ProfileScreen extends GetView<UserController> {
           ),
         ),
       );
+
+  Widget _loading() => const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+
+  Widget _myFeed() {
+    return (FeedController.to.feeds.isEmpty)
+        ? const SliverToBoxAdapter(child: SizedBox.shrink())
+        : SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final Feed feed = FeedController.to.feeds[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 14.0, horizontal: 16.0),
+                  child: FeedWidget(feed: feed),
+                );
+              },
+              childCount: FeedController.to.feeds.length,
+            ),
+          );
+  }
 
   /// 내 인적사항을 보여줌
   // Widget _info() => const SliverToBoxAdapter(

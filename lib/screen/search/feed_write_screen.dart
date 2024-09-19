@@ -45,13 +45,13 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
         dashPattern: const [5, 5],
         child: SizedBox(
           height: Get.size.width * 0.15,
-          width: Get.size.width * 0.9,
+          width: Get.size.width * 1,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: controller.titleController,
-              maxLength: 30,
-              maxLines: 3,
+              maxLength: 50,
+              maxLines: 1,
               decoration: const InputDecoration(
                 hintText: '제목을 작성해주세요.',
                 border: InputBorder.none,
@@ -75,15 +75,18 @@ class FeedWriteScreen extends GetView<FeedWriteController> {
         borderType: BorderType.RRect,
         radius: const Radius.circular(10),
         dashPattern: const [5, 5],
-        child: SizedBox(
-          height: Get.size.width * 0.6,
-          width: Get.size.width * 0.9,
+        child: Container(
+          width: Get.size.width * 1,
+          constraints: BoxConstraints(
+            minHeight: Get.size.width * 0.15,
+          ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: controller.contentController,
               maxLength: 50,
-              maxLines: 30,
+              minLines: 5,
+              maxLines: null,
               decoration: const InputDecoration(
                 hintText: '글을 작성해주세요.',
                 border: InputBorder.none,
