@@ -5,10 +5,10 @@ ThemeData get lightTheme => ThemeData(
     appBarTheme: const AppBarTheme(elevation: 0.0),
     scaffoldBackgroundColor: const Color(0xffefefef),
     colorScheme: const ColorScheme.light(
-      primary: Color(0xFFFF006B),
-      secondary: Color(0xffffffff),
-      tertiary: Color(0xffffffff),
-    ));
+        primary: Color(0xFFFF006B),
+        secondary: Color(0xffffffff),
+        tertiary: Color(0xffffffff),
+        onSecondary: Color(0xff000000)));
 
 ThemeData get darkTheme => ThemeData(
     useMaterial3: false,
@@ -17,4 +17,5 @@ ThemeData get darkTheme => ThemeData(
     colorScheme: const ColorScheme.dark(
         primary: Color(0xFFFF006B),
         secondary: Color(0xff000000),
-        tertiary: Color(0xff464646)));
+        tertiary: Color(0xff464646),
+        onSecondary: Color(0xffffffff)));

@@ -20,7 +20,6 @@ class LoginScreen extends GetView<LoginController> {
           GestureDetector(
             onTap: FocusScope.of(context).unfocus,
             child: Scaffold(
-              backgroundColor: Colors.white,
               body: Center(
                 child: SingleChildScrollView(
                   child: Column(
@@ -30,7 +29,7 @@ class LoginScreen extends GetView<LoginController> {
                       const SizedBox(
                         height: 50,
                       ),
-                      _loginFields(),
+                      _loginFields(context),
                       _forgotAccount()
                     ],
                   ),
@@ -69,14 +68,14 @@ class LoginScreen extends GetView<LoginController> {
 
   /// 로그인을 위한 이메일과 비밀번호를 입력하는 텍스트 필드와
   /// 로그인을 시도하는 버튼 위젯.
-  Widget _loginFields() {
+  Widget _loginFields(BuildContext context) {
     return Column(
       children: [
         Container(
           width: Get.size.width * 0.8,
           height: Get.size.width * 0.16,
           decoration: BoxDecoration(
-              color: const Color(0xFFEDEDED),
+              color: Theme.of(context).colorScheme.tertiary,
               borderRadius: BorderRadius.circular(45),
               boxShadow: [
                 BoxShadow(
@@ -110,7 +109,7 @@ class LoginScreen extends GetView<LoginController> {
           width: Get.size.width * 0.8,
           height: Get.size.width * 0.16,
           decoration: BoxDecoration(
-              color: const Color(0xFFEDEDED),
+              color: Theme.of(context).colorScheme.tertiary,
               borderRadius: BorderRadius.circular(45),
               boxShadow: [
                 BoxShadow(

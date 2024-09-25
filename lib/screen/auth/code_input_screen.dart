@@ -101,7 +101,6 @@ class CodeInputScreen extends GetView<EmailVerifyController> {
             color: ThemeColor.fontColor,
           ),
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
       );
 }

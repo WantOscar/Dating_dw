@@ -103,7 +103,10 @@ class _ChatBubbleState extends State<ChatBubble> {
       ),
       child: Text(
         widget.message.message!,
-        style: TextStyle(color: (isMe) ? Colors.white : Colors.black),
+        style: TextStyle(
+            color: (isMe)
+                ? Colors.white
+                : Theme.of(context).colorScheme.onSecondary),
       ),
     );
   }

@@ -3,12 +3,14 @@ import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/screen/auth/code_input_screen.dart';
 import 'package:dating/screen/auth/resister_screen.dart';
 import 'package:dating/utils/enums.dart';
+import 'package:dating/utils/show_toast.dart';
 import 'package:dating/utils/toast_message.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class EmailVerifyController extends GetxController with ToastMessage {
+class EmailVerifyController extends GetxController with UseToast {
   final Rx<Status> _isLoading = Rx<Status>(Status.loaded);
   final RxList<String> _inputCode = ["", "", "", "", "", ""].obs;
   final RxInt _cnt = 0.obs;
@@ -83,7 +85,7 @@ class EmailVerifyController extends GetxController with ToastMessage {
   /// 인증코드 전송 api를 요청하는 메소드
   void sendAuthCode() async {
     if (_email.isEmpty) {
-      showToast("이메일을 입력해주세요!");
+      showToast("이메일을 입력해주세요!", gravity: ToastGravity.CENTER);
       return;
     }
 
@@ -95,7 +97,7 @@ class EmailVerifyController extends GetxController with ToastMessage {
     } on DioException catch (err) {
       final error = err.error as List;
       final message = error[0]["email"];
-      showToast(message);
+      showToast(message, gravity: ToastGravity.CENTER);
     } finally {
       _isLoading(Status.loaded);
     }

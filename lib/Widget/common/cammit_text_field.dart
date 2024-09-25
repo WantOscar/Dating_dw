@@ -17,20 +17,22 @@ class CammitTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       alignment: Alignment.center,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24.0),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24.0),
         child: TextField(
-          cursorColor: Colors.black,
+          cursorColor: Theme.of(context).colorScheme.primary,
           controller: controller,
           onChanged: onChanged,
           decoration: InputDecoration(
             hintText: (hintText != null) ? hintText : null,
             border: InputBorder.none,
-            fillColor: const Color(0xffefefef),
+            fillColor: Theme.of(context).colorScheme.tertiary,
             filled: true,
             hintStyle: const TextStyle(color: Color(0xffafafaf)),
           ),
