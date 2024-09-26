@@ -187,34 +187,37 @@ class LoginScreen extends GetView<LoginController> {
 
   /// 계정을 생성하기 위한 라우팅 버튼
   Widget _signUp() {
-    return BottomAppBar(
-      shadowColor: Colors.white,
-      elevation: 0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            '캠밋이 처음이신가요?',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-              color: Colors.grey,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: GestureDetector(
-              onTap: () {
-                Get.to(() => const EmailVerifyPage(),
-                    binding: ResisterBinding());
-              },
-              child: Text(
-                '회원가입',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: ThemeColor.fontColor),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: BottomAppBar(
+        shadowColor: Colors.white,
+        elevation: 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              '캠밋이 처음이신가요?',
+              style: TextStyle(
+                fontWeight: FontWeight.w300,
+                color: Colors.grey,
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const EmailVerifyPage(),
+                      binding: ResisterBinding());
+                },
+                child: Text(
+                  '회원가입',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: ThemeColor.fontColor),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -29,5 +29,6 @@ class ChattingRoomModel {
   void updateLastMessage(String message) {
     lastMessage = message;
     time = DateTime.now().toIso8601String();
+    isRead = false;
   }
 }

@@ -61,6 +61,7 @@ class FirebaseApi {
         debugPrint("room ID: ${message.data["chatRoomNo"]}");
         ChatController.to.updateLastMessage(
             int.parse(message.data["chatRoomNo"]), notification.body!);
+
         showNotification(notification);
       }
     });

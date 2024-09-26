@@ -1,6 +1,7 @@
 import 'package:dating/controller/email_verify_controller.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/style/constant.dart';
+import 'package:dating/widget/common/bottom_button.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,58 +14,43 @@ class AuthForgotScreen extends GetView<EmailVerifyController> {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: ThemeColor.fontColor,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              _header(),
-              const SizedBox(
-                height: 30,
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: ThemeColor.fontColor,
               ),
-              _email(),
-            ],
-          ),
-        ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: BottomAppBar(
-            shadowColor: Colors.white,
+            ),
             elevation: 0,
-            child: GestureDetector(
-              onTap: controller.sendAuthCode,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.07,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: ThemeColor.fontColor),
-                child: const Center(
-                  child: Text(
-                    '확인',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                _header(),
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
+                _email(),
+              ],
             ),
           ),
-        ),
-      ),
+          bottomNavigationBar: SafeArea(
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BottomButton(
+                    onTap: controller.sendAuthCode,
+                    child: const Text(
+                      "인증번호발송",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  )))),
     );
   }
 

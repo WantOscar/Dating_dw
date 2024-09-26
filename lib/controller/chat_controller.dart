@@ -64,6 +64,7 @@ class ChatController extends GetxController
         .first
         .updateLastMessage(message);
     _personalChattings.refresh();
+    readChat(chatRoomId);
   }
 
   // void updateRead(int chatRoomId) {

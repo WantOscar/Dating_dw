@@ -51,13 +51,14 @@ class ChattingRoomController extends GetxController with UseToast {
 
   void _readChat() {
     ChatController.to.readChat(chat.id);
+    chat.isRead = true;
   }
 
   /// 서버의 채팅 소켓 서버와 연결하는 메소드
   void _connectChannel() {
+    fetchData();
     channel =
         IOWebSocketChannel.connect(Uri.parse("ws://13.124.21.82:8082/ws/chat"));
-    fetchData();
     channel.stream.listen(
       (message) {
         final msg = MessageModel.fromJson(jsonDecode(message));
