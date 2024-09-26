@@ -1,5 +1,6 @@
 import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -38,7 +39,9 @@ class SearchScreen extends GetView<FeedController> {
                           vertical: 14.0, horizontal: 16.0),
                       child: FeedWidget(
                         feed: feed,
-                        onTap: controller.showFeedOption,
+                        onTap: () => (feed.user != UserController.to.myInfo!)
+                            ? controller.showFeedOption()
+                            : controller.showMyFeedOption(feed),
                       ),
                     );
                   },

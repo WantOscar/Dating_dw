@@ -1,3 +1,4 @@
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
@@ -83,7 +84,9 @@ class _FeedWidgetState extends State<FeedWidget> {
           ],
         ),
         actions: [
-          _join(),
+          (widget.feed?.user != UserController.to.myInfo!)
+              ? _join()
+              : Container(),
         ],
       ),
     );
