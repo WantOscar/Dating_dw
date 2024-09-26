@@ -8,11 +8,8 @@ import 'package:get/get.dart';
 
 class FeedWriteScreen extends StatefulWidget {
   final Feed? feed;
-  final String? title;
-  final String? content;
-  final bool? isEdit;
-  const FeedWriteScreen(
-      {super.key, this.feed, this.title, this.content, this.isEdit});
+
+  const FeedWriteScreen({super.key, this.feed});
 
   @override
   State<FeedWriteScreen> createState() => _FeedWriteScreenState();
@@ -26,8 +23,9 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
   @override
   void initState() {
     controller = FeedController.to;
-    _titleController = TextEditingController(text: widget.title ?? '');
-    _contentController = TextEditingController(text: widget.content ?? '');
+    _titleController = TextEditingController(text: widget.feed?.title ?? '');
+    _contentController =
+        TextEditingController(text: widget.feed?.content ?? '');
     super.initState();
   }
 
@@ -41,26 +39,25 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: AppBar().preferredSize,
-        child: CammitAppBar(
-          showCloseButton: true,
-          backAction: FeedController.to.cancel,
-          title: (widget.isEdit != true) ? "글 쓰기" : "글 수정",
+        appBar: PreferredSize(
+          preferredSize: AppBar().preferredSize,
+          child: CammitAppBar(
+            showCloseButton: true,
+            backAction: FeedController.to.cancel,
+            title: (widget.feed == null) ? "글 쓰기" : "글 수정",
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            _titleWrite(),
-            _sub(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _titleWrite(),
+              _sub(),
+            ],
+          ),
         ),
-      ),
-      bottomSheet: _completeButton(widget.feed!),
-    );
+        bottomSheet: _completeButton());
   }
 
   /// 제목 쓰기 칸(title)
@@ -132,30 +129,28 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
 
   /// 처음 글 작성을 완료한 후,
   /// 이 버튼을 누르면 탐색 창에서 작성한 글이 올라감.
-  Widget _completeButton(Feed feed) {
+  Widget _completeButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-      child: BottomButton(
-        onTap: () {
-          // if (widget.isEdit == true) {
-          //   FeedController.to.updateDialog(feed);
-          // } else {
-          //   FeedController.to.completeFeed();
-          // }
-          if (widget.isEdit == true) {
-            Feed updatedFeed = Feed(
-                id: feed.id,
-                title: _titleController.text,
-                content: _contentController.text);
-            FeedController.to.updateDialog(updatedFeed);
-          } else {
-            FeedController.to.completeFeed();
-          }
-        },
-        child: const Text(
-          "작성 완료",
-          style: TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+      child: SafeArea(
+        bottom: true,
+        child: BottomButton(
+          onTap: () {
+            if (widget.feed != null) {
+              Feed updatedFeed = Feed(
+                  id: widget.feed!.id,
+                  title: _titleController.text,
+                  content: _contentController.text);
+              FeedController.to.updateDialog(updatedFeed);
+            } else {
+              FeedController.to.completeFeed();
+            }
+          },
+          child: const Text(
+            "작성 완료",
+            style: TextStyle(
+                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+          ),
         ),
       ),
     );

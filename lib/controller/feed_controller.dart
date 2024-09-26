@@ -1,5 +1,7 @@
 import 'package:dating/Widget/common/warning_window.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
+import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
@@ -82,6 +84,10 @@ class FeedController extends GetxController {
   /// 피드를 작성하고 작성한 데이터를 보내는 함수
   void writeFeed(Feed feed) async {
     final result = await feedRepository.postFeed(feed.toJson());
+    final User user = UserController.to.myInfo!;
+    result.user = user;
+    result.nickName = user.nickName!;
+    print(result.user?.image);
     _feeds.value.add(result);
     _feeds.refresh();
   }
@@ -195,7 +201,10 @@ class FeedController extends GetxController {
   /// 본인이 작성한 피드를 삭제하는 함수
   void deleteFeed(int id) async {
     await feedRepository.deleteFeed(id);
+    _feeds.value.removeWhere((feed) => feed.id == id);
+    _myFeeds.value.removeWhere((feed) => feed.id == id);
     _feeds.refresh();
+    _myFeeds.refresh();
   }
 
   /// 수정한 글을 적용시킬지 물어보는 dialog 함수.
@@ -247,9 +256,6 @@ class FeedController extends GetxController {
                       Get.to(
                         FeedWriteScreen(
                           feed: feed,
-                          title: feed.title,
-                          content: feed.content,
-                          isEdit: true,
                         ),
                       );
                     },
@@ -276,22 +282,20 @@ class FeedController extends GetxController {
                       ),
                     ),
                     onTap: () {
-                      // if (feed.id != null) {
-                      //   Get.dialog(
-                      //     WarningWindow(
-                      //         onTap: () => deleteFeed(feed.id!),
-                      //         titleText: '피드 삭제',
-                      //         explainText: '이 피드를 정말로 삭제하시겠습니까?',
-                      //         btnText: '삭제'),
-                      //   );
-                      //   Get.back();
-                      //   Get.off(() => const HomeScreen());
-                      // } else {
-                      //   print('Error : feed.id is null');
-                      // }
-                      deleteFeed(feed.id!);
-                      Get.back();
-                      Get.off(() => const HomeScreen());
+                      Get.dialog(
+                        WarningWindow(
+                            onTap: () {
+                              deleteFeed(feed.id!);
+                              Get.until((route) => route.isFirst);
+                            },
+                            titleText: '피드 삭제',
+                            explainText: '이 피드를 정말로 삭제하시겠습니까?',
+                            btnText: '삭제'),
+                      );
+
+                      // deleteFeed(feed.id!);
+                      // Get.back();
+                      // Get.off(() => const HomeScreen());
                     },
                   ),
 
