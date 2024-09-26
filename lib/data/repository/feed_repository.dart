@@ -51,7 +51,7 @@ class FeedRepositoryImpl extends GetxService implements FeedRepository {
   /// 본인이 작성한 글을 수정하는 API
   @override
   Future<Feed> patchFeed(Map<String, dynamic> data) async {
-    return dio.patch('/search').then((response) =>
+    return dio.patch('/search', data: data).then((response) =>
         Feed.fromMyFeed(response.data, UserController.to.myInfo!));
   }
 

@@ -43,5 +43,6 @@ class Feed {
         "title": title,
         "content": content,
         "createAt": createAt,
+        "id": id,
       };
 }

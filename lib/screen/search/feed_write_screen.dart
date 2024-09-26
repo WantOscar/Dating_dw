@@ -59,7 +59,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
           ],
         ),
       ),
-      bottomSheet: _completeButton(),
+      bottomSheet: _completeButton(widget.feed!),
     );
   }
 
@@ -132,11 +132,26 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
 
   /// 처음 글 작성을 완료한 후,
   /// 이 버튼을 누르면 탐색 창에서 작성한 글이 올라감.
-  Widget _completeButton() {
+  Widget _completeButton(Feed feed) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: BottomButton(
-        onTap: FeedController.to.completeFeed,
+        onTap: () {
+          // if (widget.isEdit == true) {
+          //   FeedController.to.updateDialog(feed);
+          // } else {
+          //   FeedController.to.completeFeed();
+          // }
+          if (widget.isEdit == true) {
+            Feed updatedFeed = Feed(
+                id: feed.id,
+                title: _titleController.text,
+                content: _contentController.text);
+            FeedController.to.updateDialog(updatedFeed);
+          } else {
+            FeedController.to.completeFeed();
+          }
+        },
         child: const Text(
           "작성 완료",
           style: TextStyle(

@@ -2,7 +2,6 @@ import 'package:dating/Widget/common/warning_window.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/data/repository/feed_repository.dart';
 import 'package:dating/screen/home_screen.dart';
-import 'package:dating/screen/profile/profile_screen.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
@@ -174,28 +173,41 @@ class FeedController extends GetxController {
   }
 
   /// 본인이 수정한 피드를 적용시키는 함수
-  void updateFeed(Feed feed) async {
-    final result = await feedRepository.patchFeed(feed.toJson());
-    final idx = _feeds.value.indexOf(feed);
-    _feeds.value.replaceRange(idx, idx, [result]);
-    _feeds.refresh();
+  void updateFeed(Feed updatedFeed) async {
+    // final result = await feedRepository.patchFeed(feed.toJson());
+    // final idx = _feeds.value
+    //     .indexOf(_feeds.value.where((feed) => feed.id == feed.id).first);
+    // _feeds.value.replaceRange(idx, idx, [result]);
+    // _feeds.refresh();
+    try {
+      final result = await feedRepository.patchFeed(updatedFeed.toJson());
+      final index =
+          _feeds.value.indexWhere((feed) => feed.id == updatedFeed.id);
+      if (index != -1) {
+        _feeds.value[index] = result;
+        _feeds.refresh();
+      }
+    } catch (e) {
+      print('Error updating feed: $e');
+    }
   }
 
   /// 본인이 작성한 피드를 삭제하는 함수
   void deleteFeed(int id) async {
     await feedRepository.deleteFeed(id);
+    _feeds.refresh();
   }
 
   /// 수정한 글을 적용시킬지 물어보는 dialog 함수.
-  void upDateFeed(Feed feed) async {
+  void updateDialog(Feed feed) async {
     Get.dialog(WarningWindow(
-      titleText: '피드 작성 완료',
-      explainText: '작성을 완료하시겠습니까?',
+      titleText: '피드 수정 완료',
+      explainText: '수정을 완료하시겠습니까?',
       onTap: () {
         updateFeed(feed);
-        Get.off(() => const ProfileScreen());
+        Get.off(() => const HomeScreen());
       },
-      btnText: "피드 생성",
+      btnText: "피드 수정",
     ));
   }
 
@@ -263,7 +275,24 @@ class FeedController extends GetxController {
                         ),
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      // if (feed.id != null) {
+                      //   Get.dialog(
+                      //     WarningWindow(
+                      //         onTap: () => deleteFeed(feed.id!),
+                      //         titleText: '피드 삭제',
+                      //         explainText: '이 피드를 정말로 삭제하시겠습니까?',
+                      //         btnText: '삭제'),
+                      //   );
+                      //   Get.back();
+                      //   Get.off(() => const HomeScreen());
+                      // } else {
+                      //   print('Error : feed.id is null');
+                      // }
+                      deleteFeed(feed.id!);
+                      Get.back();
+                      Get.off(() => const HomeScreen());
+                    },
                   ),
 
                   /// 나누는 선
