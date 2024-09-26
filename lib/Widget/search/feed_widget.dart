@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class _FeedWidgetState extends State<FeedWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(24.0),
-      highlightColor: const Color(0xffffe6f0),
+      highlightColor: Theme.of(context).colorScheme.primaryContainer,
       onTap: () {
         _showApply();
       },
@@ -39,7 +39,7 @@ class _FeedWidgetState extends State<FeedWidget> {
         ),
         child: Column(
           children: [
-            _profile(),
+            _profile(horizontal: 10.0, vertical: 15.0),
             _title(),
           ],
         ),
@@ -54,17 +54,19 @@ class _FeedWidgetState extends State<FeedWidget> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        titlePadding: EdgeInsets.zero,
+        contentPadding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(24.0),
         ),
-        title: _profile(),
+        title: _profile(horizontal: 10.0, vertical: 15.0),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             _title(),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
               child: Row(
                 children: [
                   Flexible(
@@ -89,9 +91,9 @@ class _FeedWidgetState extends State<FeedWidget> {
 
   /// 글쓴이의 프로필을 보여줌
   /// 우측 아이콘은 글쓴이를 차단/취소 가능.
-  Widget _profile() {
+  Widget _profile({required double horizontal, required double vertical}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -111,8 +113,8 @@ class _FeedWidgetState extends State<FeedWidget> {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child:
-                    Image.network(widget.feed.user!.image!, fit: BoxFit.cover),
+                child: CachedNetworkImage(
+                    imageUrl: widget.feed.user!.image!, fit: BoxFit.cover),
               ),
             ),
           ),
@@ -134,8 +136,9 @@ class _FeedWidgetState extends State<FeedWidget> {
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
                         '${widget.feed.user!.age}세',
-                        style:
-                            const TextStyle(fontSize: 12, color: Colors.black),
+                        style: const TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                   ],
@@ -230,7 +233,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                 backgroundColor: Colors.transparent,
               );
             },
-            icon: IconShape.iconMore,
+            icon: const Icon(Icons.more_horiz),
           ),
         ],
       ),
