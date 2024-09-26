@@ -22,9 +22,20 @@ class Feed {
       id: json['id'],
       title: json['title'],
       content: json['content'],
-      user: User.fromJson(json['user']),
+      user: (json['user'] != null) ? User.fromJson(json['user']) : null,
       createAt: json['createAt'],
-      nickName: json['nickName'],
+      nickName: json['nickName'] ?? null,
+    );
+  }
+
+  factory Feed.fromMyFeed(Map<String, dynamic> json, User user) {
+    return Feed(
+      id: json['id'],
+      title: json['title'],
+      content: json['content'],
+      user: user,
+      createAt: json['createAt'],
+      nickName: user.nickName!,
     );
   }
 

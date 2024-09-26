@@ -1,4 +1,4 @@
-import 'package:dating/widget/search/feed_widget.dart';
+import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -35,7 +35,10 @@ class SearchScreen extends GetView<FeedController> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 14.0, horizontal: 16.0),
-                      child: FeedWidget(feed: feed),
+                      child: FeedWidget(
+                        feed: feed,
+                        onTap: controller.showFeedOption,
+                      ),
                     );
                   },
                   itemCount: controller.feeds.length),

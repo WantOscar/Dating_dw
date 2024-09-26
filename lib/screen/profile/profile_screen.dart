@@ -57,7 +57,7 @@ class ProfileScreen extends GetView<UserController> {
                   height: 100,
                 ),
               ),
-              Obx(() => (controller.isLoading) ? _loading() : _myFeed()),
+              Obx(() => (!controller.isLoading) ? _loading() : _myFeed()),
             ],
           ),
         ),
@@ -107,26 +107,27 @@ class ProfileScreen extends GetView<UserController> {
 
   Widget _loading() => const SliverToBoxAdapter(
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       );
 
   Widget _myFeed() {
-    return (FeedController.to.feeds.isEmpty)
-        ? const SliverToBoxAdapter(child: SizedBox.shrink())
-        : SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final Feed feed = FeedController.to.feeds[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 14.0, horizontal: 16.0),
-                  child: FeedWidget(feed: feed),
-                );
-              },
-              childCount: FeedController.to.feeds.length,
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          final Feed feed = FeedController.to.historys[index];
+          return Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 14.0, horizontal: 16.0),
+            child: FeedWidget(
+              feed: feed,
+              onTap: FeedController.to.showMyFeedOption,
             ),
           );
+        },
+        childCount: FeedController.to.historys.length,
+      ),
+    );
   }
 
   /// 내 인적사항을 보여줌
