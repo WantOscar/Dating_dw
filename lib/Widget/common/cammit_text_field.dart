@@ -6,12 +6,14 @@ class CammitTextField extends StatelessWidget {
   final ValueSetter<String> onChanged;
   final bool obscureText;
   final String? hintText;
+  final Widget? suffixIcon;
   const CammitTextField({
     super.key,
     this.obscureText = false,
     required this.controller,
     required this.hintText,
     required this.onChanged,
+    this.suffixIcon,
   });
 
   @override
@@ -34,6 +36,7 @@ class CammitTextField extends StatelessWidget {
             border: InputBorder.none,
             fillColor: Theme.of(context).colorScheme.tertiary,
             filled: true,
+            suffixIcon: suffixIcon,
             hintStyle: const TextStyle(color: Color(0xffafafaf)),
           ),
           obscureText: obscureText,

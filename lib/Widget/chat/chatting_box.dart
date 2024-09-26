@@ -44,15 +44,33 @@ class ChattingBox extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        chat.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            chat.name!,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          (!chat.isRead)
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  child: Container(
+                                    width: 5,
+                                    height: 5,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                        ],
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Text(
-                        chat.lastMessage,
+                        chat.lastMessage ?? "",
                         style: const TextStyle(
                             fontWeight: FontWeight.w400, fontSize: 12),
                       ),
@@ -62,31 +80,9 @@ class ChattingBox extends StatelessWidget {
               ],
             ),
             Flexible(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  (!chat.isRead)
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Container(
-                            width: 10,
-                            height: 10,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.red,
-                            ),
-                          ),
-                        )
-                      : Container(),
-                  Text(
-                    DateFormat.jms()
-                        .format(DateTime.parse(chat.time))
-                        .toString(),
-                    style:
-                        TextStyle(fontSize: 12, color: ThemeColor.font2Color),
-                  ),
-                ],
+              child: Text(
+                DateFormat.jms().format(DateTime.parse(chat.time!)).toString(),
+                style: TextStyle(fontSize: 12, color: ThemeColor.font2Color),
               ),
             )
           ],

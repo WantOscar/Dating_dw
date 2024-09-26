@@ -29,6 +29,10 @@ class ChatController extends GetxController
     super.onInit();
   }
 
+  void readChat(int id) {
+    service.readChat(id);
+  }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // 앱의 라이프사이클 상태 변화에 따른 처리
@@ -62,23 +66,26 @@ class ChatController extends GetxController
     _personalChattings.refresh();
   }
 
-  void updateRead(int chatRoomId) {
-    _personalChattings.value
-        .where((chat) => chat.id == chatRoomId)
-        .first
-        .updateRead();
-    _personalChattings.refresh();
-  }
+  // void updateRead(int chatRoomId) {
+  //   _personalChattings.value
+  //       .where((chat) => chat.id == chatRoomId)
+  //       .first
+  //       .updateRead();
+  //   _personalChattings.refresh();
+  // }
 
   void makeChattingRoom(User target) async {
     try {
       final chatRoomId = await service.makeChattingRoom(target.id!);
+      final ChattingRoomModel chat =
+          ChattingRoomModel(id: chatRoomId, isRead: true);
+      _personalChattings.value.add(chat);
       Get.to(
           () => ChattingRoom(
                 target: target,
               ),
           binding: ChatRoomControllerBinding(
-              chatRoomId: chatRoomId, targetName: target.nickName!));
+              chat: chat, targetName: target.nickName!));
     } catch (err) {
       showToast(err.toString());
     }

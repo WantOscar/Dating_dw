@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dating/Widget/profile/chat_send_button.dart';
 import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/data/model/user.dart';
+import 'package:dating/widget/common/chat_send_button.dart';
 import 'package:flutter/material.dart';
 
 class ListAvatar extends StatelessWidget {

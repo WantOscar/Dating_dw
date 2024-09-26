@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/user_controller.dart';
+import 'package:dating/data/model/chatting_room_model.dart';
 import 'package:dating/data/model/fcm_send.dart';
 import 'package:dating/data/model/message_model.dart';
 import 'package:dating/data/repository/user_repository.dart';
@@ -19,7 +20,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 /// 채팅 전송, 채팅 내용을 불러오는 역활을 수행함.
 class ChattingRoomController extends GetxController with UseToast {
   final String targetName;
-  final int chatRoomId;
+  final ChattingRoomModel chat;
 
   late final WebSocketChannel channel;
   final Rx<List<MessageModel>> _previous = Rx<List<MessageModel>>([]);
@@ -29,7 +30,7 @@ class ChattingRoomController extends GetxController with UseToast {
   ChattingRoomController({
     required this.chatService,
     required this.userRepository,
-    required this.chatRoomId,
+    required this.chat,
     required this.targetName,
   });
 
@@ -44,21 +45,25 @@ class ChattingRoomController extends GetxController with UseToast {
   @override
   void onInit() {
     _connectChannel();
+    _readChat();
     super.onInit();
   }
 
-  /// 서버의 채팅 소켓 서버와 연결하는 메소드
+  void _readChat() {
+    ChatController.to.readChat(chat.id);
+  }
 
+  /// 서버의 채팅 소켓 서버와 연결하는 메소드
   void _connectChannel() {
     channel =
         IOWebSocketChannel.connect(Uri.parse("ws://13.124.21.82:8082/ws/chat"));
     fetchData();
     channel.stream.listen(
       (message) {
-        _messages.value.add(MessageModel.fromJson(jsonDecode(message)));
+        final msg = MessageModel.fromJson(jsonDecode(message));
+        _messages.value.add(msg);
         _messages.refresh();
-        ChatController.to.updateLastMessage(chatRoomId, message);
-        ChatController.to.updateRead(chatRoomId);
+        ChatController.to.updateLastMessage(chat.id, msg.message!);
       },
       onError: (error) {
         showToast("서버와의 통신이 원할하지 않습니다.");
@@ -72,7 +77,7 @@ class ChattingRoomController extends GetxController with UseToast {
   /// 서버로 부터 이전 대화를 불러오는 메소드
   void fetchData() async {
     try {
-      final data = await chatService.getMessages(chatRoomId);
+      final data = await chatService.getMessages(chat.id);
       _previous.value = data;
       _previous.refresh();
     } on Exception catch (_) {
@@ -92,14 +97,14 @@ class ChattingRoomController extends GetxController with UseToast {
       message: _messageController.text.toString(),
       messageType: "TALK",
       createAt: DateFormat('yyyy-MM-dd-HH:mm:ss').format(DateTime.now()),
-      chatRoomId: chatRoomId,
+      chatRoomId: chat.id,
     );
 
     final fcmSend = FCMSend(
       targetName: targetName,
       title: UserController.to.myInfo!.nickName!,
       body: _messageController.text.toString(),
-      chatRoomNo: chatRoomId,
+      chatRoomNo: chat.id,
     );
 
     channel.sink.add(jsonEncode(message.toJson()));
@@ -109,11 +114,6 @@ class ChattingRoomController extends GetxController with UseToast {
     } on DioException catch (err) {
       showToast(err.toString());
     }
-  }
-
-  void addChatLog(dynamic chat) {
-    _messages.value.add(chat);
-    _messages.refresh();
   }
 
   void moveToProfileScreen(String nickName) async {

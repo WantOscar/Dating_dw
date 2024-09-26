@@ -84,7 +84,7 @@ class ChattingRoom extends GetView<ChattingRoomController> {
             cursorColor: Theme.of(context).colorScheme.primary,
             textAlignVertical: TextAlignVertical.center,
             controller: controller.message,
-            style: const TextStyle(color: Colors.black87, fontSize: 15),
+            style: const TextStyle(fontSize: 15),
             decoration: InputDecoration(
               border: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.transparent),
