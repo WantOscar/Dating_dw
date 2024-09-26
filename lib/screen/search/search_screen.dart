@@ -1,6 +1,7 @@
 import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
+import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,11 @@ class SearchScreen extends GetView<FeedController> {
           title: '탐색',
           actions: [
             GestureDetector(
-              onTap: controller.moveToWriteScreen,
+              onTap: () {
+                Get.to(
+                  () => const FeedWriteScreen(),
+                );
+              },
               child: IconShape.iconEditNote,
             ),
           ],

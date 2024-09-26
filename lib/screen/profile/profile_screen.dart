@@ -121,7 +121,7 @@ class ProfileScreen extends GetView<UserController> {
                 const EdgeInsets.symmetric(vertical: 14.0, horizontal: 16.0),
             child: FeedWidget(
               feed: feed,
-              onTap: FeedController.to.showMyFeedOption,
+              onTap: () => FeedController.to.showMyFeedOption(feed),
             ),
           );
         },

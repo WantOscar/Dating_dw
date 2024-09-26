@@ -1,8 +1,5 @@
-import 'package:dating/Widget/common/warning_window.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
-import 'package:dating/screen/home_screen.dart';
-import 'package:dating/screen/profile/profile_screen.dart';
 import 'package:dating/widget/common/bottom_button.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -10,7 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FeedWriteScreen extends StatefulWidget {
-  const FeedWriteScreen({super.key});
+  final Feed? feed;
+  final String? title;
+  final String? content;
+  final bool? isEdit;
+  const FeedWriteScreen(
+      {super.key, this.feed, this.title, this.content, this.isEdit});
 
   @override
   State<FeedWriteScreen> createState() => _FeedWriteScreenState();
@@ -18,18 +20,14 @@ class FeedWriteScreen extends StatefulWidget {
 
 class _FeedWriteScreenState extends State<FeedWriteScreen> {
   late final FeedController controller;
-
   late final TextEditingController _titleController;
   late final TextEditingController _contentController;
-
-  String _title = "";
-  String _content = "";
 
   @override
   void initState() {
     controller = FeedController.to;
-    _titleController = TextEditingController();
-    _contentController = TextEditingController();
+    _titleController = TextEditingController(text: widget.title ?? '');
+    _contentController = TextEditingController(text: widget.content ?? '');
     super.initState();
   }
 
@@ -47,8 +45,8 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
         preferredSize: AppBar().preferredSize,
         child: CammitAppBar(
           showCloseButton: true,
-          backAction: cancel,
-          title: "글 쓰기",
+          backAction: FeedController.to.cancel,
+          title: (widget.isEdit != true) ? "글 쓰기" : "글 수정",
         ),
       ),
       body: SingleChildScrollView(
@@ -89,7 +87,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
                 border: InputBorder.none,
                 counterText: '',
               ),
-              onChanged: titleChange,
+              onChanged: FeedController.to.titleChange,
             ),
           ),
         ),
@@ -124,7 +122,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
                 border: InputBorder.none,
                 counterText: '',
               ),
-              onChanged: contentChange,
+              onChanged: FeedController.to.contentChange,
             ),
           ),
         ),
@@ -132,13 +130,13 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
     );
   }
 
-  /// 작성을 완료한 후,
+  /// 처음 글 작성을 완료한 후,
   /// 이 버튼을 누르면 탐색 창에서 작성한 글이 올라감.
   Widget _completeButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: BottomButton(
-        onTap: writeFeed,
+        onTap: FeedController.to.completeFeed,
         child: const Text(
           "작성 완료",
           style: TextStyle(
@@ -146,57 +144,5 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
         ),
       ),
     );
-  }
-
-  /// 피드 작성을 취소할건지 물어보고 뒤로 돌아가는 함수
-  void cancel() {
-    Get.dialog(WarningWindow(
-      titleText: '피드 작성 취소',
-      explainText: '현재 입력사항을 모두 취소하고 돌아가시겠습니까?',
-      onTap: () {
-        Get.until((route) => route.isFirst);
-      },
-      btnText: "작성취소",
-    ));
-  }
-
-  void writeFeed() {
-    final Feed feed = Feed(title: _title, content: _content);
-
-    Get.dialog(WarningWindow(
-      titleText: '피드 작성 완료',
-      explainText: '작성을 완료하시겠습니까?',
-      onTap: () {
-        /// 글쓰기 API
-        FeedController.to.writeFeed(feed);
-        Get.off(() => const HomeScreen());
-      },
-      btnText: "피드 생성",
-    ));
-  }
-
-  void titleChange(String value) {
-    _title = value;
-  }
-
-  void contentChange(String value) {
-    _content = value;
-  }
-
-  void upDateFeed(
-      String value, dynamic titleController, dynamic contentController) async {
-    String updatedTitle = titleController.text;
-    String updatedContent = contentController.text;
-    final Feed feed = Feed(title: updatedTitle, content: updatedContent);
-
-    Get.dialog(WarningWindow(
-      titleText: '피드 작성 완료',
-      explainText: '작성을 완료하시겠습니까?',
-      onTap: () {
-        FeedController.to.updateFeed(feed);
-        Get.off(() => const ProfileScreen());
-      },
-      btnText: "피드 생성",
-    ));
   }
 }
