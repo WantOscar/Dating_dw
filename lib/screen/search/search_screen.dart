@@ -40,7 +40,7 @@ class SearchScreen extends GetView<FeedController> {
                       child: FeedWidget(
                         feed: feed,
                         onTap: () => (feed.user != UserController.to.myInfo!)
-                            ? controller.showFeedOption()
+                            ? controller.showFeedOption(feed)
                             : controller.showMyFeedOption(feed),
                       ),
                     );

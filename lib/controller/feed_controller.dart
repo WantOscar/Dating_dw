@@ -1,4 +1,5 @@
 import 'package:dating/Widget/common/warning_window.dart';
+import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/data/model/user.dart';
@@ -11,6 +12,7 @@ import 'package:get/get.dart';
 
 class FeedController extends GetxController {
   final FeedRepositoryImpl feedRepository;
+  final User? user;
 
   final RxBool _isLoading = false.obs;
   final Rx<List<Feed>> _feeds = Rx<List<Feed>>([]);
@@ -26,6 +28,7 @@ class FeedController extends GetxController {
 
   FeedController({
     required this.feedRepository,
+    this.user,
   });
 
   @override
@@ -93,7 +96,7 @@ class FeedController extends GetxController {
   }
 
   /// 탐색창의 피드를 눌렀을 때 세부 내용을 보여주는 함수
-  void showFeedOption() {
+  void showFeedOption(Feed feed) {
     Get.bottomSheet(
       backgroundColor: Colors.transparent,
       Wrap(
@@ -126,7 +129,9 @@ class FeedController extends GetxController {
                     ),
 
                     /// 프로필 내 나의 피드 작업 끝나면 차단 연결할 것.
-                    onTap: () {},
+                    onTap: () async {
+                      await MemberBlockController.to.memberBlock(feed.id!);
+                    },
                   ),
 
                   /// 나누는 선
