@@ -1,7 +1,7 @@
+import 'package:dating/widget/common/image_data.dart';
 import 'package:dating/widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,13 +54,18 @@ class SearchScreen extends GetView<FeedController> {
         );
 
   PreferredSizeWidget _appBar() => PreferredSize(
-        preferredSize: AppBar().preferredSize,
+        preferredSize: Size.fromHeight(AppBar().preferredSize.height),
         child: CammitAppBar(
           title: '탐색',
           actions: [
-            GestureDetector(
-              onTap: controller.moveToWriteScreen,
-              child: IconShape.iconEditNote,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: controller.moveToWriteScreen,
+                child: ImageData(
+                  path: ImagePath.feedWriteIcon,
+                ),
+              ),
             ),
           ],
         ),
