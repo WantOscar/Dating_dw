@@ -1,3 +1,4 @@
+import 'package:dating/controller/user_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
@@ -7,8 +8,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class FeedWidget extends StatefulWidget {
-  final Feed feed;
-  const FeedWidget({super.key, required this.feed});
+  final Feed? feed;
+  final void Function() onTap;
+  const FeedWidget({super.key, required this.feed, required this.onTap});
 
   @override
   State<FeedWidget> createState() => _FeedWidgetState();
@@ -33,7 +35,7 @@ class _FeedWidgetState extends State<FeedWidget> {
               color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: const Offset(0, 6), // changes position of shadow
+              offset: const Offset(0, 6),
             ),
           ],
         ),
@@ -71,7 +73,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                 children: [
                   Flexible(
                     child: Text(
-                      widget.feed.content.toString(),
+                      widget.feed!.content.toString(),
                       style: const TextStyle(
                         fontSize: 14,
                       ),
@@ -83,7 +85,9 @@ class _FeedWidgetState extends State<FeedWidget> {
           ],
         ),
         actions: [
-          _join(),
+          (widget.feed?.user != UserController.to.myInfo!)
+              ? _join()
+              : Container(),
         ],
       ),
     );
@@ -107,14 +111,16 @@ class _FeedWidgetState extends State<FeedWidget> {
             ),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => SomeoneProfileScreen(
-                      user: widget.feed.user!,
-                    ));
+                Get.to(
+                  () => SomeoneProfileScreen(
+                    user: widget.feed!.user!,
+                  ),
+                );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: CachedNetworkImage(
-                    imageUrl: widget.feed.user!.image!, fit: BoxFit.cover),
+                    imageUrl: widget.feed!.user!.image!, fit: BoxFit.cover),
               ),
             ),
           ),
@@ -128,14 +134,14 @@ class _FeedWidgetState extends State<FeedWidget> {
                 Row(
                   children: [
                     Text(
-                      widget.feed.user!.nickName!,
+                      widget.feed!.user!.nickName!,
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
-                        '${widget.feed.user!.age}세',
+                        '${widget.feed!.user!.age}세',
                         style: const TextStyle(
                           fontSize: 12,
                         ),
@@ -151,7 +157,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                       size: 20,
                     ),
                     Text(
-                      widget.feed.user!.address!,
+                      widget.feed!.user!.address!,
                       style: const TextStyle(
                         fontSize: 12,
                       ),
@@ -162,77 +168,9 @@ class _FeedWidgetState extends State<FeedWidget> {
             ),
           ),
 
-          /// 차단 여부 버튼
+          /// 차단 or 수정,취소 여부 버튼
           IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return Wrap(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(3.0),
-                        margin: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              /// 차단버튼
-                              InkWell(
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10.0),
-                                  width: double.infinity,
-                                  child: Text(
-                                    '차단',
-                                    style: TextStyle(
-                                      color: ThemeColor.fontColor,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                onTap: () {},
-                              ),
-
-                              /// 나누는 선
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Divider(),
-                              ),
-
-                              /// 취소버튼
-                              InkWell(
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: const Text(
-                                    '취소',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                onTap: () {
-                                  Get.back();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                backgroundColor: Colors.transparent,
-              );
-            },
+            onPressed: widget.onTap,
             icon: const Icon(Icons.more_horiz),
           ),
         ],
@@ -249,7 +187,7 @@ class _FeedWidgetState extends State<FeedWidget> {
         children: [
           Flexible(
             child: Text(
-              widget.feed.title.toString(),
+              widget.feed!.title.toString(),
               style: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w600,
