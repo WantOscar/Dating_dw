@@ -8,6 +8,7 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/chat_send_button.dart';
 import 'package:dating/widget/common/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class SomeoneProfileScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       floatingActionButton: _fabs(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
@@ -58,6 +59,8 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
         ),
       ),
       backgroundColor: Get.theme.colorScheme.secondary,
+      systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Theme.of(context).colorScheme.onSecondary),
       centerTitle: true,
       title: Text(
         "상대 프로필",

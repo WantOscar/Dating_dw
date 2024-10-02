@@ -129,11 +129,12 @@ class ChattingRoomController extends GetxController with UseToast {
   void quit() {
     final message = MessageModel(
       nickName: UserController.to.myInfo!.nickName,
-      message: "플러터가 방에서 보낸 메시지다 시발",
+      message: "${UserController.to.myInfo!.nickName}님이 대화방을 나갔습니다.",
       messageType: "QUIT",
       createAt: DateFormat('yyyy-MM-dd-HH:mm:ss').format(DateTime.now()),
       chatRoomId: chat.id,
     );
-    channel.sink.add(message);
+    channel.sink.add(jsonEncode(message.toJson()));
+    Get.back();
   }
 }
