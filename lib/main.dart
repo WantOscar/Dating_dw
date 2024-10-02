@@ -3,7 +3,6 @@ import 'package:dating/binding/init_binding.dart';
 import 'package:dating/firebase_options.dart';
 import 'package:dating/screen/auth/login_screen.dart';
 import 'package:dating/style/app_theme.dart';
-import 'package:dating/style/constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

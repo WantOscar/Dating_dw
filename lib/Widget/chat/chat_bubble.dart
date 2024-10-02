@@ -1,7 +1,6 @@
 import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/image_avatar.dart';
 import 'package:flutter/material.dart';
 

@@ -73,7 +73,7 @@ class NotificationWindow extends StatelessWidget {
       ? _basicButton(
           onTap: onConfirm,
           buttonColor: ThemeColor.fontColor,
-          label: "확인",
+          label: confirmLabel!,
           fontColor: Colors.white)
       : Container();
 
@@ -81,7 +81,7 @@ class NotificationWindow extends StatelessWidget {
   Widget _cancelButton() => (cancelLabel != null)
       ? _basicButton(
           onTap: onCancel,
-          label: "취소",
+          label: cancelLabel!,
         )
       : Container();
 
