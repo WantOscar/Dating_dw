@@ -82,7 +82,6 @@ class HomeScreen extends GetView<BottomNavController> {
           MainScreen(),
           SearchScreen(),
           ChattingScreen(),
-          // AlarmScreen(),
           ProfileScreen(),
         ],
       );

@@ -1,7 +1,9 @@
 import 'package:dating/widget/common/image_data.dart';
-import 'package:dating/widget/search/feed_widget.dart';
+import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
+import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +39,12 @@ class SearchScreen extends GetView<FeedController> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 14.0, horizontal: 16.0),
-                      child: FeedWidget(feed: feed),
+                      child: FeedWidget(
+                        feed: feed,
+                        onTap: () => (feed.user != UserController.to.myInfo!)
+                            ? controller.showFeedOption(feed)
+                            : controller.showMyFeedOption(feed),
+                      ),
                     );
                   },
                   itemCount: controller.feeds.length),
@@ -61,7 +68,11 @@ class SearchScreen extends GetView<FeedController> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
-                onTap: controller.moveToWriteScreen,
+                onTap: () {
+                  Get.to(
+                    () => const FeedWriteScreen(),
+                  );
+                },
                 child: ImageData(
                   path: ImagePath.feedWriteIcon,
                 ),

@@ -1,4 +1,6 @@
-class User {
+import 'package:equatable/equatable.dart';
+
+class User extends Equatable {
   int? id;
   String? nickName;
   String? description;
@@ -64,4 +66,23 @@ class User {
         "interest": interest,
         "likePersonality": likePersonality
       };
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        id,
+        nickName,
+        description,
+        birthDay,
+        address,
+        gender,
+        age,
+        height,
+        images,
+        image,
+        personalInfo,
+        personality,
+        interest,
+        likePersonality,
+      ];
 }

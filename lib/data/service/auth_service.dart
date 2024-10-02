@@ -19,7 +19,7 @@ class AuthService extends GetxService implements AuthServiceImpl {
   @override
   Future<String?> signUp(Map<String, dynamic> json) async {
     return dio
-        .post(ApiUrl.signUp, data: json)
+        .post('/member/join', data: json)
         .then((response) => "회원가입에 성공했습니다!");
   }
 
@@ -29,7 +29,7 @@ class AuthService extends GetxService implements AuthServiceImpl {
   /// 실패할 경우 에러메시지를 반환함.
   @override
   Future<String> login(Map<String, dynamic> data) async {
-    return dio.post(ApiUrl.login, data: data).then((response) {
+    return dio.post('/member/login', data: data).then((response) {
       tokenProvider.saveTokenInfo(response.data);
       return response.data["accessToken"];
     });
@@ -44,7 +44,7 @@ class AuthService extends GetxService implements AuthServiceImpl {
   Future<void> logOut() async {
     final refreshToken = await tokenProvider.getRefreshToken();
     return dio
-        .delete(ApiUrl.logout,
+        .delete('/member/logout',
             options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}))
         .then((response) {
       tokenProvider.deleteTokenInfo();
@@ -64,7 +64,7 @@ class AuthService extends GetxService implements AuthServiceImpl {
     final refreshToken = await tokenProvider.getRefreshToken();
 
     return dio
-        .delete(ApiUrl.delete,
+        .delete('/member/delete',
             options: Options(headers: {"RefreshToken": "Bearer $refreshToken"}))
         .then((_) {
       tokenProvider.deleteTokenInfo();
@@ -79,7 +79,7 @@ class AuthService extends GetxService implements AuthServiceImpl {
   @override
   Future<String> emailVerify(Map<String, dynamic> email) async {
     return dio
-        .post(ApiUrl.emailVerify, data: email)
+        .post("/member/mail/confirm", data: email)
         .then((response) => response.data["code"] ?? "error");
   }
 

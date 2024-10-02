@@ -31,7 +31,7 @@ class UserRepositoryImpl extends GetxService implements UserRepository {
   @override
   Future<User> updateUserInfo(User user) async {
     return dio
-        .post("/member/profile/update", data: user.toJson())
+        .patch("/member/profile", data: user.toJson())
         .then((response) => User.fromJson(response.data));
   }
 
