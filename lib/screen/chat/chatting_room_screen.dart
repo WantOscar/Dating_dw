@@ -130,6 +130,12 @@ class ChattingRoom extends GetView<ChattingRoomController> {
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
+              actions: [
+                GestureDetector(
+                  onTap: controller.quit,
+                  child: const Icon(Icons.exit_to_app),
+                )
+              ],
             ),
           ),
         ),

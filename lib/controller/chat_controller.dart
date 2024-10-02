@@ -29,8 +29,9 @@ class ChatController extends GetxController
     super.onInit();
   }
 
-  void readChat(int id) {
-    service.readChat(id);
+  void readChat(ChattingRoomModel chat) {
+    chat.isRead = true;
+    _personalChattings.refresh();
   }
 
   @override
@@ -64,7 +65,6 @@ class ChatController extends GetxController
         .first
         .updateLastMessage(message);
     _personalChattings.refresh();
-    readChat(chatRoomId);
   }
 
   // void updateRead(int chatRoomId) {

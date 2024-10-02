@@ -50,8 +50,7 @@ class ChattingRoomController extends GetxController with UseToast {
   }
 
   void _readChat() {
-    ChatController.to.readChat(chat.id);
-    chat.isRead = true;
+    chatService.readChat(chat.id);
   }
 
   /// 서버의 채팅 소켓 서버와 연결하는 메소드
@@ -125,5 +124,16 @@ class ChattingRoomController extends GetxController with UseToast {
     } on Exception catch (err) {
       debugPrint(err.toString());
     }
+  }
+
+  void quit() {
+    final message = MessageModel(
+      nickName: UserController.to.myInfo!.nickName,
+      message: "플러터가 방에서 보낸 메시지다 시발",
+      messageType: "QUIT",
+      createAt: DateFormat('yyyy-MM-dd-HH:mm:ss').format(DateTime.now()),
+      chatRoomId: chat.id,
+    );
+    channel.sink.add(message);
   }
 }

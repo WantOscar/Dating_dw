@@ -45,8 +45,8 @@ class ChatServiceImpl extends GetxService implements ChatService {
   }
 
   @override
-  void readChat(int id) {
-    dio.post("/chat/is-read/$id");
+  void readChat(int id) async {
+    await dio.post("/chat/is-read/$id");
   }
 }
 

@@ -187,11 +187,11 @@ class LoginScreen extends GetView<LoginController> {
 
   /// 계정을 생성하기 위한 라우팅 버튼
   Widget _signUp() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: BottomAppBar(
-        shadowColor: Colors.white,
-        elevation: 0,
+    return BottomAppBar(
+      shadowColor: Colors.white,
+      elevation: 0,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
