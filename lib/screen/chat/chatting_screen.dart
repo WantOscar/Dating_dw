@@ -57,9 +57,10 @@ class _ChattingScreenState extends State<ChattingScreen>
               height: AppBar().preferredSize.height,
               width: double.infinity,
               child: TabBar(
-                labelStyle: const TextStyle(
-                    fontWeight: FontWeight.w600, color: Colors.black),
-                labelColor: Colors.black,
+                labelStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontWeight: FontWeight.w600,
+                ),
                 indicatorColor: ThemeColor.fontColor,
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicatorWeight: 1.0,

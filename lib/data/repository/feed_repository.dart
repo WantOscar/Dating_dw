@@ -19,13 +19,24 @@ class FeedRepositoryImpl extends GetxService implements FeedRepository {
             .toList());
   }
 
+  /// 다음 글 조회 API
+  /// 마지막 글의 ID를 통해서 다음 글 목록을 최대 20개까지 불러와서
+  /// 결과를 FEED 배열로 반환함.
+  @override
+  Future<List<Feed>> getNextFeeds(int id) async {
+    return dio.get("/search/list/$id").then((response) =>
+        List<Map<String, dynamic>>.from(response.data)
+            .map((json) => Feed.fromJson(json))
+            .toList());
+  }
+
   /// 피드 상세 조회 API
   /// ID를 통해서 피드의 상세 내용을 조회한 후
   /// 결과를 FEED로 반환함.
   @override
   Future<Feed> getFeed(int id) async {
     return dio
-        .get('/search/list/$id')
+        .get('/search/$id')
         .then((response) => Feed.fromJson(response.data));
   }
 
@@ -67,6 +78,7 @@ class FeedRepositoryImpl extends GetxService implements FeedRepository {
 }
 
 abstract class FeedRepository {
+  Future<List<Feed>> getNextFeeds(int id);
   Future<Feed> getFeed(int id);
   Future<List<Feed>> getAllFeeds();
   Future<Feed> postFeed(Map<String, dynamic> data);

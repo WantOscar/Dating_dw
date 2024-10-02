@@ -18,12 +18,9 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
         children: [
           Scaffold(
             appBar: _appBar(),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [_email(), _verifyButton()],
-              ),
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [_email(context), _verifyButton()],
             ),
           ),
           _loading(),
@@ -42,50 +39,42 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
             color: ThemeColor.fontColor,
           ),
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
       );
 
-  Widget _email() => Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '이메일을 입력해주세요',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: ThemeColor.fontColor),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              '이메일 작성 후 인증번호가 전송됩니다',
-              style: TextStyle(
-                  fontSize: 13,
-                  color: ThemeColor.font2Color,
-                  fontWeight: FontWeight.w300),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: const Color(0xFFEDEDED),
-                borderRadius: BorderRadius.circular(30),
+  Widget _email(BuildContext context) => Expanded(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '이메일을 입력해주세요',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: ThemeColor.fontColor),
               ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-                child: CammitTextField(
-                  controller: controller.email,
-                  hintText: 'exmaple@example.com',
-                  onChanged: controller.changeEmail,
-                ),
+              const SizedBox(
+                height: 10,
               ),
-            ),
-          ],
+              Text(
+                '이메일 작성 후 인증번호가 전송됩니다',
+                style: TextStyle(
+                    fontSize: 13,
+                    color: ThemeColor.font2Color,
+                    fontWeight: FontWeight.w300),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              CammitTextField(
+                controller: controller.email,
+                hintText: 'exmaple@example.com',
+                onChanged: controller.changeEmail,
+              ),
+            ],
+          ),
         ),
       );
 

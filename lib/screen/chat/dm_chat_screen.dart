@@ -36,8 +36,7 @@ class DmChatScreen extends StatelessWidget {
                                   target: user,
                                 ),
                             binding: ChatRoomControllerBinding(
-                                chatRoomId: chat.id,
-                                targetName: user.nickName!));
+                                chat: chat, targetName: user.nickName!));
                       },
                     ),
                   );

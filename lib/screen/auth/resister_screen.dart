@@ -143,7 +143,6 @@ class ResisterScreen extends GetView<ResisterController> {
             color: ThemeColor.fontColor,
           ),
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
       );
 }

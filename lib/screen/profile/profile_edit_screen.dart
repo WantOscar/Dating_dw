@@ -172,13 +172,17 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '닉네임',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
           SizedBox(
             width: 280,
             child: Text(
               controller.user!.nickName!,
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(
+                fontSize: 14,
+              ),
             ),
           ),
         ],
@@ -197,13 +201,14 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '한줄 소개',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
           Container(
             height: 40,
             width: 280,
             decoration: BoxDecoration(
-              color: ThemeColor.textfieldFill,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
@@ -216,15 +221,13 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                   style: const TextStyle(
                     decorationThickness: 0,
                     fontSize: 14,
-                    color: Colors.black87,
                     fontWeight: FontWeight.w400,
                   ),
                   decoration: InputDecoration(
                     counterText: "",
                     hintText: controller.user!.description ?? "한줄 소개를 입력해주세요.",
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       fontSize: 14,
-                      color: ThemeColor.textfieldText,
                       fontWeight: FontWeight.w400,
                     ),
                     border: InputBorder.none,
@@ -249,13 +252,13 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '성별',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(fontSize: 14),
           ),
           SizedBox(
             width: 280,
             child: Text(
               controller.user!.gender! == "woman" ? "여자" : "남자",
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(fontSize: 14),
             ),
           ),
         ],
@@ -273,7 +276,9 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '주소',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
           GestureDetector(
             onTap: controller.searchMyAddress,
@@ -281,7 +286,6 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               height: 40,
               width: 280,
               decoration: BoxDecoration(
-                color: ThemeColor.textfieldFill,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Padding(

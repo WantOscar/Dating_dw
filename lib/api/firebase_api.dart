@@ -1,3 +1,4 @@
+import 'package:dating/controller/chat_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +56,12 @@ class FirebaseApi {
       RemoteNotification? notification = message.notification;
 
       if (notification != null) {
-        debugPrint(notification.title);
-        debugPrint(notification.body);
+        debugPrint("title : {notification.title}");
+        debugPrint("content: ${notification.body}");
+        debugPrint("room ID: ${message.data["chatRoomNo"]}");
+        ChatController.to.updateLastMessage(
+            int.parse(message.data["chatRoomNo"]), notification.body!);
+
         showNotification(notification);
       }
     });

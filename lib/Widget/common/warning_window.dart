@@ -40,8 +40,8 @@ class WarningWindow extends StatelessWidget {
                 width: width * 0.8,
                 height: width * 0.1,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: ThemeColor.fontColor),
+                  borderRadius: BorderRadius.circular(15),
+                ),
                 child: Center(
                   child: Text(
                     /// 실행 버튼 텍스트(ex. 로그아웃)

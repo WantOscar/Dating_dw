@@ -15,7 +15,7 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: IconButton(icon: IconShape.iconClose, onPressed: backAction!),
+        child: IconButton(icon: IconShape.iconClose, onPressed: backAction),
       ),
       title: Text(
         text,
@@ -25,7 +25,6 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
             color: ThemeColor.fontColor),
       ),
       centerTitle: true,
-      backgroundColor: Colors.white,
       elevation: 0,
       actions: actions,
       toolbarHeight: _headerHeight,

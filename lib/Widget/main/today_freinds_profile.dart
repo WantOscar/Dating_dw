@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dating/Widget/profile/chat_send_button.dart';
 import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/style/constant.dart';
-import 'package:dating/style/icon_shape.dart';
+import 'package:dating/widget/common/chat_send_button.dart';
+import 'package:dating/widget/common/favorite_button.dart';
+
 import 'package:flutter/material.dart';
 
 class TodayFriendsProfile extends StatelessWidget {
@@ -91,29 +91,9 @@ class TodayFriendsProfile extends StatelessWidget {
               ChatController.to.makeChattingRoom(user);
             },
           ),
-          GestureDetector(
-            onTap: () => UserController.to.postHeartAdd(user.id!),
-            child: SizedBox(
-              height: 50,
-              width: 50,
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: ThemeColor.fontColor,
-                      shape: BoxShape.circle,
-                    ),
-                    child: IconShape.iconFavorite,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          FavoriteButton(onTap: () {
+            UserController.to.postHeartAdd(user.id!);
+          })
         ],
       );
 }

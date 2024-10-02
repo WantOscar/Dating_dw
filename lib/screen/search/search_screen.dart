@@ -1,9 +1,9 @@
+import 'package:dating/widget/common/image_data.dart';
 import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,6 +31,8 @@ class SearchScreen extends GetView<FeedController> {
           children: [
             Expanded(
               child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  controller: controller.scrollController,
                   padding: const EdgeInsets.only(top: 12.0),
                   itemBuilder: (context, index) {
                     final Feed feed = controller.feeds[index];
@@ -49,22 +51,32 @@ class SearchScreen extends GetView<FeedController> {
             ),
             const SizedBox(
               height: 100,
-            )
+            ),
+            if (controller.nextLoading)
+              Container(
+                padding: const EdgeInsets.all(30),
+                child: const CircularProgressIndicator.adaptive(),
+              )
           ],
         );
 
   PreferredSizeWidget _appBar() => PreferredSize(
-        preferredSize: AppBar().preferredSize,
+        preferredSize: Size.fromHeight(AppBar().preferredSize.height),
         child: CammitAppBar(
           title: '탐색',
           actions: [
-            GestureDetector(
-              onTap: () {
-                Get.to(
-                  () => const FeedWriteScreen(),
-                );
-              },
-              child: IconShape.iconEditNote,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(
+                    () => const FeedWriteScreen(),
+                  );
+                },
+                child: ImageData(
+                  path: ImagePath.feedWriteIcon,
+                ),
+              ),
             ),
           ],
         ),

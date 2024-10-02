@@ -20,7 +20,6 @@ class LoginScreen extends GetView<LoginController> {
           GestureDetector(
             onTap: FocusScope.of(context).unfocus,
             child: Scaffold(
-              backgroundColor: Colors.white,
               body: Center(
                 child: SingleChildScrollView(
                   child: Column(
@@ -30,7 +29,7 @@ class LoginScreen extends GetView<LoginController> {
                       const SizedBox(
                         height: 50,
                       ),
-                      _loginFields(),
+                      _loginFields(context),
                       _forgotAccount()
                     ],
                   ),
@@ -69,14 +68,14 @@ class LoginScreen extends GetView<LoginController> {
 
   /// 로그인을 위한 이메일과 비밀번호를 입력하는 텍스트 필드와
   /// 로그인을 시도하는 버튼 위젯.
-  Widget _loginFields() {
+  Widget _loginFields(BuildContext context) {
     return Column(
       children: [
         Container(
           width: Get.size.width * 0.8,
           height: Get.size.width * 0.16,
           decoration: BoxDecoration(
-              color: const Color(0xFFEDEDED),
+              color: Theme.of(context).colorScheme.tertiary,
               borderRadius: BorderRadius.circular(45),
               boxShadow: [
                 BoxShadow(
@@ -110,7 +109,7 @@ class LoginScreen extends GetView<LoginController> {
           width: Get.size.width * 0.8,
           height: Get.size.width * 0.16,
           decoration: BoxDecoration(
-              color: const Color(0xFFEDEDED),
+              color: Theme.of(context).colorScheme.tertiary,
               borderRadius: BorderRadius.circular(45),
               boxShadow: [
                 BoxShadow(
@@ -188,34 +187,37 @@ class LoginScreen extends GetView<LoginController> {
 
   /// 계정을 생성하기 위한 라우팅 버튼
   Widget _signUp() {
-    return BottomAppBar(
-      shadowColor: Colors.white,
-      elevation: 0,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            '캠밋이 처음이신가요?',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-              color: Colors.grey,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: GestureDetector(
-              onTap: () {
-                Get.to(() => const EmailVerifyPage(),
-                    binding: ResisterBinding());
-              },
-              child: Text(
-                '회원가입',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: ThemeColor.fontColor),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: BottomAppBar(
+        shadowColor: Colors.white,
+        elevation: 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              '캠밋이 처음이신가요?',
+              style: TextStyle(
+                fontWeight: FontWeight.w300,
+                color: Colors.grey,
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const EmailVerifyPage(),
+                      binding: ResisterBinding());
+                },
+                child: Text(
+                  '회원가입',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: ThemeColor.fontColor),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

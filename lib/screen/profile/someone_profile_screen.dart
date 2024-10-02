@@ -1,8 +1,12 @@
 import 'package:dating/Widget/profile/user_profile_widget.dart';
+import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/member_block_controller.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
+import 'package:dating/widget/common/chat_send_button.dart';
+import 'package:dating/widget/common/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,8 +22,10 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
+      floatingActionButton: _fabs(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
-        bottom: false,
         child: CustomScrollView(
           slivers: [
             _appbar(),
@@ -51,7 +57,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
           },
         ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Get.theme.colorScheme.secondary,
       centerTitle: true,
       title: Text(
         "상대 프로필",
@@ -141,6 +147,33 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   Widget _profile() => SliverToBoxAdapter(
         child: UserProfileWidget(
           user: widget.user,
+        ),
+      );
+
+  Widget _fabs() => SizedBox(
+        width: double.maxFinite,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ChatSendButtom(
+                  onPressed: () {
+                    ChatController.to.makeChattingRoom(widget.user);
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FavoriteButton(
+                onTap: () {
+                  UserController.to.postHeartAdd(widget.user.id!);
+                },
+              ),
+            )
+          ],
         ),
       );
 

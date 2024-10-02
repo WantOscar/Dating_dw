@@ -43,6 +43,11 @@ class ChatServiceImpl extends GetxService implements ChatService {
   void sendPushNotification(Map<String, dynamic> data) {
     dio.post("/fcm", data: data);
   }
+
+  @override
+  void readChat(int id) {
+    dio.post("/chat/is-read/$id");
+  }
 }
 
 abstract class ChatService {
@@ -53,4 +58,6 @@ abstract class ChatService {
   Future<List<MessageModel>> getMessages(int chatRoomId);
 
   void sendPushNotification(Map<String, dynamic> data);
+
+  void readChat(int id) {}
 }

@@ -44,21 +44,35 @@ class ChattingBox extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        chat.name,
-                        style: TextStyle(
-                            color: ThemeColor.font2Color,
-                            fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Text(
+                            chat.name!,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          (!chat.isRead)
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  child: Container(
+                                    width: 5,
+                                    height: 5,
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                )
+                              : Container(),
+                        ],
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Text(
-                        chat.lastMessage,
+                        chat.lastMessage ?? "",
                         style: const TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12),
+                            fontWeight: FontWeight.w400, fontSize: 12),
                       ),
                     ],
                   ),
@@ -67,7 +81,7 @@ class ChattingBox extends StatelessWidget {
             ),
             Flexible(
               child: Text(
-                DateFormat.jms().format(DateTime.parse(chat.time)).toString(),
+                DateFormat.jms().format(DateTime.parse(chat.time!)).toString(),
                 style: TextStyle(fontSize: 12, color: ThemeColor.font2Color),
               ),
             )

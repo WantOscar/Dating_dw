@@ -47,6 +47,7 @@ class ProfileScreen extends GetView<UserController> {
         body: Padding(
           padding: const EdgeInsets.only(bottom: 70),
           child: CustomScrollView(
+            physics: const BouncingScrollPhysics(),
             slivers: [
               _profile(),
               // _personality(),

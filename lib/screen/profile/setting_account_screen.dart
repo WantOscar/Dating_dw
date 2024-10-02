@@ -81,7 +81,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: SettingProfileRow(
           label: "차단된 계정",
-          onTap: () => Get.to(const BlockedAccountScreen()),
+          onTap: () => Get.to(() => const BlockedAccountScreen()),
         ));
   }
 

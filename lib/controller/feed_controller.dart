@@ -8,9 +8,10 @@ import 'package:dating/screen/home_screen.dart';
 import 'package:dating/screen/search/feed_write_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:dating/utils/show_toast.dart';
 import 'package:get/get.dart';
 
-class FeedController extends GetxController {
+class FeedController extends GetxController with UseToast {
   final FeedRepositoryImpl feedRepository;
   final User? user;
 
@@ -19,6 +20,16 @@ class FeedController extends GetxController {
   final Rx<List<Feed>> _myFeeds = Rx<List<Feed>>([]);
   String _title = "";
   String _content = "";
+
+  final RxBool _nextLoading = false.obs;
+
+  bool get nextLoading => _nextLoading.value;
+
+  bool _isFeedLimit = false;
+
+  final ScrollController _scrollController = ScrollController();
+
+  ScrollController get scrollController => _scrollController;
 
   bool get isLoading => _isLoading.value;
   List<Feed> get feeds => _feeds.value;
@@ -35,6 +46,41 @@ class FeedController extends GetxController {
   void onInit() {
     getAllFeeds();
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    fetchFeeds();
+    _scrollController.addListener(_nextLoad);
+    super.onReady();
+  }
+
+  void fetchFeeds() async {
+    final result = await feedRepository.getAllFeeds();
+    _feeds(result);
+  }
+
+  void _nextLoad() async {
+    if (!_isFeedLimit &&
+        !_nextLoading.value &&
+        !_isLoading.value &&
+        _scrollController.position.extentAfter >= 100) {
+      _nextLoading(true);
+      final id = _feeds.value.last.id!;
+      try {
+        final newFeeds = await feedRepository.getNextFeeds(id);
+        if (newFeeds.isEmpty) {
+          _isFeedLimit = true;
+        } else {
+          _feeds.value.addAll(newFeeds);
+          _feeds.refresh();
+        }
+      } on Exception catch (e) {
+        showToast(e.toString());
+      } finally {
+        _nextLoading(false);
+      }
+    }
   }
 
   /// 피드 작성을 취소할건지 물어보고 뒤로 돌아가는 함수

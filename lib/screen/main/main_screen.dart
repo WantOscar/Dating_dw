@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/Widget/main/avatar.dart';
 import 'package:dating/controller/main_controller.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:dating/widget/main/today_freinds_profile.dart';
@@ -24,6 +25,7 @@ class MainScreen extends GetView<MainController> {
         body: (controller.isLoading == Status.loading)
             ? _loading()
             : SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     _todayIntroduce(),
