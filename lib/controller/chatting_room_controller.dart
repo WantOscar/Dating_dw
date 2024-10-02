@@ -9,6 +9,7 @@ import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/data/service/chat_service.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/utils/show_toast.dart';
+import 'package:dating/widget/common/notification_window.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -127,14 +128,26 @@ class ChattingRoomController extends GetxController with UseToast {
   }
 
   void quit() {
-    final message = MessageModel(
-      nickName: UserController.to.myInfo!.nickName,
-      message: "${UserController.to.myInfo!.nickName}님이 대화방을 나갔습니다.",
-      messageType: "QUIT",
-      createAt: DateFormat('yyyy-MM-dd-HH:mm:ss').format(DateTime.now()),
-      chatRoomId: chat.id,
+    Get.dialog(
+      NotificationWindow(
+        content: "채팅방을 나가면 상대방과 대화 내용이 모두 삭제됩니다.",
+        title: "채팅방을 나가시겠습니까?",
+        onConfirm: () {
+          final message = MessageModel(
+            nickName: UserController.to.myInfo!.nickName,
+            message: "${UserController.to.myInfo!.nickName}님이 대화방을 나갔습니다.",
+            messageType: "QUIT",
+            createAt: DateFormat('yyyy-MM-dd-HH:mm:ss').format(DateTime.now()),
+            chatRoomId: chat.id,
+          );
+          channel.sink.add(jsonEncode(message.toJson()));
+          ChatController.to.quit(chat.id);
+          Get.until((route) => route.isFirst);
+        },
+        confirmLabel: "나가기",
+        onCancel: Get.back,
+        cancelLabel: "취소",
+      ),
     );
-    channel.sink.add(jsonEncode(message.toJson()));
-    Get.back();
   }
 }

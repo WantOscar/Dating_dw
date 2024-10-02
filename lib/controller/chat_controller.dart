@@ -67,14 +67,6 @@ class ChatController extends GetxController
     _personalChattings.refresh();
   }
 
-  // void updateRead(int chatRoomId) {
-  //   _personalChattings.value
-  //       .where((chat) => chat.id == chatRoomId)
-  //       .first
-  //       .updateRead();
-  //   _personalChattings.refresh();
-  // }
-
   void makeChattingRoom(User target) async {
     try {
       final chatRoomId = await service.makeChattingRoom(target.id!);
@@ -90,5 +82,10 @@ class ChatController extends GetxController
     } catch (err) {
       showToast(err.toString());
     }
+  }
+
+  void quit(int id) {
+    _personalChattings.value.removeWhere((chat) => chat.id == id);
+    _personalChattings.refresh();
   }
 }
