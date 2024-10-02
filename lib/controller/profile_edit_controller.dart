@@ -4,7 +4,6 @@ import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/widget/common/notification_window.dart';
-import 'package:dating/widget/common/warning_window.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_instance/get_instance.dart';

@@ -1,5 +1,4 @@
 import 'package:dating/Widget/common/notification_window.dart';
-import 'package:dating/Widget/common/warning_window.dart';
 import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
@@ -112,14 +111,18 @@ class FeedController extends GetxController with UseToast {
   void completeFeed() {
     final Feed feed = Feed(title: _title, content: _content);
 
-    Get.dialog(WarningWindow(
-      titleText: '피드 작성 완료',
-      explainText: '작성을 완료하시겠습니까?',
-      onTap: () {
+    Get.dialog(NotificationWindow(
+      title: '피드 작성 완료',
+      content: '작성을 완료하시겠습니까?',
+      onConfirm: () {
         writeFeed(feed);
         Get.off(() => const HomeScreen());
       },
-      btnText: "피드 생성",
+      confirmLabel: "피드 생성",
+      onCancel: () {
+        Get.back();
+      },
+      cancelLabel: "작성 취소",
     ));
   }
 
@@ -265,14 +268,16 @@ class FeedController extends GetxController with UseToast {
 
   /// 수정한 글을 적용시킬지 물어보는 dialog 함수.
   void updateDialog(Feed feed) async {
-    Get.dialog(WarningWindow(
-      titleText: '피드 수정 완료',
-      explainText: '수정을 완료하시겠습니까?',
-      onTap: () {
+    Get.dialog(NotificationWindow(
+      title: '피드 수정 완료',
+      content: '수정을 완료하시겠습니까?',
+      confirmLabel: "확인",
+      cancelLabel: "취소",
+      onConfirm: () {
         updateFeed(feed);
         Get.off(() => const HomeScreen());
       },
-      btnText: "피드 수정",
+      onCancel: Get.back,
     ));
   }
 
@@ -339,19 +344,18 @@ class FeedController extends GetxController with UseToast {
                     ),
                     onTap: () {
                       Get.dialog(
-                        WarningWindow(
-                            onTap: () {
-                              deleteFeed(feed.id!);
-                              Get.until((route) => route.isFirst);
-                            },
-                            titleText: '피드 삭제',
-                            explainText: '이 피드를 정말로 삭제하시겠습니까?',
-                            btnText: '삭제'),
+                        NotificationWindow(
+                          title: '피드 삭제',
+                          content: '이 피드를 정말로 삭제하시겠습니까?',
+                          confirmLabel: "확인",
+                          cancelLabel: "취소",
+                          onConfirm: () {
+                            deleteFeed(feed.id!);
+                            Get.until((route) => route.isFirst);
+                          },
+                          onCancel: Get.back,
+                        ),
                       );
-
-                      // deleteFeed(feed.id!);
-                      // Get.back();
-                      // Get.off(() => const HomeScreen());
                     },
                   ),
 

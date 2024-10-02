@@ -1,6 +1,4 @@
 import 'package:dating/data/model/user.dart';
-import 'package:dating/utils/api_urls.dart';
-import 'package:dating/utils/dio_intercepter.dart';
 import 'package:dio/dio.dart';
 
 class MemberBlockRespository {

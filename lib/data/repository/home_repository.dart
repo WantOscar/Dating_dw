@@ -1,4 +1,3 @@
-import 'package:dating/utils/api_urls.dart';
 import 'package:dio/dio.dart';
 
 class HomeRepositoryImpl implements HomeRepository {
