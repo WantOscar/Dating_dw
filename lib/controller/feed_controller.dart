@@ -1,3 +1,4 @@
+import 'package:dating/Widget/common/notification_window.dart';
 import 'package:dating/Widget/common/warning_window.dart';
 import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/user_controller.dart';
@@ -85,14 +86,18 @@ class FeedController extends GetxController with UseToast {
 
   /// 피드 작성을 취소할건지 물어보고 뒤로 돌아가는 함수
   void cancel() {
-    Get.dialog(WarningWindow(
-      titleText: '피드 작성 취소',
-      explainText: '현재 입력사항을 모두 취소하고 돌아가시겠습니까?',
-      onTap: () {
-        Get.until((route) => route.isFirst);
-      },
-      btnText: "작성취소",
-    ));
+    Get.dialog(
+      NotificationWindow(
+        title: '피드 작성 취소',
+        content: '현재 입력사항을 모두 취소하고 돌아가시겠습니까?',
+        confirmLabel: "확인",
+        cancelLabel: "취소",
+        onConfirm: () {
+          Get.until((route) => route.isFirst);
+        },
+        onCancel: () => Get.until((route) => route.isFirst),
+      ),
+    );
   }
 
   void titleChange(String value) {
