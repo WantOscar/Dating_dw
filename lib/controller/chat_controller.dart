@@ -25,6 +25,9 @@ class ChatController extends GetxController
 
   List<ChattingRoomModel> get meetingChattings => _meetingChattings.value;
 
+  List<ChattingRoomModel> get allChattings =>
+      _personalChattings.value + _meetingChattings.value;
+
   @override
   void onInit() {
     getMyChattingList();
@@ -33,8 +36,15 @@ class ChatController extends GetxController
   }
 
   void readChat(ChattingRoomModel chat) {
-    chat.isRead = true;
-    _personalChattings.refresh();
+    for (var c in allChattings) {
+      if (c.id == chat.id) {
+        c.isRead = true;
+        _personalChattings.refresh();
+        _meetingChattings.refresh();
+        break;
+      }
+    }
+    service.readChat(chat.id);
   }
 
   @override

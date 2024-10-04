@@ -44,14 +44,15 @@ class ChattingRoomController extends GetxController with UseToast {
   List<MessageModel> get messages => _messages.value;
 
   @override
-  void onInit() {
+  void onReady() {
     _connectChannel();
     _readChat();
-    super.onInit();
+    super.onReady();
   }
 
+  /// 채팅 읽음 API
   void _readChat() {
-    chatService.readChat(chat.id);
+    ChatController.to.readChat(chat);
   }
 
   /// 서버의 채팅 소켓 서버와 연결하는 메소드
