@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 ThemeData get lightTheme => ThemeData(
     useMaterial3: false,
-    appBarTheme: const AppBarTheme(elevation: 0.0),
-    scaffoldBackgroundColor: const Color(0xffefefef),
+    appBarTheme:
+        const AppBarTheme(elevation: 0.0, backgroundColor: Color(0xffffffff)),
+    scaffoldBackgroundColor: const Color(0xffffffff),
     colorScheme: const ColorScheme.light(
         primary: Color(0xFFFF006B),
         primaryContainer: Color(0xffffe6f0),
@@ -13,7 +14,8 @@ ThemeData get lightTheme => ThemeData(
 
 ThemeData get darkTheme => ThemeData(
     useMaterial3: false,
-    appBarTheme: const AppBarTheme(elevation: 0.0),
+    appBarTheme:
+        const AppBarTheme(elevation: 0.0, backgroundColor: Color(0xff101010)),
     scaffoldBackgroundColor: const Color(0xff101010),
     colorScheme: const ColorScheme.dark(
         primary: Color(0xFFFF006B),
