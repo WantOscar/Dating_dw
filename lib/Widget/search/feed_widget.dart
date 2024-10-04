@@ -1,3 +1,4 @@
+import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/data/model/feed.dart';
@@ -222,7 +223,8 @@ class _FeedWidgetState extends State<FeedWidget> {
                     ),
                   ),
                   onPressed: () {
-                    joinToast();
+                    ChatController.to
+                        .makeChattingRoom(widget.feed!.user!, "meeting");
                   },
                   child: const Text(
                     '참여하기',

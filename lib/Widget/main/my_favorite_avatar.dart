@@ -69,7 +69,7 @@ class ListAvatar extends StatelessWidget {
         ),
         ChatSendButtom(
           onPressed: () {
-            ChatController.to.makeChattingRoom(user);
+            ChatController.to.makeChattingRoom(user, "dm");
           },
         ),
       ],

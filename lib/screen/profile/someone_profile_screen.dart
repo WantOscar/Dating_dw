@@ -163,7 +163,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: ChatSendButtom(
                   onPressed: () {
-                    ChatController.to.makeChattingRoom(widget.user);
+                    ChatController.to.makeChattingRoom(widget.user, "dm");
                   },
                 ),
               ),

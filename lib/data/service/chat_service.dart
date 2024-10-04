@@ -8,13 +8,13 @@ class ChatServiceImpl extends GetxService implements ChatService {
 
   ChatServiceImpl({required this.dio});
 
-  /// 채팅방 생성 API
+  /// 1:1채팅방 생성 API
   /// 로그인한 사용자가 원하는 상대방에게 채팅을 신청하는 API
   /// 채팅 신청이 성공하면 채팅방 ID를 반환함.
   @override
-  Future<int> makeChattingRoom(int memberId) async {
+  Future<int> makeChattingRoom(int memberId, String type) async {
     return dio.post("/chat/create/$memberId", queryParameters: {
-      "type": "dm"
+      "type": type,
     }).then((response) => response.data["chatRoomId"]);
   }
 
@@ -22,8 +22,18 @@ class ChatServiceImpl extends GetxService implements ChatService {
   /// 로그인한 사용자가 포함된 모든 채팅방을 조회하여
   /// CHATTING_ROOM_MODEL 배열로 반환함.
   @override
-  Future<List<ChattingRoomModel>> getMyChattingList() async {
+  Future<List<ChattingRoomModel>> getMyPersonalChattingList() async {
     return dio.get("/chat/list", queryParameters: {"type": "dm"}).then(
+        (response) => List<ChattingRoomModel>.from(response.data["chatRoomList"]
+            .map((json) => ChattingRoomModel.fromJson(json))).toList());
+  }
+
+  /// 채팅방 조회 API
+  /// 로그인한 사용자가 포함된 모든 채팅방을 조회하여
+  /// CHATTING_ROOM_MODEL 배열로 반환함.
+  @override
+  Future<List<ChattingRoomModel>> getMyMeetingChattingList() async {
+    return dio.get("/chat/list", queryParameters: {"type": "meeting"}).then(
         (response) => List<ChattingRoomModel>.from(response.data["chatRoomList"]
             .map((json) => ChattingRoomModel.fromJson(json))).toList());
   }
@@ -51,9 +61,11 @@ class ChatServiceImpl extends GetxService implements ChatService {
 }
 
 abstract class ChatService {
-  Future<int> makeChattingRoom(int id);
+  Future<int> makeChattingRoom(int id, String type);
 
-  Future<List<ChattingRoomModel>> getMyChattingList();
+  Future<List<ChattingRoomModel>> getMyPersonalChattingList();
+
+  Future<List<ChattingRoomModel>> getMyMeetingChattingList();
 
   Future<List<MessageModel>> getMessages(int chatRoomId);
 

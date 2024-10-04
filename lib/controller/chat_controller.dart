@@ -4,8 +4,11 @@ import 'package:dating/data/model/user.dart';
 import 'package:dating/data/service/chat_service.dart';
 import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:dating/utils/show_toast.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+enum ChatType { dm, meeting }
 
 class ChatController extends GetxController
     with GetSingleTickerProviderStateMixin, UseToast, WidgetsBindingObserver {
@@ -53,10 +56,13 @@ class ChatController extends GetxController
     super.onClose();
   }
 
-  Future<void> getMyChattingList() async {
-    final result = await service.getMyChattingList();
-    _personalChattings.value.clear();
-    _personalChattings(result);
+  void getMyChattingList() async {
+    service.getMyPersonalChattingList().then((dms) {
+      _personalChattings(dms);
+    });
+    service.getMyMeetingChattingList().then((meetings) {
+      _meetingChattings(meetings);
+    });
   }
 
   void updateLastMessage(int chatRoomId, String message) {
@@ -67,11 +73,16 @@ class ChatController extends GetxController
     _personalChattings.refresh();
   }
 
-  void makeChattingRoom(User target) async {
+  void makeChattingRoom(User target, String type) async {
     try {
-      final chatRoomId = await service.makeChattingRoom(target.id!);
-      final ChattingRoomModel chat =
-          ChattingRoomModel(id: chatRoomId, isRead: true);
+      final chatRoomId = await service.makeChattingRoom(target.id!, type);
+      final ChattingRoomModel chat = ChattingRoomModel(
+          id: chatRoomId,
+          isRead: true,
+          name: target.nickName,
+          image: target.image,
+          lastMessage: "",
+          time: DateTime.now().toIso8601String());
       _personalChattings.value.add(chat);
       Get.to(
           () => ChattingRoom(
@@ -79,8 +90,8 @@ class ChatController extends GetxController
               ),
           binding: ChatRoomControllerBinding(
               chat: chat, targetName: target.nickName!));
-    } catch (err) {
-      showToast(err.toString());
+    } on DioException catch (err) {
+      showToast(err.message!);
     }
   }
 
