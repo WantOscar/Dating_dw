@@ -28,14 +28,14 @@ class Feed {
     );
   }
 
-  factory Feed.fromMyFeed(Map<String, dynamic> json, User user) {
+  factory Feed.fromUser(Map<String, dynamic> json, User user) {
     return Feed(
       id: json['id'],
       title: json['title'],
       content: json['content'],
       user: user,
       createAt: json['createAt'],
-      nickName: user.nickName!,
+      nickName: user.nickName,
     );
   }
 

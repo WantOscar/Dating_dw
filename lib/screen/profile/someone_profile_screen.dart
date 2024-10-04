@@ -1,7 +1,10 @@
 import 'package:dating/Widget/profile/user_profile_widget.dart';
+import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/chat_controller.dart';
+import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/controller/member_block_controller.dart';
 import 'package:dating/controller/user_controller.dart';
+import 'package:dating/data/model/feed.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
@@ -11,31 +14,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class SomeoneProfileScreen extends StatefulWidget {
+class SomeoneProfileScreen extends GetView<UserController> {
   final User user;
   const SomeoneProfileScreen({super.key, required this.user});
 
   @override
-  State<SomeoneProfileScreen> createState() => _SomeoneProfileScreenState();
-}
-
-class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
-      floatingActionButton: _fabs(),
+      floatingActionButton: _fabs(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            _appbar(),
+            _appbar(context),
             _profile(),
             // _personality(),
             // _interesting(),
             // _idealType(),
             // _storyHeader(),
             // _story(),
+            Obx(() => (!controller.isLoading) ? _loading() : _otherFeed()),
           ],
         ),
       ),
@@ -45,7 +44,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   /// 커스텀 앱바를 제작
   /// 앱바 우측 아이콘을 누르면
   /// 사용자는 상대방을 차단/취소 가능.
-  Widget _appbar() {
+  Widget _appbar(context) {
     return SliverAppBar(
       elevation: 0.0,
       floating: true,
@@ -93,7 +92,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                             InkWell(
                               onTap: () async {
                                 await MemberBlockController.to
-                                    .memberBlock(widget.user.id!);
+                                    .memberBlock(user.id!);
                               },
                               child: Container(
                                 alignment: Alignment.center,
@@ -149,11 +148,12 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
   /// 상대방의 프로필을 보여주는 위젯
   Widget _profile() => SliverToBoxAdapter(
         child: UserProfileWidget(
-          user: widget.user,
+          user: user,
         ),
       );
 
-  Widget _fabs() => SizedBox(
+  /// 상대방의 프로필에서 채팅신청 or 좋아요를 누를 수 있는 위젯
+  Widget _fabs(context) => SizedBox(
         width: double.maxFinite,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -163,7 +163,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
                 padding: const EdgeInsets.all(8.0),
                 child: ChatSendButtom(
                   onPressed: () {
-                    ChatController.to.makeChattingRoom(widget.user);
+                    ChatController.to.makeChattingRoom(user);
                   },
                 ),
               ),
@@ -172,7 +172,7 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
               padding: const EdgeInsets.all(8.0),
               child: FavoriteButton(
                 onTap: () {
-                  UserController.to.postHeartAdd(widget.user.id!);
+                  controller.postHeartAdd(user.id!);
                 },
               ),
             )
@@ -180,182 +180,28 @@ class _SomeoneProfileScreenState extends State<SomeoneProfileScreen> {
         ),
       );
 
-  /// 상대방의 인적사항을 보여줌
-  // Widget _info() => const SliverToBoxAdapter(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-  //             child: Text('인적사항'),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //             child: Wrap(
-  //               direction: Axis.horizontal,
-  //               alignment: WrapAlignment.start,
-  //               spacing: 5,
-  //               runSpacing: 5,
-  //               children: [
-  //                 HobbyContainer(
-  //                   text: '일반대',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '학생',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: 'ESTP',
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
+  Widget _loading() => const SliverToBoxAdapter(
+        child: Center(
+          child: CircularProgressIndicator.adaptive(),
+        ),
+      );
 
-  /// 상대방의 성격을 보여줌
-  // Widget _personality() => const SliverToBoxAdapter(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-  //             child: Text('성격'),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //             child: Wrap(
-  //               direction: Axis.horizontal,
-  //               alignment: WrapAlignment.start,
-  //               spacing: 5,
-  //               runSpacing: 5,
-  //               children: [
-  //                 HobbyContainer(
-  //                   text: '털털한',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '기모띠',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '자유로운',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '유쾌한',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '대담한',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '보수적인',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '재밌는',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '호전적인',
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-
-  /// 상대방의 관심사를 보여줌
-  // Widget _interesting() => const SliverToBoxAdapter(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-  //             child: Text('관심사'),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //             child: Wrap(
-  //               direction: Axis.horizontal,
-  //               alignment: WrapAlignment.start,
-  //               spacing: 5,
-  //               runSpacing: 5,
-  //               children: [
-  //                 HobbyContainer(
-  //                   text: '게임',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: 'IT',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '운동',
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-
-  /// 상대방의 이상형을 보여줌
-  // Widget _idealType() => const SliverToBoxAdapter(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-  //             child: Text('이상형'),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //             child: Wrap(
-  //               direction: Axis.horizontal,
-  //               alignment: WrapAlignment.start,
-  //               spacing: 5,
-  //               runSpacing: 5,
-  //               children: [
-  //                 HobbyContainer(
-  //                   text: '예쁜',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '귀여운',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '섹시한',
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-
-  /// 상대방 스토리 텍스트
-  // Widget _storyHeader() {
-  //   return SliverToBoxAdapter(
-  //     child: Padding(
-  //       padding: const EdgeInsets.all(8.0),
-  //       child: Text(
-  //         '스토리',
-  //         style: TextStyle(
-  //             color: ThemeColor.fontColor,
-  //             fontSize: 30,
-  //             fontWeight: FontWeight.bold),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  /// 상대방 스토리를 보여줌
-  // Widget _story() {
-  //   return SliverGrid.builder(
-  //     itemCount: 10,
-  //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-  //         mainAxisSpacing: 2.0, crossAxisSpacing: 2.0, crossAxisCount: 3),
-  //     itemBuilder: (contex, index) {
-  //       return const MyPhotos();
-  //     },
-  //   );
-  // }
+  Widget _otherFeed() {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          final Feed feed = FeedController.to.historys[index];
+          return Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 14.0, horizontal: 16.0),
+            child: FeedWidget(
+              feed: feed,
+              onTap: () => FeedController.to.showMyFeedOption(feed),
+            ),
+          );
+        },
+        childCount: FeedController.to.historys.length,
+      ),
+    );
+  }
 }

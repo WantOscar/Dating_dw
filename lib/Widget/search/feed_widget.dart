@@ -1,29 +1,24 @@
+import 'package:dating/controller/main_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/data/model/feed.dart';
-import 'package:dating/screen/profile/someone_profile_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class FeedWidget extends StatefulWidget {
+class FeedWidget extends GetView<MainController> {
   final Feed? feed;
   final void Function() onTap;
   const FeedWidget({super.key, required this.feed, required this.onTap});
 
-  @override
-  State<FeedWidget> createState() => _FeedWidgetState();
-}
-
-class _FeedWidgetState extends State<FeedWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(24.0),
       highlightColor: Theme.of(context).colorScheme.primaryContainer,
       onTap: () {
-        _showApply();
+        _showApply(context);
       },
       child: Ink(
         width: double.infinity,
@@ -52,7 +47,7 @@ class _FeedWidgetState extends State<FeedWidget> {
   /// 상대방의 피드를 누르면 팝업창이 뜸
   /// 세부 글 내용을 볼 수 있고,
   /// 참여 신청버튼을 통해 신청 가능.
-  Future<dynamic> _showApply() {
+  Future<dynamic> _showApply(context) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -73,7 +68,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                 children: [
                   Flexible(
                     child: Text(
-                      widget.feed!.content.toString(),
+                      feed!.content.toString(),
                       style: const TextStyle(
                         fontSize: 14,
                       ),
@@ -85,9 +80,7 @@ class _FeedWidgetState extends State<FeedWidget> {
           ],
         ),
         actions: [
-          (widget.feed?.user != UserController.to.myInfo!)
-              ? _join()
-              : Container(),
+          (feed?.user != UserController.to.myInfo!) ? _join() : Container(),
         ],
       ),
     );
@@ -111,16 +104,14 @@ class _FeedWidgetState extends State<FeedWidget> {
             ),
             child: GestureDetector(
               onTap: () {
-                Get.to(
-                  () => SomeoneProfileScreen(
-                    user: widget.feed!.user!,
-                  ),
-                );
+                if (feed?.user != UserController.to.myInfo!) {
+                  controller.moveToProfileScreen(feed!.user!);
+                }
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: CachedNetworkImage(
-                    imageUrl: widget.feed!.user!.image!, fit: BoxFit.cover),
+                    imageUrl: feed!.user!.image!, fit: BoxFit.cover),
               ),
             ),
           ),
@@ -134,14 +125,14 @@ class _FeedWidgetState extends State<FeedWidget> {
                 Row(
                   children: [
                     Text(
-                      widget.feed!.user!.nickName!,
+                      feed!.user!.nickName!,
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
-                        '${widget.feed!.user!.age}세',
+                        '${feed!.user!.age}세',
                         style: const TextStyle(
                           fontSize: 12,
                         ),
@@ -157,7 +148,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                       size: 20,
                     ),
                     Text(
-                      widget.feed!.user!.address!,
+                      feed!.user!.address!,
                       style: const TextStyle(
                         fontSize: 12,
                       ),
@@ -170,7 +161,7 @@ class _FeedWidgetState extends State<FeedWidget> {
 
           /// 차단 or 수정,취소 여부 버튼
           IconButton(
-            onPressed: widget.onTap,
+            onPressed: onTap,
             icon: const Icon(Icons.more_horiz),
           ),
         ],
@@ -187,7 +178,7 @@ class _FeedWidgetState extends State<FeedWidget> {
         children: [
           Flexible(
             child: Text(
-              widget.feed!.title.toString(),
+              feed!.title.toString(),
               style: const TextStyle(
                 fontSize: 17,
                 fontWeight: FontWeight.w600,

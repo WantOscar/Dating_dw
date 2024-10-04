@@ -1,3 +1,4 @@
+import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/service/home_service.dart';
 import 'package:dating/screen/main/my_fan_detail_screen.dart';
@@ -103,5 +104,10 @@ class MainController extends GetxController with UseToast {
 
   void requestChatAlarm() {
     showToast('채팅을 신청하였습니다!', gravity: ToastGravity.CENTER);
+  }
+
+  void moveToProfileScreen(User user) {
+    Get.to(() => SomeoneProfileScreen(user: user));
+    FeedController.to.fetchMyFeeds(user);
   }
 }

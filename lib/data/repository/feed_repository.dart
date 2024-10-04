@@ -1,5 +1,6 @@
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
+import 'package:dating/data/model/user.dart';
 import 'package:dio/dio.dart';
 import 'package:get/state_manager.dart';
 
@@ -52,18 +53,18 @@ class FeedRepositoryImpl extends GetxService implements FeedRepository {
 
   /// 본인이 작성한 피드 List를 불러오는 API
   @override
-  Future<List<Feed>> getMyFeeds(Map<String, dynamic> data) async {
+  Future<List<Feed>> getMyFeeds(Map<String, dynamic> data, User user) async {
     return dio.get('/search/history', data: data).then((response) =>
         List<Map<String, dynamic>>.from(response.data)
-            .map((json) => Feed.fromMyFeed(json, UserController.to.myInfo!))
+            .map((json) => Feed.fromUser(json, user))
             .toList());
   }
 
   /// 본인이 작성한 글을 수정하는 API
   @override
   Future<Feed> patchFeed(Map<String, dynamic> data) async {
-    return dio.patch('/search', data: data).then((response) =>
-        Feed.fromMyFeed(response.data, UserController.to.myInfo!));
+    return dio.patch('/search', data: data).then(
+        (response) => Feed.fromUser(response.data, UserController.to.myInfo!));
   }
 
   /// 본인이 작성한 글을 삭제하는 API
@@ -82,7 +83,7 @@ abstract class FeedRepository {
   Future<Feed> getFeed(int id);
   Future<List<Feed>> getAllFeeds();
   Future<Feed> postFeed(Map<String, dynamic> data);
-  Future<List<Feed>> getMyFeeds(Map<String, dynamic> nickName);
+  Future<List<Feed>> getMyFeeds(Map<String, dynamic> nickName, User user);
   Future<Feed> patchFeed(Map<String, dynamic> data);
   Future<void> deleteFeed(int id);
 }
