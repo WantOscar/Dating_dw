@@ -65,50 +65,50 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               const SizedBox(height: 20),
 
               /// 내 인적사항
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-                    child: Text('인적사항'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      alignment: WrapAlignment.start,
-                      spacing: 5,
-                      runSpacing: 5,
-                      children: [
-                        HobbyContainer(
-                          text: '일반대',
-                        ),
-                        HobbyContainer(
-                          text: '학생',
-                        ),
-                        HobbyContainer(
-                          text: 'ESTP',
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 7),
+              // const Column(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     Padding(
+              //       padding:
+              //           EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
+              //       child: Text('인적사항'),
+              //     ),
+              //     Padding(
+              //       padding: EdgeInsets.symmetric(horizontal: 20.0),
+              //       child: Wrap(
+              //         direction: Axis.horizontal,
+              //         alignment: WrapAlignment.start,
+              //         spacing: 5,
+              //         runSpacing: 5,
+              //         children: [
+              //           HobbyContainer(
+              //             text: '일반대',
+              //           ),
+              //           HobbyContainer(
+              //             text: '학생',
+              //           ),
+              //           HobbyContainer(
+              //             text: 'ESTP',
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(height: 7),
 
               /// 내 성격
-              const Personality(),
-              const SizedBox(height: 7),
+              // const Personality(),
+              // const SizedBox(height: 7),
 
               /// 내 이상형
-              const IdealType(),
-              const SizedBox(height: 7),
+              // const IdealType(),
+              // const SizedBox(height: 7),
 
               /// 내 관심사
-              const Interest(),
-              const SizedBox(height: 100),
+              // const Interest(),
+              // const SizedBox(height: 100),
               _completeButton(),
             ],
           ),
