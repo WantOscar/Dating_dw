@@ -1,5 +1,4 @@
 import 'package:dating/widget/common/cammit_app_bar.dart';
-import 'package:dating/widget/profile/hobby_container.dart';
 import 'package:dating/widget/profile/profile_image.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/profile_image_controller.dart';
@@ -8,9 +7,6 @@ import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/bottom_button.dart';
-import 'package:dating/widget/profile/ideal_type.dart';
-import 'package:dating/widget/profile/interest.dart';
-import 'package:dating/widget/profile/personality.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
