@@ -1,4 +1,5 @@
 import 'package:dating/controller/main_controller.dart';
+import 'package:dating/controller/chat_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/data/model/feed.dart';
@@ -213,7 +214,7 @@ class FeedWidget extends GetView<MainController> {
                     ),
                   ),
                   onPressed: () {
-                    joinToast();
+                    ChatController.to.makeChattingRoom(feed!.user!, "meeting");
                   },
                   child: const Text(
                     '참여하기',

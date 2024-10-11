@@ -163,7 +163,7 @@ class SomeoneProfileScreen extends GetView<UserController> {
                 padding: const EdgeInsets.all(8.0),
                 child: ChatSendButtom(
                   onPressed: () {
-                    ChatController.to.makeChattingRoom(user);
+                    ChatController.to.makeChattingRoom(user, "dm");
                   },
                 ),
               ),

@@ -11,17 +11,10 @@ class ChangeAlbumScreen extends GetView<ProfileImageController> {
     return Obx(
       () => Scaffold(
         appBar: AppBar(
-          leading: GestureDetector(
-            onTap: Get.back,
-            child: const Icon(Icons.arrow_back),
-          ),
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
           elevation: 0.0,
           title: const Text(
             "앨범 선택",
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w600, fontSize: 18),
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
           ),
         ),
         body: SingleChildScrollView(
@@ -53,13 +46,11 @@ class ChangeAlbumScreen extends GetView<ProfileImageController> {
                           children: [
                             Text(
                               album.name.toString(),
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 15),
+                              style: const TextStyle(fontSize: 15),
                             ),
                             Text(
                               album.images!.length.toString(),
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 15),
+                              style: const TextStyle(fontSize: 15),
                             )
                           ],
                         ),
