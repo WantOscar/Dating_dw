@@ -133,6 +133,7 @@ class FeedController extends GetxController with UseToast {
       final result = await feedRepository.getAllFeeds();
       _feeds(result);
     } on Exception catch (e) {
+      print("Error : $e");
     } finally {
       _isLoading(false);
     }
@@ -224,11 +225,11 @@ class FeedController extends GetxController with UseToast {
   ///ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ Profile ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
   /// 본인이 작성한 피드를 조회하는 함수
-  void fetchMyFeeds(String nickName) async {
+  void fetchMyFeeds(User user) async {
     _isLoading(true);
     try {
-      final data = {"nickName": nickName};
-      final result = await feedRepository.getMyFeeds(data);
+      final data = {"nickName": user.nickName};
+      final result = await feedRepository.getMyFeeds(data, user);
       _myFeeds(result);
     } on Exception catch (e) {
       print('error: $e');

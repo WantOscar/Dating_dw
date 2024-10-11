@@ -18,8 +18,7 @@ class BottomNavController extends GetxController {
     final page = PageName.values[value];
     switch (page) {
       case PageName.profile:
-        final nickName = UserController.to.myInfo!.nickName!;
-        FeedController.to.fetchMyFeeds(nickName);
+        FeedController.to.fetchMyFeeds(UserController.to.myInfo!);
       case PageName.main:
       case PageName.chat:
       case PageName.search:

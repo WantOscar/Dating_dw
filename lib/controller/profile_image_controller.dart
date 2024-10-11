@@ -1,16 +1,15 @@
 import 'dart:io';
 
+import 'package:dating/Widget/common/notification_window.dart';
 import 'package:dating/controller/camera_controller.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/data/model/album.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
-import 'package:dating/widget/common/notification_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:photo_manager/photo_manager.dart';
-
 import '../screen/profile/camera_screen.dart';
 
 class ProfileImageController extends GetxController {
@@ -91,13 +90,15 @@ class ProfileImageController extends GetxController {
 
     if (_selectImageIndex.value != null && _selectImageIndex.value != index) {
       Get.dialog(NotificationWindow(
+        title: "선택한 사진 변경",
+        content: "이미 선택한 사진이 존재합니다. 해당 사진을 지우고 다른 이미지를 선택하겠습니까?",
+        confirmLabel: "확인",
+        cancelLabel: "취소",
         onConfirm: () {
           Get.back();
           _cropImage(image, index);
         },
-        title: "선택한 사진 변경",
-        content: "이미 선택한 사진이 존재합니다. 해당 사진을 지우고 다른 이미지를 선택하겠습니까?",
-        cancelLabel: "사진 변경",
+        onCancel: Get.back,
       ));
 
       return;
@@ -159,27 +160,35 @@ class ProfileImageController extends GetxController {
   }
 
   void clearSelectImage() {
-    Get.dialog(NotificationWindow(
+    Get.dialog(
+      NotificationWindow(
+        title: "사진 삭제",
+        content: "이미 편집이 완료된 사진을 취소하시겠습니까?",
+        confirmLabel: "확인",
+        cancelLabel: "취소",
         onConfirm: () {
           _selectImage.value = null;
           _selectImageIndex.value = null;
           Get.back();
         },
-        title: "사진 삭제",
-        content: "이미 편집이 완료된 사진을 취소하시겠습니까?",
-        confirmLabel: "삭제하기"));
+        onCancel: Get.back,
+      ),
+    );
   }
 
   void backToPreviousPage() {
     if (_selectImage.value != null) {
-      Get.dialog(NotificationWindow(
+      Get.dialog(
+        NotificationWindow(
+          title: "업로드 취소",
+          content: "이미 편집된 사진이 존재합니다. 모든 작업을 종료하고 돌아갈까요?",
           onConfirm: () {
             Get.off(() => const ProfileEditScreen());
             Get.delete<ProfileImageController>();
           },
-          title: "업로드 취소",
-          content: "이미 편집된 사진이 존재합니다. 모든 작업을 종료하고 돌아갈까요?",
-          confirmLabel: "돌아가기"));
+          onCancel: Get.back,
+        ),
+      );
       return;
     }
 

@@ -53,9 +53,44 @@ class ProfileScreen extends GetView<UserController> {
               // _personality(),
               // _interesting(),
               // _idealType(),
-              const SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 100,
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16.0, left: 8.0),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: 100,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: Center(
+                              child: Text(
+                                '게시물',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 24,
+                                    color: ThemeColor.fontColor),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          '${FeedController.to.historys.length}개',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: ThemeColor.fontColor),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Obx(() => (!controller.isLoading) ? _loading() : _myFeed()),
