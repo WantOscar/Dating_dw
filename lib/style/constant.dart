@@ -13,4 +13,5 @@ class ThemeColor {
   static Color get iconColor => const Color.fromARGB(255, 179, 177, 177);
   static Color get textfieldFill => const Color(0xffefefef);
   static Color get textfieldText => const Color(0xffafafaf);
+  static Color get practice => const Color(0xffEDEDED);
 }

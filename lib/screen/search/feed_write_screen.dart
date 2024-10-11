@@ -1,10 +1,11 @@
+import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/bottom_button.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class FeedWriteScreen extends StatefulWidget {
   final Feed? feed;
@@ -52,7 +53,23 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                    left: 33.0, right: 33.0, top: 30, bottom: 10),
+                child: Text(
+                  '제목',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
               _titleWrite(),
+              const Padding(
+                padding: EdgeInsets.only(
+                    left: 33.0, right: 33.0, top: 30, bottom: 10),
+                child: Text(
+                  '당신의 이야기를 공유해보세요',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
               _sub(),
             ],
           ),
@@ -63,29 +80,32 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
   /// 제목 쓰기 칸(title)
   Widget _titleWrite() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: DottedBorder(
-        strokeWidth: 2,
-        color: Colors.grey,
-        borderType: BorderType.RRect,
-        radius: const Radius.circular(10),
-        dashPattern: const [5, 5],
-        child: SizedBox(
-          height: Get.size.width * 0.15,
-          width: Get.size.width * 1,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _titleController,
-              maxLength: 50,
-              maxLines: 1,
-              decoration: const InputDecoration(
-                hintText: '제목을 작성해주세요.',
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              onChanged: FeedController.to.titleChange,
+      padding: const EdgeInsets.only(left: 33.0, right: 33.0, bottom: 10),
+      child: Container(
+        height: 60,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: ThemeColor.practice,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 11.0, vertical: 17.0),
+          child: TextField(
+            controller: _titleController,
+            maxLength: 20,
+            maxLines: 1,
+            keyboardType: TextInputType.multiline,
+            style: const TextStyle(color: Colors.black),
+            decoration: const InputDecoration(
+              hintText: '제목을 작성해주세요.',
+              hintStyle: TextStyle(fontSize: 12),
+              border: InputBorder.none,
+              counterText: '',
             ),
+            onChanged: FeedController.to.titleChange,
+            textInputAction: TextInputAction.done,
+            scrollPhysics: const BouncingScrollPhysics(),
+            scrollPadding: const EdgeInsets.all(0),
           ),
         ),
       ),
@@ -95,32 +115,31 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
   /// 세부 글 작성 칸(sub)
   Widget _sub() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: DottedBorder(
-        strokeWidth: 2,
-        color: Colors.grey,
-        borderType: BorderType.RRect,
-        radius: const Radius.circular(10),
-        dashPattern: const [5, 5],
-        child: Container(
-          width: Get.size.width * 1,
-          constraints: BoxConstraints(
-            minHeight: Get.size.width * 0.15,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _contentController,
-              maxLength: 50,
-              minLines: 5,
-              maxLines: null,
-              decoration: const InputDecoration(
-                hintText: '글을 작성해주세요.',
-                border: InputBorder.none,
-                counterText: '',
-              ),
-              onChanged: FeedController.to.contentChange,
+      padding: const EdgeInsets.only(left: 33.0, right: 33.0, bottom: 10),
+      child: Container(
+        height: 300,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: ThemeColor.practice,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 11.0, vertical: 17.0),
+          child: TextField(
+            textAlignVertical: const TextAlignVertical(y: -1),
+            controller: _contentController,
+            maxLength: 255,
+            expands: true,
+            maxLines: null,
+            minLines: null,
+            keyboardType: TextInputType.multiline,
+            decoration: const InputDecoration(
+              hintText: '글을 작성해주세요.',
+              hintStyle: TextStyle(fontSize: 12),
+              border: InputBorder.none,
+              counterText: '',
             ),
+            onChanged: FeedController.to.contentChange,
           ),
         ),
       ),
@@ -130,26 +149,31 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
   /// 처음 글 작성을 완료한 후,
   /// 이 버튼을 누르면 탐색 창에서 작성한 글이 올라감.
   Widget _completeButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
-      child: SafeArea(
-        bottom: true,
-        child: BottomButton(
-          onTap: () {
-            if (widget.feed != null) {
-              Feed updatedFeed = Feed(
-                  id: widget.feed!.id,
-                  title: _titleController.text,
-                  content: _contentController.text);
-              FeedController.to.updateDialog(updatedFeed);
-            } else {
-              FeedController.to.completeFeed();
-            }
-          },
-          child: const Text(
-            "작성 완료",
-            style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+    return Container(
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 33.0, vertical: 35.0),
+        child: SafeArea(
+          bottom: true,
+          child: BottomButton(
+            onTap: () {
+              if (widget.feed != null) {
+                Feed updatedFeed = Feed(
+                    id: widget.feed!.id,
+                    title: _titleController.text,
+                    content: _contentController.text);
+                FeedController.to.updateDialog(updatedFeed);
+              } else {
+                FeedController.to.completeFeed();
+              }
+            },
+            child: const Text(
+              "작성 완료",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ),
