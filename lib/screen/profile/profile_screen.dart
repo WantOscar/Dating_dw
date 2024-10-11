@@ -50,43 +50,64 @@ class ProfileScreen extends GetView<UserController> {
             physics: const BouncingScrollPhysics(),
             slivers: [
               _profile(),
-              // _personality(),
-              // _interesting(),
-              // _idealType(),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 16.0, left: 8.0),
-                  child: Row(
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 23.0),
+                sliver: SliverToBoxAdapter(
+                  child: Column(
                     children: [
-                      SizedBox(
-                        height: 50,
-                        width: 100,
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
-                            child: Center(
-                              child: Text(
-                                '게시물',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 24,
-                                    color: ThemeColor.fontColor),
+                      const SizedBox(height: 23),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              '내가 쓴 피드',
+                              style: TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w600,
+                                color: ThemeColor.fontColor,
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
+                      const SizedBox(height: 15),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(
-                          '${FeedController.to.historys.length}개',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                              color: ThemeColor.fontColor),
+                        padding: const EdgeInsets.symmetric(horizontal: 7.0),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16.0, vertical: 6.0),
+                                  child: Text(
+                                    '게시물',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
+                                textAlign: TextAlign.center,
+                                '${FeedController.to.historys.length}개',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -154,7 +175,7 @@ class ProfileScreen extends GetView<UserController> {
           final Feed feed = FeedController.to.historys[index];
           return Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 14.0, horizontal: 16.0),
+                const EdgeInsets.symmetric(vertical: 14.0, horizontal: 23.0),
             child: FeedWidget(
               feed: feed,
               onTap: () => FeedController.to.showMyFeedOption(feed),
@@ -165,155 +186,4 @@ class ProfileScreen extends GetView<UserController> {
       ),
     );
   }
-
-  /// 내 인적사항을 보여줌
-  // Widget _info() => const SliverToBoxAdapter(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-  //             child: Text('인적사항'),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //             child: Wrap(
-  //               direction: Axis.horizontal,
-  //               alignment: WrapAlignment.start,
-  //               spacing: 5,
-  //               runSpacing: 5,
-  //               children: [
-  //                 HobbyContainer(
-  //                   text: '일반대',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '학생',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: 'ESTP',
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-
-  /// 내 성격을 보여줌
-  // Widget _personality() => const SliverToBoxAdapter(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-  //             child: Text('성격'),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //             child: Wrap(
-  //               direction: Axis.horizontal,
-  //               alignment: WrapAlignment.start,
-  //               spacing: 5,
-  //               runSpacing: 5,
-  //               children: [
-  //                 HobbyContainer(
-  //                   text: '털털한',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '기모띠',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '자유로운',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '유쾌한',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '대담한',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '보수적인',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '재밌는',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '호전적인',
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-
-  /// 내 관심사를 보여줌
-  // Widget _interesting() => const SliverToBoxAdapter(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-  //             child: Text('관심사'),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //             child: Wrap(
-  //               direction: Axis.horizontal,
-  //               alignment: WrapAlignment.start,
-  //               spacing: 5,
-  //               runSpacing: 5,
-  //               children: [
-  //                 HobbyContainer(
-  //                   text: '게임',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: 'IT',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '운동',
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-
-  /// 내 이상형을 보여줌
-  // Widget _idealType() => const SliverToBoxAdapter(
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         crossAxisAlignment: CrossAxisAlignment.start,
-  //         children: [
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-  //             child: Text('이상형'),
-  //           ),
-  //           Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //             child: Wrap(
-  //               direction: Axis.horizontal,
-  //               alignment: WrapAlignment.start,
-  //               spacing: 5,
-  //               runSpacing: 5,
-  //               children: [
-  //                 HobbyContainer(
-  //                   text: '예쁜',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '귀여운',
-  //                 ),
-  //                 HobbyContainer(
-  //                   text: '섹시한',
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
 }
