@@ -1,11 +1,9 @@
-import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/bottom_button.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class FeedWriteScreen extends StatefulWidget {
   final Feed? feed;
@@ -86,7 +84,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: ThemeColor.practice,
+          color: ThemeColor.inputTextColor,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 11.0, vertical: 17.0),
@@ -121,7 +119,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: ThemeColor.practice,
+          color: ThemeColor.inputTextColor,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 11.0, vertical: 17.0),

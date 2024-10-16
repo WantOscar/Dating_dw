@@ -21,7 +21,7 @@ class SomeoneProfileScreen extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
+      backgroundColor: ThemeColor.grayBackground,
       floatingActionButton: _fabs(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SafeArea(
@@ -58,8 +58,10 @@ class SomeoneProfileScreen extends GetView<UserController> {
         ),
       ),
       backgroundColor: Get.theme.colorScheme.secondary,
-      systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Theme.of(context).colorScheme.onSecondary),
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
       centerTitle: true,
       title: Text(
         "상대 프로필",

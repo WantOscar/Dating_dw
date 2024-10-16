@@ -23,6 +23,7 @@ class ProfileScreen extends GetView<UserController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        backgroundColor: ThemeColor.grayBackground,
         appBar: PreferredSize(
           preferredSize: AppBar().preferredSize,
           child: CammitAppBar(
