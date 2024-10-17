@@ -18,9 +18,9 @@ class ItemSelectBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondary,
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(12.0), topRight: Radius.circular(12.0))),
       child: SafeArea(
         child: Column(

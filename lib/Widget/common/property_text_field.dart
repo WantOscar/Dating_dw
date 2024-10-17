@@ -28,12 +28,11 @@ class PropertyTextField extends StatelessWidget {
           controller: controller,
           onChanged: onChanged,
           // obscureText: obscureText,
-          cursorColor: Colors.black87,
           decoration: InputDecoration(
             hintText: label,
             hintStyle: const TextStyle(fontSize: 15, color: Color(0xffafafaf)),
             border: InputBorder.none,
-            fillColor: const Color(0xffefefef),
+            fillColor: Theme.of(context).colorScheme.onTertiary,
             filled: true,
             suffixIcon: sufficIcon,
           ),

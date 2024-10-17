@@ -7,7 +7,6 @@ import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/bottom_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -323,13 +322,15 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             "나이",
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(fontSize: 14),
           ),
           SizedBox(
             width: 280,
             child: Text(
               "${controller.user!.age!}세",
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(
+                fontSize: 14,
+              ),
             ),
           ),
         ],
@@ -347,23 +348,25 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '키',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
           SizedBox(
             width: 280,
-            child: CupertinoButton(
-              minSize: 0.0,
-              padding: const EdgeInsets.all(0.0),
+            child: GestureDetector(
+              onTap: controller.updateUserHeight,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     '${controller.user!.height!} cm',
-                    style: const TextStyle(fontSize: 14, color: Colors.black87),
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
-              onPressed: () {},
             ),
           ),
         ],

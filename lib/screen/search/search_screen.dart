@@ -15,7 +15,7 @@ class SearchScreen extends GetView<FeedController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColor.grayBackground,
+      backgroundColor: Theme.of(context).colorScheme.onTertiary,
       appBar: _appBar(),
       body: Obx(() => (controller.isLoading) ? _loading() : _body()),
     );

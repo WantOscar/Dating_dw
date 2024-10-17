@@ -149,7 +149,7 @@ class OnboardingController extends GetxController with ToastMessage {
 
   /// 생년월일 중 월을 고르는 함수
   void pickBirthdayMonth() {
-    if (_year.value != 0) {
+    if (_year.value == 0) {
       return;
     }
 
@@ -241,37 +241,44 @@ class OnboardingController extends GetxController with ToastMessage {
         }
       }
     }
-
+    debugPrint(images.toString());
     if (images.length < 3) {
       showToast("최소 3개 이상 프로필을 등록해주세요!");
       return;
     }
     _isLoading(Status.loading);
     FormData data = FormData.fromMap({"file": images});
-    final urls = await userRepository.uploadImage(data);
-    if (urls.isNotEmpty) {
-      NumberFormat format = NumberFormat("00");
-      User user = User(
-          nickName: _nickName.text.toString().trim(),
-          description: _description.text.toString(),
-          birthDay:
-              "${_year.value}-${format.format(_month.value)}-${format.format(_day.value)}",
-          address: _address.value,
-          gender: _gender.value!.name,
-          age: DateTime.now().year - int.parse(_year.value.toString()) + 1,
-          height: int.parse(_height.value.toString()),
-          images: urls,
-          image: urls.first);
+    try {
+      final urls = await userRepository.uploadImage(data);
+      if (urls.isNotEmpty) {
+        NumberFormat format = NumberFormat("00");
+        User user = User(
+            nickName: _nickName.text.toString().trim(),
+            description: _description.text.toString(),
+            birthDay:
+                "${_year.value}-${format.format(_month.value)}-${format.format(_day.value)}",
+            address: _address.value,
+            gender: _gender.value!.name,
+            age: DateTime.now().year - int.parse(_year.value.toString()) + 1,
+            height: int.parse(_height.value.toString()),
+            images: urls,
+            image: urls.first);
 
-      try {
-        final response = await userRepository.updateUserInfo(user);
-        UserController.to.setMyInfo(response);
-        Get.off(() => const HomeScreen(), binding: HomeBinding());
-      } catch (e) {
-        showToast("에러가 발생했습니다. 잠시후에 다시 시도해주세요!");
-      } finally {
-        _isLoading(Status.loaded);
+        try {
+          final response = await userRepository.updateUserInfo(user);
+          UserController.to.setMyInfo(response);
+          Get.off(() => const HomeScreen(), binding: HomeBinding());
+        } catch (e) {
+          showToast("에러가 발생했습니다. 잠시후에 다시 시도해주세요!");
+        } finally {
+          _isLoading(Status.loaded);
+        }
       }
+    } on DioException catch (e) {
+      showToast(e.toString());
+      return;
+    } finally {
+      _isLoading(Status.loading);
     }
   }
 }
