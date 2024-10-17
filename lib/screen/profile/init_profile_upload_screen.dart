@@ -21,10 +21,8 @@ class InitProfileUploadScreen
         appBar: AppBar(
           leading: GestureDetector(
             onTap: Get.back,
-            child: const Icon(
-              Icons.close,
-              size: 25,
-            ),
+            child: Icon(Icons.close,
+                size: 25, color: Theme.of(context).colorScheme.onSecondary),
           ),
           title: (controller.isReady)
               ? GestureDetector(
@@ -38,15 +36,13 @@ class InitProfileUploadScreen
                     children: [
                       Text(
                         controller.albums[controller.albumIndex].name!,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
-                            color: Colors.black87),
+                            color: Theme.of(context).colorScheme.onSecondary),
                       ),
-                      const Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black87,
-                      )
+                      Icon(Icons.arrow_drop_down,
+                          color: Theme.of(context).colorScheme.onSecondary)
                     ],
                   ),
                 )
@@ -63,8 +59,6 @@ class InitProfileUploadScreen
                 ))
           ],
           centerTitle: true,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
           elevation: 0.0,
         ),
         body: (controller.isReady)
@@ -104,9 +98,7 @@ class InitProfileUploadScreen
                                     width: double.infinity,
                                     color: Colors.white.withOpacity(0.3),
                                     child: Text(
-                                      "${controller.selectImageIndex
-                                          .indexOf(index)+1}"
-                                          ,
+                                      "${controller.selectImageIndex.indexOf(index) + 1}",
                                       style: const TextStyle(
                                           fontSize: 50,
                                           color: Colors.white,

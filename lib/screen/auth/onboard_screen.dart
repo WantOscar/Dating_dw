@@ -10,8 +10,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class OnboardScreen extends GetView<OnboardingController> {
+class OnboardScreen extends StatefulWidget {
   const OnboardScreen({super.key});
+
+  @override
+  State<OnboardScreen> createState() => _OnboardScreenState();
+}
+
+class _OnboardScreenState extends State<OnboardScreen> {
+  late final OnboardingController controller;
+  @override
+  void initState() {
+    controller = OnboardingController.to;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,6 @@ class OnboardScreen extends GetView<OnboardingController> {
                             color: ThemeColor.fontColor,
                             fontSize: 20,
                             fontWeight: FontWeight.w600),
-                        backgroundColor: Colors.white,
                         elevation: 0.0,
                       ),
                       body: SingleChildScrollView(
@@ -146,9 +157,9 @@ class OnboardScreen extends GetView<OnboardingController> {
                 Text(
                   "기본정보",
                   style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff848484)),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -174,7 +185,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                           decoration: BoxDecoration(
                               color: (controller.gender == Gender.man)
                                   ? Colors.blue.withOpacity(0.5)
-                                  : const Color(0xffefefef),
+                                  : Theme.of(context).colorScheme.onTertiary,
                               borderRadius: BorderRadius.circular(8.0)),
                           child: Text(
                             "남성",
@@ -199,7 +210,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                           decoration: BoxDecoration(
                               color: (controller.gender == Gender.woman)
                                   ? Colors.red.withOpacity(0.5)
-                                  : const Color(0xffefefef),
+                                  : Theme.of(context).colorScheme.onTertiary,
                               borderRadius: BorderRadius.circular(8.0)),
                           child: Text(
                             "여성",
@@ -228,7 +239,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                         alignment: Alignment.center,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: const Color(0xffefefef),
+                          color: Get.theme.colorScheme.onTertiary,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Row(
@@ -242,7 +253,9 @@ class OnboardScreen extends GetView<OnboardingController> {
                                 style: TextStyle(
                                     color: (controller.year == 0)
                                         ? const Color(0xffafafaf)
-                                        : Colors.black87,
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .onSecondary,
                                     fontSize: 15),
                               ),
                             ),
@@ -273,7 +286,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                         alignment: Alignment.center,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: const Color(0xffefefef),
+                          color: Theme.of(context).colorScheme.onTertiary,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Row(
@@ -318,7 +331,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                         alignment: Alignment.center,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: const Color(0xffefefef),
+                          color: Theme.of(context).colorScheme.onTertiary,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Row(
@@ -363,7 +376,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: const Color(0xffefefef),
+                  color: Theme.of(context).colorScheme.onTertiary,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -376,9 +389,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                               ? "주소"
                               : controller.address,
                           style: const TextStyle(
-                            color: Color(0xffafafaf),
-                            fontSize: 15,
-                          ),
+                              fontSize: 15, color: Color(0xffafafaf)),
                         ),
                         GestureDetector(
                           onTap: controller.searchMyAddress,
@@ -402,16 +413,13 @@ class OnboardScreen extends GetView<OnboardingController> {
                 height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: const Color(0xffefefef),
+                  color: Theme.of(context).colorScheme.onTertiary,
                 ),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
                     "상세주소",
-                    style: TextStyle(
-                      color: Color(0xffafafaf),
-                      fontSize: 15,
-                    ),
+                    style: TextStyle(fontSize: 15, color: Color(0xffafafaf)),
                   ),
                 ),
               ),
@@ -430,9 +438,9 @@ class OnboardScreen extends GetView<OnboardingController> {
                 Text(
                   "선택정보",
                   style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xff848484)),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
@@ -448,7 +456,7 @@ class OnboardScreen extends GetView<OnboardingController> {
               child: Container(
                 height: 50,
                 decoration: BoxDecoration(
-                  color: const Color(0xffefefef),
+                  color: Theme.of(context).colorScheme.onTertiary,
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Padding(
@@ -464,7 +472,7 @@ class OnboardScreen extends GetView<OnboardingController> {
                           style: TextStyle(
                             color: (controller.height == "")
                                 ? const Color(0xffafafaf)
-                                : Colors.black87,
+                                : Theme.of(context).colorScheme.onSecondary,
                             fontSize: 15,
                           ),
                         ),
