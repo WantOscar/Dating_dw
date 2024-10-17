@@ -56,7 +56,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
                     left: 33.0, right: 33.0, top: 30, bottom: 10),
                 child: Text(
                   '제목',
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 15),
                 ),
               ),
               _titleWrite(),
@@ -65,7 +65,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
                     left: 33.0, right: 33.0, top: 30, bottom: 10),
                 child: Text(
                   '당신의 이야기를 공유해보세요',
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 15),
                 ),
               ),
               _sub(),
@@ -96,7 +96,8 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
             style: const TextStyle(color: Colors.black),
             decoration: const InputDecoration(
               hintText: '제목을 작성해주세요.',
-              hintStyle: TextStyle(fontSize: 12),
+              hintStyle: TextStyle(fontSize: 15.0),
+              isDense: true,
               border: InputBorder.none,
               counterText: '',
             ),
@@ -133,7 +134,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
             keyboardType: TextInputType.multiline,
             decoration: const InputDecoration(
               hintText: '글을 작성해주세요.',
-              hintStyle: TextStyle(fontSize: 12),
+              hintStyle: TextStyle(fontSize: 15.0),
               border: InputBorder.none,
               counterText: '',
             ),
