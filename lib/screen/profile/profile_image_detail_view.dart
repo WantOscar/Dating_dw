@@ -7,11 +7,16 @@ class ProfileImageDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: AspectRatio(
-      aspectRatio: 1.0,
-      child: SizedBox(
-          width: double.infinity, child: CachedNetworkImage(imageUrl: path)),
-    ));
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+      ),
+      body: Center(
+          child: AspectRatio(
+        aspectRatio: 1.0,
+        child: SizedBox(
+            width: double.infinity, child: CachedNetworkImage(imageUrl: path)),
+      )),
+    );
   }
 }
