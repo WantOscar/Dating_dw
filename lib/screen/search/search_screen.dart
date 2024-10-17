@@ -1,4 +1,3 @@
-import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/image_data.dart';
 import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';

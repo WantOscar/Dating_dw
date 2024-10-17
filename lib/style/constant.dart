@@ -15,4 +15,5 @@ class ThemeColor {
   static Color get textfieldText => const Color(0xffafafaf);
   static Color get inputTextColor => const Color(0xffEDEDED);
   static Color get grayBackground => const Color(0xffF4F4F4);
+  static Color get warningText => const Color(0xffF0F0F0);
 }
