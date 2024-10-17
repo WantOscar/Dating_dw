@@ -88,7 +88,7 @@ class TodayFriendsProfile extends StatelessWidget {
         children: [
           ChatSendButtom(
             onPressed: () {
-              ChatController.to.makeChattingRoom(user, "dm");
+              ChatController.to.makeChattingRoom(user, ChatType.dm);
             },
           ),
           FavoriteButton(onTap: () {
