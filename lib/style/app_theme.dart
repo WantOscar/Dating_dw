@@ -11,7 +11,7 @@ ThemeData get lightTheme => ThemeData(
         secondary: Color(0xffffffff),
         tertiary: Color(0xffededed),
         onSecondary: Color(0xff000000),
-        onTertiary: Color(0xffefefef)));
+        onTertiary: Color(0xfff4f4f4)));
 
 ThemeData get darkTheme => ThemeData(
     useMaterial3: false,
