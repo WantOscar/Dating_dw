@@ -1,3 +1,7 @@
+import 'package:dating/binding/chat_room_controller_binding.dart';
+import 'package:dating/controller/chatting_room_controller.dart';
+import 'package:dating/data/model/user.dart';
+import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:dating/widget/chat/chatting_box.dart';
 import 'package:dating/controller/chat_controller.dart';
 import 'package:flutter/material.dart';
@@ -18,28 +22,28 @@ class MeetingChatScreen extends StatelessWidget {
             ),
             GetX<ChatController>(builder: (controller) {
               return Column(
-                children: List.generate(
-                  controller.meetingChattings.length,
-                  (index) => Padding(
+                children:
+                    List.generate(controller.meetingChattings.length, (index) {
+                  final chat = controller.meetingChattings[index];
+                  return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: GestureDetector(
                       child: ChattingBox(
                         chat: controller.meetingChattings[index],
                       ),
-                      // onTap: () {
-                      //   Get.to(
-                      //       () => ChattingRoom(
-                      //             target:
-                      //                 controller.chattings[index].,
-                      //           ), binding: BindingsBuilder(() {
-                      //     Get.put(ChattingRoomController(
-                      //         chatRoomId: controller.chattings[index].id,
-                      //         targetName: controller.chattings[index].name));
-                      //   }));
-                      // },
+                      onTap: () {
+                        final User user =
+                            User(nickName: chat.name, image: chat.image);
+                        Get.to(
+                            () => ChattingRoom(
+                                  target: user,
+                                ),
+                            binding: ChatRoomControllerBinding(
+                                chat: chat, targetName: user.nickName!));
+                      },
                     ),
-                  ),
-                ),
+                  );
+                }),
               );
             }),
             const SizedBox(height: 100),

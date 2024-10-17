@@ -37,7 +37,8 @@ class InitProfileUploadScreenController extends GetxController {
   }
 
   void _getAlbums() async {
-    final assets = await PhotoManager.getAssetPathList(type: RequestType.image);
+    final assets =
+        await PhotoManager.getAssetPathList(type: RequestType.common);
     if (assets.isNotEmpty) {
       final List<Album> albums = [];
       for (AssetPathEntity asset in assets) {
