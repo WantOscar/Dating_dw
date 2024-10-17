@@ -37,8 +37,8 @@ class HomeScreen extends GetView<BottomNavController> {
             topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
         child: BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: 20.0,
-            sigmaY: 20.0,
+            sigmaX: 10.0,
+            sigmaY: 10.0,
           ),
           child: BottomNavigationBar(
             items: [
