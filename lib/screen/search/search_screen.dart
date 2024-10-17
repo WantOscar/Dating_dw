@@ -1,3 +1,4 @@
+import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/image_data.dart';
 import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/feed_controller.dart';
@@ -14,7 +15,7 @@ class SearchScreen extends GetView<FeedController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onTertiary,
+      backgroundColor: ThemeColor.grayBackground,
       appBar: _appBar(),
       body: Obx(() => (controller.isLoading) ? _loading() : _body()),
     );

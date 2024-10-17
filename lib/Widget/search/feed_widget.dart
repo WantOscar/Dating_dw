@@ -15,31 +15,34 @@ class FeedWidget extends GetView<MainController> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(24.0),
-      highlightColor: Theme.of(context).colorScheme.primaryContainer,
-      onTap: () {
-        _showApply(context);
-      },
-      child: Ink(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
-          borderRadius: BorderRadius.circular(24.0),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            _profile(horizontal: 10.0, vertical: 15.0),
-            _title(),
-          ],
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24.0),
+        highlightColor: Theme.of(context).colorScheme.primaryContainer,
+        onTap: () {
+          _showApply(context);
+        },
+        child: Ink(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            borderRadius: BorderRadius.circular(24.0),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              _profile(horizontal: 10.0, vertical: 15.0),
+              _title(),
+            ],
+          ),
         ),
       ),
     );
