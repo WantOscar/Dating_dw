@@ -1,3 +1,4 @@
+import 'package:dating/Widget/common/cammit_app_bar.dart';
 import 'package:dating/Widget/profile/user_profile_widget.dart';
 import 'package:dating/Widget/search/feed_widget.dart';
 import 'package:dating/controller/chat_controller.dart';
@@ -11,7 +12,6 @@ import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/chat_send_button.dart';
 import 'package:dating/widget/common/favorite_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class SomeoneProfileScreen extends GetView<UserController> {
@@ -21,127 +21,103 @@ class SomeoneProfileScreen extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
+      backgroundColor: ThemeColor.grayBackground,
       floatingActionButton: _fabs(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            _appbar(context),
-            _profile(),
-            // _personality(),
-            // _interesting(),
-            // _idealType(),
-            // _storyHeader(),
-            // _story(),
-            Obx(() => (!controller.isLoading) ? _loading() : _otherFeed()),
+      appBar: PreferredSize(
+        preferredSize: AppBar().preferredSize,
+        child: CammitAppBar(
+          backAction: () => Get.back(),
+          title: "상대 프로필",
+          centerTitle: true,
+          showCloseButton: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                /// 우측 상단 ... 아이콘 누르면 바텀에서 차단/취소 여부 시트가 나옴
+                showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Wrap(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(3.0),
+                          margin: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    await MemberBlockController.to
+                                        .memberBlock(user.id!);
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(10.0),
+                                    width: double.infinity,
+                                    child: Text(
+                                      '차단',
+                                      style: TextStyle(
+                                        color: ThemeColor.fontColor,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: Divider(),
+                                ),
+                                InkWell(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const Text(
+                                      '취소',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                  backgroundColor: Colors.transparent,
+                );
+              },
+              icon: IconShape.iconMore,
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  /// 커스텀 앱바를 제작
-  /// 앱바 우측 아이콘을 누르면
-  /// 사용자는 상대방을 차단/취소 가능.
-  Widget _appbar(context) {
-    return SliverAppBar(
-      elevation: 0.0,
-      floating: true,
-      leading: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: IconButton(
-          icon: IconShape.iconClose,
-          onPressed: () {
-            Get.back();
-          },
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            _profile(),
+            Obx(() => (!controller.isLoading) ? _loading() : _otherFeed()),
+            const SliverToBoxAdapter(
+              child: SizedBox(height: 100),
+            ),
+          ],
         ),
       ),
-      backgroundColor: Get.theme.colorScheme.secondary,
-      systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: Theme.of(context).colorScheme.onSecondary),
-      centerTitle: true,
-      title: Text(
-        "상대 프로필",
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-          color: ThemeColor.fontColor,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {
-            /// 우측 상단 ... 아이콘 누르면 바텀에서 차단/취소 여부 시트가 나옴
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return Wrap(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(3.0),
-                      margin: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                await MemberBlockController.to
-                                    .memberBlock(user.id!);
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.all(10.0),
-                                width: double.infinity,
-                                child: Text(
-                                  '차단',
-                                  style: TextStyle(
-                                    color: ThemeColor.fontColor,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Divider(),
-                            ),
-                            InkWell(
-                              child: Container(
-                                alignment: Alignment.center,
-                                padding: const EdgeInsets.all(10.0),
-                                child: const Text(
-                                  '취소',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              onTap: () {
-                                Get.back();
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-              backgroundColor: Colors.transparent,
-            );
-          },
-          icon: IconShape.iconMore,
-        ),
-      ],
     );
   }
 
