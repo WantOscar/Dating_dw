@@ -7,6 +7,7 @@ import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/profile/profile_edit_screen.dart';
+import 'package:dating/screen/profile/profile_image_detail_view.dart';
 import 'package:dating/screen/profile/setting_account_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/utils/api_urls.dart';

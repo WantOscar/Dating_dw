@@ -28,7 +28,6 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       actions: actions,
       toolbarHeight: _headerHeight,
-      backgroundColor: Colors.white,
     );
   }
 

@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dating/data/model/user.dart';
+import 'package:dating/screen/profile/profile_image_detail_view.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class UserProfileWidget extends StatefulWidget {
@@ -54,14 +56,19 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
   Widget _profileImages() => CarouselSlider.builder(
         itemCount: widget.user.images!.length,
         itemBuilder: (context, index, realIndex) {
-          return AspectRatio(
-              aspectRatio: 1.1,
-              child: Container(
-                color: Colors.grey,
-                child: CachedNetworkImage(
-                  imageUrl: widget.user.images![index],
-                ),
-              ));
+          return GestureDetector(
+            onTap: () => Get.to(
+                () => ProfileImageDetailView(path: widget.user.images![index]),
+                transition: Transition.fade),
+            child: AspectRatio(
+                aspectRatio: 1.1,
+                child: Container(
+                  color: Colors.grey,
+                  child: CachedNetworkImage(
+                    imageUrl: widget.user.images![index],
+                  ),
+                )),
+          );
         },
         options: CarouselOptions(
           enableInfiniteScroll: false,
