@@ -112,6 +112,9 @@ class SomeoneProfileScreen extends GetView<UserController> {
           slivers: [
             _profile(),
             Obx(() => (!controller.isLoading) ? _loading() : _otherFeed()),
+            const SliverToBoxAdapter(
+              child: SizedBox(height: 100),
+            ),
           ],
         ),
       ),

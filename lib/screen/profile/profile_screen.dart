@@ -51,71 +51,11 @@ class ProfileScreen extends GetView<UserController> {
             physics: const BouncingScrollPhysics(),
             slivers: [
               _profile(),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 23.0),
-                sliver: SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 23),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 7.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              '내가 쓴 피드',
-                              style: TextStyle(
-                                fontSize: 19,
-                                fontWeight: FontWeight.w600,
-                                color: ThemeColor.fontColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 7.0),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 16.0, vertical: 6.0),
-                                  child: Text(
-                                    '게시물',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(
-                                textAlign: TextAlign.center,
-                                '${FeedController.to.historys.length}개',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 13,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              _myFeedList(),
               Obx(() => (!controller.isLoading) ? _loading() : _myFeed()),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 100),
+              ),
             ],
           ),
         ),
@@ -162,6 +102,72 @@ class ProfileScreen extends GetView<UserController> {
           ),
         ),
       );
+
+  Widget _myFeedList() {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 23.0),
+      sliver: SliverToBoxAdapter(
+        child: Column(
+          children: [
+            const SizedBox(height: 23),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 7.0),
+              child: Row(
+                children: [
+                  Text(
+                    '내가 쓴 피드',
+                    style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.w600,
+                      color: ThemeColor.fontColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 7.0),
+              child: Row(
+                children: [
+                  SizedBox(
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 6.0),
+                        child: Text(
+                          '게시물',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      '${FeedController.to.historys.length}개',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _loading() => const SliverToBoxAdapter(
         child: Center(
