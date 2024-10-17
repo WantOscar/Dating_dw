@@ -217,7 +217,8 @@ class FeedWidget extends GetView<MainController> {
                     ),
                   ),
                   onPressed: () {
-                    ChatController.to.makeChattingRoom(feed!.user!, "meeting");
+                    ChatController.to
+                        .makeChattingRoom(feed!.user!, ChatType.meeting);
                   },
                   child: const Text(
                     '참여하기',

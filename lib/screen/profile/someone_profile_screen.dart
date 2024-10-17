@@ -21,7 +21,6 @@ class SomeoneProfileScreen extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeColor.grayBackground,
       floatingActionButton: _fabs(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: PreferredSize(
@@ -139,7 +138,7 @@ class SomeoneProfileScreen extends GetView<UserController> {
                 padding: const EdgeInsets.all(8.0),
                 child: ChatSendButtom(
                   onPressed: () {
-                    ChatController.to.makeChattingRoom(user, "dm");
+                    ChatController.to.makeChattingRoom(user, ChatType.dm);
                   },
                 ),
               ),

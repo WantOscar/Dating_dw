@@ -83,9 +83,9 @@ class ChatController extends GetxController
     _personalChattings.refresh();
   }
 
-  void makeChattingRoom(User target, String type) async {
+  void makeChattingRoom(User target, ChatType type) async {
     try {
-      final chatRoomId = await service.makeChattingRoom(target.id!, type);
+      final chatRoomId = await service.makeChattingRoom(target.id!, type.name);
       final ChattingRoomModel chat = ChattingRoomModel(
           id: chatRoomId,
           isRead: true,
@@ -94,6 +94,13 @@ class ChatController extends GetxController
           lastMessage: "",
           time: DateTime.now().toIso8601String());
       _personalChattings.value.add(chat);
+      if (type == ChatType.dm) {
+        _personalChattings.value.add(chat);
+        _personalChattings.refresh();
+      } else if (type == ChatType.meeting) {
+        _meetingChattings.value.add(chat);
+        _meetingChattings.refresh();
+      }
       Get.to(
           () => ChattingRoom(
                 target: target,
