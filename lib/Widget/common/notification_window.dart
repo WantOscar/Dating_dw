@@ -32,7 +32,6 @@ class NotificationWindow extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(18.0),
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.circular(24.0),
         ),
         child: Column(
@@ -65,7 +64,7 @@ class NotificationWindow extends StatelessWidget {
         child: Text(
           content,
           textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 12, color: Colors.black54),
+          style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
         ),
       );
 
@@ -74,7 +73,7 @@ class NotificationWindow extends StatelessWidget {
       ? _basicButton(
           onTap: onConfirm,
           buttonColor: ThemeColor.fontColor,
-          label: "확인",
+          label: confirmLabel!,
           fontColor: Colors.white)
       : Container();
 
@@ -82,17 +81,16 @@ class NotificationWindow extends StatelessWidget {
   Widget _cancelButton() => (cancelLabel != null)
       ? _basicButton(
           onTap: onCancel,
-          buttonColor: const Color(0xffefefef),
-          label: "취소",
-          fontColor: const Color(0xffafafaf))
+          label: cancelLabel!,
+        )
       : Container();
 
   /// 다이얼로그에서 사용하는 확인 및 취소 버튼의 기본 외형
   /// 외부에서 색상과 레이블, 함수만 받아서 랜더링함.
   Widget _basicButton({
-    required Color buttonColor,
+    Color? buttonColor,
+    Color? fontColor,
     required String label,
-    required Color fontColor,
     required void Function()? onTap,
   }) =>
       GestureDetector(

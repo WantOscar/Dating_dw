@@ -1,19 +1,22 @@
-import 'package:dating/widget/common/bottom_apply_bar.dart';
+import 'package:dating/widget/common/bottom_button.dart';
+import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:dating/widget/common/icon_header.dart';
-import 'package:dating/widget/common/property_text_field.dart';
 import 'package:dating/controller/setting_password_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AccountInformationScreen extends GetView<SettingPasswordController> {
-  const AccountInformationScreen({super.key});
+class ChangePasswordScreen extends GetView<SettingPasswordController> {
+  const ChangePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
       child: Scaffold(
-        appBar: const IconHeader(text: '비밀번호 변경'),
+        appBar: IconHeader(
+          text: '비밀번호 변경',
+          backAction: Get.back,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -34,9 +37,16 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomApplyBar(
-          text: '확인',
-          onTap: controller.completeChangePw,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+          child: BottomButton(
+            onTap: controller.completeChangePw,
+            child: const Text("확인",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600)),
+          ),
         ),
       ),
     );
@@ -54,19 +64,18 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
             '현재 비밀번호 입력',
             style: TextStyle(
               fontSize: 15,
-              color: Colors.black87,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-          child: PropertyTextField(
-            // obscureText: !controller.isTextVisible,
+          child: CammitTextField(
+            obscureText: !controller.isTextVisible,
             controller: controller.currentPassword,
             onChanged: controller.setCurrentPw,
-            label: "현재 비밀번호",
-            sufficIcon: IconButton(
+            hintText: "현재 비밀번호",
+            suffixIcon: IconButton(
               onPressed: controller.toggleTextVisibility,
               icon: Icon(controller.isTextVisible
                   ? Icons.visibility
@@ -91,19 +100,18 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
             '변경할 비밀번호 입력',
             style: TextStyle(
               fontSize: 15,
-              color: Colors.black87,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-          child: PropertyTextField(
+          child: CammitTextField(
             // obscureText: !controller.isTextVisible,
             controller: controller.newPassword,
             onChanged: controller.setNewPw,
-            label: "현재 비밀번호",
-            sufficIcon: IconButton(
+            hintText: "현재 비밀번호",
+            suffixIcon: IconButton(
               onPressed: controller.toggleTextVisibility,
               icon: Icon(controller.isTextVisible
                   ? Icons.visibility
@@ -128,19 +136,18 @@ class AccountInformationScreen extends GetView<SettingPasswordController> {
             '변경된 비밀번호 입력',
             style: TextStyle(
               fontSize: 15,
-              color: Colors.black87,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-          child: PropertyTextField(
+          child: CammitTextField(
             // obscureText: !controller.isTextVisible,
             controller: controller.checkNewPassword,
             onChanged: controller.setCheckNewPw,
-            label: "현재 비밀번호",
-            sufficIcon: IconButton(
+            hintText: "현재 비밀번호",
+            suffixIcon: IconButton(
               onPressed: controller.toggleTextVisibility,
               icon: Icon(controller.isTextVisible
                   ? Icons.visibility

@@ -19,8 +19,6 @@ class InitProfileAlbumChangeScreen
             size: 25,
           ),
         ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
         elevation: 0.0,
       ),
       body: _body(),
@@ -42,15 +40,24 @@ class InitProfileAlbumChangeScreen
                 },
                 child: Row(
                   children: [
-                    // Text(album.images!.first.toString()),
-                    SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: AssetEntityImage(
-                        album.images!.first,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                    (album.images!.isNotEmpty)
+                        ? SizedBox(
+                            width: 100,
+                            height: 100,
+                            child: AssetEntityImage(
+                              album.images!.first,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : Container(
+                            width: 100,
+                            height: 100,
+                            color: Colors.grey,
+                            child: const Icon(
+                              Icons.broken_image,
+                              color: Colors.white,
+                            ),
+                          ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -58,13 +65,13 @@ class InitProfileAlbumChangeScreen
                         children: [
                           Text(
                             album.name.toString(),
-                            style: const TextStyle(
-                                fontSize: 15, color: Colors.black),
+                            style: const TextStyle(fontSize: 15),
                           ),
                           Text(
                             album.images!.length.toString(),
                             style: const TextStyle(
-                                fontSize: 15, color: Colors.black),
+                              fontSize: 15,
+                            ),
                           )
                         ],
                       ),

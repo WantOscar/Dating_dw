@@ -1,7 +1,7 @@
 import 'package:dating/controller/setting_controller.dart';
 import 'package:dating/controller/setting_password_controller.dart';
 import 'package:dating/data/repository/user_repository.dart';
-import 'package:dating/screen/profile/account_information_screen.dart';
+import 'package:dating/screen/profile/change_password_screen.dart';
 import 'package:dating/screen/profile/blocked_account_screen.dart';
 import 'package:dating/screen/profile/setting_profile_row.dart';
 import 'package:dating/utils/api_urls.dart';
@@ -51,7 +51,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
         child: SettingProfileRow(
           label: "계정 확인 및 비밀번호 변경",
           onTap: () {
-            Get.to(() => const AccountInformationScreen(),
+            Get.to(() => const ChangePasswordScreen(),
                 binding: BindingsBuilder(() {
               Get.put(SettingPasswordController(
                   userRepository: UserRepositoryImpl(
@@ -81,7 +81,7 @@ class _SettingAccountScreenState extends State<SettingAccountScreen> {
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         child: SettingProfileRow(
           label: "차단된 계정",
-          onTap: () => Get.to(const BlockedAccountScreen()),
+          onTap: () => Get.to(() => const BlockedAccountScreen()),
         ));
   }
 

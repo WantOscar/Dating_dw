@@ -16,7 +16,7 @@ class BaseIntercepter extends Interceptor with ToastMessage {
     debugPrint("[ERROR OCCURED][$errorMessage]");
     switch (err.type) {
       case DioExceptionType.badResponse:
-        throw errorMessage ?? "에러가 발생했습니다!";
+        throw errorMessage["message"] ?? "에러가 발생했습니다!";
       case DioExceptionType.cancel:
         throw "요청이 취소되었습니다.";
       case DioExceptionType.connectionError:

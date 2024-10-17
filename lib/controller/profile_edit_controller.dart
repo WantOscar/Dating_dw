@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/data/repository/user_repository.dart';
-import 'package:dating/widget/common/warning_window.dart';
+import 'package:dating/widget/common/notification_window.dart';
+import 'package:dating/widget/profile/item_select_bottom_sheet.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_instance/get_instance.dart';
@@ -49,13 +50,15 @@ class ProfileEditController extends GetxController {
 
   /// 뒤로 이동하는 함수
   void back() {
-    Get.dialog(WarningWindow(
-      titleText: '프로필 수정 취소',
-      explainText: '현재 변경사항을 모두 취소하고 돌아가시겠습니까?',
-      onTap: () {
+    Get.dialog(NotificationWindow(
+      title: '프로필 수정 취소',
+      content: '현재 변경사항을 모두 취소하고 돌아가시겠습니까?',
+      onConfirm: () {
         Get.until((route) => Get.currentRoute == "/HomeScreen");
       },
-      btnText: "수정취소",
+      confirmLabel: "수정취소",
+      onCancel: Get.back,
+      cancelLabel: "취소",
     ));
   }
 
@@ -82,6 +85,20 @@ class ProfileEditController extends GetxController {
     _files.add(image);
     _user.value!.images!.add(image);
     _user.refresh();
+  }
+
+  void updateUserHeight() {
+    var heightIndex = 0;
+    Get.bottomSheet(ItemSelectBottomSheet(
+      items: List.generate(60, (index) => "${index + 140}cm"),
+      onSelectedItemChanged: (value) {
+        heightIndex = value;
+      },
+      onDone: () {
+        _user.value!.height = heightIndex;
+        Get.back();
+      },
+    ));
   }
 
   void updateUserInfo() async {

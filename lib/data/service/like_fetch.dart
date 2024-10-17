@@ -7,7 +7,7 @@ class LikeFetch {
   LikeFetch({required this.dio});
 
   Future<List<Like>> getLike() {
-    return dio.request(ApiUrl.main).then((resp) {
+    return dio.request('/').then((resp) {
       if (resp.statusCode == 200) {
         final List<Like> likes = [];
         for (Map<String, dynamic> data in resp.data) {

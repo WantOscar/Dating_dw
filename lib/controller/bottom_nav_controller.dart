@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:dating/controller/feed_controller.dart';
+import 'package:dating/controller/user_controller.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/notification_window.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +17,10 @@ class BottomNavController extends GetxController {
   void changeIndex(int value) {
     final page = PageName.values[value];
     switch (page) {
+      case PageName.profile:
+        FeedController.to.fetchMyFeeds(UserController.to.myInfo!);
       case PageName.main:
       case PageName.chat:
-      case PageName.alarm:
-      case PageName.profile:
       case PageName.search:
     }
     _moveToPage(value);

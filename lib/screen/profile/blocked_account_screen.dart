@@ -11,7 +11,10 @@ class BlockedAccountScreen extends GetView<MemberBlockController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const IconHeader(text: '차단된 계정'),
+      appBar: IconHeader(
+        text: '차단된 계정',
+        backAction: Get.back,
+      ),
       body: Obx(() => (controller.isLoading == Status.loading)
           ? const Center(
               child: CircularProgressIndicator.adaptive(),

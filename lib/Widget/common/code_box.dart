@@ -15,11 +15,12 @@ class CodeBox extends StatelessWidget {
           border: Border(
               bottom: BorderSide(
                   width: 2.0,
-                  color: (value == "") ? Colors.black : ThemeColor.fontColor))),
+                  color: (value == "")
+                      ? Theme.of(context).colorScheme.onSecondary
+                      : ThemeColor.fontColor))),
       child: Text(
         value,
-        style: const TextStyle(
-            fontSize: 30, fontWeight: FontWeight.w700, color: Colors.black),
+        style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
       ),
     );
   }

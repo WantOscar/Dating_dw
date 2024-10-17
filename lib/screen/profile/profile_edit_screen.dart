@@ -1,5 +1,4 @@
 import 'package:dating/widget/common/cammit_app_bar.dart';
-import 'package:dating/widget/profile/hobby_container.dart';
 import 'package:dating/widget/profile/profile_image.dart';
 import 'package:dating/controller/profile_edit_controller.dart';
 import 'package:dating/controller/profile_image_controller.dart';
@@ -8,10 +7,6 @@ import 'package:dating/screen/profile/upload_screen.dart';
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:dating/widget/common/bottom_button.dart';
-import 'package:dating/widget/profile/ideal_type.dart';
-import 'package:dating/widget/profile/interest.dart';
-import 'package:dating/widget/profile/personality.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -65,50 +60,50 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               const SizedBox(height: 20),
 
               /// 내 인적사항
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
-                    child: Text('인적사항'),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Wrap(
-                      direction: Axis.horizontal,
-                      alignment: WrapAlignment.start,
-                      spacing: 5,
-                      runSpacing: 5,
-                      children: [
-                        HobbyContainer(
-                          text: '일반대',
-                        ),
-                        HobbyContainer(
-                          text: '학생',
-                        ),
-                        HobbyContainer(
-                          text: 'ESTP',
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 7),
+              // const Column(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     Padding(
+              //       padding:
+              //           EdgeInsets.symmetric(vertical: 10, horizontal: 20.0),
+              //       child: Text('인적사항'),
+              //     ),
+              //     Padding(
+              //       padding: EdgeInsets.symmetric(horizontal: 20.0),
+              //       child: Wrap(
+              //         direction: Axis.horizontal,
+              //         alignment: WrapAlignment.start,
+              //         spacing: 5,
+              //         runSpacing: 5,
+              //         children: [
+              //           HobbyContainer(
+              //             text: '일반대',
+              //           ),
+              //           HobbyContainer(
+              //             text: '학생',
+              //           ),
+              //           HobbyContainer(
+              //             text: 'ESTP',
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(height: 7),
 
               /// 내 성격
-              const Personality(),
-              const SizedBox(height: 7),
+              // const Personality(),
+              // const SizedBox(height: 7),
 
               /// 내 이상형
-              const IdealType(),
-              const SizedBox(height: 7),
+              // const IdealType(),
+              // const SizedBox(height: 7),
 
               /// 내 관심사
-              const Interest(),
-              const SizedBox(height: 100),
+              // const Interest(),
+              // const SizedBox(height: 100),
               _completeButton(),
             ],
           ),
@@ -172,13 +167,17 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '닉네임',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
           SizedBox(
             width: 280,
             child: Text(
               controller.user!.nickName!,
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(
+                fontSize: 14,
+              ),
             ),
           ),
         ],
@@ -197,13 +196,14 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '한줄 소개',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
           Container(
             height: 40,
             width: 280,
             decoration: BoxDecoration(
-              color: ThemeColor.textfieldFill,
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: Padding(
@@ -216,15 +216,13 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
                   style: const TextStyle(
                     decorationThickness: 0,
                     fontSize: 14,
-                    color: Colors.black87,
                     fontWeight: FontWeight.w400,
                   ),
                   decoration: InputDecoration(
                     counterText: "",
                     hintText: controller.user!.description ?? "한줄 소개를 입력해주세요.",
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       fontSize: 14,
-                      color: ThemeColor.textfieldText,
                       fontWeight: FontWeight.w400,
                     ),
                     border: InputBorder.none,
@@ -249,13 +247,13 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '성별',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(fontSize: 14),
           ),
           SizedBox(
             width: 280,
             child: Text(
               controller.user!.gender! == "woman" ? "여자" : "남자",
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(fontSize: 14),
             ),
           ),
         ],
@@ -273,7 +271,9 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '주소',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
           GestureDetector(
             onTap: controller.searchMyAddress,
@@ -281,7 +281,6 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
               height: 40,
               width: 280,
               decoration: BoxDecoration(
-                color: ThemeColor.textfieldFill,
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: Padding(
@@ -323,13 +322,15 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             "나이",
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(fontSize: 14),
           ),
           SizedBox(
             width: 280,
             child: Text(
               "${controller.user!.age!}세",
-              style: const TextStyle(fontSize: 14, color: Colors.black87),
+              style: const TextStyle(
+                fontSize: 14,
+              ),
             ),
           ),
         ],
@@ -347,23 +348,25 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
         children: [
           const Text(
             '키',
-            style: TextStyle(fontSize: 14, color: Colors.black87),
+            style: TextStyle(
+              fontSize: 14,
+            ),
           ),
           SizedBox(
             width: 280,
-            child: CupertinoButton(
-              minSize: 0.0,
-              padding: const EdgeInsets.all(0.0),
+            child: GestureDetector(
+              onTap: controller.updateUserHeight,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     '${controller.user!.height!} cm',
-                    style: const TextStyle(fontSize: 14, color: Colors.black87),
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
-              onPressed: () {},
             ),
           ),
         ],

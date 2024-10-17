@@ -1,7 +1,6 @@
 import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/controller/user_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/image_avatar.dart';
 import 'package:flutter/material.dart';
 
@@ -91,17 +90,22 @@ class _ChatBubbleState extends State<ChatBubble> {
       alignment: Alignment.center,
       height: MediaQuery.of(context).size.height * 0.055,
       decoration: BoxDecoration(
-        color: (isMe) ? ThemeColor.fontColor : const Color(0xFFF0F0F0),
+        color: (isMe)
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.only(
-          topLeft: (isMe) ? const Radius.circular(24) : Radius.zero,
-          topRight: (isMe) ? Radius.zero : const Radius.circular(24),
-          bottomLeft: const Radius.circular(24),
-          bottomRight: const Radius.circular(24),
+          bottomLeft: (isMe) ? const Radius.circular(12) : Radius.zero,
+          bottomRight: (isMe) ? Radius.zero : const Radius.circular(12),
+          topLeft: const Radius.circular(12),
+          topRight: const Radius.circular(12),
         ),
       ),
       child: Text(
         widget.message.message!,
-        style: TextStyle(color: (isMe) ? Colors.white : Colors.black),
+        style: TextStyle(
+            color: (isMe)
+                ? Colors.white
+                : Theme.of(context).colorScheme.onSecondary),
       ),
     );
   }

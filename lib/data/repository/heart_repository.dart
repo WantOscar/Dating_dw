@@ -11,8 +11,7 @@ class HeartRepository implements HeartRepositoryImpl {
 
   @override
   Future<void> heartAdd(int id) async {
-    final response =
-        await dio.post(ApiUrl.heartAdd, queryParameters: {"id": id});
+    final response = await dio.post("/heart/add", queryParameters: {"id": id});
     if (response.statusCode != 200) {
       throw Exception();
     }

@@ -1,11 +1,11 @@
 import 'package:dating/style/constant.dart';
 import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class IconHeader extends StatelessWidget implements PreferredSizeWidget {
-  const IconHeader({super.key, required this.text, this.actions});
-
+  const IconHeader(
+      {super.key, required this.text, this.actions, this.backAction});
+  final void Function()? backAction;
   final double _headerHeight = 65;
   final String text;
   final List<Widget>? actions;
@@ -15,12 +15,7 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: IconButton(
-          icon: IconShape.iconClose,
-          onPressed: () {
-            Get.back();
-          },
-        ),
+        child: IconButton(icon: IconShape.iconClose, onPressed: backAction),
       ),
       title: Text(
         text,
@@ -30,10 +25,10 @@ class IconHeader extends StatelessWidget implements PreferredSizeWidget {
             color: ThemeColor.fontColor),
       ),
       centerTitle: true,
-      backgroundColor: Colors.white,
       elevation: 0,
       actions: actions,
       toolbarHeight: _headerHeight,
+      backgroundColor: Colors.white,
     );
   }
 

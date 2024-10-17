@@ -1,3 +1,4 @@
+import 'package:dating/controller/chat_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +25,6 @@ class FirebaseApi {
     debugPrint('User granted permission: ${settings.authorizationStatus}');
 
     final fcmToken = await _firebaseMessaging.getToken();
-
-    FirebaseMessaging.instance.onTokenRefresh.listen((fcmToken) {
-      debugPrint(fcmToken);
-    }).onError((err) {
-      // Error getting token.
-    });
 
     debugPrint("token : $fcmToken");
 
@@ -61,7 +56,12 @@ class FirebaseApi {
       RemoteNotification? notification = message.notification;
 
       if (notification != null) {
-        debugPrint(notification.body);
+        debugPrint("title : {notification.title}");
+        debugPrint("content: ${notification.body}");
+        debugPrint("room ID: ${message.data["chatRoomNo"]}");
+        ChatController.to.updateLastMessage(
+            int.parse(message.data["chatRoomNo"]), notification.body!);
+
         showNotification(notification);
       }
     });
@@ -74,10 +74,11 @@ class FirebaseApi {
         notification.body,
         const NotificationDetails(
           android: AndroidNotificationDetails(
-              "high_importance_channel", "High Importance Notifications",
-              playSound: true,
-              importance: Importance.max,
-              sound: RawResourceAndroidNotificationSound('notification')),
+            "high_importance_channel",
+            "High Importance Notifications",
+            playSound: true,
+            importance: Importance.max,
+          ),
         ));
   }
 }

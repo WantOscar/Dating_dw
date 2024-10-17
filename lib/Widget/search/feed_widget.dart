@@ -1,46 +1,48 @@
+import 'package:dating/controller/main_controller.dart';
+import 'package:dating/controller/chat_controller.dart';
+import 'package:dating/controller/user_controller.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dating/data/model/feed.dart';
 import 'package:dating/style/constant.dart';
-import 'package:dating/style/icon_shape.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
-class FeedWidget extends StatefulWidget {
-  final Feed feed;
-  const FeedWidget({super.key, required this.feed});
+class FeedWidget extends GetView<MainController> {
+  final Feed? feed;
+  final void Function() onTap;
+  const FeedWidget({super.key, required this.feed, required this.onTap});
 
-  @override
-  State<FeedWidget> createState() => _FeedWidgetState();
-}
-
-class _FeedWidgetState extends State<FeedWidget> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(24.0),
-      highlightColor: const Color(0xffffe6f0),
-      onTap: () {
-        _showApply();
-      },
-      child: Ink(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 6), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            _profile(),
-            _title(),
-          ],
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24.0),
+        highlightColor: Theme.of(context).colorScheme.primaryContainer,
+        onTap: () {
+          _showApply(context);
+        },
+        child: Ink(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.secondary,
+            borderRadius: BorderRadius.circular(24.0),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.secondary.withOpacity(0.2),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              _profile(horizontal: 10.0, vertical: 15.0),
+              _title(),
+            ],
+          ),
         ),
       ),
     );
@@ -49,29 +51,30 @@ class _FeedWidgetState extends State<FeedWidget> {
   /// 상대방의 피드를 누르면 팝업창이 뜸
   /// 세부 글 내용을 볼 수 있고,
   /// 참여 신청버튼을 통해 신청 가능.
-  Future<dynamic> _showApply() {
+  Future<dynamic> _showApply(context) {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        titlePadding: EdgeInsets.zero,
+        contentPadding: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(24.0),
         ),
-        title: _profile(),
+        title: _profile(horizontal: 10.0, vertical: 15.0),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             _title(),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
               child: Row(
                 children: [
                   Flexible(
                     child: Text(
-                      widget.feed.description.toString(),
+                      feed!.content.toString(),
                       style: const TextStyle(
                         fontSize: 14,
-                        color: Colors.black87,
                       ),
                     ),
                   ),
@@ -81,7 +84,7 @@ class _FeedWidgetState extends State<FeedWidget> {
           ],
         ),
         actions: [
-          _join(),
+          (feed?.user != UserController.to.myInfo!) ? _join() : Container(),
         ],
       ),
     );
@@ -89,9 +92,9 @@ class _FeedWidgetState extends State<FeedWidget> {
 
   /// 글쓴이의 프로필을 보여줌
   /// 우측 아이콘은 글쓴이를 차단/취소 가능.
-  Widget _profile() {
+  Widget _profile({required double horizontal, required double vertical}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -105,50 +108,53 @@ class _FeedWidgetState extends State<FeedWidget> {
             ),
             child: GestureDetector(
               onTap: () {
-                // Get.to(() => const SomeoneProfileScreen());
+                if (feed?.user != UserController.to.myInfo!) {
+                  controller.moveToProfileScreen(feed!.user!);
+                }
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100),
-                child: Image.network(
-                    'https://postfiles.pstatic.net/MjAyMjA4MDNfMTA5/MDAxNjU5NDk2ODM5ODg3.uC0PshEiib8q26jwPjQ6GoHdP_h3BIp-0kMw9lOxwdYg.fidwJGXN_KjzDVGvtkJz-212ExplHUOz_3y69_cWz6gg.PNG.duswnekd0/Image_015.png?type=w966',
-                    fit: BoxFit.cover),
+                child: CachedNetworkImage(
+                    imageUrl: feed!.user!.image!, fit: BoxFit.cover),
               ),
             ),
           ),
           const SizedBox(width: 10),
 
           /// 글쓴이 정보
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Text(
-                      '홍길동',
-                      style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600),
+                      feed!.user!.nickName!,
+                      style: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text(
-                        '20세',
-                        style: TextStyle(fontSize: 12, color: Colors.black),
+                        '${feed!.user!.age}세',
+                        style: const TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 4),
+                const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(Icons.location_on, size: 20, color: Colors.black),
+                    const Icon(
+                      Icons.location_on,
+                      size: 20,
+                    ),
                     Text(
-                      '성북구',
-                      style: TextStyle(
+                      feed!.user!.address!,
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -157,78 +163,10 @@ class _FeedWidgetState extends State<FeedWidget> {
             ),
           ),
 
-          /// 차단 여부 버튼
+          /// 차단 or 수정,취소 여부 버튼
           IconButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return Wrap(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(3.0),
-                        margin: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              /// 차단버튼
-                              InkWell(
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10.0),
-                                  width: double.infinity,
-                                  child: Text(
-                                    '차단',
-                                    style: TextStyle(
-                                      color: ThemeColor.fontColor,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                onTap: () {},
-                              ),
-
-                              /// 나누는 선
-                              const Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.0),
-                                child: Divider(),
-                              ),
-
-                              /// 취소버튼
-                              InkWell(
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: const Text(
-                                    '취소',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                onTap: () {
-                                  Get.back();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-                backgroundColor: Colors.transparent,
-              );
-            },
-            icon: IconShape.iconMore,
+            onPressed: onTap,
+            icon: const Icon(Icons.more_horiz),
           ),
         ],
       ),
@@ -244,10 +182,9 @@ class _FeedWidgetState extends State<FeedWidget> {
         children: [
           Flexible(
             child: Text(
-              widget.feed.title.toString(),
+              feed!.title.toString(),
               style: const TextStyle(
                 fontSize: 17,
-                color: Colors.black87,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -280,7 +217,7 @@ class _FeedWidgetState extends State<FeedWidget> {
                     ),
                   ),
                   onPressed: () {
-                    joinToast();
+                    ChatController.to.makeChattingRoom(feed!.user!, "meeting");
                   },
                   child: const Text(
                     '참여하기',

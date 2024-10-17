@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 class CammitAppBar extends StatelessWidget {
   final String title;
+  final bool? centerTitle;
   final List<Widget>? actions;
   final bool showCloseButton;
   final void Function()? backAction;
@@ -14,13 +15,14 @@ class CammitAppBar extends StatelessWidget {
       this.actions,
       this.showCloseButton = false,
       this.bottom,
-      this.backAction});
+      this.backAction,
+      this.centerTitle});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       leading: (showCloseButton)
           ? GestureDetector(
               onTap: backAction ?? Get.back,
@@ -38,15 +40,8 @@ class CammitAppBar extends StatelessWidget {
             fontWeight: FontWeight.w600,
             color: ThemeColor.fontColor),
       ),
-      centerTitle: (showCloseButton),
-      actions: (actions != null)
-          ? List.generate(
-              actions!.length,
-              (index) => Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: actions![index],
-                  ))
-          : null,
+      centerTitle: showCloseButton,
+      actions: actions,
       bottom: bottom,
     );
   }

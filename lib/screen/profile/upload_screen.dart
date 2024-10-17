@@ -60,7 +60,6 @@ class UploadScreen extends GetView<ProfileImageController> {
               color: ThemeColor.fontColor),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
         elevation: 0,
         actions: [
           Padding(
@@ -114,16 +113,14 @@ class UploadScreen extends GetView<ProfileImageController> {
               children: [
                 Text(
                   controller.album[controller.idx].name.toString(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
+                    color: Get.theme.colorScheme.onSecondary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.black,
-                )
+                Icon(Icons.arrow_drop_down,
+                    color: Get.theme.colorScheme.onSecondary)
               ],
             ),
           ),
