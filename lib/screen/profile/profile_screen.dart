@@ -29,17 +29,20 @@ class ProfileScreen extends GetView<UserController> {
           child: CammitAppBar(
             title: "프로필",
             actions: [
-              GestureDetector(
-                onTap: () {
-                  Get.to(() => const SettingAccountScreen(),
-                      binding: BindingsBuilder(() {
-                    Get.put(SettingController());
-                  }));
-                },
-                child: Icon(
-                  Icons.settings,
-                  color: ThemeColor.fontColor,
-                  size: 30,
+              Padding(
+                padding: const EdgeInsets.only(right: 14.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => const SettingAccountScreen(),
+                        binding: BindingsBuilder(() {
+                      Get.put(SettingController());
+                    }));
+                  },
+                  child: Icon(
+                    Icons.settings,
+                    color: ThemeColor.fontColor,
+                    size: 30,
+                  ),
                 ),
               ),
             ],
