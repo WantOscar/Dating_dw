@@ -1,3 +1,4 @@
+import 'package:dating/Widget/common/check_box_widget.dart';
 import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:dating/widget/common/offset_loading_widget.dart';
 import 'package:dating/controller/email_verify_controller.dart';
@@ -6,9 +7,13 @@ import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class EmailVerifyPage extends GetView<EmailVerifyController> {
-  const EmailVerifyPage({super.key});
+class EmailVerifyScreen extends GetView<EmailVerifyController> {
+  final Uri _url = Uri.parse(
+      'https://ani-s3.s3.ap-northeast-2.amazonaws.com/%5B%EB%A1%9C%ED%8F%BC%5D%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8.pdf');
+
+  EmailVerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +23,11 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
         children: [
           Scaffold(
             appBar: _appBar(),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [_email(context), _verifyButton()],
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [_email(context), _verifyButton()],
+              ),
             ),
           ),
           _loading(),
@@ -42,7 +49,8 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
         elevation: 0,
       );
 
-  Widget _email(BuildContext context) => Expanded(
+  Widget _email(BuildContext context) => SingleChildScrollView(
+        // SingleChildScrollView 추가
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
@@ -73,6 +81,39 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
                 hintText: 'exmaple@example.com',
                 onChanged: controller.changeEmail,
               ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                '이용약관 동의',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  _launchUrl();
+                },
+                child: Text(
+                  '이용약관 보기',
+                  style: TextStyle(
+                    color: ThemeColor.fontColor,
+                    fontSize: 14,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              CheckBoxWidget(),
+              const SizedBox(
+                height: 50,
+              ),
             ],
           ),
         ),
@@ -98,4 +139,10 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
           child: const OffsetLoadingWidget(),
         ),
       );
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
 }
