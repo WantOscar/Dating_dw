@@ -2,6 +2,7 @@ import 'package:dating/controller/resister_controller.dart';
 import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/screen/auth/code_input_screen.dart';
 import 'package:dating/screen/auth/resister_screen.dart';
+import 'package:dating/style/constant.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:dating/utils/show_toast.dart';
 import 'package:dio/dio.dart';
@@ -22,11 +23,17 @@ class EmailVerifyController extends GetxController with UseToast {
   late String authCode;
   final RxBool _clicked = false.obs;
 
+  ///
+  final RxBool _isAgreed = false.obs;
+
   TextEditingController get email => _emailController;
   List get code => _inputCode;
   int get cnt => _cnt.value;
   Status get isLoading => _isLoading.value;
   bool get clicked => _clicked.value;
+
+  ///
+  bool get isAgreed => _isAgreed.value;
 
   String _email = "";
 
@@ -44,6 +51,20 @@ class EmailVerifyController extends GetxController with UseToast {
     if (!await launchUrl(_url)) {
       throw Exception('Could not launch $_url');
     }
+  }
+
+  /// 체크박스 버튼이 체크되면 isAgreed 상태 또한 동일시 함
+  void checkBoxOnChecked(bool isChecked) {
+    _isAgreed.value = isChecked;
+  }
+
+  /// _isAgreed 상태에 따라 함수를 실행 시킬건지 아니면 null로 줄건지 결정함
+  void bottomBtnOnTap() {
+    _isAgreed.value ? sendAuthCode() : null;
+  }
+
+  Color get bottomBtnColorChanged {
+    return _isAgreed.value ? ThemeColor.fontColor : Colors.grey;
   }
 
   /// 인증코드 입력 전달 함수

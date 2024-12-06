@@ -22,7 +22,10 @@ class EmailVerifyScreen extends GetView<EmailVerifyController> {
             body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [_email(context), _verifyButton()],
+                children: [
+                  _email(context),
+                  _verifyButton(),
+                ],
               ),
             ),
           ),
@@ -104,7 +107,9 @@ class EmailVerifyScreen extends GetView<EmailVerifyController> {
               const SizedBox(
                 height: 10,
               ),
-              const CheckBoxWidget(),
+              CheckBoxWidget(
+                onChecked: controller.checkBoxOnChecked,
+              ),
               const SizedBox(
                 height: 350,
               ),
@@ -114,18 +119,21 @@ class EmailVerifyScreen extends GetView<EmailVerifyController> {
       );
 
   Widget _verifyButton() => SafeArea(
-      child: Padding(
+        child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BottomButton(
-            onTap: controller.sendAuthCode,
+            onTap: controller.bottomBtnOnTap,
             child: const Text(
               "인증번호발송",
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600),
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          )));
+          ),
+        ),
+      );
 
   Widget _loading() => Obx(
         () => Offstage(
