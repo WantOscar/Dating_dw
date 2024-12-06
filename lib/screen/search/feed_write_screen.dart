@@ -4,6 +4,7 @@ import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/bottom_button.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class FeedWriteScreen extends StatefulWidget {
   final Feed? feed;
@@ -84,7 +85,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: ThemeColor.inputTextColor,
+          color: Theme.of(context).colorScheme.tertiary,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 11.0, vertical: 12),
@@ -93,7 +94,6 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
             maxLength: 20,
             maxLines: 1,
             keyboardType: TextInputType.multiline,
-            style: const TextStyle(color: Colors.black),
             decoration: const InputDecoration(
               hintText: '제목을 작성해주세요.',
               hintStyle: TextStyle(fontSize: 15.0),
@@ -120,7 +120,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: ThemeColor.inputTextColor,
+          color: Theme.of(context).colorScheme.tertiary,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 11.0, vertical: 12.0),
@@ -155,7 +155,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            color: Colors.white,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 33.0, vertical: 35.0),
@@ -187,7 +187,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
           Container(
             width: double.infinity,
             height: 70,
-            color: ThemeColor.warningText,
+            color: Theme.of(context).colorScheme.tertiary,
             child: Center(
               child: Padding(
                 padding:

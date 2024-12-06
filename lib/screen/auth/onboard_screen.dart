@@ -410,24 +410,6 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Theme.of(context).colorScheme.onTertiary,
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    "상세주소",
-                    style: TextStyle(fontSize: 15, color: Color(0xffafafaf)),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       );

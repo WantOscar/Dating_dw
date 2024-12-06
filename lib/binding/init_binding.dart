@@ -1,8 +1,5 @@
 import 'package:dating/controller/login_controller.dart';
-import 'package:dating/controller/setting_password_controller.dart';
 import 'package:dating/controller/user_controller.dart';
-import 'package:dating/data/repository/heart_repository.dart';
-import 'package:dating/data/service/heart_service.dart';
 import 'package:dating/data/service/auth_service.dart';
 import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/utils/api_urls.dart';
@@ -20,7 +17,6 @@ class InitBinding implements Bindings {
               dio: Dio(BaseOptions(baseUrl: ApiUrl.baseUrl))
                 ..interceptors.add(AuthInterceptor())
                 ..interceptors.add(BaseIntercepter())),
-          heartService: HeartService(heartRepository: HeartRepository()),
         ),
         permanent: true);
   }

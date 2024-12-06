@@ -43,7 +43,7 @@ dependencies:
   dio: ^5.3.3
   image_picker: ^1.0.7
   flutter_secure_storage: ^9.0.0
-  fluttertoast: ^8.2.4
+  fluttertoast: ^8.2.6
   smooth_page_indicator: ^1.1.0
   cached_network_image: ^3.3.1
   web_socket_channel: ^3.0.1
@@ -55,14 +55,14 @@ dependencies:
   remedi_kopo: ^0.0.2
   loading_animation_widget: ^1.2.1
   uuid: ^4.2.2
-  intl: ^0.19.0
+  intl: ^0.20.1
   dotted_border: ^2.1.0
   firebase_core: ^3.1.0
-  firebase_messaging: ^15.0.1
-  flutter_local_notifications: ^17.1.2
+  firebase_messaging: ^15.1.5
+  flutter_local_notifications: ^18.0.1
   change_app_package_name: ^1.2.0
   mockito: ^5.4.4
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.2
   permission_handler: ^11.3.1
   badges: ^3.1.2
   equatable: ^2.0.5
@@ -76,7 +76,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   freezed: ^2.4.5
   build_runner: ^2.4.6
   json_serializable: ^6.7.1

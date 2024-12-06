@@ -56,7 +56,7 @@ class FirebaseApi {
       RemoteNotification? notification = message.notification;
 
       if (notification != null) {
-        debugPrint("title : {notification.title}");
+        debugPrint("title : {$notification.title}");
         debugPrint("content: ${notification.body}");
         debugPrint("room ID: ${message.data["chatRoomNo"]}");
         ChatController.to.updateLastMessage(
