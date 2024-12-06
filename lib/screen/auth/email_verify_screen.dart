@@ -7,13 +7,9 @@ import 'package:dating/utils/enums.dart';
 import 'package:dating/widget/common/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EmailVerifyScreen extends GetView<EmailVerifyController> {
-  final Uri _url = Uri.parse(
-      'https://ani-s3.s3.ap-northeast-2.amazonaws.com/%5B%EB%A1%9C%ED%8F%BC%5D%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8.pdf');
-
-  EmailVerifyScreen({super.key});
+  const EmailVerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +81,7 @@ class EmailVerifyScreen extends GetView<EmailVerifyController> {
                 height: 30,
               ),
               const Text(
-                '이용약관 동의',
+                '이용약관 확인',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
@@ -95,9 +91,7 @@ class EmailVerifyScreen extends GetView<EmailVerifyController> {
                 height: 10,
               ),
               GestureDetector(
-                onTap: () {
-                  _launchUrl();
-                },
+                onTap: controller.termsOfUser,
                 child: Text(
                   '이용약관 보기',
                   style: TextStyle(
@@ -110,9 +104,9 @@ class EmailVerifyScreen extends GetView<EmailVerifyController> {
               const SizedBox(
                 height: 10,
               ),
-              CheckBoxWidget(),
+              const CheckBoxWidget(),
               const SizedBox(
-                height: 50,
+                height: 350,
               ),
             ],
           ),
@@ -139,10 +133,4 @@ class EmailVerifyScreen extends GetView<EmailVerifyController> {
           child: const OffsetLoadingWidget(),
         ),
       );
-
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
-  }
 }

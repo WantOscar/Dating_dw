@@ -8,8 +8,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmailVerifyController extends GetxController with UseToast {
+  EmailVerifyController({required this.service});
+
   final Rx<Status> _isLoading = Rx<Status>(Status.loaded);
   final RxList<String> _inputCode = ["", "", "", "", "", ""].obs;
   final RxInt _cnt = 0.obs;
@@ -17,16 +20,31 @@ class EmailVerifyController extends GetxController with UseToast {
   final TextEditingController _emailController = TextEditingController();
   final AuthService service;
   late String authCode;
-
-  EmailVerifyController({required this.service});
+  final RxBool _clicked = false.obs;
 
   TextEditingController get email => _emailController;
   List get code => _inputCode;
   int get cnt => _cnt.value;
-
   Status get isLoading => _isLoading.value;
+  bool get clicked => _clicked.value;
 
   String _email = "";
+
+  final Uri _url = Uri.parse(
+      'https://ani-s3.s3.ap-northeast-2.amazonaws.com/%5B%EB%A1%9C%ED%8F%BC%5D%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8.pdf');
+
+  /// 이용약관을 click 하면 url로 들어가도록 함
+  void termsOfUser() {
+    _launchUrl();
+    _clicked(true);
+  }
+
+  /// url을 모바일 앱 환경에서 실행할 수 있도록 함
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
+  }
 
   /// 인증코드 입력 전달 함수
   /// 인증코드 자리수를 모두 입력한 경우
