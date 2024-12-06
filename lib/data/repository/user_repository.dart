@@ -57,6 +57,43 @@ class UserRepositoryImpl extends GetxService implements UserRepository {
         )
         .then((response) => response.data["successMessage"]);
   }
+
+  /// 메인 화면 데이터 Get Api
+  @override
+  Future<Map<String, dynamic>> getHomeDatas() {
+    return dio.get("/").then((response) => response.data);
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> newFavoriteMembers(int id) {
+    return dio
+        .get("/favorite-list/$id")
+        .then((response) => List<Map<String, dynamic>>.from(response.data));
+  }
+
+  @override
+  Future<void> heartAdd(int id) async {
+    final response = await dio.post("/heart/add", queryParameters: {"id": id});
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<void> postMemberBlock(int id) async {
+    return dio.post("/member/block/$id").then((response) => response.data);
+  }
+
+  @override
+  Future<void> postMemberNonBlock(int id) async {
+    return dio.post("/member/nonblock/$id").then((response) => response.data);
+  }
+
+  @override
+  Future<List<User>> getMemberBlockList() async {
+    return dio.get("/member/block").then((response) =>
+        List.from(response.data).map((json) => User.fromJson(json)).toList());
+  }
 }
 
 abstract class UserRepository {
@@ -69,4 +106,16 @@ abstract class UserRepository {
   Future<User> getUser(Map<String, dynamic> nickName);
 
   Future<String> postSettingPassword(Map<String, dynamic> data);
+
+  Future<Map<String, dynamic>> getHomeDatas();
+
+  Future<List<Map<String, dynamic>>> newFavoriteMembers(int id);
+
+  Future<void> heartAdd(int id);
+
+  Future<void> postMemberBlock(int id);
+
+  Future<void> postMemberNonBlock(int id);
+
+  Future<List<User>> getMemberBlockList();
 }

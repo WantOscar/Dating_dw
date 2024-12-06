@@ -1,6 +1,6 @@
 import 'package:dating/controller/feed_controller.dart';
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/service/home_service.dart';
+import 'package:dating/data/service/user_service.dart';
 import 'package:dating/screen/main/my_fan_detail_screen.dart';
 import 'package:dating/screen/main/my_favorite_detail_screen.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';
@@ -11,7 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 class MainController extends GetxController with UseToast {
-  final HomeService homeService;
+  final UserService userService;
 
   final _scrollController = ScrollController();
 
@@ -34,7 +34,7 @@ class MainController extends GetxController with UseToast {
   List<User> get myFavoriteMember => _myFavoriteMembers.value;
   List<User> get myFanMembers => _myFanMembers.value;
 
-  MainController({required this.homeService});
+  MainController({required this.userService});
 
   ScrollController get scrollController => _scrollController;
 
@@ -53,7 +53,7 @@ class MainController extends GetxController with UseToast {
     _isFavoriteLoading(Status.loading);
     final id = _myFavoriteMembers.value.last.id!;
     try {
-      final result = await homeService.newFavoriteMembers(id);
+      final result = await userService.newFavoriteMembers(id);
       if (result.isNotEmpty) {
         _myFavoriteMembers.value.addAll(result);
         _myFavoriteMembers.refresh();
@@ -70,7 +70,7 @@ class MainController extends GetxController with UseToast {
   void _fetchData() async {
     _isLoading(Status.loading);
     try {
-      final data = await homeService.getHomeDatas();
+      final data = await userService.getHomeDatas();
       _recommendMembers.value = data[0];
       _myFavoriteMembers.value = data[1];
       _myFanMembers.value = data[2];

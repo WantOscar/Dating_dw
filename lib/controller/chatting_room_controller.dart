@@ -59,7 +59,7 @@ class ChattingRoomController extends GetxController with UseToast {
   void _connectChannel() {
     fetchData();
     channel =
-        IOWebSocketChannel.connect(Uri.parse("ws://13.124.21.82:8082/ws/chat"));
+        IOWebSocketChannel.connect(Uri.parse("ws://15.164.91.35:8082/ws/chat"));
     channel.stream.listen(
       (message) {
         final msg = MessageModel.fromJson(jsonDecode(message));

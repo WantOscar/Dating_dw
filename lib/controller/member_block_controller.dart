@@ -1,13 +1,13 @@
 import 'package:dating/data/model/user.dart';
-import 'package:dating/data/repository/member_block_respository.dart';
+import 'package:dating/data/repository/user_repository.dart';
 import 'package:dating/screen/home_screen.dart';
 import 'package:dating/utils/enums.dart';
 import 'package:get/get.dart';
 
 class MemberBlockController extends GetxController {
-  final MemberBlockRespository memberBlockRespository;
+  final UserRepositoryImpl userRepository;
 
-  MemberBlockController({required this.memberBlockRespository});
+  MemberBlockController({required this.userRepository});
 
   static MemberBlockController get to => Get.find();
 
@@ -28,7 +28,7 @@ class MemberBlockController extends GetxController {
   Future<void> fetchBlockedUsers() async {
     _isLoading(Status.loading);
     try {
-      final response = await memberBlockRespository.getMemberBlockList();
+      final response = await userRepository.getMemberBlockList();
       _blockedUsers.value.addAll(response);
       _blockedUsers.refresh();
     } catch (e) {
@@ -40,7 +40,7 @@ class MemberBlockController extends GetxController {
 
   Future<void> memberBlock(int id) async {
     try {
-      await memberBlockRespository.postMemberBlock(id);
+      await userRepository.postMemberBlock(id);
       Get.offAll(() => const HomeScreen());
     } catch (e) {
       Get.snackbar('Error', 'Failed to block user: $e');
@@ -49,7 +49,7 @@ class MemberBlockController extends GetxController {
 
   Future<void> memberNonBlock(int id) async {
     try {
-      await memberBlockRespository.postMemberNonBlock(id);
+      await userRepository.postMemberNonBlock(id);
       fetchBlockedUsers();
       refresh();
     } catch (e) {
