@@ -42,6 +42,7 @@ class AuthForgotScreen extends GetView<EmailVerifyController> {
               child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: BottomButton(
+                    color: ThemeColor.fontColor,
                     onTap: controller.sendAuthCode,
                     child: const Text(
                       "인증번호발송",

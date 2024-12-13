@@ -377,6 +377,7 @@ class ProfileEditScreen extends GetView<ProfileEditController> {
   Widget _completeButton() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
         child: BottomButton(
+          color: ThemeColor.fontColor,
           onTap: controller.updateUserInfo,
           child: const Text(
             "수정 완료",

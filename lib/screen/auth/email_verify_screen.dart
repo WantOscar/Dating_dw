@@ -122,6 +122,7 @@ class EmailVerifyScreen extends GetView<EmailVerifyController> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BottomButton(
+            color: EmailVerifyController.to.bottomBtnColorChanged,
             onTap: controller.bottomBtnOnTap,
             child: const Text(
               "인증번호발송",

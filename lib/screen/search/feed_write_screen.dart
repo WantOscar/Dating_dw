@@ -173,6 +173,7 @@ class _FeedWriteScreenState extends State<FeedWriteScreen> {
                       FeedController.to.completeFeed();
                     }
                   },
+                  color: ThemeColor.fontColor,
                   child: const Text(
                     "작성 완료",
                     style: TextStyle(

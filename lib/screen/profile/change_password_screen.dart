@@ -1,3 +1,4 @@
+import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/bottom_button.dart';
 import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:dating/widget/common/icon_header.dart';
@@ -40,6 +41,7 @@ class ChangePasswordScreen extends GetView<SettingPasswordController> {
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
           child: BottomButton(
+            color: ThemeColor.fontColor,
             onTap: controller.completeChangePw,
             child: const Text("확인",
                 style: TextStyle(

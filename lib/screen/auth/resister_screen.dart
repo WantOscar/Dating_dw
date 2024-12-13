@@ -115,6 +115,7 @@ class ResisterScreen extends GetView<ResisterController> {
       child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BottomButton(
+            color: ThemeColor.fontColor,
             onTap: () {
               (controller.isLoading == Status.loading)
                   ? null

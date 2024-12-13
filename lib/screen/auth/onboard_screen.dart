@@ -493,6 +493,7 @@ class _OnboardScreenState extends State<OnboardScreen> {
   Widget _createProfileButton() => Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: BottomButton(
+        color: ThemeColor.fontColor,
         onTap: controller.updateUserInfo,
         child: const Text("프로필 생성",
             style: TextStyle(
