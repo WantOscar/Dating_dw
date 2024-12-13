@@ -1,5 +1,4 @@
 import 'package:dating/binding/chat_room_controller_binding.dart';
-import 'package:dating/controller/chatting_room_controller.dart';
 import 'package:dating/data/model/user.dart';
 import 'package:dating/screen/chat/chatting_room_screen.dart';
 import 'package:dating/widget/chat/chatting_box.dart';

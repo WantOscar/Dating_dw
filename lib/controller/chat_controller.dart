@@ -93,7 +93,6 @@ class ChatController extends GetxController
           image: target.image,
           lastMessage: "",
           time: DateTime.now().toIso8601String());
-      _personalChattings.value.add(chat);
       if (type == ChatType.dm) {
         _personalChattings.value.add(chat);
         _personalChattings.refresh();
@@ -101,7 +100,7 @@ class ChatController extends GetxController
         _meetingChattings.value.add(chat);
         _meetingChattings.refresh();
       }
-      Get.to(
+      Get.off(
           () => ChattingRoom(
                 target: target,
               ),
