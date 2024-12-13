@@ -87,15 +87,14 @@ class FeedController extends GetxController with UseToast {
   void cancel() {
     Get.dialog(
       NotificationWindow(
-        title: '피드 작성 취소',
-        content: '현재 입력사항을 모두 취소하고 돌아가시겠습니까?',
-        confirmLabel: "확인",
-        cancelLabel: "취소",
-        onConfirm: () {
-          Get.until((route) => route.isFirst);
-        },
-        onCancel: () => Get.until((route) => route.isFirst),
-      ),
+          title: '피드 작성 취소',
+          content: '현재 입력사항을 모두 취소하고 돌아가시겠습니까?',
+          confirmLabel: "확인",
+          cancelLabel: "취소",
+          onConfirm: () {
+            Get.until((route) => route.isFirst);
+          },
+          onCancel: () => Get.back()),
     );
   }
 

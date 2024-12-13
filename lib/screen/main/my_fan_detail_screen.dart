@@ -1,5 +1,4 @@
 import 'package:dating/widget/common/cammit_app_bar.dart';
-import 'package:dating/widget/common/icon_header.dart';
 import 'package:dating/widget/main/my_favorite_avatar.dart';
 import 'package:dating/controller/main_controller.dart';
 import 'package:dating/screen/profile/someone_profile_screen.dart';

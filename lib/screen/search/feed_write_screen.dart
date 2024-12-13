@@ -4,7 +4,6 @@ import 'package:dating/style/constant.dart';
 import 'package:dating/widget/common/bottom_button.dart';
 import 'package:dating/widget/common/cammit_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class FeedWriteScreen extends StatefulWidget {
   final Feed? feed;
