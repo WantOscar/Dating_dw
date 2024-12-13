@@ -113,6 +113,8 @@ class ChatController extends GetxController
 
   void quit(int id) {
     _personalChattings.value.removeWhere((chat) => chat.id == id);
+    _meetingChattings.value.removeWhere((chat) => chat.id == id);
     _personalChattings.refresh();
+    _meetingChattings.refresh();
   }
 }

@@ -1,4 +1,4 @@
-import 'package:dating/style/constant.dart';
+import 'package:dating/controller/email_verify_controller.dart';
 import 'package:flutter/material.dart';
 
 class BottomButton extends StatelessWidget {
@@ -15,8 +15,9 @@ class BottomButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-            color: ThemeColor.fontColor,
-            borderRadius: BorderRadius.circular(12.0)),
+          color: EmailVerifyController.to.bottomBtnColorChanged,
+          borderRadius: BorderRadius.circular(12.0),
+        ),
         child: child,
       ),
     );
