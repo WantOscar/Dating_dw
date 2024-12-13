@@ -76,11 +76,12 @@ class ChatController extends GetxController
   }
 
   void updateLastMessage(int chatRoomId, String message) {
-    _personalChattings.value
+    allChattings
         .where((chat) => chat.id == chatRoomId)
         .first
         .updateLastMessage(message);
     _personalChattings.refresh();
+    _meetingChattings.refresh();
   }
 
   void makeChattingRoom(User target, ChatType type) async {
