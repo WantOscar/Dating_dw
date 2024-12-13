@@ -1,3 +1,4 @@
+import 'package:dating/Widget/common/check_box_widget.dart';
 import 'package:dating/widget/common/cammit_text_field.dart';
 import 'package:dating/widget/common/offset_loading_widget.dart';
 import 'package:dating/controller/email_verify_controller.dart';
@@ -7,8 +8,8 @@ import 'package:dating/widget/common/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EmailVerifyPage extends GetView<EmailVerifyController> {
-  const EmailVerifyPage({super.key});
+class EmailVerifyScreen extends GetView<EmailVerifyController> {
+  const EmailVerifyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +19,14 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
         children: [
           Scaffold(
             appBar: _appBar(),
-            body: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [_email(context), _verifyButton()],
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _email(context),
+                  _verifyButton(),
+                ],
+              ),
             ),
           ),
           _loading(),
@@ -42,7 +48,8 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
         elevation: 0,
       );
 
-  Widget _email(BuildContext context) => Expanded(
+  Widget _email(BuildContext context) => SingleChildScrollView(
+        // SingleChildScrollView 추가
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
@@ -73,24 +80,60 @@ class EmailVerifyPage extends GetView<EmailVerifyController> {
                 hintText: 'exmaple@example.com',
                 onChanged: controller.changeEmail,
               ),
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                '이용약관 확인',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                onTap: controller.termsOfUser,
+                child: Text(
+                  '이용약관 보기',
+                  style: TextStyle(
+                    color: ThemeColor.fontColor,
+                    fontSize: 14,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              CheckBoxWidget(
+                onChecked: controller.checkBoxOnChecked,
+              ),
+              const SizedBox(
+                height: 350,
+              ),
             ],
           ),
         ),
       );
 
   Widget _verifyButton() => SafeArea(
-      child: Padding(
+        child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BottomButton(
-            onTap: controller.sendAuthCode,
+            onTap: controller.bottomBtnOnTap,
             child: const Text(
               "인증번호발송",
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600),
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          )));
+          ),
+        ),
+      );
 
   Widget _loading() => Obx(
         () => Offstage(

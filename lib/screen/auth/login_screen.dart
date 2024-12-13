@@ -203,8 +203,7 @@ class LoginScreen extends GetView<LoginController> {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: GestureDetector(
               onTap: () {
-                Get.to(() => const EmailVerifyPage(),
-                    binding: ResisterBinding());
+                Get.to(() => EmailVerifyScreen(), binding: ResisterBinding());
               },
               child: Text(
                 '회원가입',
