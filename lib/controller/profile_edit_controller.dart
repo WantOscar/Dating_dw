@@ -95,7 +95,7 @@ class ProfileEditController extends GetxController {
         heightIndex = value;
       },
       onDone: () {
-        _user.value!.height = heightIndex;
+        _user(_user.value!.copyWith(height: heightIndex));
         Get.back();
       },
     ));
